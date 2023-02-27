@@ -129,6 +129,8 @@ let array = [
 let sum=0;
 let aux = 0;
     //bucle iterador
+
+
 for (let row of array) {
     if (row.state === 'ADRA') {
       sum += row.number_camping_places;
