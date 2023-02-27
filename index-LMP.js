@@ -27,4 +27,4 @@ const filtered = array.filter(function(element){
   let sum = filtered.reduce((previous, current) => current.icmsld += previous.icmsld);
 let avg = sum / filtered.length;
 
-log(avg);
+console.log(avg);

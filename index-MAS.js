@@ -130,12 +130,13 @@ let sum=0;
 let aux = 0;
     //bucle iterador
 
+let filtrado = array.filter(function(element){
+    return element.state==="ADRA";
+});
 
-for (let row of array) {
-    if (row.state === 'ADRA') {
+for (let row of filtrado) {
       sum += row.number_camping_places;
       aux++;
-    }
   }
 
     //imprimir el average por consola:
