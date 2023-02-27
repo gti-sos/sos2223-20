@@ -1,0 +1,25 @@
+{
+  "name": "sos2223-20",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index-CGM",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gti-sos/sos2223-20.git"
+  },
+  "keywords": [
+    "\u001b[D\u001b[D\u001b[C"
+  ],
+  "author": "cargarmun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gti-sos/sos2223-20/issues"
+  },
+  "homepage": "https://github.com/gti-sos/sos2223-20#readme",
+  "dependencies": {
+  }
+}
