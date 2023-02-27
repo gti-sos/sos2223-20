@@ -11,10 +11,6 @@ const datos = [
     [new Date("14-07-16"),"CRTS CORDOBA",34,28,0,0,4,"SPC",13001,"CTS Córdoba"],
 ];
 
-//suma = suma + dato_actual
-const suma_dnt_people = datos.reduce(
-    (suma, dato_actual) => suma = suma + dato_actual[2],
-    0
-);
+const resultado = datos.filter((n) => n[1] === "CRTS CORDOBA").map((n) => { return n[2] });
 
-console.log(suma_dnt_people/datos.length);
+console.log( resultado.reduce((a, b) => a + b, 0) / resultado.length);
