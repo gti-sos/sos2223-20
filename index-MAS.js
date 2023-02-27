@@ -139,3 +139,5 @@ for (let row of array) {
     //imprimir el average por consola:
   let average = sum / aux;
   console.log(`La media de number_camping_places para el estado 'Adra' es: ${average}`);
+ //pr
+ 
