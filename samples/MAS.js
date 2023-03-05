@@ -1,3 +1,5 @@
+
+
 let array = [
     {
         id: 8,
@@ -141,3 +143,11 @@ for (let row of array) {
     //imprimir el average por consola:
   let average = sum / aux;
   console.log(`La media de number_camping_places para el estado 'Adra' es: ${average}`);
+
+
+  function handleMiembro1(req, res) {
+    console.log(`La media de number_camping_places para el estado 'Adra' es: ${average}`);
+    res.send(`La media de number_camping_places para el estado 'Adra' es: ${average}`);
+  }
+  
+  module.exports = handleMiembro1;
