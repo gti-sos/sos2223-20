@@ -1,3 +1,9 @@
+const express = require('express');
+const app = express();
+
+
+
+
 let array = [
     {
         id: 8,
@@ -141,4 +147,10 @@ for (let row of filtrado) {
 
     //imprimir el average por consola:
   let average = sum / aux;
-  console.log(`La media de number_camping_places para el estado 'Adra' es: ${average}`);
+  
+  app.get('MAS', (req, res) => {
+    res.send(`La media de number_camping_places para el estado 'Adra' es: ${average}`);
+  });
+  
+  module.exports = app;
+  
