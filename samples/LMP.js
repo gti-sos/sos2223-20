@@ -27,4 +27,10 @@ const filtered = array.filter(function(element){
   let sum = filtered.reduce((previous, current) => current.icmsld += previous.icmsld);
 let avg = sum / filtered.length;
 
-console.log(avg);
+
+function handleMiembro1(req, res) {
+  console.log(`La media es: ${avg}`);
+  res.send(`La media  es: ${avg}`);
+}
+
+module.exports = handleMiembro1;
