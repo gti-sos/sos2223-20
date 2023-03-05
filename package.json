@@ -70,7 +70,6 @@
     "vary": "^1.1.2",
     "xtend": "^4.0.2"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
