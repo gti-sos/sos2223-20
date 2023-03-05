@@ -2,7 +2,7 @@
 var express = require("express");
 var cool = require("cool-ascii-faces");
 var port = process.env.PORT || 12345;
-const MAS = require("./index-MAS.js");
+const MAS = require("samples/index-MAS.js");
 
 var app = express();
 
