@@ -1,5 +1,3 @@
-
-
 let array = [
     {
         id: 8,
@@ -132,18 +130,15 @@ let sum=0;
 let aux = 0;
     //bucle iterador
 
-
 for (let row of array) {
     if (row.state === 'ADRA') {
       sum += row.number_camping_places;
       aux++;
     }
   }
-
     //imprimir el average por consola:
   let average = sum / aux;
   console.log(`La media de number_camping_places para el estado 'Adra' es: ${average}`);
-
 
   function handleMiembro1(req, res) {
     console.log(`La media de number_camping_places para el estado 'Adra' es: ${average}`);
