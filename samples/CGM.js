@@ -11,10 +11,12 @@ const datos = [
     [new Date("14-07-16"),"CRTS CORDOBA",34,28,0,0,4,"SPC",13001,"CTS Córdoba"],
 ];
 
-//suma = suma + dato_actual
-const suma_dnt_people = datos.reduce(
-    (suma, dato_actual) => suma = suma + dato_actual[2],
-    0
-);
+const filtrado = datos.filter((n) => n[1] === "CRTS CORDOBA").map((n) => { return n[2] });
+const resultado = filtrado.reduce((a, b) => a + b, 0) / filtrado.length;
 
-console.log(suma_dnt_people/datos.length);
+function handleMiembro1(req, res) {
+    console.log(`La media es: ${resultado}`);
+    res.send(`La media  es: ${resultado}`);
+  }
+  
+module.exports = handleMiembro1;
