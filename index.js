@@ -23,8 +23,10 @@ app.get("/samples/LMP", useLMP);
 app.get("/samples/CGM", useCGM);
 
 //L06 MAS
-app.get(BASE_API_URL+'/campings/loadInitialData', (req, res) => {
-  let campings = [];
+let campings = [];
+
+//GET
+app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
   // Comprobamos si el array campings está vacío
   if (campings.length === 0) {
     // Leemos el archivo de campings
@@ -42,7 +44,21 @@ app.get(BASE_API_URL+'/campings/loadInitialData', (req, res) => {
   res.json(campings);
 });
 
-
+//POST
+app.post(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
+  var newCamping = req.body;
+  console.log("New post to /contact");
+  // Validar si ya existe un camping con el mismo nombre
+  var existingCamping = campings.find(camping => camping.name === newCamping.name);
+  if (existingCamping) {
+    res.sendStatus(409);
+  } else {
+    // Agregar el nuevo camping al array
+    console.log(`newCamping = <${JSON.stringify(newCamping,null,2)}>`);
+    campings.push(newCamping);
+    res.sendStatus(201);
+  }
+});
 
 
 
