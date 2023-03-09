@@ -40,9 +40,22 @@ app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
       campings.push(randomCamping);
     }
   }
-  // Devolvemos los objetos aleatorios como respuesta
-  res.json(campings);
+  // Aplicamos el filtro a los campings según la URL
+  var filteredCampings = campings.filter(camping => {
+    let match = true;
+    for (const key in req.query) {
+      if (camping[key] !== req.query[key]) {
+        match = false;
+        break;
+      }
+    }
+    return match;
+  });
+  // Devolvemos los objetos filtrados como respuesta
+  res.json(filteredCampings);
 });
+
+
 
 //POST
 app.post(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
