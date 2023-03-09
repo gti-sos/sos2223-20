@@ -1,0 +1,18 @@
+{
+    "SILO DE LAS CABEZAS DE SAN JUAN": [
+      {
+        "active_name": "SILO DE LAS CABEZAS DE SAN JUAN",
+        "available": "True",
+        "collection": "jda_buscador_bienes_inmuebles",
+        "counseling": "CONSEJERÍA DE AGRICULTURA, GANADERÍA, PESCA Y DESA",
+        "current_usage": "AGROPECUARIO",
+        "icmsId": 9741,
+        "id": 9741,
+        "inventory_num": 2000002330,
+        "modified_date": 44855,
+        "municipality": "CABEZAS DE SAN JUAN (LAS)",
+        "nature": "Urbana",
+        "province": "Sevilla",
+        "resource": 9741,
+        "street": "UTRERA"
+      }]}
