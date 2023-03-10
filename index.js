@@ -48,33 +48,17 @@ app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
   const query = req.query;
   let filteredCampings = campings;
   for (const key in query) {
-    let value = query[key];
-
-    if (Array.isArray(value)) {
-      value = value.map(val => val.toLowerCase());
-    } else if (key === 'from' || key === 'to') {
-      value = new Date(value);
-    } else {
-      value = value.toLowerCase();
-    }
+    const value = Array.isArray(query[key]) ? query[key].map(val => val) : query[key];
     filteredCampings = filteredCampings.filter(camping => {
-      let campingValue = camping[key];
-
-      if (Array.isArray(campingValue)) {
-        campingValue = campingValue.map(val => val.toLowerCase());
-      } else if (key === 'from' || key === 'to') {
-        campingValue = new Date(campingValue);
-      } else {
-        campingValue = campingValue.toLowerCase();
-      }
-      if (key === 'from') {
-        return campingValue <= query['to'];
-      } else if (key === 'to') {
-        return campingValue >= query['from'];
-      } else if (key === 'start_date') { // si el atributo es start_date
-        const year = value.substring(0, 4); // obtenemos el año del valor de la query
-        const startYear = campingValue.substring(0, 4); // obtenemos el año de start_date del camping
-        return startYear === year || (startYear >= query['from'].getFullYear() && startYear <= query['to'].getFullYear());
+      const campingValue = Array.isArray(camping[key]) ? camping[key].map(val => val) : camping[key];
+      if (key === 'from' && camping.start_date) {
+        const fromYear = parseInt(value);
+        const startYear = parseInt(camping.start_date.substring(0, 4));
+        return startYear >= fromYear;
+      } else if (key === 'to' && camping.start_date) {
+        const toYear = parseInt(value);
+        const startYear = parseInt(camping.start_date.substring(0, 4));
+        return startYear <= toYear;
       } else {
         return campingValue == value || (Array.isArray(campingValue) && campingValue.includes(value));
       }
@@ -88,6 +72,9 @@ app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
     res.sendStatus(404);
   }
 });
+
+
+
 
 
 
