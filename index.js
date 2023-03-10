@@ -77,27 +77,28 @@ app.post(BASE_API_URL+'/andalusian-campings/*', (req, res) => {
 
 //POST
 app.post(BASE_API_URL+'/andalusian-campings', (req, res) => {
-  var newCamping = req.body;
-  console.log("New post to /contact");
+  const newCamping = req.body;
+  const expectedFields = ['id', 'registry_code', 'name', 'inscription_date', 'start_date', 'state', 'city', 'mail', 'coord_x', 'srid', 'num_doc_verified', 'responsible'];
 
-  // Check si tenemos todas las variables necesarias
-  if (!newCamping.name || !newCamping.city || !newCamping.id || 
-    !newCamping.registry_code || !newCamping.state || !newCamping.start_date
-     || !newCamping.inscription_date) {
+  // Verificar si todos los campos esperados están presentes en el cuerpo del mensaje
+  const missingFields = expectedFields.filter(field => !(field in newCamping));
+  if (missingFields.length > 0) {
     res.sendStatus(400);
+    return;
+  }
+
+  // Verificar si ya existe un camping con el mismo nombre
+  const existingCamping = campings.find(camping => camping.name === newCamping.name);
+  if (existingCamping) {
+    res.sendStatus(409);
   } else {
-    // Validate if a camping with the same name already exists
-    var existingCamping = campings.find(camping => camping.name === newCamping.name);
-    if (existingCamping) {
-      res.sendStatus(409);
-    } else {
-      // Add the new camping to the array
-      console.log(`newCamping = <${JSON.stringify(newCamping,null,2)}>`);
-      campings.push(newCamping);
-      res.sendStatus(201);
-    }
+    // Agregar el nuevo camping al array
+    console.log(`newCamping = <${JSON.stringify(newCamping,null,2)}>`);
+    campings.push(newCamping);
+    res.sendStatus(201);
   }
 });
+
 
 
 //PUT
