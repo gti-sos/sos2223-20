@@ -24,7 +24,6 @@ app.get("/samples/CGM", useCGM);
 
 //L06 MAS______________________________________________________________________________________-
 let campings = [];
-
 //GET initial data
 app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
   // Comprobamos si el array campings está vacío
@@ -57,7 +56,7 @@ app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
       return campingValue == value || (Array.isArray(campingValue) && campingValue.includes(value));
     });
   }
-  
+
   if (filteredCampings.length > 0) {
     res.json(filteredCampings);
     console.log(`New GET request with query parameters ${JSON.stringify(query)}`);
@@ -81,17 +80,14 @@ app.get(BASE_API_URL+'/andalusian-campings/:value/:value2?', (req, res) => {
   let filteredCampings = campings.filter(camping => {
     let matchValue = false;
     let matchValue2 = false;
-
     for (const key in camping) {
       if (camping[key] == value) {
         matchValue = true;
       }
-
       if (value2 && camping[key] == value2) {
         matchValue2 = true;
       }
     }
-
     if (value2) {
       return matchValue && matchValue2;
     } else {
@@ -107,11 +103,7 @@ app.get(BASE_API_URL+'/andalusian-campings/:value/:value2?', (req, res) => {
   }
 });
 
-
-
-
-
-//POST con URL prohibido
+//POST con URL prohibidas
 app.post(BASE_API_URL+'/andalusian-campings/*', (req, res) => {
   res.sendStatus(405);
 });
