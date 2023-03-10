@@ -22,7 +22,7 @@ app.get("/samples/MAS", useMAS);
 //app.get("/samples/LMP", useLMP);
 app.get("/samples/CGM", useCGM);
 
-//L06 MAS____________________________________________
+//L06 MAS______________________________________________________________________________________-
 let campings = [];
 
 //GET initial data
@@ -46,14 +46,27 @@ app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
 
 //GET
 app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
-  if (campings.length > 0) {
-    res.json(campings);
-    console.log("New Get request");
+  const query = req.query;
+
+  let filteredCampings = campings;
+  //añado que no importe si es mayusculas o minusculas en las busquedas
+  for (const key in query) {
+    const value = Array.isArray(query[key]) ? query[key].map(val => val.toLowerCase()) : query[key].toLowerCase();
+    filteredCampings = filteredCampings.filter(camping => {
+      const campingValue = Array.isArray(camping[key]) ? camping[key].map(val => val.toLowerCase()) : camping[key].toLowerCase();
+      return campingValue == value || (Array.isArray(campingValue) && campingValue.includes(value));
+    });
+  }
+  
+  if (filteredCampings.length > 0) {
+    res.json(filteredCampings);
+    console.log(`New GET request with query parameters ${JSON.stringify(query)}`);
     res.sendStatus(200);
   } else {
     res.sendStatus(404);
   }
 });
+
 
 //Get con 2 valores 
 app.get(BASE_API_URL+'/andalusian-campings/:value/:value2?', (req, res) => {
@@ -196,7 +209,7 @@ app.delete(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
   }
 });
 
-//L06 LPM____________________________________________
+//L06 LPM____________________________________________________________________________-
 
 
 app.listen(port,() =>{
