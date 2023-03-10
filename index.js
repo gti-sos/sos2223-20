@@ -24,7 +24,7 @@ app.get("/samples/CGM", useCGM);
 
 //L06 MAS______________________________________________________________________________________-
 let campings = [];
-//GET initial data
+//__________________________GET initial data
 app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
   // Comprobamos si el array campings está vacío
   if (campings.length === 0) {
@@ -43,20 +43,43 @@ app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
   res.json(campings);
 });
 
-//GET
+//_____________________________GET busqueda normal + querys + busqueda en periodos.
 app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
   const query = req.query;
-
   let filteredCampings = campings;
-  //añado que no importe si es mayusculas o minusculas en las busquedas
   for (const key in query) {
-    const value = Array.isArray(query[key]) ? query[key].map(val => val.toLowerCase()) : query[key].toLowerCase();
+    let value = query[key];
+
+    if (Array.isArray(value)) {
+      value = value.map(val => val.toLowerCase());
+    } else if (key === 'from' || key === 'to') {
+      value = new Date(value);
+    } else {
+      value = value.toLowerCase();
+    }
     filteredCampings = filteredCampings.filter(camping => {
-      const campingValue = Array.isArray(camping[key]) ? camping[key].map(val => val.toLowerCase()) : camping[key].toLowerCase();
-      return campingValue == value || (Array.isArray(campingValue) && campingValue.includes(value));
+      let campingValue = camping[key];
+
+      if (Array.isArray(campingValue)) {
+        campingValue = campingValue.map(val => val.toLowerCase());
+      } else if (key === 'from' || key === 'to') {
+        campingValue = new Date(campingValue);
+      } else {
+        campingValue = campingValue.toLowerCase();
+      }
+      if (key === 'from') {
+        return campingValue <= query['to'];
+      } else if (key === 'to') {
+        return campingValue >= query['from'];
+      } else if (key === 'start_date') { // si el atributo es start_date
+        const year = value.substring(0, 4); // obtenemos el año del valor de la query
+        const startYear = campingValue.substring(0, 4); // obtenemos el año de start_date del camping
+        return startYear === year || (startYear >= query['from'].getFullYear() && startYear <= query['to'].getFullYear());
+      } else {
+        return campingValue == value || (Array.isArray(campingValue) && campingValue.includes(value));
+      }
     });
   }
-
   if (filteredCampings.length > 0) {
     res.json(filteredCampings);
     console.log(`New GET request with query parameters ${JSON.stringify(query)}`);
@@ -67,7 +90,10 @@ app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
 });
 
 
-//Get con 2 valores 
+
+
+
+//______________________________Get con 2 valores 
 app.get(BASE_API_URL+'/andalusian-campings/:value/:value2?', (req, res) => {
   const value = req.params.value;
   const value2 = req.params.value2;
@@ -103,12 +129,12 @@ app.get(BASE_API_URL+'/andalusian-campings/:value/:value2?', (req, res) => {
   }
 });
 
-//POST con URL prohibidas
+//______________________________POST con URL prohibidas
 app.post(BASE_API_URL+'/andalusian-campings/*', (req, res) => {
   res.sendStatus(405);
 });
 
-//POST
+//______________________________POST normal
 app.post(BASE_API_URL+'/andalusian-campings', (req, res) => {
   try {
     var newCamping = req.body;
@@ -137,7 +163,7 @@ app.post(BASE_API_URL+'/andalusian-campings', (req, res) => {
 
 
 
-//PUT
+//___________________________________PUT
 app.put(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
   const id = req.params.id;
   const updatedCamping = req.body;
@@ -167,7 +193,7 @@ app.put(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
 });
 
 
-//DELETE all
+//_________________________DELETE all
 app.delete(BASE_API_URL+'/andalusian-campings', (req, res) => {
   if (campings.length > 0) {
     campings = [];
@@ -179,7 +205,7 @@ app.delete(BASE_API_URL+'/andalusian-campings', (req, res) => {
 });
 
 
-//DELETE por id
+//__________________________DELETE por id
 app.delete(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
   const id = req.params.id;
   let deleted = false;
