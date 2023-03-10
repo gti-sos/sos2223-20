@@ -51,6 +51,17 @@ app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
   res.sendStatus(200);
 });
 
+//Get based on Values
+app.get(BASE_API_URL+'/andalusian-campings/:attribute/:value', (req, res) => {
+  const attribute = req.params.attribute;
+  const value = req.params.value;
+  let filteredCampings = campings.filter(camping => camping[attribute] == value);
+  
+  res.json(filteredCampings);
+  console.log(`New GET request for ${attribute}=${value}`);
+  res.sendStatus(200);
+});
+
 
 //POST
 app.post(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
