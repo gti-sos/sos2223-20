@@ -55,20 +55,48 @@ app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
   }
 });
 
-//Get based on Values
-app.get(BASE_API_URL+'/andalusian-campings/:attribute/:value', (req, res) => {
-  const attribute = req.params.attribute;
+//Get con 2 valores 
+app.get(BASE_API_URL+'/andalusian-campings/:value/:value2?', (req, res) => {
   const value = req.params.value;
-  let filteredCampings = campings.filter(camping => camping[attribute] == value);
-  
+  const value2 = req.params.value2;
+  //Filtro de error de lista vacía
+  if (campings.length == 0) {
+    res.status(404).send('Error: Campings list is empty');
+    return;
+  }
+  //Filtro para ver si tengo 1 o 2 valores y filtrar por ambos.
+  let filteredCampings = campings.filter(camping => {
+    let matchValue = false;
+    let matchValue2 = false;
+
+    for (const key in camping) {
+      if (camping[key] == value) {
+        matchValue = true;
+      }
+
+      if (value2 && camping[key] == value2) {
+        matchValue2 = true;
+      }
+    }
+
+    if (value2) {
+      return matchValue && matchValue2;
+    } else {
+      return matchValue;
+    }
+  });
   if (filteredCampings.length > 0) {
     res.json(filteredCampings);
-    console.log(`New GET request for ${attribute}=${value}`);
+    console.log(`New GET request for value=${value} and secondValue=${secondValue}`);
     res.sendStatus(200);
   } else {
     res.sendStatus(404);
   }
 });
+
+
+
+
 
 //POST con URL prohibido
 app.post(BASE_API_URL+'/andalusian-campings/*', (req, res) => {
@@ -77,22 +105,28 @@ app.post(BASE_API_URL+'/andalusian-campings/*', (req, res) => {
 
 //POST
 app.post(BASE_API_URL+'/andalusian-campings', (req, res) => {
-  var newCamping = req.body;
-  console.log("New post to /andalusian-campings");
-  // Validar si se han proporcionado los campos esperados
-  if (!newCamping.name || !newCamping.location || !newCamping.rating) {
-    res.sendStatus(400);
-  } else {
-    // Validar si ya existe un camping con el mismo nombre
-    var existingCamping = campings.find(camping => camping.name === newCamping.name);
-    if (existingCamping) {
-      res.sendStatus(409);
+  try {
+    var newCamping = req.body;
+    console.log("New post to /andalusian-campings");
+    // Validar si se han proporcionado los campos esperados
+    if (!newCamping.name || !newCamping.city || !newCamping.start_date|| !newCamping.id) {
+      res.sendStatus(400);
+      console.log("no tiene los atributos: id, name,city y/o start_Date")
     } else {
-      // Agregar el nuevo camping al array
-      console.log(`newCamping = <${JSON.stringify(newCamping,null,2)}>`);
-      campings.push(newCamping);
-      res.sendStatus(201);
+      // Validar si ya existe un camping con el mismo nombre
+      var existingCamping = campings.find(camping => camping.name === newCamping.name);
+      if (existingCamping) {
+        res.sendStatus(409);
+      } else {
+        // Agregar el nuevo camping al array
+        console.log(`newCamping = <${JSON.stringify(newCamping,null,2)}>`);
+        campings.push(newCamping);
+        res.sendStatus(201);
+      }
     }
+  } catch (err) {
+    res.sendStatus(400);
+    console.log("Error con el formato JSON");
   }
 });
 
