@@ -22,7 +22,8 @@ app.get("/samples/MAS", useMAS);
 //app.get("/samples/LMP", useLMP);
 app.get("/samples/CGM", useCGM);
 
-//L06 MAS______________________________________________________________________________________-
+//L06 MAS______________________________________________________________________________________
+
 let campings = [];
 //__________________________GET initial data
 app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
@@ -32,49 +33,72 @@ app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
     const campingsData = fs.readFileSync(campingsFilePath);
     // Convertimos el contenido del archivo a un objeto JavaScript
     const campingsArray = JSON.parse(campingsData);
-    // Creamos 15 objetos aleatorios a partir del array de campings
-    for (let i = 0; i < 15; i++) {
-      const randomIndex = Math.floor(Math.random() * campingsArray.length);
-      const randomCamping = campingsArray[randomIndex];
-      campings.push(randomCamping);
-    }
+    // Obtenemos los primeros 15 objetos del array de campings
+    campings = campingsArray.slice(0, 15);
   }
-  // Devolvemos los objetos aleatorios como respuesta
+  // Devolvemos los objetos
+  res.sendStatus(200);
   res.json(campings);
 });
 
-//_____________________________GET busqueda normal + querys + busqueda en periodos.
+//______________________________GET con rango de busqueda
+//andalusian-campings?from=2004&to=2016
 app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
-  const query = req.query;
+
+  if (campings.length == 0) {
+    res.status(404).send('Error: Campings not found');
+    return;
+  }
+  // Se obtienen los parámetros de consulta 'from' y 'to'
+  const fromYear = req.query.from;
+  const toYear = req.query.to;
+
   let filteredCampings = campings;
-  for (const key in query) {
-    const value = Array.isArray(query[key]) ? query[key].map(val => val) : query[key];
+  if (fromYear && toYear) {
     filteredCampings = filteredCampings.filter(camping => {
-      const campingValue = Array.isArray(camping[key]) ? camping[key].map(val => val) : camping[key];
-      if (key === 'from' && camping.start_date) {
-        const fromYear = parseInt(value);
-        const startYear = parseInt(camping.start_date.substring(0, 4));
-        return startYear >= fromYear;
-      } else if (key === 'to' && camping.start_date) {
-        const toYear = parseInt(value);
-        const startYear = parseInt(camping.start_date.substring(0, 4));
-        return startYear <= toYear;
-      } else {
-        return campingValue == value || (Array.isArray(campingValue) && campingValue.includes(value));
-      }
+      const year = parseInt(camping.start_date.substring(0, 4));
+      return year >= parseInt(fromYear) && year <= parseInt(toYear);
     });
   }
   if (filteredCampings.length > 0) {
     res.json(filteredCampings);
-    console.log(`New GET request with query parameters ${JSON.stringify(query)}`);
+    console.log(`Nueva solicitud GET con fecha de inicio=${fromYear}, fecha de fin=${toYear}`);
     res.sendStatus(200);
   } else {
+  
     res.sendStatus(404);
   }
 });
 
 
+//______________________________GET con valor y rango de fechas año
+//andalusian-campings/value?from=2004&to=2016
+app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
+  if (campings.length == 0) {
+    res.status(404).send('Error: Campings not found');
+    return;
+  }
 
+  const fromYear = req.query.from;
+  const toYear = req.query.to;
+
+  let filteredCampings = campings;
+
+  if (fromYear && toYear) {
+    filteredCampings = filteredCampings.filter(camping => {
+      const year = parseInt(camping.start_date.substring(0, 4));
+      return year >= parseInt(fromYear) && year <= parseInt(toYear);
+    });
+  }
+
+  if (filteredCampings.length > 0) {
+    res.json(filteredCampings);
+    console.log(`New GET request with date range from=${fromYear}, to=${toYear}`);
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(404);
+  }
+});
 
 
 
@@ -86,7 +110,7 @@ app.get(BASE_API_URL+'/andalusian-campings/:value/:value2?', (req, res) => {
   const value2 = req.params.value2;
   //Filtro de error de lista vacía
   if (campings.length == 0) {
-    res.status(404).send('Error: Campings list is empty');
+    res.status(404).send('Error: Campings not found');
     return;
   }
   //Filtro para ver si tengo 1 o 2 valores y filtrar por ambos.
