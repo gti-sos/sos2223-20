@@ -52,13 +52,11 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
       return year >= from && year <= to;
     });
   }
-
+  if (filteredCampings.length === 0) {
+    return res.status(404).json({ error: 'No campings found.' });
+  }
   res.json(filteredCampings);
 });
-
-
-
-
 
 //______________________________GET con valor y rango de fechas año
 //andalusian-campings/value?from=2004&to=2016
@@ -169,7 +167,10 @@ app.post(BASE_API_URL+'/andalusian-campings', (req, res) => {
   }
 });
 
-
+//______________________________PUT con URL prohibidas
+app.put(BASE_API_URL+'/andalusian-campings', (req, res) => {
+  res.sendStatus(405);
+});
 
 //___________________________________PUT
 app.put(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
