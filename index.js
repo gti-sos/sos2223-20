@@ -151,7 +151,7 @@ app.post(BASE_API_URL+'/andalusian-campings', (req, res) => {
       console.log("no tiene los atributos: id, name,city y/o start_Date")
     } else {
       // Validar si ya existe un camping con el mismo nombre
-      var existingCamping = campings.find(camping => camping.name === newCamping.name);
+      var existingCamping = campings.find(camping => camping.id === newCamping.id);
       if (existingCamping) {
         res.sendStatus(409);
       } else {
