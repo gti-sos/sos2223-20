@@ -43,63 +43,60 @@ app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
 
 //______________________________GET con rango de busqueda
 //andalusian-campings?from=2004&to=2016
-app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
-
-  if (campings.length == 0) {
-    res.status(404).send('Error: Campings not found');
-    return;
-  }
-  // Se obtienen los parámetros de consulta 'from' y 'to'
-  const fromYear = req.query.from;
-  const toYear = req.query.to;
-
+app.get('/api/v1/andalusian-campings', (req, res) => {
+  const { from, to } = req.query;
   let filteredCampings = campings;
-  if (fromYear && toYear) {
-    filteredCampings = filteredCampings.filter(camping => {
-      const year = parseInt(camping.start_date.substring(0, 4));
-      return year >= parseInt(fromYear) && year <= parseInt(toYear);
+  if (from && to) {
+    filteredCampings = campings.filter(camping => {
+      const year = camping.start_date.slice(0, 4);
+      return year >= from && year <= to;
     });
   }
-  if (filteredCampings.length > 0) {
-    res.json(filteredCampings);
-    console.log(`Nueva solicitud GET con fecha de inicio=${fromYear}, fecha de fin=${toYear}`);
-    res.sendStatus(200);
-  } else {
-  
-    res.sendStatus(404);
-  }
+
+  res.json(filteredCampings);
 });
+
+
+
 
 
 //______________________________GET con valor y rango de fechas año
 //andalusian-campings/value?from=2004&to=2016
-app.get(BASE_API_URL+'/andalusian-campings', (req, res) => {
+app.get(BASE_API_URL+'/andalusian-campings/:value', (req, res) => {
   if (campings.length == 0) {
     res.status(404).send('Error: Campings not found');
     return;
   }
-
+  const value = req.params.value;
   const fromYear = req.query.from;
   const toYear = req.query.to;
 
-  let filteredCampings = campings;
+  let filteredCampings = campings.filter(camping => {
+    let matchValue = false;
+    for (const key in camping) {
+      if (camping[key] == value) {
+        matchValue = true;
+      }
+    }
+    return matchValue;
+  });
 
   if (fromYear && toYear) {
-    filteredCampings = filteredCampings.filter(camping => {
+    const filteredByYear = filteredCampings.filter(camping => {
       const year = parseInt(camping.start_date.substring(0, 4));
       return year >= parseInt(fromYear) && year <= parseInt(toYear);
     });
+    filteredCampings = filteredByYear;
   }
 
   if (filteredCampings.length > 0) {
     res.json(filteredCampings);
-    console.log(`New GET request with date range from=${fromYear}, to=${toYear}`);
+    console.log(`New GET request for value=${value}, from=${fromYear}, to=${toYear}`);
     res.sendStatus(200);
   } else {
     res.sendStatus(404);
   }
 });
-
 
 
 
