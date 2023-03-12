@@ -1,16 +1,4 @@
 
-function media_de_provincia(data, prov){
-  var acc = 0;
-  var sum = 0;
-  
-  data.forEach(x => { if (x.province == prov){
-      acc = acc + 1;
-      sum = sum + x.icmsld;
-  }    
-  });
-  let med = sum/acc;
-  return `La media de ${prov} es =  ${med} `;
-}
 
 let data_lmp = [
   { active_name: "SILO DE LAS CABEZAS DE SAN JUAN", aviable: true,
@@ -75,5 +63,24 @@ let data_lmp = [
 
 ];
 
-module.exports.data_lmp = data_lmp;
-module.exports.media_de_provincia =  media_de_provincia;
+    //inicio de variables
+    let sum=0;
+    let aux = 0;
+        //bucle iterador
+    
+    for (let row of data_lmp) {
+        if (row.province === 'Sevilla') {
+         
+          sum += row.icmsld;
+          
+          aux++;
+        }
+      }
+        //imprimir el average por consola:
+      let average = sum / aux;
+    
+      function handleMiembro1(req, res) {
+        res.send(`La media  es: ${average}`);
+      }
+      
+      module.exports = handleMiembro1;
