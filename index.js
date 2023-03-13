@@ -352,9 +352,9 @@ app.get(BASE_API_URL+'/immovables/:value/:value2?', (req, res) => {
 });
 
 //______________________________POST con URL prohibidas
-/*app.post(BASE_API_URL+'/immovables/', (req, res) => {
+app.post(BASE_API_URL+'/immovables/*', (req, res) => {
   res.sendStatus(405);
-});*/
+});
 
 //______________________________POST normal
 app.post(BASE_API_URL+'/immovables', (req, res) => {
@@ -373,7 +373,7 @@ app.post(BASE_API_URL+'/immovables', (req, res) => {
       } else {
         // Agregar el nuevo immovable al array
         console.log(`newImmovable = <${JSON.stringify(newImmovable,null,2)}>`);
-        campings.push(newImmovable);
+        immovables.push(newImmovable);
         res.sendStatus(201);
       }
     }
