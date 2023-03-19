@@ -144,15 +144,12 @@ app.put(BASE_API_URL+'/andalusian-campings', (req, res) => {
 });
 
 //___________________________________PUT
-app.put('/campings/:id', (req, res) => {
-    const db = req.app.locals.db;
-  
+app.put(BASE_API_URL+'/andalusian-campings:id', (req, res) => {
+    var db = req.app.locals.db;
     // Obtener el ID del camping de la URL
-    const campingId = req.params.id;
-  
+    var campingId = req.params.id;
     // Obtener los datos del camping que se enviarán en la solicitud
-    const updatedCamping = req.body;
-  
+    var updatedCamping = req.body;
     // Buscar el camping por ID en la base de datos
     db.campings.findOne({ id: campingId }, (err, camping) => {
       if (err) {
