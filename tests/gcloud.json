@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "b57b319b-e224-4447-9a3e-9fba228ab8ec",
+		"name": "Gcloud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26063155"
+	},
+	"item": [
+		{
+			"name": "GCLOUD INITIAL DATA",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});",
+							"",
+							"pm.test(\"Numero de campings superior a 0\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.above(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gcloud GET ALL",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});",
+							"",
+							"pm.test(\"Numero de campings superior a 0\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.above(0);",
+							"});",
+							"",
+							"pm.test(\"Numero de campings superior es 15\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.a.lengthOf(15);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gcloud GET /ADRA",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings/ADRA",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings",
+						"ADRA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GCLOUD POST",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function(){",
+							"    pm.response.to.have.status(201);",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "      { \"id\": 113439,\n        \"registry_code\": \"VFT/MA/029625\",\n        \"name\": \"___________________POOOOOOST___________\",\n        \"inscription_date\": 201703314,\n        \"start_date\": 201702322,\n        \"state\": \"ADRA\",\n        \"city\": \"ADRA\",\n        \"mail\": \"fleur2vdwoude@gmail.com\",\n        \"coord_x\": 30269741.9082,\n        \"srid\": 2528830,\n        \"num_doc_verified\": \"X75792273Z\",\n        \"responsible\": \"xxx: FLEU2R MADELEINE VAN DER WOUDE \"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GCLOUD POST CON ID NOT ALLOWED",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405 not allowed\", function(){",
+							"    pm.response.to.have.status(405);",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "      { \"id\": 13439,\n        \"registry_code\": \"VFT/MA/029625\",\n        \"name\": \"CASITA22 SANTO 222\",\n        \"inscription_date\": 201703314,\n        \"start_date\": 201702322,\n        \"state\": \"RON2DA\",\n        \"city\": \"ROND2A\",\n        \"mail\": \"fleur2vdwoude@gmail.com\",\n        \"coord_x\": 30269741.9082,\n        \"srid\": 2528830,\n        \"num_doc_verified\": \"X75792273Z\",\n        \"responsible\": \"xxx: FLEU2R MADELEINE VAN DER WOUDE \"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings/113439",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings",
+						"113439"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GCLOUD PUT",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 113439,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"_______________PUT_MODIFIED________________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": \"20100107\",\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings/113439",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings",
+						"113439"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GCLOUD PUT NotAllowed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405 not allowed\", function(){",
+							"    pm.response.to.have.status(405);",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3439,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"_______________PUT_MODIFIED________________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": \"20100107\",\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GCLOUD - DELETE ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3439,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"____________aaaaa_____________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": 20100107,\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com//api/v1/andalusian-campings/113439",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"",
+						"api",
+						"v1",
+						"andalusian-campings",
+						"113439"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GCLOUD -DELETE All",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 19715,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"____________aaaaa_____________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": 20100107,\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/andalusian-campings",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

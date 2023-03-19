@@ -64,12 +64,17 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
           res.sendStatus(500);
         } else {
           console.log(`Campings returned = ${campings.length}`)
-          res.json(campings);
+          if (campings.length === 0) {
+            res.sendStatus(404);
+          } else {
+            res.json(campings);
+          }
         }
       });
     }
     console.log("Nuevo get a campings");
   });
+  
 
 //______________________________GET con 2 values.
 app.get('/api/v1/andalusian-campings/:value/:value2?', (req, res) => {
