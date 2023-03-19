@@ -58,67 +58,36 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
 
 //______________________________GET con valor y rango de fechas año
 //andalusian-campings/value?from=2004&to=2016
-app.get('/api/v1/andalusian-campings/:value', (req, res) => {
-    const { value } = req.params;
-    campings.find({ $where: function() {
-        for (let key in this) {
-          if (typeof this[key] === 'string' && this[key].includes(value)) {
+app.get('/api/v1/andalusian-campings/:value/:value2?', (req, res) => {
+    const { value, value2 } = req.params;
+    const query = { $where: function() {
+      for (let key in this) {
+        if (typeof this[key] === 'string' && this[key].includes(value)) {
+          if (value2) {
+            if (typeof this[key] === 'string' && this[key].includes(value2)) {
+              return true;
+            }
+          } else {
             return true;
           }
         }
-        return false;
       }
-    }, (err, campings) => {
-      if(err){
-          console.log(`Error getting /campings: ${err}`);
-          res.sendStatus(500);
+      return false;
+    }};
+    campings.find(query, (err, campings) => {
+      if (err) {
+        console.log(`Error getting /campings: ${err}`);
+        res.sendStatus(500);
       } else if (campings.length === 0) {
-          res.status(404).json({ error: 'Campings not found.' });
+        res.status(404).json({ error: 'Campings not found.' });
       } else {
-          console.log(`Campings returned = ${campings.length}`)
-          res.json(campings);
+        console.log(`Campings returned = ${campings.length}`)
+        res.json(campings);
       }
     });
     console.log("Nuevo get a campings");
   });
   
-
-//______________________________Get con 2 valores 
-app.get(BASE_API_URL+'/andalusian-campings/:value/:value2?', (req, res) => {
-  const value = req.params.value;
-  const value2 = req.params.value2;
-  //Filtro de error de lista vacía
-  if (campings.length == 0) {
-    res.status(404).send('Error: Campings not found');
-    return;
-  }
-  //Filtro para ver si tengo 1 o 2 valores y filtrar por ambos.
-  let filteredCampings = campings.filter(camping => {
-    let matchValue = false;
-    let matchValue2 = false;
-    for (const key in camping) {
-      if (camping[key] == value) {
-        matchValue = true;
-      }
-      if (value2 && camping[key] == value2) {
-        matchValue2 = true;
-      }
-    }
-    if (value2) {
-      return matchValue && matchValue2;
-    } else {
-      return matchValue;
-    }
-  });
-  if (filteredCampings.length > 0) {
-    res.json(filteredCampings);
-    console.log(`New GET request for value=${value} and secondValue=${secondValue}`);
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(404);
-  }
-});
-
 //______________________________POST con URL prohibidas
 app.post(BASE_API_URL+'/andalusian-campings/*', (req, res) => {
   res.sendStatus(405);
