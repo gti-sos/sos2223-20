@@ -42,17 +42,41 @@ console.log("insertado los contactos de load");
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
-  campings.find({}, (err, campings) => {
-    if(err){
-        console.log(`Error getting /campings: ${err}`);
-        res.sendStatus(500);
-    }else{
-        console.log(`Campings returned = ${campings.length}`)
-        res.json(campings);
+    const { from, to } = req.query;
+    if (from && to) {
+      campings.find({}, (err, campings) => {
+        if (err) {
+          console.log(`Error getting /campings: ${err}`);
+          res.sendStatus(500);
+        } else {
+          const filteredCampings = campings
+            .map(camping => {
+              const year = camping.start_date.substring(0, 4);
+              if (year >= from && year <= to) {
+                return camping;
+              }
+            })
+            .filter(camping => camping !== undefined);
+          console.log(`Campings returned = ${filteredCampings.length}`)
+          res.json(filteredCampings);
+        }
+      });
+    } else {
+      campings.find({}, (err, campings) => {
+        if (err) {
+          console.log(`Error getting /campings: ${err}`);
+          res.sendStatus(500);
+        } else {
+          console.log(`Campings returned = ${campings.length}`)
+          res.json(campings);
+        }
+      });
     }
+    console.log("Nuevo get a campings");
   });
-  console.log("Nuevo get a campings");
-});
+  
+  
+  
 
 //______________________________GET con 2 values.
 app.get('/api/v1/andalusian-campings/:value/:value2?', (req, res) => {
