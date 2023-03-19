@@ -70,9 +70,6 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
     }
     console.log("Nuevo get a campings");
   });
-  
-  
-  
 
 //______________________________GET con 2 values.
 app.get('/api/v1/andalusian-campings/:value/:value2?', (req, res) => {
@@ -136,7 +133,6 @@ app.post(BASE_API_URL+'/andalusian-campings', (req, res) => {
     });
   });
   
-
 //______________________________PUT con URL prohibidas
 app.put(BASE_API_URL+'/andalusian-campings', (req, res) => {
   res.sendStatus(405);
@@ -144,67 +140,52 @@ app.put(BASE_API_URL+'/andalusian-campings', (req, res) => {
 
 //___________________________________PUT
 app.put(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
-    const campingId = req.params.id; // Obtener el ID del camping de la URL
-    const updatedCamping = req.body; // Obtener el objeto camping actualizado desde el cuerpo de la petición
-    // Buscar el objeto camping por su ID en la base de datos
-    campings.findOne({ id: campingId }, (err, camping) => {
+    const campingId = Number(req.params.id); // Obtener el ID de la URL
+    const updatedCamping = req.body; // Obtener camping actualizado desde cuerpo 
+  
+    // Actualizar el objeto camping en la base de datos
+    campings.update({ id: campingId }, { $set: updatedCamping }, {}, (err, numReplaced) => {
       if (err) {
         console.error(err);
         return res.status(500).send({ error: 'Internal server error' });
       }
-      if (!camping) {
-        return res.status(404).send({ error: 'Camping not found' });
+      if (numReplaced === 0) {
+        return res.status(400).send({ error: 'Bad request: camping ID not found' });
       }
-      // Comprobar si el ID del objeto camping coincide con el ID de la URL
-      if (camping.id !== campingId) {
-        return res.status(400).send({ error: 'Invalid camping ID' });
-      }
-      // Actualizar el objeto camping en la base de datos
-      campings.update({ id: campingId }, updatedCamping, {}, (err, numReplaced) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send({ error: 'Internal server error' });
-        }
-        return res.status(200).send({ message: 'Camping updated successfully' });
-      });
+      return res.status(200).send({ message: 'Camping updated successfully' });
     });
   });
   
-  
-  
 //_________________________DELETE all
 app.delete(BASE_API_URL+'/andalusian-campings', (req, res) => {
-  if (campings.length > 0) {
-    campings = [];
-    res.sendStatus(200);
-    console.log("All campings deleted");
-  } else {
-    res.sendStatus(404);
-  }
+    // Borrar todos los campings de la base de datos
+    campings.remove({}, { multi: true }, (err, numRemoved) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send({ error: 'Internal server error' });
+        }
+        return res.status(200).send({ message: `Deleted ${numRemoved} campings` });
+    });
 });
+
 
 
 //__________________________DELETE por id
 app.delete(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
-  const id = req.params.id;
-  let deleted = false;
-
-  campings = campings.filter(camping => {
-    if (camping.id != id) {
-      return true;
-    } else {
-      deleted = true;
-      return false;
-    }
-  });
-
-  if (deleted) {
-    res.sendStatus(200);
-    console.log(`Camping ${id} deleted`);
-  } else {
-    res.sendStatus(404);
-  }
+    const campingId = Number(req.params.id); // Obtener el ID del camping de la URL
+    // Borrar el camping de la base de datos
+    campings.remove({ id: campingId }, {}, (err, numRemoved) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send({ error: 'Internal server error' });
+        }
+        if (numRemoved === 0) {
+            return res.status(400).send({ error: 'Bad request: camping ID not found' });
+        }
+        return res.status(200).send({ message: 'Camping deleted successfully' });
+    });
 });
+
 
 //L06 LPM____________________________________________________________________________-
 

@@ -341,33 +341,32 @@ app.put(BASE_API_URL+'/immovables', (req, res) => {
 });
 
 //___________________________________PUT
-app.put(BASE_API_URL+'/immovables/:id', (req, res) => {
-  const id = req.params.id;
-  const updatedImmovable = req.body;
-  let updated = false;
-  // Verificar si se proporcionó un ID en la URL
-  if (!id) {
-    res.sendStatus(405);
-    return;
-  }
-  // Verificar que el ID proporcionado en la URL coincide con el ID del objeto de immovable
-  immovables.forEach(immovable => {
-    if (immovable.id == id) {
-      if (immovable.id == updatedImmovable.id) {
-        Object.assign(immovable, updatedImmovable);
-        updated = true;
-        res.sendStatus(200);
-        console.log(`Immovable ${id} updated: ${JSON.stringify(immovable)}`);
-      } else {
-        res.sendStatus(400);
+app.put(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
+  const campingId = Number(req.params.id); // Obtener el ID del camping de la URL
+  const updatedCamping = req.body; // Obtener el objeto camping actualizado desde el cuerpo de la petición
+  // Buscar el objeto camping en la base de datos por su ID
+  campings.findOne({ id: campingId }, (err, camping) => {
+      if (err) {
+          console.error(err);
+          return res.status(500).send({ error: 'Internal server error' });
       }
-    }
+      if (camping === null) {
+          return res.status(400).send({ error: 'Bad request: camping ID not found' });
+      }
+      // Actualizar el objeto camping en la base de datos
+      campings.update({ id: campingId }, { $set: updatedCamping }, {}, (err, numReplaced) => {
+          if (err) {
+              console.error(err);
+              return res.status(500).send({ error: 'Internal server error' });
+          }
+          if (numReplaced === 0) {
+              return res.status(400).send({ error: 'Bad request: camping ID not found' });
+          }
+          return res.status(200).send({ message: 'Camping updated successfully' });
+      });
   });
-
-  if (!updated) {
-    res.sendStatus(404);
-  }
 });
+
 
 
 //_________________________DELETE all
