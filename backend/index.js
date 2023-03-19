@@ -41,7 +41,6 @@ console.log("insertado los contactos de load");
 
 
 //______________________________GET con rango de busqueda
-//andalusian-campings?from=2004&to=2016
 app.get('/api/v1/andalusian-campings', (req, res) => {
   campings.find({}, (err, campings) => {
     if(err){
@@ -54,10 +53,8 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
   });
   console.log("Nuevo get a campings");
 });
-  
 
-//______________________________GET con valor y rango de fechas año
-//andalusian-campings/value?from=2004&to=2016
+//______________________________GET con 2 values.
 app.get('/api/v1/andalusian-campings/:value/:value2?', (req, res) => {
     const { value, value2 } = req.params;
     const query = { $where: function() {
@@ -127,32 +124,26 @@ app.put(BASE_API_URL+'/andalusian-campings', (req, res) => {
 
 //___________________________________PUT
 app.put(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
-  const id = req.params.id;
-  const updatedCamping = req.body;
-  let updated = false;
-  // Verificar si se proporcionó un ID en la URL
-  if (!id) {
-    res.sendStatus(405);
-    return;
-  }
-  // Verificar que el ID proporcionado en la URL coincide con el ID del objeto de camping
-  campings.forEach(camping => {
-    if (camping.id == id) {
-      if (camping.id == updatedCamping.id) {
-        Object.assign(camping, updatedCamping);
-        updated = true;
-        res.sendStatus(200);
-        console.log(`Camping ${id} updated: ${JSON.stringify(camping)}`);
-      } else {
-        res.sendStatus(400);
-      }
+    const { id } = req.params;
+    const update = req.body;
+    
+    if (!id) {
+      res.sendStatus(405);
+      return;
     }
+    campings.findOneAndUpdate({ _id: id }, update, { new: true }, (err, updatedCamping) => {
+      if (err) {
+        console.log(`Error updating /campings/${id}: ${err}`);
+        res.sendStatus(404);
+      } else if (!updatedCamping) {
+        res.sendStatus(400);
+      } else {
+        console.log(`Camping with id ${id} updated successfully`);
+        res.json(updatedCamping);
+      }
+    });
   });
-
-  if (!updated) {
-    res.sendStatus(404);
-  }
-});
+  
 
 
 //_________________________DELETE all
