@@ -4,7 +4,6 @@ const immovablesFilePath = 'ddbb/immovables.json';
 const BASE_API_URL = "/api/v1";
 var port = process.env.PORT || 12345;
 const fs = require('fs');
-
 var Datastore = require('nedb'), campings = new Datastore();
 
 module.exports = (app) => {
@@ -144,40 +143,29 @@ app.put(BASE_API_URL+'/andalusian-campings', (req, res) => {
 });
 
 //___________________________________PUT
-app.put(BASE_API_URL+'/andalusian-campings:id', (req, res) => {
-    var db = req.app.locals.db;
-    // Obtener el ID del camping de la URL
-    var campingId = req.params.id;
-    // Obtener los datos del camping que se enviarán en la solicitud
-    var updatedCamping = req.body;
-    // Buscar el camping por ID en la base de datos
-    db.campings.findOne({ id: campingId }, (err, camping) => {
+app.put(`${BASE_API_URL}/andalusian-campings/:id`, (req, res) => {
+    const campingId = req.params.id; // Obtener el ID del camping de la URL
+    const updatedCamping = req.body; // Obtener el objeto camping actualizado desde el cuerpo de la petición
+    // Buscar el objeto camping por su ID en la base de datos
+    campings.findOne({ id: campingId }, (err, camping) => {
       if (err) {
-        // Si hay un error al buscar el camping, enviar una respuesta de error al cliente
-        res.status(500).send('Error al buscar el camping en la base de datos');
-        return;
+        console.error(err);
+        return res.status(500).send({ error: 'Internal server error' });
       }
-  
       if (!camping) {
-        // Si no se encuentra el camping, enviar una respuesta de error al cliente
-        res.status(400).send(`No se encontró un camping con ID ${campingId}`);
-        return;
+        return res.status(404).send({ error: 'Camping not found' });
       }
-      if (camping.id !== updatedCamping.id) {
-        // Si el ID del camping en la base de datos no coincide con el ID proporcionado en la solicitud, enviar una respuesta de error al cliente
-        res.status(400).send(`El ID del camping a actualizar no coincide con el ID proporcionado en la URL`);
-        return;
+      // Comprobar si el ID del objeto camping coincide con el ID de la URL
+      if (camping.id !== campingId) {
+        return res.status(400).send({ error: 'Invalid camping ID' });
       }
-      // Actualizar los datos del camping en la base de datos
-      db.campings.update({ id: campingId }, updatedCamping, {}, (err, numReplaced) => {
+      // Actualizar el objeto camping en la base de datos
+      campings.update({ id: campingId }, updatedCamping, {}, (err, numReplaced) => {
         if (err) {
-          // Si hay un error al actualizar el camping, enviar una respuesta de error al cliente
-          res.status(500).send('Error al actualizar el camping en la base de datos');
-          return;
+          console.error(err);
+          return res.status(500).send({ error: 'Internal server error' });
         }
-  
-        // Enviar una respuesta de éxito al cliente
-        res.status(200).send(`Camping actualizado con éxito`);
+        return res.status(200).send({ message: 'Camping updated successfully' });
       });
     });
   });
