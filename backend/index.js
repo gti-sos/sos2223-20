@@ -5,6 +5,7 @@ const BASE_API_URL = "/api/v1";
 var port = process.env.PORT || 12345;
 const fs = require('fs');
 var Datastore = require('nedb'), campings = new Datastore();
+var Datastore = require('nedb'), immovables = new Datastore();
 
 module.exports = (app) => {
 //L06 MAS______________________________________________________________________________________
@@ -193,40 +194,77 @@ app.delete(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
 
 
 //L06 LPM____________________________________________________________________________-
-
-
-let immovables = [];
 //__________________________GET initial data
+
+//Redireccion a la DOC de POSTMAN
+
+app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
+  res.redirect("https://web.postman.co/workspace/My-Workspace~e8939805-9e0a-4345-8916-67764037dea9/documentation/26062489-81f43409-305f-4c51-bc35-1b4c1884b355");
+});
+
 app.get(BASE_API_URL+'/immovables/loadInitialData', (req, res) => {
-  // Comprobamos si el array immovables está vacío
-  if (immovables.length === 0) {
-    // Leemos el archivo de immovables
-    const immovablesData = fs.readFileSync(immovablesFilePath);
-    // Convertimos el contenido del archivo a un objeto JavaScript
-    const immovablesArray = JSON.parse(immovablesData);
-    // Obtenemos los primeros 15 objetos del array de immovables
-    immovables = immovablesArray.slice(0, 15);
-  }
-  // Devolvemos los objetos
-  res.sendStatus(200);
-  res.json(immovables);
+  immovables.find({}, (err, docs) => {
+    if (err) {
+      console.log(`Error getting /immovables: ${err}`);
+      res.sendStatus(500);
+    } else if (docs.length === 0) {
+      const fs = require('fs');
+      const immovablesData = JSON.parse(fs.readFileSync(immovablesFilePath));
+      const initialImmovables = immovablesData.slice(0, 15);
+      immovables.insert(initialImmovables, (err, newDocs) => {
+        if (err) {
+          console.log(`Error inserting initial data into immovables: ${err}`);
+          res.sendStatus(500);
+        } else {
+          console.log(`Inserted ${newDocs.length} initial immovables`);
+          res.sendStatus(200);
+        }
+      });
+    } else {
+      console.log(`Immovables collection already has ${docs.length} documents`);
+      res.sendStatus(200);
+    }
+  });
 });
 
 //______________________________GET con rango de busqueda
 //immovables
 app.get('/api/v1/immovables', (req, res) => {
   const { from, to } = req.query;
-  let filteredImmovables = immovables;
   if (from && to) {
-    filteredImmovables = immovables.filter(immovable => {
-      const year = immovable.modified_date.slice(0, 4);
-      return year >= from && year <= to;
+    immovables.find({}, (err, immovables) => {
+      if (err) {
+        console.log(`Error getting /immovables: ${err}`);
+        res.sendStatus(500);
+      } else {
+        const filteredImmovables = immovables
+          .map(immovable => {
+            const year = immovable.modified_date.substring(0, 4);
+            if (year >= from && year <= to) {
+              return immovables;
+            }
+          })
+          .filter(immovable => immovable !== undefined);
+        console.log(`Immovables returned = ${filteredImmovables.length}`)
+        res.json(filteredImmovables);
+      }
+    });
+  } else {
+    immovables.find({}, (err, immovables) => {
+      if (err) {
+        console.log(`Error getting /immovables: ${err}`);
+        res.sendStatus(500);
+      } else {
+        console.log(`Immovables returned = ${immovables.length}`)
+        if (immovables.length === 0) {
+          res.sendStatus(404);
+        } else {
+          res.json(immovables);
+        }
+      }
     });
   }
-  if (filteredImmovables.length === 0) {
-    return res.status(404).json({ error: 'No Immovables found.' });
-  }
-  res.json(filteredImmovables);
+  console.log("Nuevo get a immovables");
 });
 
 //______________________________GET con valor y rango de fechas año
@@ -283,7 +321,7 @@ app.get(BASE_API_URL+'/immovables/:value/:value2?', (req, res) => {
   let filteredImmovables = immovables.filter(immovable => {
     let matchValue = false;
     let matchValue2 = false;
-    for (const key in camping) {
+    for (const key in immovable) {
       if (immovable[key] == value) {
         matchValue = true;
       }
@@ -313,29 +351,28 @@ app.post(BASE_API_URL+'/immovables/*', (req, res) => {
 
 //______________________________POST normal
 app.post(BASE_API_URL+'/immovables', (req, res) => {
-  try {
-    var newImmovable = req.body;
-    console.log("New post to /immovables");
-    // Validar si se han proporcionado los campos esperados
-    if (!newImmovable.active_name || !newImmovable.municipality || !newImmovable.modified_date|| !newImmovable.id) {
-      res.sendStatus(400);
-      console.log("no tiene los atributos: id, name,municipality y/o modified_date")
-    } else {
-      // Validar si ya existe un immovable con el mismo nombre
-      var existingImmovable = immovables.find(immovable => immovable.id === newImmovable.id);
-      if (existingImmovable) {
-        res.sendStatus(409);
-      } else {
-        // Agregar el nuevo immovable al array
-        console.log(`newImmovable = <${JSON.stringify(newImmovable,null,2)}>`);
-        immovables.push(newImmovable);
-        res.sendStatus(201);
-      }
-    }
-  } catch (err) {
-    res.sendStatus(400);
-    console.log("Error con el formato JSON");
+  const newImmovable = req.body;
+  if (!newImmovable.active_name || !newImmovable.province || !newImmovable.modified_date || !newImmovable.id) {
+    return res.status(400).json({ error: 'Faltan datos en el JSON' });
   }
+  immovables.findOne({ id: newImmovable.id }, (err, doc) => {
+    if (err) {
+      console.log(`Error finding immovable with id ${newImmovable.id}: ${err}`);
+      res.sendStatus(500);
+    } else if (doc) {
+      res.status(409).json({ error: `Immovable with id ${newImmovable.id} already exists.` });
+    } else {
+      immovables.insert(newImmovable, (err, newDoc) => {
+        if (err) {
+          console.log(`Error inserting immovable with id ${newImmovable.id}: ${err}`);
+          res.sendStatus(500);
+        } else {
+          console.log(`Inserted new immovable with id ${newImmovable.id}`);
+          res.sendStatus(201);
+        }
+      });
+    }
+  });
 });
 
 //______________________________PUT con URL prohibidas
@@ -345,67 +382,53 @@ app.put(BASE_API_URL+'/immovables', (req, res) => {
 
 //___________________________________PUT
 app.put(BASE_API_URL+'/immovables/:id', (req, res) => {
-  const id = req.params.id;
-  const updatedImmovable = req.body;
-  let updated = false;
-  // Verificar si se proporcionó un ID en la URL
-  if (!id) {
-    res.sendStatus(405);
-    return;
-  }
-  // Verificar que el ID proporcionado en la URL coincide con el ID del objeto de immovable
-  immovables.forEach(immovable => {
-    if (immovable.id == id) {
-      if (immovable.id == updatedImmovable.id) {
-        Object.assign(immovable, updatedImmovable);
-        updated = true;
-        res.sendStatus(200);
-        console.log(`Immovable ${id} updated: ${JSON.stringify(immovable)}`);
-      } else {
-        res.sendStatus(400);
-      }
-    }
-  });
+  const immovableId = Number(req.params.id); // Obtener el ID de la URL
+  const updatedImmovable = req.body; // Obtener immovable actualizado desde cuerpo 
 
-  if (!updated) {
-    res.sendStatus(404);
-  }
+  // Actualizar el objeto immovable en la base de datos
+  immovables.update({ id: immovableId }, { $set: updatedImmovable }, {}, (err, numReplaced) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send({ error: 'Internal server error' });
+    }
+    if (numReplaced === 0) {
+      return res.status(400).send({ error: 'Bad request: immovable ID not found' });
+    }
+    return res.status(200).send({ message: 'Immovable updated successfully' });
+  });
 });
+
 
 
 //_________________________DELETE all
 app.delete(BASE_API_URL+'/immovables', (req, res) => {
-  if (immovables.length > 0) {
-    immovables = [];
-    res.sendStatus(200);
-    console.log("All immovables deleted");
-  } else {
-    res.sendStatus(404);
-  }
+  // Borrar todos los immovables de la base de datos
+  immovables.remove({}, { multi: true }, (err, numRemoved) => {
+      if (err) {
+          console.error(err);
+          return res.status(500).send({ error: 'Internal server error' });
+      }
+      return res.status(200).send({ message: `Deleted ${numRemoved} immovables` });
+  });
 });
 
 
 //__________________________DELETE por id
 app.delete(BASE_API_URL+'/immovables/:id', (req, res) => {
-  const id = req.params.id;
-  let deleted = false;
-
-  immovables = immovables.filter(immovable => {
-    if (immovable.id != id) {
-      return true;
-    } else {
-      deleted = true;
-      return false;
-    }
+  const immovableId = Number(req.params.id); // Obtener el ID del immovable de la URL
+  // Borrar el immovable de la base de datos
+  immovables.remove({ id: immovableId }, {}, (err, numRemoved) => {
+      if (err) {
+          console.error(err);
+          return res.status(500).send({ error: 'Internal server error' });
+      }
+      if (numRemoved === 0) {
+          return res.status(400).send({ error: 'Bad request: immovable ID not found' });
+      }
+      return res.status(200).send({ message: 'Immovable deleted successfully' });
   });
-
-  if (deleted) {
-    res.sendStatus(200);
-    console.log(`Immovable ${id} deleted`);
-  } else {
-    res.sendStatus(404);
-  }
 });
+
 
 app.listen(port,() =>{
   console.log(`Servidor corriendo en el puerto: ${port}`);
