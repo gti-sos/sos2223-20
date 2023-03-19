@@ -143,7 +143,7 @@ app.put(BASE_API_URL+'/andalusian-campings', (req, res) => {
 });
 
 //___________________________________PUT
-app.put(`${BASE_API_URL}/andalusian-campings/:id`, (req, res) => {
+app.put(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
     const campingId = req.params.id; // Obtener el ID del camping de la URL
     const updatedCamping = req.body; // Obtener el objeto camping actualizado desde el cuerpo de la petición
     // Buscar el objeto camping por su ID en la base de datos
