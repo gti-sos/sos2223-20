@@ -144,8 +144,6 @@ app.put(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
     });
   });
   
-
-
 //_________________________DELETE all
 app.delete(BASE_API_URL+'/andalusian-campings', (req, res) => {
   if (campings.length > 0) {
