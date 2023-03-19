@@ -8,9 +8,7 @@ const fs = require('fs');
 var Datastore = require('nedb'), campings = new Datastore();
 
 module.exports = (app) => {
-
-    //L06 MAS______________________________________________________________________________________
-
+//L06 MAS______________________________________________________________________________________
 //__________________________GET initial data
 app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
     campings.find({}, (err, docs) => {
@@ -38,7 +36,6 @@ app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
   });
 //insertar los datos de loadInitial en la BBDD
 console.log("insertado los contactos de load");
-
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
@@ -147,26 +144,48 @@ app.put(BASE_API_URL+'/andalusian-campings', (req, res) => {
 });
 
 //___________________________________PUT
-app.put(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
-    const { id } = req.params;
-    const update = req.body;
-    
-    if (!id) {
-      res.sendStatus(405);
-      return;
-    }
-    campings.findOneAndUpdate({ _id: id }, update, { new: true }, (err, updatedCamping) => {
+app.put('/campings/:id', (req, res) => {
+    const db = req.app.locals.db;
+  
+    // Obtener el ID del camping de la URL
+    const campingId = req.params.id;
+  
+    // Obtener los datos del camping que se enviarán en la solicitud
+    const updatedCamping = req.body;
+  
+    // Buscar el camping por ID en la base de datos
+    db.campings.findOne({ id: campingId }, (err, camping) => {
       if (err) {
-        console.log(`Error updating /campings/${id}: ${err}`);
-        res.sendStatus(404);
-      } else if (!updatedCamping) {
-        res.sendStatus(400);
-      } else {
-        console.log(`Camping with id ${id} updated successfully`);
-        res.json(updatedCamping);
+        // Si hay un error al buscar el camping, enviar una respuesta de error al cliente
+        res.status(500).send('Error al buscar el camping en la base de datos');
+        return;
       }
+  
+      if (!camping) {
+        // Si no se encuentra el camping, enviar una respuesta de error al cliente
+        res.status(400).send(`No se encontró un camping con ID ${campingId}`);
+        return;
+      }
+      if (camping.id !== updatedCamping.id) {
+        // Si el ID del camping en la base de datos no coincide con el ID proporcionado en la solicitud, enviar una respuesta de error al cliente
+        res.status(400).send(`El ID del camping a actualizar no coincide con el ID proporcionado en la URL`);
+        return;
+      }
+      // Actualizar los datos del camping en la base de datos
+      db.campings.update({ id: campingId }, updatedCamping, {}, (err, numReplaced) => {
+        if (err) {
+          // Si hay un error al actualizar el camping, enviar una respuesta de error al cliente
+          res.status(500).send('Error al actualizar el camping en la base de datos');
+          return;
+        }
+  
+        // Enviar una respuesta de éxito al cliente
+        res.status(200).send(`Camping actualizado con éxito`);
+      });
     });
   });
+  
+  
   
 //_________________________DELETE all
 app.delete(BASE_API_URL+'/andalusian-campings', (req, res) => {
