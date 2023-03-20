@@ -204,7 +204,7 @@ app.delete(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
 //Redireccion a la DOC de POSTMAN
 
 app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
-  res.redirect("https://web.postman.co/workspace/My-Workspace~e8939805-9e0a-4345-8916-67764037dea9/documentation/26062489-81f43409-305f-4c51-bc35-1b4c1884b355");
+  res.redirect("https://documenter.getpostman.com/view/26062489/2s93K1oysD");
 });
 
 app.get(BASE_API_URL+'/immovables/loadInitialData', (req, res) => {
