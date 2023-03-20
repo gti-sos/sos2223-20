@@ -240,21 +240,30 @@ app.get(BASE_API_URL+'/immovables/loadInitialData', (req, res) => {
 //______________________________GET con rango de busqueda
 //immovables
 app.get('/api/v1/immovables', (req, res) => {
-  const { from, to, limit, offset } = req.query;
+  const { street, active_name, province, modified_date, id, current_usage, limit = 10, offset = 0 } = req.query;
   const query = {};
 
-  if (from && to) {
-    const yearQuery = {
-      start_date: {
-        $gte: new Date(`${from}-01-01`),
-        $lte: new Date(`${to}-12-31`),
-      },
-    };
-    Object.assign(query, yearQuery);
+  if (street) {
+    query.street = { $regex: new RegExp(street, 'i') };
+  }
+  if (active_name) {
+    query.active_name = { $regex: new RegExp(active_name, 'i') };
+  }
+  if (province) {
+    query.province = { $regex: new RegExp(province, 'i') };
+  }
+  if (modified_date) {
+    query.modified_date = new Date(modified_date);
+  }
+  if (id) {
+    query.id = parseInt(id);
+  }
+  if (current_usage) {
+    query.current_usage = parseInt(current_usage);
   }
 
-  const limitValue = limit ? parseInt(limit) : 10;
-  const offsetValue = offset ? parseInt(offset) : 0;
+  const limitValue = parseInt(limit);
+  const offsetValue = parseInt(offset);
 
   immovables
     .find(query)
