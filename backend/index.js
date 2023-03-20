@@ -44,42 +44,37 @@ console.log("insertado los contactos de load");
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
-    const { from, to } = req.query;
-    if (from && to) {
-      campings.find({}, (err, campings) => {
-        if (err) {
-          console.log(`Error getting /campings: ${err}`);
-          res.sendStatus(500);
-        } else {
-          const filteredCampings = campings
-            .map(camping => {
-              const year = camping.start_date.substring(0, 4);
-              if (year >= from && year <= to) {
-                return camping;
-              }
-            })
-            .filter(camping => camping !== undefined);
-          console.log(`Campings returned = ${filteredCampings.length}`)
-          res.json(filteredCampings);
-        }
-      });
-    } else {
-      campings.find({}, (err, campings) => {
-        if (err) {
-          console.log(`Error getting /campings: ${err}`);
-          res.sendStatus(500);
-        } else {
-          console.log(`Campings returned = ${campings.length}`)
-          if (campings.length === 0) {
-            res.sendStatus(404);
-          } else {
-            res.json(campings);
-          }
-        }
-      });
-    }
-    console.log("Nuevo get a campings");
-  });
+  const { from, to, limit, offset } = req.query;
+  const query = {};
+
+  if (from && to) {
+    const yearQuery = {
+      start_date: {
+        $gte: new Date(`${from}-01-01`),
+        $lte: new Date(`${to}-12-31`),
+      },
+    };
+    Object.assign(query, yearQuery);
+  }
+
+  const limitValue = limit ? parseInt(limit) : 10;
+  const offsetValue = offset ? parseInt(offset) : 0;
+
+  campings
+    .find(query)
+    .limit(limitValue)
+    .skip(offsetValue)
+    .exec((err, campings) => {
+      if (err) {
+        console.log(`Error getting /campings: ${err}`);
+        res.sendStatus(500);
+      } else {
+        console.log(`Campings returned = ${campings.length}`);
+        res.json(campings);
+      }
+    });
+});
+
   
 
 //______________________________GET con 2 values.
