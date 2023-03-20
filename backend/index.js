@@ -232,41 +232,35 @@ app.get(BASE_API_URL+'/immovables/loadInitialData', (req, res) => {
 //______________________________GET con rango de busqueda
 //immovables
 app.get('/api/v1/immovables', (req, res) => {
-  const { from, to } = req.query;
+  const { from, to, limit, offset } = req.query;
+  const query = {};
+
   if (from && to) {
-    immovables.find({}, (err, immovables) => {
-      if (err) {
-        console.log(`Error getting /immovables: ${err}`);
-        res.sendStatus(500);
-      } else {
-        const filteredImmovables = immovables
-          .map(immovable => {
-            const year = immovable.modified_date.substring(0, 4);
-            if (year >= from && year <= to) {
-              return immovables;
-            }
-          })
-          .filter(immovable => immovable !== undefined);
-        console.log(`Immovables returned = ${filteredImmovables.length}`)
-        res.json(filteredImmovables);
-      }
-    });
-  } else {
-    immovables.find({}, (err, immovables) => {
-      if (err) {
-        console.log(`Error getting /immovables: ${err}`);
-        res.sendStatus(500);
-      } else {
-        console.log(`Immovables returned = ${immovables.length}`)
-        if (immovables.length === 0) {
-          res.sendStatus(404);
-        } else {
-          res.json(immovables);
-        }
-      }
-    });
+    const yearQuery = {
+      start_date: {
+        $gte: new Date(`${from}-01-01`),
+        $lte: new Date(`${to}-12-31`),
+      },
+    };
+    Object.assign(query, yearQuery);
   }
-  console.log("Nuevo get a immovables");
+
+  const limitValue = limit ? parseInt(limit) : 10;
+  const offsetValue = offset ? parseInt(offset) : 0;
+
+  immovables
+    .find(query)
+    .limit(limitValue)
+    .skip(offsetValue)
+    .exec((err, immovables) => {
+      if (err) {
+        console.log(`Error getting /immovables: ${err}`);
+        res.sendStatus(500);
+      } else {
+        console.log(`Immovables returned = ${immovables.length}`);
+        res.json(immovables);
+      }
+    });
 });
 
 //______________________________GET con valor y rango de fechas año
