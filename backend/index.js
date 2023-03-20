@@ -57,7 +57,10 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
     query.state = { $regex: new RegExp(state, 'i') };
   }
   if (start_date) {
-    query.start_date = new Date(start_date);
+    const startYear = parseInt(start_date);
+    const startYearBegin = new Date(startYear, 0, 1);
+    const startYearEnd = new Date(startYear + 1, 0, 1);
+    query.start_date = { $gte: startYearBegin, $lt: startYearEnd };
   }
   if (group_id) {
     query.group_id = parseInt(group_id);
@@ -65,18 +68,16 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
   if (category) {
     query.category = parseInt(category);
   }
-
   const limitValue = parseInt(limit);
   const offsetValue = parseInt(offset);
-
   campings
     .find(query)
     .limit(limitValue)
     .skip(offsetValue)
     .exec((err, campings) => {
       if (err) {
-        console.log(`Error getting /campings: ${err}`);
-        res.sendStatus(500);
+        console.log(`No campings found: ${err}`);
+        res.sendStatus(404);
       } else {
         console.log(`Campings returned = ${campings.length}`);
         res.json(campings);
@@ -240,30 +241,21 @@ app.get(BASE_API_URL+'/immovables/loadInitialData', (req, res) => {
 //______________________________GET con rango de busqueda
 //immovables
 app.get('/api/v1/immovables', (req, res) => {
-  const { street, active_name, province, modified_date, id, current_usage, limit = 10, offset = 0 } = req.query;
+  const { from, to, limit, offset } = req.query;
   const query = {};
 
-  if (street) {
-    query.street = { $regex: new RegExp(street, 'i') };
-  }
-  if (active_name) {
-    query.active_name = { $regex: new RegExp(active_name, 'i') };
-  }
-  if (province) {
-    query.province = { $regex: new RegExp(province, 'i') };
-  }
-  if (modified_date) {
-    query.modified_date = new Date(modified_date);
-  }
-  if (id) {
-    query.id = parseInt(id);
-  }
-  if (current_usage) {
-    query.current_usage = parseInt(current_usage);
+  if (from && to) {
+    const yearQuery = {
+      start_date: {
+        $gte: new Date(`${from}-01-01`),
+        $lte: new Date(`${to}-12-31`),
+      },
+    };
+    Object.assign(query, yearQuery);
   }
 
-  const limitValue = parseInt(limit);
-  const offsetValue = parseInt(offset);
+  const limitValue = limit ? parseInt(limit) : 10;
+  const offsetValue = offset ? parseInt(offset) : 0;
 
   immovables
     .find(query)
