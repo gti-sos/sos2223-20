@@ -44,11 +44,26 @@ console.log("insertado los contactos de load");
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
-  const { city, limit = 10, offset = 0 } = req.query;
+  const { city, name, state, start_date, group_id, category, limit = 10, offset = 0 } = req.query;
   const query = {};
 
   if (city) {
     query.city = { $regex: new RegExp(city, 'i') };
+  }
+  if (name) {
+    query.name = { $regex: new RegExp(name, 'i') };
+  }
+  if (state) {
+    query.state = { $regex: new RegExp(state, 'i') };
+  }
+  if (start_date) {
+    query.start_date = new Date(start_date);
+  }
+  if (group_id) {
+    query.group_id = parseInt(group_id);
+  }
+  if (category) {
+    query.category = parseInt(category);
   }
 
   const limitValue = parseInt(limit);
@@ -68,6 +83,7 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
       }
     });
 });
+
 
 // _________________________________________
 
