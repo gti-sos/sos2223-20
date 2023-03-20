@@ -44,8 +44,7 @@ console.log("insertado los contactos de load");
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
-  const { from, to, limit, offset } = req.query;
-  const query = {};
+  const { from, to, limit, offset, ...query } = req.query;
 
   if (from && to) {
     const yearQuery = {
@@ -56,12 +55,14 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
     };
     Object.assign(query, yearQuery);
   }
-
   const limitValue = limit ? parseInt(limit) : 10;
   const offsetValue = offset ? parseInt(offset) : 0;
+  // build the $or query to find documents with at least one attribute matching the query
+  const orQuery = Object.keys(query).map((key) => ({ [key]: { $eq: query[key] } }));
+  const $or = orQuery.length ? { $or: orQuery } : {};
 
   campings
-    .find(query)
+    .find($or)
     .limit(limitValue)
     .skip(offsetValue)
     .exec((err, campings) => {
@@ -74,6 +75,7 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
       }
     });
 });
+
 
   
 
