@@ -1,11 +1,13 @@
 
 const campingsFilePath = 'ddbb/camping-andalusia.json';
 const immovablesFilePath = 'ddbb/immovables.json';
+//const blooddonationsFilePath = 'ddbb/blood-donations.json';
 const BASE_API_URL = "/api/v1";
 var port = process.env.PORT || 12345;
 const fs = require('fs');
 var Datastore = require('nedb'), campings = new Datastore();
 var Datastore = require('nedb'), immovables = new Datastore();
+//var Datastore = require('nedb'), blooddonations = new Datastore();
 
 module.exports = (app) => {
 //L06 MAS______________________________________________________________________________________
