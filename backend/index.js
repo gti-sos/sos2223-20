@@ -46,43 +46,49 @@ console.log("insertado los contactos de load");
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
-    const { from, to } = req.query;
-    if (from && to) {
-      campings.find({}, (err, campings) => {
-        if (err) {
-          console.log(`Error getting /campings: ${err}`);
-          res.sendStatus(500);
-        } else {
-          const filteredCampings = campings
-            .map(camping => {
-              const year = camping.start_date.substring(0, 4);
-              if (year >= from && year <= to) {
-                return camping;
-              }
-            })
-            .filter(camping => camping !== undefined);
-          console.log(`Campings returned = ${filteredCampings.length}`)
-          res.json(filteredCampings);
-        }
-      });
-    } else {
-      campings.find({}, (err, campings) => {
-        if (err) {
-          console.log(`Error getting /campings: ${err}`);
-          res.sendStatus(500);
-        } else {
-          console.log(`Campings returned = ${campings.length}`)
-          if (campings.length === 0) {
-            res.sendStatus(404);
-          } else {
-            res.json(campings);
-          }
-        }
-      });
-    }
-    console.log("Nuevo get a campings");
-  });
-  
+  const { city, name, state, start_date, group_id, category, limit = 10, offset = 0 } = req.query;
+  const query = {};
+
+  if (city) {
+    query.city = { $regex: new RegExp(city, 'i') };
+  }
+  if (name) {
+    query.name = { $regex: new RegExp(name, 'i') };
+  }
+  if (state) {
+    query.state = { $regex: new RegExp(state, 'i') };
+  }
+  if (start_date) {
+    const startYear = parseInt(start_date);
+    const startYearBegin = new Date(startYear, 0, 1);
+    const startYearEnd = new Date(startYear + 1, 0, 1);
+    query.start_date = { $gte: startYearBegin, $lt: startYearEnd };
+  }
+  if (group_id) {
+    query.group_id = parseInt(group_id);
+  }
+  if (category) {
+    query.category = parseInt(category);
+  }
+  const limitValue = parseInt(limit);
+  const offsetValue = parseInt(offset);
+  campings
+    .find(query)
+    .limit(limitValue)
+    .skip(offsetValue)
+    .exec((err, campings) => {
+      if (err) {
+        console.log(`No campings found: ${err}`);
+        res.sendStatus(404);
+      } else {
+        console.log(`Campings returned = ${campings.length}`);
+        res.json(campings);
+      }
+    });
+});
+
+
+// _________________________________________
 
 //______________________________GET con 2 values.
 app.get('/api/v1/andalusian-campings/:value/:value2?', (req, res) => {
@@ -237,41 +243,35 @@ app.get(BASE_API_URL+'/immovables/loadInitialData', (req, res) => {
 //______________________________GET con rango de busqueda
 //immovables
 app.get('/api/v1/immovables', (req, res) => {
-  const { from, to } = req.query;
+  const { from, to, limit, offset } = req.query;
+  const query = {};
+
   if (from && to) {
-    immovables.find({}, (err, immovables) => {
-      if (err) {
-        console.log(`Error getting /immovables: ${err}`);
-        res.sendStatus(500);
-      } else {
-        const filteredImmovables = immovables
-          .map(immovable => {
-            const year = immovable.modified_date.substring(0, 4);
-            if (year >= from && year <= to) {
-              return immovables;
-            }
-          })
-          .filter(immovable => immovable !== undefined);
-        console.log(`Immovables returned = ${filteredImmovables.length}`)
-        res.json(filteredImmovables);
-      }
-    });
-  } else {
-    immovables.find({}, (err, immovables) => {
-      if (err) {
-        console.log(`Error getting /immovables: ${err}`);
-        res.sendStatus(500);
-      } else {
-        console.log(`Immovables returned = ${immovables.length}`)
-        if (immovables.length === 0) {
-          res.sendStatus(404);
-        } else {
-          res.json(immovables);
-        }
-      }
-    });
+    const yearQuery = {
+      start_date: {
+        $gte: new Date(`${from}-01-01`),
+        $lte: new Date(`${to}-12-31`),
+      },
+    };
+    Object.assign(query, yearQuery);
   }
-  console.log("Nuevo get a immovables");
+
+  const limitValue = limit ? parseInt(limit) : 10;
+  const offsetValue = offset ? parseInt(offset) : 0;
+
+  immovables
+    .find(query)
+    .limit(limitValue)
+    .skip(offsetValue)
+    .exec((err, immovables) => {
+      if (err) {
+        console.log(`Error getting /immovables: ${err}`);
+        res.sendStatus(500);
+      } else {
+        console.log(`Immovables returned = ${immovables.length}`);
+        res.json(immovables);
+      }
+    });
 });
 
 //______________________________GET con valor y rango de fechas año
