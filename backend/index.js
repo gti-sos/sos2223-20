@@ -4,6 +4,8 @@ const immovablesFilePath = 'ddbb/immovables.json';
 const blooddonationsFilePath = 'ddbb/blood-donations.json';
 const BASE_API_URL = "/api/v1";
 var port = process.env.PORT || 12345;
+const { notStrictEqual } = require('assert');
+const { Console } = require('console');
 const fs = require('fs');
 var Datastore = require('nedb'), campings = new Datastore();
 var Datastore = require('nedb'), immovables = new Datastore();
@@ -456,7 +458,7 @@ app.listen(port,() =>{
 // ########################################################################################################
 
 app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
-  res.redirect("");
+  res.redirect("https://documenter.getpostman.com/view/26062213/2s93RNxZZC");
 });
 
 app.get(BASE_API_URL+"/blood-donations/loadInitialData", (req, res) => {
@@ -483,9 +485,9 @@ app.get(BASE_API_URL+"/blood-donations/loadInitialData", (req, res) => {
   });
 });
 
-//GET específico
+//GET de rango de búsqueda
 app.get(BASE_API_URL+"/blood-donations", (req,res) => {
-  const {date,place,dnt_people,dnt_blood,dnt_plasme,dnt_datef,dnt_new,extraction,idcenter,center,limit=10,offset=0} = req.query;
+  const {date,place,dnt_people,dnt_blood,dnt_plasme,dnt_new,limit=10,offset=0} = req.query;
   const query = {};
 
   if (date) {
@@ -506,20 +508,8 @@ app.get(BASE_API_URL+"/blood-donations", (req,res) => {
   if (dnt_plasme) {
     query.dnt_plasme = parseInt(dnt_plasme);
   }
-  if (dnt_datef) {
-    query.dnt_datef = parseInt(dnt_datef);
-  }
   if (dnt_new) {
     query.dnt_new = parseInt(dnt_new);
-  }
-  if (extraction) {
-    query.extraction = { $regex: new RegExp(extraction, 'i') };
-  }
-  if (idcenter) {
-    query.idcenter = parseInt(idcenter);
-  }
-  if (center) {
-    query.center = { $regex: new RegExp(center, 'i') };
   }
   const limitValue = parseInt(limit);
   const offsetValue = parseInt(offset);
@@ -538,13 +528,18 @@ app.get(BASE_API_URL+"/blood-donations", (req,res) => {
     });
 });
 
+//Get específico, búsqueda de dos valores
 app.get('/api/v1/blood-donations/:value/:value2?', (req, res) => {
   const { value, value2 } = req.params;
   const query = { $where: function() {
     for (let key in this) {
       if (typeof this[key] === 'string' && this[key].includes(value)) {
         if (value2) {
+          console.log(">>>>>>>>>>>>>>>>>> clave = " + typeof this[key]);
+          console.log(">>>>>>>>>>>>>>>>>> boolean1 = " + typeof this[key]==='string');
+          console.log(">>>>>>>>>>>>>>>>>> boolean2 = " + this[key].includes(value2));
           if (typeof this[key] === 'string' && this[key].includes(value2)) {
+            console.log("asquiii");
             return true;
           }
         } else {
@@ -568,29 +563,88 @@ app.get('/api/v1/blood-donations/:value/:value2?', (req, res) => {
   console.log("Nuevo get a Blood donations");
 });
 
-//POST ok
-app.post(BASE_API_URL + "/blood-donations-stats", (request, response) => {
-
+//POST fallo
+app.post(BASE_API_URL + "/blood-donations/*", (req, res) => {
+  console.log("POST FALLIDO HERE I AMMM");
+  res.sendStatus(405);
 });
 
-//POST fallo
-app.post(BASE_API_URL+"/blood-donations-stats/:dnt_people",(req,res)=>{
+//POST ok
+app.post(BASE_API_URL+"/blood-donations",(req,res)=>{
+  const nbd = req.body;
+    if (!nbd.date || !nbd.place || !nbd.dnt_people || !nbd.dnt_blood) {
+      return res.status(400).json({ error: 'Faltan datos en el JSON' });
+    }
+    blooddonations.findOne({ date:nbd.date, place:nbd.place, dnt_people:nbd.dnt_people, 
+    dnt_blood:nbd.dnt_blood, dnt_plasme:nbd.dnt_plasme, dnt_datef:nbd.dnt_datef, 
+    dnt_new:nbd.dnt_new, extraction:nbd.extraction, idcenter:nbd.idcenter, center:nbd.center 
+    }, (err, doc) => {
+      if (err) {
+        console.log(`Error finding blood donation`);
+        res.sendStatus(500);
+      } else if (doc) {
+        res.status(409).json({ error: `Blood donation with already exists.` });
+      } else {
+        blooddonations.insert(nbd, (err, newDoc) => {
+          if (err) {
+            console.log(`Error inserting blood donation`);
+            res.sendStatus(500);
+          } else {
+            console.log(`Inserted new blood donation`);
+            res.sendStatus(201);
+          }
+        });
+      }
+    });
 });
 
 //DELETE  array completo
-app.delete(BASE_API_URL+"/blood-donations-stats", (request, response) => {
+app.delete(BASE_API_URL+"/blood-donations", (req, res) => {
+  blooddonations.remove({}, { multi: true }, (err, numRemoved) => {
+    if (err) {
+        console.error(err);
+        return res.status(500).send({ error: 'Internal server error' });
+    }
+    return res.status(200).send({ message: `Deleted ${numRemoved} blood donation` });
+});
 });
 
 //DELETE  DE UN RECURSO
-app.delete(BASE_API_URL + "/blood-donations-stats/:place", (request, response) => {
+app.delete(BASE_API_URL + "/blood-donations/:dnt_people", (req, res) => {
+  const bd_dnt_people = Number(req.params.dnt_people);
+  blooddonations.remove({ dnt_people: bd_dnt_people }, {}, (err, numRemoved) => {
+      if (err) {
+          console.error(err);
+          return res.status(500).send({ error: 'Internal server error' });
+      }
+      if (numRemoved === 0) {
+          return res.status(400).send({ error: 'Bad request: Blood donation parameter not found' });
+      }
+      return res.status(200).send({ message: 'Blood donation deleted successfully' });
+  });
 });
 
-// PUT actualizar recurso existente
-app.put(BASE_API_URL + "/blood-donations-stats/:place", (request, response) => {
+// PUT fallido
+app.put(BASE_API_URL + "/blood-donations", (req, res) => {
+  res.sendStatus(405);
 });
 
   //PUT a lista de recursos
-  app.put(BASE_API_URL + "/blood-donations-stats",(request,response)=>{
+  app.put(BASE_API_URL + "/blood-donations/:dnt_people",(req,res)=>{
+    const bd_dnt_people = Number(req.params.dnt_people); // Obtener el ID de la URL
+    const updatedBd = req.body; // Obtener camping actualizado desde cuerpo 
+  
+    // Actualizar el objeto camping en la base de datos
+    blooddonations.update({ dnt_people: bd_dnt_people }, { $set: updatedBd }, {}, (err, numReplaced) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send({ error: 'Internal server error' });
+      }
+      if (numReplaced === 0) {
+        return res.status(400).send({ error: 'Bad request: blood donations ID not found' });
+      }
+      return res.status(200).send({ message: 'Blood donations updated successfully' });
+    });
 });
 
 
