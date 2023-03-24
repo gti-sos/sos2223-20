@@ -243,36 +243,45 @@ app.get(BASE_API_URL+'/immovables/loadInitialData', (req, res) => {
 //______________________________GET con rango de busqueda
 //immovables
 app.get('/api/v1/immovables', (req, res) => {
-  const { from, to, limit, offset } = req.query;
+  const { current_usage, active_name, province, modified_date, id, street, limit = 10, offset = 0 } = req.query;
   const query = {};
 
-  if (from && to) {
-    const yearQuery = {
-      start_date: {
-        $gte: new Date(`${from}-01-01`),
-        $lte: new Date(`${to}-12-31`),
-      },
-    };
-    Object.assign(query, yearQuery);
+  if (current_usage) {
+    query.current_usage = { $regex: new RegExp(current_usage, 'i') };
   }
-
-  const limitValue = limit ? parseInt(limit) : 10;
-  const offsetValue = offset ? parseInt(offset) : 0;
-
+  if (active_name) {
+    query.active_name = { $regex: new RegExp(active_name, 'i') };
+  }
+  if (province) {
+    query.province = { $regex: new RegExp(province, 'i') };
+  }
+  if (modified_date) {
+    query.modified_date = { $regex: new RegExp(modified_date, 'i') };
+  }
+  if (id) {
+    query.id = { $regex: new RegExp(id, 'i') };
+  }
+  if (street) {
+    query.street = { $regex: new RegExp(street, 'i') };
+  }
+  const limitValue = parseInt(limit);
+  const offsetValue = parseInt(offset);
   immovables
     .find(query)
     .limit(limitValue)
     .skip(offsetValue)
     .exec((err, immovables) => {
       if (err) {
-        console.log(`Error getting /immovables: ${err}`);
-        res.sendStatus(500);
+        console.log(`No immovables found: ${err}`);
+        res.sendStatus(404);
       } else {
         console.log(`Immovables returned = ${immovables.length}`);
         res.json(immovables);
       }
     });
 });
+
+
 
 //______________________________GET con valor y rango de fechas año
 //immovables/value?from=2004&to=2016
