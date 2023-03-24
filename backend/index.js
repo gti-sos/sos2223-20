@@ -458,7 +458,7 @@ app.listen(port,() =>{
 // ########################################################################################################
 
 app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
-  res.redirect("https://documenter.getpostman.com/view/26062213/2s93RNxZZC");
+  res.redirect("https://documenter.getpostman.com/view/26062213/2s93RNxZnU");
 });
 
 app.get(BASE_API_URL+"/blood-donations/loadInitialData", (req, res) => {
