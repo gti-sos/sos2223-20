@@ -245,7 +245,7 @@ app.get(BASE_API_URL+'/immovables/loadInitialData', (req, res) => {
 //______________________________GET con rango de busqueda
 //immovables
 app.get('/api/v1/immovables', (req, res) => {
-  const { current_usage, active_name, province, modified_date, id, street, limit = 10, offset = 0 } = req.query;
+  const { current_usage, active_name, province, modified_date, id, nature, limit = 10, offset = 0 } = req.query;
   const query = {};
 
   if (current_usage) {
@@ -263,8 +263,8 @@ app.get('/api/v1/immovables', (req, res) => {
   if (id) {
     query.id = { $regex: new RegExp(id, 'i') };
   }
-  if (street) {
-    query.street = { $regex: new RegExp(street, 'i') };
+  if (nature) {
+    query.nature = { $regex: new RegExp(nature, 'i') };
   }
   const limitValue = parseInt(limit);
   const offsetValue = parseInt(offset);
