@@ -1,0 +1,122 @@
+[
+    {
+    "date": "130716",
+    "place": "CRTS CORDOBA",
+    "dnt_people": 8,
+    "dnt_blood": 6,
+    "dnt_plasme": 1,
+    "dnt_datef": 0,
+    "dnt_new": 0,
+    "extraction": "SPC",
+    "idcenter": 13001,
+    "center": "CTS Córdoba"
+    },
+    {
+    "date": "130716",
+    "place": "CRTS CORDOBA",
+    "dnt_people": 5,
+    "dnt_blood": 4,
+    "dnt_plasme": 1,
+    "dnt_datef": 0,
+    "dnt_new": 0,
+    "extraction": "SPC",
+    "idcenter": 13001,
+    "center": "CTS Córdoba"
+    },
+    {
+    "date": "140716",
+    "place": "ADAMUZ",
+    "dnt_people": 65,
+    "dnt_blood": 57,
+    "dnt_plasme": 0,
+    "dnt_datef": 0,
+    "dnt_new": 1,
+    "extraction": "SP",
+    "idcenter": 13001,
+    "center": "CTS Córdoba"
+    },
+    {
+    "date": "140716",
+    "place": "MORILES",
+    "dnt_people": 67,
+    "dnt_blood": 59,
+    "dnt_plasme": 2,
+    "dnt_datef": 0,
+    "dnt_new": 3,
+    "extraction": "SP",
+    "idcenter": 13001,
+    "center": "CTS Córdoba"
+    },
+    {
+    "date": "140716",
+    "place": "CESPEDES",
+    "dnt_people": 20,
+    "dnt_blood": 17,
+    "dnt_plasme": 0,
+    "dnt_datef": 0,
+    "dnt_new": 0,
+    "extraction": "SP",
+    "idcenter": 13001,
+    "center": "CTS Córdoba"
+    },
+    {
+    "date": "150716",
+    "place": "CRTS CORDOBA",
+    "dnt_people": 14,
+    "dnt_blood": 10,
+    "dnt_plasme": 1,
+    "dnt_datef": 0,
+    "dnt_new": 4,
+    "extraction": "SPC",
+    "idcenter": 13001,
+    "center": "CTS Córdoba"
+    },
+    {
+    "date": "150716",
+    "place": "TORRECAMPO",
+    "dnt_people": 37,
+    "dnt_blood": 35,
+    "dnt_plasme": 0,
+    "dnt_datef": 0,
+    "dnt_new": 2,
+    "extraction": "SP",
+    "idcenter": 13001,
+    "center": "CTS Córdoba"
+    },
+    {
+        "date": "150716",
+        "place": "CRTS CORDOBA",
+        "dnt_people": 16,
+        "dnt_blood": 12,
+        "dnt_plasme": 1,
+        "dnt_datef": 0,
+        "dnt_new": 2,
+        "extraction": "SPC",
+        "idcenter": 13001,
+        "center": "CTS Córdoba"
+        },
+        {
+        "date": "130716",
+        "place": "POZOBLANCO",
+        "dnt_people": 113,
+        "dnt_blood": 91,
+        "dnt_plasme": 4,
+        "dnt_datef": 0,
+        "dnt_new": 12,
+        "extraction": "SP",
+        "idcenter": 13001,
+        "center": "CTS Córdoba"
+        },
+        {
+        "date": "140716",
+        "place": "CRTS CORDOBA",
+        "dnt_people": 34,
+        "dnt_blood": 28,
+        "dnt_plasme": 0,
+        "dnt_datef": 0,
+        "dnt_new": 4,
+        "extraction": "SPC",
+        "idcenter": 13001,
+        "center": "CTS Córdoba"
+        }
+]

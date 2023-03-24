@@ -1,13 +1,13 @@
 
 const campingsFilePath = 'ddbb/camping-andalusia.json';
 const immovablesFilePath = 'ddbb/immovables.json';
-//const blooddonationsFilePath = 'ddbb/blood-donations.json';
+const blooddonationsFilePath = 'ddbb/blood-donations.json';
 const BASE_API_URL = "/api/v1";
 var port = process.env.PORT || 12345;
 const fs = require('fs');
 var Datastore = require('nedb'), campings = new Datastore();
 var Datastore = require('nedb'), immovables = new Datastore();
-//var Datastore = require('nedb'), blooddonations = new Datastore();
+var Datastore = require('nedb'), blooddonations = new Datastore();
 
 module.exports = (app) => {
 //L06 MAS______________________________________________________________________________________
@@ -50,7 +50,7 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
   const query = {};
 
   if (city) {
-    query.city = { $regex: new RegExp(city, 'i') };
+    query.city = { $regex: new RegExp(city, 'i') };   
   }
   if (name) {
     query.name = { $regex: new RegExp(name, 'i') };
@@ -446,130 +446,148 @@ app.listen(port,() =>{
 //##############################################  L06 - CGM  ##############################################
 // ########################################################################################################
 
-var blooddonations = [];
-
-app.get("/samples/CGM", (req, res)=>{
-  res.send(useCGM.resultado(useCGM.datos));
-  console.log("New request / blood-donations-stats");
+app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
+  res.redirect("");
 });
 
-app.get(BASE_API_URL+"/blood-donations-stats", (req, res) => {
-  // dato inicial   
-  res.json(blooddonations);
-  console.log("New request to /blood-donations");
+app.get(BASE_API_URL+"/blood-donations/loadInitialData", (req, res) => {
+  blooddonations.find({}, (err, docs) => {
+    if (err) {
+      console.log(`Error getting /blood-donations: ${err}`);
+      res.sendStatus(500);
+    } else if (docs.length === 0) {
+      const blooddonationsData = JSON.parse(fs.readFileSync(blooddonationsFilePath));
+      const initialBlooddonations = blooddonationsData.slice(0, 15);
+      blooddonations.insert(initialBlooddonations, (err, newDocs) => {
+        if (err) {
+          console.log(`Error inserting initial data into blood donations: ${err}`);
+          res.sendStatus(500);
+        } else {
+          console.log(`Inserted ${newDocs.length} initial blood donations`);
+          res.sendStatus(200);
+        }
+      });
+    } else {
+      console.log(`Blood donations collection already has ${docs.length} documents`);
+      res.sendStatus(200);
+    }
+  });
 });
 
-app.get(BASE_API_URL+"/blood-donations-stats/loadInitialData", (req, res) => {
-  //GET dato inicial   
-  blooddonations = useCGM.datos;
-  res.json(blooddonations);
-  console.log(useCGM.datos);
-  console.log("New GET request to /blood-donations/loadInitialData");
-});
+//GET específico
+app.get(BASE_API_URL+"/blood-donations", (req,res) => {
+  const {date,place,dnt_people,dnt_blood,dnt_plasme,dnt_datef,dnt_new,extraction,idcenter,center,limit=10,offset=0} = req.query;
+  const query = {};
 
-//GET recurso especifico
-app.get(BASE_API_URL+"/blood-donations-stats/:place",(req,res)=>{
-  const place = req.params.place; // URL: parámetro de territorio
-  console.log(place);
-  const resource = blooddonations.find(r => r.place === place); // busca el recurso por territorio
-  console.log(resource);
-  if (resource) {
-      res.json(resource); // Devolver recurso (respuesta HTTP 200)
-  } else {
-      res.status(404).json({error: "Recurso no encontrado"}); // Devolver error HTTP 404 si no encuentra recurso
+  if (date) {
+    const startYear = parseInt(date);
+    const startYearBegin = new Date(startYear, 0, 1);
+    const startYearEnd = new Date(startYear + 1, 0, 1);
+    query.date = { $gte: startYearBegin, $lt: startYearEnd };
   }
+  if (place) {
+    query.place = { $regex: new RegExp(place, 'i') };
+  }
+  if (dnt_people) {
+    query.dnt_people = parseInt(dnt_people);
+  }
+  if (dnt_blood) {
+    query.dnt_blood = parseInt(dnt_blood);
+  }
+  if (dnt_plasme) {
+    query.dnt_plasme = parseInt(dnt_plasme);
+  }
+  if (dnt_datef) {
+    query.dnt_datef = parseInt(dnt_datef);
+  }
+  if (dnt_new) {
+    query.dnt_new = parseInt(dnt_new);
+  }
+  if (extraction) {
+    query.extraction = { $regex: new RegExp(extraction, 'i') };
+  }
+  if (idcenter) {
+    query.idcenter = parseInt(idcenter);
+  }
+  if (center) {
+    query.center = { $regex: new RegExp(center, 'i') };
+  }
+  const limitValue = parseInt(limit);
+  const offsetValue = parseInt(offset);
+  blooddonations
+    .find(query)
+    .limit(limitValue)
+    .skip(offsetValue)
+    .exec((err, blooddonations) => {
+      if (err) {
+        console.log(`No blood donations found: ${err}`);
+        res.sendStatus(404);
+      } else {
+        console.log(`Blood donations returned = ${blooddonations.length}`);
+        res.json(blooddonations);
+      }
+    });
+});
+
+app.get('/api/v1/blood-donations/:value/:value2?', (req, res) => {
+  const { value, value2 } = req.params;
+  const query = { $where: function() {
+    for (let key in this) {
+      if (typeof this[key] === 'string' && this[key].includes(value)) {
+        if (value2) {
+          if (typeof this[key] === 'string' && this[key].includes(value2)) {
+            return true;
+          }
+        } else {
+          return true;
+        }
+      }
+    }
+    return false;
+  }};
+  blooddonations.find(query, (err, blooddonations) => {
+    if (err) {
+      console.log(`Error getting /blooddonations: ${err}`);
+      res.sendStatus(500);
+    } else if (blooddonations.length === 0) {
+      res.status(404).json({ error: 'Blood donations not found.' });
+    } else {
+      console.log(`Blood donations returned = ${blooddonations.length}`)
+      res.json(blooddonations);
+    }
+  });
+  console.log("Nuevo get a Blood donations");
 });
 
 //POST ok
 app.post(BASE_API_URL + "/blood-donations-stats", (request, response) => {
-  const ns = request.body;
- // response.sendStatus(201); // Objeto creado ok
-   // Comprueba que el JSON tiene los campos correctos
-if (!ns.hasOwnProperty("date") || !ns.hasOwnProperty("place") || !ns.hasOwnProperty("dnt_people") || !ns.hasOwnProperty("dnt_blood") || !ns.hasOwnProperty("dnt_plasme")
-|| !ns.hasOwnProperty("dnt_datef")|| !ns.hasOwnProperty("dnt_new") || !ns.hasOwnProperty("extraction") || !ns.hasOwnProperty("idcenter") || !ns.hasOwnProperty("center")) 
-{
-  console.log(ns);
-  response.status(400).send({ error: "El objeto JSON no tiene los campos esperados" }); // Enviar una respuesta con el código 400 (Bad Request) si el objeto JSON no tiene los campos esperados
-  return;
-}
-  const conflictIndex = blooddonations.findIndex(stat => stat.date === ns.date
-                                               && stat.place === ns.place
-                                               && stat.dnt_people === ns.dnt_people 
-                                               && stat.dnt_blood === ns.dnt_blood
-                                               && stat.dnt_plasme === ns.dnt_plasme 
-                                               && stat.dnt_datef === ns.dnt_datef
-                                               && stat.dnt_new === ns.dnt_new
-                                               && stat.extraction === ns.extraction
-                                               && stat.idcenter === ns.idcenter
-                                               && stat.center === ns.center) ;
 
-  if (conflictIndex !== -1) {
-    response.status(409).send({ error: "Ya existe un elemento con los mismos datos" }); // ERROR, ya existe un objeto con esos datos
-    console.log("Error: Ya existe un elemento con los mismos datos");
-  } else {
-    blooddonations.push(ns);
-    response.sendStatus(201); // Objeto creado ok
-    console.log("Nuevo post /blood-donations-stats");
-  }
 });
 
 //POST fallo
 app.post(BASE_API_URL+"/blood-donations-stats/:dnt_people",(req,res)=>{
-  res.sendStatus(405, "Method not allowed"); // respuesta ERROR 405
-  console.log("New post /blood-donations-stats/:dnt_people");
 });
 
 //DELETE  array completo
 app.delete(BASE_API_URL+"/blood-donations-stats", (request, response) => {
-  if (!request.body || Object.keys(request.body).length === 0) {
-    blooddonations = [];
-      response.status(200).send("Los datos se han borrado correctamente");
-  }else{
-      if (blooddonations.length == 0) { // si no encuentra el Objeto -> error 404 ya que el objeto no existe  
-          response.status(404).send("El objeto no existe");
-      }
-  }
-  console.log("Se ha borrado /blood-donations-stats");
 });
 
 //DELETE  DE UN RECURSO
 app.delete(BASE_API_URL + "/blood-donations-stats/:place", (request, response) => {
-  const place = request.params.place;
-  const indice = blooddonations.findIndex(i => i.place === place); // Encontrar el índice del elemento a eliminar
-  if (indice !== -1) { // Si encuentra el elemento segun el indice, lo elimina y envia una respuesta + 204 (No Content)
-    blooddonations.splice(indice, 1);
-    response.status(204).send("Se ha eliminado correctamente el objeto con place= "+place);
-    console.log(place+" eliminado correctamente");
-  } else { // respuesta + código 404 (Not Found) si no encuentra el elemento
-    response.status(404).send({ error: "No se encontró el elemento con el territorio especificado" });
-  }
 });
 
 // PUT actualizar recurso existente
 app.put(BASE_API_URL + "/blood-donations-stats/:place", (request, response) => {
-  const place = request.params.place; 
-  const upd_s = request.body;
-  if (!upd_s.hasOwnProperty("place")) { // Comprobar si el cuerpo de la solicitud contiene el campo "place"
-      response.status(400).send({ error: "El objeto JSON no tiene los campos esperados" });
-      return;
-  }
-  if (place !== upd_s.place) { // Comprobar si el "place" de la URL es igual al "place" de la solicitud
-      response.status(400).send({ error: "El ID del recurso no coincide con el ID de la URL" });
-      return;
-  }
-  const indice = blooddonations.findIndex(stat => stat.place === place); // Encontrar el índice del recurso a actualizar
-  console.log(indice);
-  if (indice !== -1) {
-      blooddonations[indice] = upd_s; // Actualizar recurso
-      response.sendStatus(204); // Enviar respuesta actualización exitosa
-      console.log("Recurso actualizado: " + place);
-  } else {
-      response.status(404).send({ error: "Recurso no encontrado" }); // Si no se encuentra el recurso, devolver un código de estado 404
-  }
 });
 
   //PUT a lista de recursos
   app.put(BASE_API_URL + "/blood-donations-stats",(request,response)=>{
-    response.sendStatus(405, "Method not allowed");
 });
+
+
+
+
+
+
+
 }
