@@ -73,7 +73,8 @@
   },
   "scripts": {
     "start": "node index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "testCGM": "npx newman run ./tests/req-gcloud-CGM.json"
   },
   "repository": {
     "type": "git",

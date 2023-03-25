@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "7ffa80a4-38e0-42a4-a328-5e5b7e1b1726",
+		"name": "Requests-gcloud-blood-donation-CGM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26062213"
+	},
+	"item": [
+		{
+			"name": "Cargar datos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v1/blood-donations/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"blood-donations",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta por valor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v1/blood-donations/POZOBLANCO",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"blood-donations",
+						"POZOBLANCO"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta por rango",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v1/blood-donations?offset=3&limit=5",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"blood-donations"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "3"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fallo actualizar",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v1/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar objeto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"date\": \"130716\",\r\n        \"place\": \"POZOBLANCO-ACTUALIZADO\",\r\n        \"dnt_people\": 113,\r\n        \"dnt_blood\": 91,\r\n        \"dnt_plasme\": 4,\r\n        \"dnt_datef\": 0,\r\n        \"dnt_new\": 12,\r\n        \"extraction\": \"SP\",\r\n        \"idcenter\": 13001,\r\n        \"center\": \"CTS Córdoba\",\r\n        \"_id\": \"HbxpoegCd0rMBhkv\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v1/blood-donations/113",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"blood-donations",
+						"113"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar objeto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v1/blood-donations/113",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"blood-donations",
+						"113"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fallo añadir",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v1/blood-donations/67",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"blood-donations",
+						"67"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir elemento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"date\": \"130716\",\r\n        \"place\": \"POZOBLANCO\",\r\n        \"dnt_people\": 113,\r\n        \"dnt_blood\": 91,\r\n        \"dnt_plasme\": 4,\r\n        \"dnt_datef\": 0,\r\n        \"dnt_new\": 12,\r\n        \"extraction\": \"SP\",\r\n        \"idcenter\": 13001,\r\n        \"center\": \"CTS Córdoba\",\r\n        \"_id\": \"HbxpoegCd0rMBhkv\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v1/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar todo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v1/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reiniciar datos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v1/blood-donations/loadInitialData",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"blood-donations",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

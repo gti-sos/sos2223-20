@@ -631,8 +631,8 @@ app.put(BASE_API_URL + "/blood-donations", (req, res) => {
 
   //PUT a lista de recursos
   app.put(BASE_API_URL + "/blood-donations/:dnt_people",(req,res)=>{
-    const bd_dnt_people = Number(req.params.dnt_people); // Obtener el ID de la URL
-    const updatedBd = req.body; // Obtener camping actualizado desde cuerpo 
+    const bd_dnt_people = Number(req.params.dnt_people);
+    const updatedBd = req.body;
   
     // Actualizar el objeto camping en la base de datos
     blooddonations.update({ dnt_people: bd_dnt_people }, { $set: updatedBd }, {}, (err, numReplaced) => {
