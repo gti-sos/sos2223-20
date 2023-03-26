@@ -12,10 +12,7 @@ var Datastore = require('nedb'), immovables = new Datastore();
 var Datastore = require('nedb'), blooddonations = new Datastore();
 
 module.exports = (app) => {
-   
-  
-//L06 MAS______________________________________________________________________________________
-//__________________________GET initial data
+   //__________________________GET initial data
 
 app.get(BASE_API_URL+'/andalusian-campings/docs', (req, res) => {
   res.redirect("https://documenter.getpostman.com/view/26063155/2s93K1oeqs");
@@ -632,10 +629,6 @@ app.put(BASE_API_URL + "/blood-donations", (req, res) => {
       return res.status(200).send({ message: 'Blood donations updated successfully' });
     });
 });
-
-
-
-
 
 
 
