@@ -67,8 +67,10 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
     if (province) {
       query.province = { $regex: new RegExp(province, 'i') };
     }
-    if (modified_date) {
-      query.modified_date = { $regex: new RegExp(modified_date, 'i') };
+    if (from || to) {
+      query.modified_date = {};
+      if (from) query.modified_date.$gte = `${from}-10-21`.substring(0, 4);
+      if (to) query.modified_date.$lte = `${to}-10-21`.substring(0, 4);
     }
     if (id) {
       query.id = parseInt(id);
@@ -94,7 +96,10 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
           res.sendStatus(404);
         } else {
           console.log(`Immovables returned = ${immovables.length}`);
-          res.json(immovables);
+          res.json(immovables.map((c)=>{
+            delete c._id;
+            return c;
+          }));
         }
       });
   });
@@ -145,7 +150,9 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
   //______________________________POST normal
   app.post(BASE_API_URL+'/immovables', (req, res) => {
     const newImmovable = req.body;
-    if (!newImmovable.active_name || !newImmovable.province || !newImmovable.modified_date || !newImmovable.id) {
+    if (!newImmovable.active_name || !newImmovable.counseling || !newImmovable.current_usage || 
+      !newImmovable.inventory_num ||  !newImmovable.municipality || !newImmovable.nature ||!newImmovable.province 
+      || !newImmovable.modified_date || !newImmovable.resource || !newImmovable.id) {
       return res.status(400).json({ error: 'Faltan datos en el JSON' });
     }
     immovables.findOne({ id: newImmovable.id }, (err, doc) => {
