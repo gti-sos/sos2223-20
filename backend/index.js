@@ -48,33 +48,13 @@ console.log("insertado los contactos de load");
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
-  const { id, registry_code, inscription_date, city, name, state, start_date, camping_places, responsible, group_id, category, modality, limit = 10, offset = 0, from, to } = req.query;
+  const { id, registry_code, inscription_date, city, name, limit = 10, offset = 0, from, to } = req.query;
   const query = {};
- if (id) {
-    query.id = parseInt(id);
-  } if (registry_code) {
-    query.registry_code = registry_code;
-  } if (inscription_date) {
-    query.inscription_date = parseInt(inscription_date);
-  } if (city) {
-    query.city = city;
-  } if (name) {
-    query.name = name;
-  } if (state) {
-    query.state = state;
-  } if (start_date) {
-    query.start_date = parseInt(start_date);
-  } if (camping_places) {
-    query.camping_places = parseInt(camping_places);
-  } if (responsible) {
-    query.responsible = responsible;
-  } if (group_id) {
-    query.group_id = parseInt(group_id);
-  } if (category) {
-    query.category = parseInt(category);
-  } if (modality) {
-    query.modality = parseInt(modality);
-  }
+  if (id) query.id = parseInt(id);
+  if (registry_code) query.registry_code = registry_code;
+  if (inscription_date) query.inscription_date = parseInt(inscription_date);
+  if (city) query.city = city;
+  if (name) query.name = name;
   if (from && to) {
     query.start_date = {
       $gte: parseInt(from),
@@ -95,8 +75,6 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
     });
 });
 
-
-// _________________________________________
 
 //______________________________GET con 2 values.
 app.get('/api/v1/andalusian-campings/:value/:value2?', (req, res) => {
