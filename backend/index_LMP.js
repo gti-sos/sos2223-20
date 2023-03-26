@@ -82,19 +82,17 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
     if (nature) {
       query.nature = { $regex: new RegExp(nature, 'i') };
     }
-    const limitValue = parseInt(limit);
-    const offsetValue = parseInt(offset);
     immovables
       .find(query)
-      .limit(limitValue)
-      .skip(offsetValue)
-      .exec((err, immovables) => {
-        if (err) {
-          console.log(`No immovables found: ${err}`);
-          res.sendStatus(404);
+      .limit(parseInt(limit))
+      .skip(parseInt(offset))
+      .exec((error, results) => {
+        if (error) {
+          res.status(500).json({ error: error.message });
+        } else if (results.length === 0) {
+          res.status(404).json({ error: 'Immovables not found.' });
         } else {
-          console.log(`Immovables returned = ${immovables.length}`);
-          res.json(immovables.map((c)=> {
+          res.status(200).json(results.map((c)=>{
             delete c._id;
             return c;
           }));
