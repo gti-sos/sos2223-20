@@ -48,13 +48,16 @@ console.log("insertado los contactos de load");
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
-  const { id, registry_code, inscription_date, city, name, limit = 10, offset = 0, from, to } = req.query;
+  const { id, category, camping_places, modality,registry_code, inscription_date, city, name, limit = 10, offset = 0, from, to } = req.query;
   const query = {};
   if (id) query.id = parseInt(id);
   if (registry_code) query.registry_code = registry_code;
   if (inscription_date) query.inscription_date = parseInt(inscription_date);
   if (city) query.city = city;
   if (name) query.name = name;
+  if (category) query.category = parseInt(category);
+  if (camping_places) query.camping_places = parseInt(camping_places);
+  if (modality) query.modality = parseInt(modality);
   if (from || to) {
     query.start_date = {};
     if (from) query.start_date.$gte = `${from}-01-01`.substring(0, 4);
