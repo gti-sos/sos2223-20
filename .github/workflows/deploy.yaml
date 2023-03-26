@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to Cloud Run
+    name: Deploy to Google Cloud Run
     runs-on: ubuntu-latest
     environment: production
     steps:
