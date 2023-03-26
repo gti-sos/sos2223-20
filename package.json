@@ -73,7 +73,7 @@
   },
   "scripts": {
     "start": "node index",
-    "test": "npm run test-MAS",
+    "test": "npm run test-MAS && npm run test-LMP",
     "test-MAS": "npx newman run ./tests/Gcloud.postman_MAS.json",
     "testCGM": "npx newman run ./tests/req-gcloud-CGM.json",
     "test-LMP": "npx newman run ./tests/immovables.postman_LMP.json"
