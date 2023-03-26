@@ -49,7 +49,7 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
   //immovables
   app.get('/api/v1/immovables', (req, res) => {
     const { resource,inventory_num,municipality, current_usage, active_name, 
-        province, id, nature, counseling, limit = 10, offset = 0 } = req.query;
+        province, modified_date, id, nature, counseling, limit = 10, offset = 0 } = req.query;
     const query = {};
 
     if (municipality) {
@@ -67,10 +67,8 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
     if (province) {
       query.province = { $regex: new RegExp(province, 'i') };
     }
-    if (from || to) {
-      query.modified_date = {};
-      if (from) query.modified_date.$gte = `${from}-10-21`.substring(0, 4);
-      if (to) query.modified_date.$lte = `${to}-10-21`.substring(0, 4);
+    if (modified_date) {
+      query.modified_date = { $regex: new RegExp(modified_date, 'i') };
     }
     if (id) {
       query.id = parseInt(id);
