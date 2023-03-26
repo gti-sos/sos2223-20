@@ -99,48 +99,7 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
       });
   });
   
-  
-  
-  //______________________________GET con valor y rango de fechas año
-  //immovables/value?from=2004&to=2016
-  app.get(BASE_API_URL+'/immovables/:value', (req, res) => {
-    if (immovables.length == 0) {
-      res.status(404).send('Error: Immovables not found');
-      return;
-    }
-    const value = req.params.value;
-    const fromYear = req.query.from;
-    const toYear = req.query.to;
-  
-    let filteredImmovables = immovables.filter(immovable => {
-      let matchValue = false;
-      for (const key in immovable) {
-        if (immovable[key] == value) {
-          matchValue = true;
-        }
-      }
-      return matchValue;
-    });
-  
-    if (fromYear && toYear) {
-      const filteredByYear = filteredImmovables.filter(immovable => {
-        const year = parseInt(immovable.modified_date.substring(0, 4));
-        return year >= parseInt(fromYear) && year <= parseInt(toYear);
-      });
-      filteredImmovables = filteredByYear;
-    }
-  
-    if (filteredImmovables.length > 0) {
-      res.json(filteredImmovables);
-      console.log(`New GET request for value=${value}, from=${fromYear}, to=${toYear}`);
-      res.sendStatus(200);
-    } else {
-      res.sendStatus(404);
-    }
-  });
-  
-  
-  
+
   
   //______________________________Get con 2 valores 
   app.get(BASE_API_URL+'/immovables/:value/:value2?', (req, res) => {

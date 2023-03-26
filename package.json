@@ -75,7 +75,8 @@
     "start": "node index",
     "test": "npm run test-MAS",
     "test-MAS": "npx newman run ./tests/Gcloud.postman_MAS.json",
-    "testCGM": "npx newman run ./tests/req-gcloud-CGM.json"
+    "testCGM": "npx newman run ./tests/req-gcloud-CGM.json",
+    "test-LMP": "npx newman run ./tests/immovables.postman_LMP.json"
   },
   "repository": {
     "type": "git",
