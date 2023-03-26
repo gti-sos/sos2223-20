@@ -15,9 +15,9 @@ jobs:
       
       - run: npm install
 
-      -run: npm start &
+      - run: npm start &
 
-      -run: npm test
+      - run: npm test
 
 
       - id: 'auth'
