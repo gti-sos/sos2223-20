@@ -48,8 +48,7 @@ console.log("insertado los contactos de load");
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
-  const { id, registry_code, inscription_date, city, name, 
-  limit = 10, offset = 0, from, to } = req.query;
+  const { id, registry_code, inscription_date, city, name, limit = 10, offset = 0, from, to } = req.query;
   const query = {};
   if (id) query.id = parseInt(id);
   if (registry_code) query.registry_code = registry_code;
@@ -58,8 +57,8 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
   if (name) query.name = name;
   if (from || to) {
     query.start_date = {};
-    if (from) query.start_date.$gte = new Date(from);
-    if (to) query.start_date.$lte = new Date(to);
+    if (from) query.start_date.$gte = `${from}-01-01`.substring(0, 4);
+    if (to) query.start_date.$lte = `${to}-12-31`.substring(0, 4);
   }
   campings.find(query)
     .skip(parseInt(offset))
@@ -74,7 +73,6 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
       }
     });
 });
-
 
 
 //______________________________GET con 2 values.
