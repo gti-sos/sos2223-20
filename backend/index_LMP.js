@@ -48,8 +48,8 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
   //______________________________GET con rango de busqueda
   //immovables
   app.get('/api/v1/immovables', (req, res) => {
-    const { resource,inventory_num,municipality, current_usage, active_name, 
-        province, modified_date,id, nature, counseling, limit = 10, offset = 0 } = req.query;
+    const { resource,modified_date,inventory_num,municipality, current_usage, active_name, 
+        province, id, nature, counseling, limit = 10, offset = 0 } = req.query;
     const query = {};
 
     if (municipality) {
@@ -94,7 +94,10 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
           res.sendStatus(404);
         } else {
           console.log(`Immovables returned = ${immovables.length}`);
-          res.json(immovables);
+          res.json(immovables.map((c)=> {
+            delete c._id;
+            return c;
+          }));
         }
       });
   });
