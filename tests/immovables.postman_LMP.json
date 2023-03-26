@@ -43,39 +43,10 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "loadInitialData",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/loadInitialData",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables",
-								"loadInitialData"
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
-			"name": "GET Immovables",
+			"name": "GET ALL immovables",
 			"event": [
 				{
 					"listen": "test",
@@ -84,16 +55,6 @@
 							"pm.test(\"Status code is 200\", function(){\r",
 							"    pm.response.to.have.status(200);\r",
 							"\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables es superior a 9\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.a.lengthOf(10);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -121,36 +82,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET Immovables",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables",
-								""
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "Post Immovables",
@@ -197,44 +129,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "Post Immovables",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"active_name\":\"SILO DE CARMONA\",\"counseling\":\"CONSEJERÍA DE AGRICULTURA, GANADERÍA, PESCA Y DESA\",\"current_usage\":\"AGROPECUARIO\",\"id\":1,\"inventory_num\":2000002371,\"modified_date\":\"2022-10-21\",\"municipality\":\"CARMONA\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":9749,\"_id\":\"1\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "Post Immovables ERROR FALTAN DATOS",
@@ -257,7 +152,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"active_name\":\"SILO DE CARMONA\",\"counseling\":\"CONSEJERÍA DE AGRICULTURA, GANADERÍA, PESCA Y DESA\",\"current_usage\":\"AGROPECUARIO\",\"inventory_num\":2000002371,\"modified_date\":\"2022-10-21\",\"municipality\":\"CARMONA\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":9749,\"_id\":\"1\"}",
+					"raw": "{\"active_name\":\"SILO DE CARMONA\",\"counseling\":\"CONSEJERÍA DE AGRICULTURA, GANADERÍA, PESCA Y DESA\",\"current_usage\":\"AGROPECUARIO\",\"inventory_num\":2000002371,\"modified_date\":\"2022-10-21\",\"municipality\":\"CARMONA\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":9749}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -281,44 +176,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "Post Immovables ERROR FALTAN DATOS",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"active_name\":\"SILO DE CARMONA\",\"counseling\":\"CONSEJERÍA DE AGRICULTURA, GANADERÍA, PESCA Y DESA\",\"current_usage\":\"AGROPECUARIO\",\"inventory_num\":2000002371,\"modified_date\":\"2022-10-21\",\"municipality\":\"CARMONA\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":9749,\"_id\":\"1\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "Put Immovables Method not Allowed",
@@ -341,7 +199,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"resource\":\"08942\",\"counseling\":\"CONSEJERÍA DE CULTURA Y PATRIMONIO HISTÓRICO\",\"street\":\"NEVERAL A-27.\",\"icmsId\":\"08942\",\"nature\":\"Rústica\",\"id\":\"08942\",\"province\":\"Jaén\",\"modified_date\":\"2023-03-16\",\"municipality\":\"JAEN\",\"inventory_num\":2000003772,\"active_name\":\"CASTILLO DE SANTA CATALINA\",\"current_usage\":\"CULTURAL\",\"_id\":\"1Q5u9cY8VhNQGgPf\"}",
+					"raw": "{\"resource\":\"08942\",\"counseling\":\"CONSEJERÍA DE CULTURA Y PATRIMONIO HISTÓRICO\",\"street\":\"NEVERAL A-27.\",\"icmsId\":\"08942\",\"nature\":\"Rústica\",\"id\":\"08942\",\"province\":\"Jaén\",\"modified_date\":\"2023-03-16\",\"municipality\":\"JAEN\",\"inventory_num\":2000003772,\"active_name\":\"CASTILLO DE SANTA CATALINA\",\"current_usage\":\"CULTURAL\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -366,45 +224,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "Put Immovables Method not Allowed",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"resource\":\"08942\",\"counseling\":\"CONSEJERÍA DE CULTURA Y PATRIMONIO HISTÓRICO\",\"street\":\"NEVERAL A-27.\",\"icmsId\":\"08942\",\"nature\":\"Rústica\",\"id\":\"08942\",\"province\":\"Jaén\",\"modified_date\":\"2023-03-16\",\"municipality\":\"JAEN\",\"inventory_num\":2000003772,\"active_name\":\"CASTILLO DE SANTA CATALINA\",\"current_usage\":\"CULTURAL\",\"_id\":\"1Q5u9cY8VhNQGgPf\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables",
-								""
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "Post Immovable Method not Allowed",
@@ -427,7 +247,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"active_name\":\"Nuevo immovable de Prueba\",\"counseling\":\"SERVICIO ANDALUZ DE SALUD\",\"current_usage\":\"SANITARIO\",\"id\":1,\"inventory_num\":900001805,\"modified_date\":\"2022-10-21\",\"municipality\":\"BEAS\",\"nature\":\"Urbana\",\"province\":\"Huelva\",\"resource\":13865,\"_id\":\"1\"}",
+					"raw": "{\"active_name\":\"Nuevo immovable de Prueba\",\"counseling\":\"SERVICIO ANDALUZ DE SALUD\",\"current_usage\":\"SANITARIO\",\"id\":1,\"inventory_num\":900001805,\"modified_date\":\"2022-10-21\",\"municipality\":\"BEAS\",\"nature\":\"Urbana\",\"province\":\"Huelva\",\"resource\":13865}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -452,45 +272,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "Post Immovable Method not Allowed",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"active_name\":\"Nuevo immovable de Prueba\",\"counseling\":\"SERVICIO ANDALUZ DE SALUD\",\"current_usage\":\"SANITARIO\",\"id\":1,\"inventory_num\":900001805,\"modified_date\":\"2022-10-21\",\"municipality\":\"BEAS\",\"nature\":\"Urbana\",\"province\":\"Huelva\",\"resource\":13865,\"_id\":\"1\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/1",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables",
-								"1"
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "Put Immovable",
@@ -513,7 +295,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"active_name\":\"Nuevo\",\"counseling\":\"SERVICIO ANDALUZ DE SALUD\",\"current_usage\":\"SANITARIO\",\"id\":1,\"inventory_num\":900001805,\"modified_date\":\"2022-10-21\",\"municipality\":\"BEAS\",\"nature\":\"Urbana\",\"province\":\"Huelva\",\"resource\":13865,\"_id\":\"1\"}",
+					"raw": "{\"active_name\":\"Nuevo\",\"counseling\":\"SERVICIO ANDALUZ DE SALUD\",\"current_usage\":\"SANITARIO\",\"id\":1,\"inventory_num\":900001805,\"modified_date\":\"2022-10-21\",\"municipality\":\"BEAS\",\"nature\":\"Urbana\",\"province\":\"Huelva\",\"resource\":13865}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -538,45 +320,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "Put Immovable",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"active_name\":\"Nuevo\",\"counseling\":\"SERVICIO ANDALUZ DE SALUD\",\"current_usage\":\"SANITARIO\",\"id\":1,\"inventory_num\":900001805,\"modified_date\":\"2022-10-21\",\"municipality\":\"BEAS\",\"nature\":\"Urbana\",\"province\":\"Huelva\",\"resource\":13865,\"_id\":\"1\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/1",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables",
-								"1"
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "PUT con ERROR NO EXISTE",
@@ -615,36 +359,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "PUT con ERROR NO EXISTE",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/12345",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables",
-								"12345"
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "GET con id",
@@ -693,41 +408,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET con id",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables?id=1",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "GET con active_name",
@@ -776,41 +457,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET con active_name",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables?active_name=Nuevo",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							],
-							"query": [
-								{
-									"key": "active_name",
-									"value": "Nuevo"
-								}
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "GET con counseling",
@@ -859,41 +506,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET con counseling",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables?counseling=SERVICIO ANDALUZ DE SALUD",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							],
-							"query": [
-								{
-									"key": "counseling",
-									"value": "SERVICIO ANDALUZ DE SALUD"
-								}
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "GET con current_usage",
@@ -942,41 +555,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET con current_usage",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables?current_usage=SANITARIO",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							],
-							"query": [
-								{
-									"key": "current_usage",
-									"value": "SANITARIO"
-								}
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "GET con inventory_num",
@@ -1026,41 +605,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET con inventory_num",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables?inventory_num=900001805",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							],
-							"query": [
-								{
-									"key": "inventory_num",
-									"value": "900001805"
-								}
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "GET con modified_date",
@@ -1110,41 +655,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET con modified_date",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables?modified_date=2022",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							],
-							"query": [
-								{
-									"key": "modified_date",
-									"value": "2022"
-								}
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "GET con municipality",
@@ -1194,41 +705,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET con municipality",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables?municipality=BEAS",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							],
-							"query": [
-								{
-									"key": "municipality",
-									"value": "BEAS"
-								}
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "GET con nature",
@@ -1278,41 +755,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET con nature",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables?nature=Urbana",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							],
-							"query": [
-								{
-									"key": "nature",
-									"value": "Urbana"
-								}
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "GET con province",
@@ -1362,41 +805,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET con province",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables?province=Huelva",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							],
-							"query": [
-								{
-									"key": "province",
-									"value": "Huelva"
-								}
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "GET con resource",
@@ -1446,41 +855,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "GET con resource",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables?resource=13865",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							],
-							"query": [
-								{
-									"key": "resource",
-									"value": "13865"
-								}
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "Delete Immovable",
@@ -1528,45 +903,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "Delete Immovable",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/1",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables",
-								"1"
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "Delete ALL Immovables",
@@ -1608,39 +945,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "Delete ALL Immovables",
-					"originalRequest": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables"
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		},
 		{
 			"name": "loadInitialData",
@@ -1679,36 +984,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "loadInitialData",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/loadInitialData",
-							"protocol": "https",
-							"host": [
-								"sos2223-20",
-								"ew",
-								"r",
-								"appspot",
-								"com"
-							],
-							"path": [
-								"api",
-								"v1",
-								"immovables",
-								"loadInitialData"
-							]
-						}
-					},
-					"_postman_previewlanguage": null,
-					"header": null,
-					"cookie": [],
-					"body": null
-				}
-			]
+			"response": []
 		}
 	]
 }
