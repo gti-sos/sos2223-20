@@ -76,8 +76,6 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
       }
     });
 });
-
-
 //______________________________GET con 2 values.
 app.get('/api/v1/andalusian-campings/:value/:value2?', (req, res) => {
     const { value, value2 } = req.params;
