@@ -50,7 +50,6 @@ console.log("insertado los contactos de load");
 app.get('/api/v1/andalusian-campings', (req, res) => {
   const { id, registry_code,inscription_date, city, name, state, start_date,camping_places,responsible, group_id, category,modality, limit = 10, offset = 0 } = req.query;
   const query = {};
-
   if (id) {
     query.id = parseInt(id);
   } if (registry_code) {
@@ -84,8 +83,7 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
         res.status(500).json({ error: error.message });
       } else if (campings.length === 0) {
         res.status(404).json({ error: 'Campings not found.' });
-      }
-      else {
+      } else {
         res.status(200).json(results);
       }
     });
