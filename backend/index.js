@@ -48,43 +48,45 @@ console.log("insertado los contactos de load");
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
-  const { city, name, state, start_date, group_id, category, limit = 10, offset = 0 } = req.query;
+  const { id, registry_code,inscription_date, city, name, state, start_date,camping_places,responsible, group_id, category,modality, limit = 10, offset = 0 } = req.query;
   const query = {};
 
-  if (city) {
-    query.city = { $regex: new RegExp(city, 'i') };   
-  }
-  if (name) {
-    query.name = { $regex: new RegExp(name, 'i') };
-  }
-  if (state) {
-    query.state = { $regex: new RegExp(state, 'i') };
-  }
-  if (start_date) {
-    const startYear = parseInt(start_date);
-    const startYearBegin = new Date(startYear, 0, 1);
-    const startYearEnd = new Date(startYear + 1, 0, 1);
-    query.start_date = { $gte: startYearBegin, $lt: startYearEnd };
-  }
-  if (group_id) {
+  if (id) {
+    query.id = parseInt(id);
+  } if (registry_code) {
+    query.registry_code = registry_code;
+  } if (inscription_date) {
+    query.inscription_date = parseInt(inscription_date);
+  } if (city) {
+    query.city = city;
+  } if (name) {
+    query.name = name;
+  } if (state) {
+    query.state = state;
+  } if (start_date) {
+    query.start_date = parseInt(start_date);
+  } if (camping_places) {
+    query.camping_places = parseInt(camping_places);
+  } if (responsible) {
+    query.responsible = responsible;
+  } if (group_id) {
     query.group_id = parseInt(group_id);
-  }
-  if (category) {
+  } if (category) {
     query.category = parseInt(category);
+  } if (modality) {
+    query.modality = parseInt(modality);
   }
-  const limitValue = parseInt(limit);
-  const offsetValue = parseInt(offset);
-  campings
-    .find(query)
-    .limit(limitValue)
-    .skip(offsetValue)
-    .exec((err, campings) => {
-      if (err) {
-        console.log(`No campings found: ${err}`);
-        res.sendStatus(404);
-      } else {
-        console.log(`Campings returned = ${campings.length}`);
-        res.json(campings);
+  db.find(query)
+    .skip(parseInt(offset))
+    .limit(parseInt(limit))
+    .exec((error, results) => {
+      if (error) {
+        res.status(500).json({ error: error.message });
+      } else if (campings.length === 0) {
+        res.status(404).json({ error: 'Campings not found.' });
+      }
+      else {
+        res.status(200).json(results);
       }
     });
 });
