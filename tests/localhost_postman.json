@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "e2baa37a-81f2-4924-8a7b-77444f4de792",
+		"name": "SOS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26063155"
+	},
+	"item": [
+		{
+			"name": "Load Initial Data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "      [{ \"id\": 49184,\n        \"registry_code\": \"VFT/MA/09625\",\n        \"name\": \"CASITA SANTO 2\",\n        \"inscription_date\": 20170314,\n        \"start_date\": 20170222,\n        \"state\": \"RONDA\",\n        \"city\": \"RONDA\",\n        \"mail\": \"fleurvdwoude@gmail.com\",\n        \"coord_x\": 306741.9082,\n        \"srid\": 25830,\n        \"num_doc_verified\": \"X7579273Z\",\n        \"responsible\": \"xxx: FLEUR MADELEINE VAN DER WOUDE \"}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/api/v1/andalusian-campings/loadInitialData",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get ALL",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "      [{ \"id\": 49184,\n        \"registry_code\": \"VFT/MA/09625\",\n        \"name\": \"CASITA SANTO 2\",\n        \"inscription_date\": 20170314,\n        \"start_date\": 20170222,\n        \"state\": \"RONDA\",\n        \"city\": \"RONDA\",\n        \"mail\": \"fleurvdwoude@gmail.com\",\n        \"coord_x\": 306741.9082,\n        \"srid\": 25830,\n        \"num_doc_verified\": \"X7579273Z\",\n        \"responsible\": \"xxx: FLEUR MADELEINE VAN DER WOUDE \"}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/api/v1/andalusian-campings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get offset",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "      [{ \"id\": 49184,\n        \"registry_code\": \"VFT/MA/09625\",\n        \"name\": \"CASITA SANTO 2\",\n        \"inscription_date\": 20170314,\n        \"start_date\": 20170222,\n        \"state\": \"RONDA\",\n        \"city\": \"RONDA\",\n        \"mail\": \"fleurvdwoude@gmail.com\",\n        \"coord_x\": 306741.9082,\n        \"srid\": 25830,\n        \"num_doc_verified\": \"X7579273Z\",\n        \"responsible\": \"xxx: FLEUR MADELEINE VAN DER WOUDE \"}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/api/v1/andalusian-campings?city=ADRA&group_id=10&limit=10&offset=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "ADRA"
+						},
+						{
+							"key": "group_id",
+							"value": "10"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get fechas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "      [{ \"id\": 49184,\n        \"registry_code\": \"VFT/MA/09625\",\n        \"name\": \"CASITA SANTO 2\",\n        \"inscription_date\": 20170314,\n        \"start_date\": 20170222,\n        \"state\": \"RONDA\",\n        \"city\": \"RONDA\",\n        \"mail\": \"fleurvdwoude@gmail.com\",\n        \"coord_x\": 306741.9082,\n        \"srid\": 25830,\n        \"num_doc_verified\": \"X7579273Z\",\n        \"responsible\": \"xxx: FLEUR MADELEINE VAN DER WOUDE \"}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/api/v1/andalusian-campings?from=1980&to=1999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "1980"
+						},
+						{
+							"key": "to",
+							"value": "1999"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get /ADRA",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "      [{ \"id\": 49184,\n        \"registry_code\": \"VFT/MA/09625\",\n        \"name\": \"CASITA SANTO 2\",\n        \"inscription_date\": 20170314,\n        \"start_date\": 20170222,\n        \"state\": \"RONDA\",\n        \"city\": \"RONDA\",\n        \"mail\": \"fleurvdwoude@gmail.com\",\n        \"coord_x\": 306741.9082,\n        \"srid\": 25830,\n        \"num_doc_verified\": \"X7579273Z\",\n        \"responsible\": \"xxx: FLEUR MADELEINE VAN DER WOUDE \"}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/api/v1/andalusian-campings/ADRA",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings",
+						"ADRA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/api/v1/campings/loadInitialData",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "      { \"id\": 113439,\n        \"registry_code\": \"VFT/MA/029625\",\n        \"name\": \"CASITA22 SANTO 222\",\n        \"inscription_date\": 201703314,\n        \"start_date\": 201702322,\n        \"state\": \"ADRA\",\n        \"city\": \"ADRA\",\n        \"mail\": \"fleur2vdwoude@gmail.com\",\n        \"coord_x\": 30269741.9082,\n        \"srid\": 2528830,\n        \"num_doc_verified\": \"X75792273Z\",\n        \"responsible\": \"xxx: FLEU2R MADELEINE VAN DER WOUDE \"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/api/v1/andalusian-campings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/api/v1/campings/loadInitialData Copy",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 113439,\n    \"registry_code\": \"VFT/MA/029625\",\n    \"name\": \"____________PUT MODIFIED______________\",\n    \"inscription_date\": 201703314,\n    \"start_date\": 201702322,\n    \"state\": \"ADRA\",\n    \"city\": \"ADRA\",\n    \"mail\": \"fleur2vdwoude@gmail.com\",\n    \"coord_x\": 30269741.9082,\n    \"srid\": 2528830,\n    \"num_doc_verified\": \"X75792273Z\",\n    \"responsible\": \"xxx: FLEU2R MADELEINE VAN DER WOUDE \"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/api/v1/andalusian-campings/113439",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings",
+						"113439"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:12345/api/v1/campings/loadInitialData Copy 2",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/api/v1/andalusian-campings/113439",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings",
+						"113439"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE All",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 19715,\n    \"registry_code\": \"VTAR/GR/00652\",\n    \"name\": \"____________aaaaa_____________\",\n    \"inscription_date\": 20100107,\n    \"start_date\": 20100107,\n    \"city\": \"BUBION\",\n    \"num_doc_verified\": \"24247606V\",\n    \"responsible\": \"xxx: ANGEL RODRIGUEZ PEREZ\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:12345/api/v1/andalusian-campings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "12345",
+					"path": [
+						"api",
+						"v1",
+						"andalusian-campings"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "19715"
+		}
+	]
+}
