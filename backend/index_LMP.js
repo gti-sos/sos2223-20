@@ -92,7 +92,9 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
           res.status(500).json({ error: error.message });
         } else if (results.length === 0) {
           res.status(404).json({ error: 'Immovables not found.' });
-        } else {
+        } else if (results.length === 1) {
+          res.json(results[0]);
+        }else {
           res.status(200).json(results.map((c)=>{
             delete c._id;
             return c;
