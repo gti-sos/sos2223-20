@@ -222,7 +222,7 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
           console.error(err);
           return res.status(500).send({ error: 'Internal server error' });
         }
-        if (!existe || dnt_people!== req.body.bd_dnt_people) {
+        if (!existe || dnt_people!== Number(req.body.bd_dnt_people)) {
           return res.status(400).send({ error: 'Bad request: blood donations ID not found' });
         }
         return res.status(200).send({ message: 'Blood donations updated successfully' });
