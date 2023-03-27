@@ -105,41 +105,95 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
   
 
   
-  //______________________________Get con 2 valores 
-  app.get(BASE_API_URL+'/immovables/:value/:value2?', (req, res) => {
-    const value = req.params.value;
-    const value2 = req.params.value2;
-    //Filtro de error de lista vacía
-    if (immovables.length == 0) {
-      res.status(404).send('Error: Immovables not found');
-      return;
-    }
-    //Filtro para ver si tengo 1 o 2 valores y filtrar por ambos.
-    let filteredImmovables = immovables.filter(immovable => {
-      let matchValue = false;
-      let matchValue2 = false;
-      for (const key in immovable) {
-        if (immovable[key] == value) {
-          matchValue = true;
+  //GET /immovables/province/id (First Province, then id): Recurso único
+  app.get(`${BASE_API_URL}/immovables/:province/:id`, (req, res) => {
+
+    let id = req.params.id;
+    let province = req.params.province;
+
+    console.log(`New request to /immovables/${province}/${id}`);
+
+    // Recuperamos el registro concreto que se nos pide
+    immovables.find({'id': parseInt(id), 'province' : province}, {_id : 0}, (err, data) => {
+
+        // Si existen errores:
+        if(err){
+
+            console.log(`Error getting immovables/${province}/${id}: ${err}`);
+            // Estado 500: Internal Server Error
+            res.sendStatus(500);
+        
+        // Si no existen datos 
+        }else if(data.length == 0){
+
+            console.log(`immovables/${province}/${id} not found`);
+            // Estado 404: Not Found
+            res.sendStatus(404);
+
+        // Si existen datos
+        }else{
+
+            console.log(`Data immovables/${province}/${id} returned`);
+            // Estado 200: Ok
+            res.json(data[0]);
         }
-        if (value2 && immovable[key] == value2) {
-          matchValue2 = true;
-        }
-      }
-      if (value2) {
-        return matchValue && matchValue2;
-      } else {
-        return matchValue;
-      }
     });
-    if (filteredImmovables.length > 0) {
-      res.json(filteredImmovables);
-      console.log(`New GET request for value=${value} and secondValue=${secondValue}`);
-      res.sendStatus(200);
-    } else {
-      res.sendStatus(404);
-    }
-  });
+});
+
+
+//GET /immovables/province: Recursos por provincia
+app.get(`${BASE_API_URL}/immovables/:province`, (req, res) => {
+
+    let province = req.params.province;
+
+    console.log(`New request to /immovables/${province}`);
+
+    // Buscamos los registros que tengan el dado campo provincia
+    immovables.find({'province': province}, {_id: 0}, (err, data) => {
+        console.log(province);
+        console.log(data);
+        // Si existen errores
+        if(err){
+
+            console.log(`Error getting immovables`);
+            // Estado 500: Internal Server Error
+            res.sendStatus(500);
+
+        // Si no existen datos
+        }else if(data.length == 0){
+
+            console.log(`immovables/${province} not found`);
+            // Estado 404: Not Found
+            res.sendStatus(404);
+
+        }else{
+            let i = -1;
+            if(!req.query.offset){ var offset = -1;}else{ var offset = parseInt(req.query.offset);}
+
+            let datos = data.filter((x) => {
+                i = i+1;
+                if(req.query.limit==undefined){ var cond = true;}else{ var cond = (offset + parseInt(req.query.limit)) >= i;}
+                return (i>offset)&&cond;
+            });
+
+            if(datos.length == 0){
+
+                console.log(`immovables not found`);
+                // Estado 404: Not Found
+                res.sendStatus(404);
+            
+            // Si hay datos:
+            }else{
+
+                console.log(`Data of immovables returned: ${datos.length}`);
+                // Devolvemos datos, estado 200: Ok
+                res.json(datos);
+                
+            }
+        }
+    });
+    
+});
   
   //______________________________POST con URL prohibidas
   app.post(BASE_API_URL+'/immovables/*', (req, res) => {
