@@ -77,7 +77,10 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
           res.sendStatus(404);
         } else {
           console.log(`Blood donations returned = ${blooddonations.length}`);
-          res.json(blooddonations);
+          res.json(blooddonations.map((j) => {
+            delete j._id;
+            return j;
+        }));
         }
       });
   });
