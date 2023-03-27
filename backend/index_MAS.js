@@ -65,6 +65,8 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
         res.status(500).json({ error: error.message });
       } else if (results.length === 0) {
         res.status(404).json({ error: 'Campings not found.' });
+      } else if (results.length === 1) {
+        res.status(200).json(results[0]);
       } else {
         res.status(200).json(results);
       }
