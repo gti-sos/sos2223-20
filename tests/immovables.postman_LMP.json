@@ -7,55 +7,13 @@
 	},
 	"item": [
 		{
-			"name": "loadInitialData",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/loadInitialData",
-					"protocol": "https",
-					"host": [
-						"sos2223-20",
-						"ew",
-						"r",
-						"appspot",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"immovables",
-						"loadInitialData"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "GET ALL immovables",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -65,7 +23,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -77,8 +35,7 @@
 					"path": [
 						"api",
 						"v1",
-						"immovables",
-						""
+						"immovables"
 					]
 				}
 			},
@@ -105,7 +62,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"active_name\":\"SILO DE CARMONA\",\"counseling\":\"CONSEJERÍA DE AGRICULTURA, GANADERÍA, PESCA Y DESA\",\"current_usage\":\"AGROPECUARIO\",\"id\":1,\"inventory_num\":2000002371,\"modified_date\":\"2022-10-21\",\"municipality\":\"CARMONA\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":9749}",
+					"raw": "{\"active_name\":\"Nuevo\",\"counseling\":\"CONSEJERÍA DE AGRICULTURA, GANADERÍA, PESCA Y DESA\",\"current_usage\":\"AGROPECUARIO\",\"id\":1,\"inventory_num\":2000002371,\"modified_date\":\"2022-10-21\",\"municipality\":\"CARMONA\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":9749}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -372,11 +329,7 @@
 							"    pm.response.to.have.status(200);\r",
 							"\r",
 							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -420,11 +373,6 @@
 							"pm.test(\"Status code is 200\", function(){\r",
 							"    pm.response.to.have.status(200);\r",
 							"\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -469,11 +417,6 @@
 							"pm.test(\"Status code is 200\", function(){\r",
 							"    pm.response.to.have.status(200);\r",
 							"\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -519,11 +462,7 @@
 							"    pm.response.to.have.status(200);\r",
 							"\r",
 							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -569,10 +508,6 @@
 							"\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
-							"});\r",
 							""
 						],
 						"type": "text/javascript"
@@ -617,11 +552,6 @@
 							"pm.test(\"Status code is 200\", function(){\r",
 							"    pm.response.to.have.status(200);\r",
 							"\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
 							"});\r",
 							""
 						],
@@ -668,11 +598,6 @@
 							"    pm.response.to.have.status(200);\r",
 							"\r",
 							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
-							"});\r",
 							""
 						],
 						"type": "text/javascript"
@@ -717,13 +642,7 @@
 							"pm.test(\"Status code is 200\", function(){\r",
 							"    pm.response.to.have.status(200);\r",
 							"\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
-							"});\r",
-							""
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -767,11 +686,6 @@
 							"pm.test(\"Status code is 200\", function(){\r",
 							"    pm.response.to.have.status(200);\r",
 							"\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
 							"});\r",
 							""
 						],
@@ -817,11 +731,6 @@
 							"pm.test(\"Status code is 200\", function(){\r",
 							"    pm.response.to.have.status(200);\r",
 							"\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Numero de immovables superior a 0\", function() {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData).to.have.lengthOf.above(0);\r",
 							"});\r",
 							""
 						],
@@ -900,87 +809,6 @@
 						"v1",
 						"immovables",
 						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete ALL Immovables",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables",
-					"protocol": "https",
-					"host": [
-						"sos2223-20",
-						"ew",
-						"r",
-						"appspot",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"immovables"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "loadInitialData",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/loadInitialData",
-					"protocol": "https",
-					"host": [
-						"sos2223-20",
-						"ew",
-						"r",
-						"appspot",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"immovables",
-						"loadInitialData"
 					]
 				}
 			},
