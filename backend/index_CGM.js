@@ -210,7 +210,8 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
     app.put(BASE_API_URL + "/blood-donations/:dnt_people",(req,res)=>{
       const bd_dnt_people = Number(req.params.dnt_people);
       const updatedBd = req.body;
-    
+    console.log("1>>>>" + bd_dnt_people);
+      console.log("2>>>>" + updatedBd);
       // Actualizar el objeto camping en la base de datos
       blooddonations.update({ dnt_people: bd_dnt_people }, { $set: updatedBd }, {}, (err, numReplaced) => {
         if (err) {
