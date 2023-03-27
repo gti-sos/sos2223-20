@@ -41,7 +41,7 @@ console.log("insertado los contactos de load");
 
 //______________________________GET con rango de busqueda
 app.get('/api/v1/andalusian-campings', (req, res) => {
-  const { id, category, camping_places, modality,registry_code, inscription_date, city, name, limit = 10, offset = 0, from, to } = req.query;
+  const { id, category, camping_places, modality, registry_code, inscription_date, city, name, limit = 10, offset = 0, from, to } = req.query;
   const query = {};
   if (id) query.id = parseInt(id);
   if (registry_code) query.registry_code = registry_code;
@@ -56,21 +56,33 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
     if (from) query.start_date.$gte = `${from}-01-01`.substring(0, 4);
     if (to) query.start_date.$lte = `${to}-12-31`.substring(0, 4);
   }
-  campings.find(query, {_id:0})
-    .skip(parseInt(offset))
-    .limit(parseInt(limit))
-    .exec((error, results) => {
+
+  if (id) {
+    campings.findOne(query, {_id: 0}, (error, result) => {
       if (error) {
         res.status(500).json({ error: error.message });
-      } else if (results.length === 0) {
-        res.status(404).json({ error: 'Campings not found.' });
-      } else if (results.length === 1) {
-        res.status(200).json(results[0]);
+      } else if (!result) {
+        res.status(404).json({ error: 'Camping not found.' });
       } else {
-        res.status(200).json(results);
+        res.status(200).json(result);
       }
     });
+  } else {
+    campings.find(query, {_id: 0})
+      .skip(parseInt(offset))
+      .limit(parseInt(limit))
+      .exec((error, results) => {
+        if (error) {
+          res.status(500).json({ error: error.message });
+        } else if (results.length === 0) {
+          res.status(404).json({ error: 'Campings not found.' });
+        } else {
+          res.status(200).json(results);
+        }
+      });
+  }
 });
+
 //______________________________GET con 2 values.
 app.get('/api/v1/andalusian-campings/:value/:value2?', (req, res) => {
     const { value, value2 } = req.params;
