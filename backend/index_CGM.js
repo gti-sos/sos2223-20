@@ -41,7 +41,7 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
   
   //GET de rango de búsqueda
   app.get(BASE_API_URL+"/blood-donations", (req,res) => {
-    const {date,place,dnt_people,dnt_blood,dnt_plasme,dnt_new,limit=10,offset=0} = req.query;
+    const {date,place,dnt_people,dnt_blood,dnt_plasme,dnt_new,limit=100,offset=0} = req.query;
     const query = {};
   
     if (date) {
