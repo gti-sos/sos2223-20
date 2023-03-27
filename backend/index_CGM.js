@@ -9,8 +9,6 @@ const fs = require('fs');
 var Datastore = require('nedb'), blooddonations = new Datastore();
 
 
-
-
 module.exports = (app) => {
 
 app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
@@ -88,17 +86,22 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
   app.get('/api/v1/blood-donations/:value/:value2?', (req, res) => {
     const { value, value2 } = req.params;
     const query = { $where: function() {
-      for (let key in this) {
-        if (typeof this[key] === 'string' && this[key].includes(value)) {
+      const keys = Object.keys(this);
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        if (typeof this[key] === 'number' && parseFloat(value) === this[key]) {
+          return true;
+        } else if (typeof this[key] === 'string' && this[key].toLowerCase().includes(value.toLowerCase())) {
           if (value2) {
-            console.log(">>>>>>>>>>>>>>>>>> clave = " + typeof this[key]);
-            console.log(">>>>>>>>>>>>>>>>>> boolean1 = " + typeof this[key]==='string');
-            console.log(">>>>>>>>>>>>>>>>>> boolean2 = " + this[key].includes(value2));
-            if (typeof this[key] === 'string' && this[key].includes(value2)) {
-              console.log("asquiii");
+            const nextKey = keys[i + 1];
+            if (nextKey && typeof this[nextKey] === 'number' && parseInt(value2) === this[nextKey]) {
               return true;
             }
           } else {
+            return true;
+          }
+        } else if (typeof this[value] === 'string' && typeof parseInt(value2) === 'number' && Number.isInteger(parseInt(value2))) {
+          if (this[value] === value && parseInt(this[value2]) === parseInt(value2)) {
             return true;
           }
         }
@@ -110,13 +113,31 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
         console.log(`Error getting /blooddonations: ${err}`);
         res.sendStatus(500);
       } else if (blooddonations.length === 0) {
-        res.status(404).json({ error: 'Blood donations not found.' });
+        res.status(404).json({ error: 'blooddonations not found.' });
       } else {
-        console.log(`Blood donations returned = ${blooddonations.length}`)
-        res.json(blooddonations);
+        console.log(`blooddonations returned = ${blooddonations.length}`)
+        
+        if (typeof value === 'string' && typeof parseInt(value2) === 'number' && Number.isInteger(parseInt(value2))) {
+          if (blooddonations.length === 1) {
+            delete blooddonations[0]._id;
+            res.json(blooddonations[0]);
+          } else { 
+            res.json(blooddonations.map((j) => {
+              delete j._id;
+              return j;
+            }));
+          }
+        } else if (!value2 && blooddonations.length === 1) {
+          delete blooddonations[0]._id;
+          res.json(blooddonations[0]);
+        } else { 
+          res.json(blooddonations.map((j) => {
+            delete j._id;
+            return j;
+          }));
+        }
       }
     });
-    console.log("Nuevo get a Blood donations");
   });
   
   //POST fallo
