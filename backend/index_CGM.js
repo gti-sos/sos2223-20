@@ -151,8 +151,12 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
   
   //POST ok
   app.post(BASE_API_URL+"/blood-donations",(req,res)=>{
-    const nbd = req.body;
-      if (!nbd.date || !nbd.place || !nbd.dnt_people || !nbd.dnt_blood) {
+    const newReq = req.body;
+      if (!rnewReqeq.body || !newReq.hasOwnProperty('date') || !newReq.hasOwnProperty('place') || 
+      !newReq.hasOwnProperty('dnt_people') || !newReq.hasOwnProperty('dnt_blood') || 
+      !newReq.hasOwnProperty('dnt_plasme') || !newReq.hasOwnProperty('dnt_datef') ||
+      !newReq.hasOwnProperty('dnt_new') || !newReq.hasOwnProperty('extraction') ||
+      !newReq.hasOwnProperty('idcenter') || !newReq.hasOwnProperty('center')) {
         return res.status(400).json({ error: 'Faltan datos en el JSON' });
       }
       blooddonations.findOne({ date:nbd.date, place:nbd.place, dnt_people:nbd.dnt_people, 
@@ -213,15 +217,12 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
     app.put(BASE_API_URL + "/blood-donations/:dnt_people",(req,res)=>{
       const bd_dnt_people = Number(req.params.dnt_people);
       const updatedBd = req.body;
-    console.log("1>>>>" + bd_dnt_people);
-      console.log("2>>>>" + updatedBd);
-      // Actualizar el objeto camping en la base de datos
-      blooddonations.update({ dnt_people: bd_dnt_people }, { $set: updatedBd }, {}, (err, numReplaced) => {
+      blooddonations.update({ dnt_people: bd_dnt_people }, { $set: updatedBd }, {}, (err, existe) => {
         if (err) {
           console.error(err);
           return res.status(500).send({ error: 'Internal server error' });
         }
-        if (numReplaced === 0) {
+        if (!existe || dnt_people!== req.body.bd_dnt_people) {
           return res.status(400).send({ error: 'Bad request: blood donations ID not found' });
         }
         return res.status(200).send({ message: 'Blood donations updated successfully' });
