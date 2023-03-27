@@ -7,45 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "loadInitialData",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/loadInitialData",
-					"protocol": "https",
-					"host": [
-						"sos2223-20",
-						"ew",
-						"r",
-						"appspot",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"immovables",
-						"loadInitialData"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "GET ALL immovables",
 			"event": [
 				{
@@ -900,87 +861,6 @@
 						"v1",
 						"immovables",
 						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete ALL Immovables",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables",
-					"protocol": "https",
-					"host": [
-						"sos2223-20",
-						"ew",
-						"r",
-						"appspot",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"immovables"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "loadInitialData",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v1/immovables/loadInitialData",
-					"protocol": "https",
-					"host": [
-						"sos2223-20",
-						"ew",
-						"r",
-						"appspot",
-						"com"
-					],
-					"path": [
-						"api",
-						"v1",
-						"immovables",
-						"loadInitialData"
 					]
 				}
 			},
