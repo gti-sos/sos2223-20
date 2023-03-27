@@ -227,6 +227,7 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
         }
         return res.status(200).send({ message: 'Blood donations updated successfully' });
       });
+      //Comprobación
   });
   
 }
