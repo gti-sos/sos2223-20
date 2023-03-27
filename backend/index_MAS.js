@@ -57,6 +57,7 @@ app.get('/api/v1/andalusian-campings', (req, res) => {
     if (to) query.start_date.$lte = `${to}-12-31`.substring(0, 4);
   }
   campings.find(query)
+    .select('-_id')
     .skip(parseInt(offset))
     .limit(parseInt(limit))
     .exec((error, results) => {
