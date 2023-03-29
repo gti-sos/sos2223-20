@@ -1,21 +1,22 @@
 
-var express = require("express");
+import express from "express";
 var port = process.env.PORT || 12345;
 var app = express();
-var bodyParser = require("body-parser");
 
-var backend_MAS = require("./backend/index_MAS");
+app.use(cors());
+import {handler} from "./frontend/build/handler.js"
 
-var backend_LMP = require("./backend/index_LMP");
+//var backend_MAS = require("./backend/index_MAS");
 
-var backend_CGM = require("./backend/index_CGM");
+import {loadBackend_LMP} from "./backend/index_LMP.js";
+
+//var backend_CGM = require("./backend/index_CGM");
 
 app.listen(port,() =>{
     console.log(`Servidor corriendo en el puerto: ${port}`);
   });
-  
-app.use(bodyParser.json());
-app.use("/", express.static("./public"));
-backend_MAS(app);
-backend_LMP(app);
-backend_CGM(app);
+
+app.use(handler);
+//backend_MAS(app);
+loadBackend_LMP(app);
+//backend_CGM(app);

@@ -1,15 +1,15 @@
 
 const immovablesFilePath = 'ddbb/immovables.json';
 const BASE_API_URL = "/api/v1";
-var port = process.env.PORT || 12345;
-const { notStrictEqual } = require('assert');
-const { Console } = require('console');
-const fs = require('fs');
+import { notStrictEqual } from 'assert';
+import { Console } from 'console';
+import fs from 'fs';
 
-var Datastore = require('nedb'), immovables = new Datastore();
+import Datastore from 'nedb';
+var immovables = new Datastore();
 
 
-module.exports = (app) => {
+function loadBackend_LMP(app){
 
     
 //L06 LPM____________________________________________________________________________-
@@ -27,7 +27,6 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
         console.log(`Error getting /immovables: ${err}`);
         res.sendStatus(500);
       } else if (docs.length === 0) {
-        const fs = require('fs');
         const immovablesData = JSON.parse(fs.readFileSync(immovablesFilePath));
         const initialImmovables = immovablesData.slice(0, 15);
         immovables.insert(initialImmovables, (err, newDocs) => {
@@ -48,7 +47,7 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
   
   //______________________________GET con rango de busqueda
   //immovables
-  app.get('/api/v1/immovables', (req, res) => {
+  app.get(BASE_API_URL+'/immovables', (req, res) => {
     const { resource,modified_date,inventory_num,municipality, current_usage, active_name, 
         province, id, nature, counseling, limit = 10, offset = 0 } = req.query;
     const query = {};
@@ -284,3 +283,5 @@ app.get(`${BASE_API_URL}/immovables/:province`, (req, res) => {
   
   
 }
+
+export {loadBackend_LMP}
