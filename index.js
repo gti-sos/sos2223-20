@@ -1,5 +1,6 @@
 
 import express from "express";
+import cors from "cors";
 var port = process.env.PORT || 12345;
 var app = express();
 
