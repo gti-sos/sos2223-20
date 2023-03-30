@@ -75,7 +75,7 @@
   },
   "scripts": {
     "start": "node index",
-    "test": "",
+    "test": "npm run test-inmovables ",
     "test-andalusian-campings": "npx newman run ./tests/Gcloud.postman_MAS.json",
     "test-blood-donations": "npx newman run ./tests/req-gcloud-CGM.json",
     "test-inmovables": "npx newman run ./tests/immovables.postman_LMP.json"
