@@ -14,7 +14,7 @@
             <li><strong>URL</strong>: <a href="http://sos2223-20.appspot.com/">http://sos2223-20.appspot.com/ </a></li>
             <li><strong>APIs</strong>:
             <ul dir="auto">
-            <li><a href="http://sos2223-20.appspot.com/api/v1/immovables/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v1/immovables/docs</a> (developed by <a href="https://github.com/Lukmare">Lorenzo Morales Palacios</a>)</li>
+            <li><a href="http://sos2223-20.appspot.com/api/v2/immovables/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v2/immovables/docs</a> (developed by <a href="https://github.com/Lukmare">Lorenzo Morales Palacios</a>)</li>
             <li><a href="http://sos2223-20.appspot.com/api/v2/andalusian-campings/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v2/andalusian-campings/docs</a> (developed by <a href="https://github.com/salinosaso">Miguel Ángel Salinas</a>)</li>
             <li><a href="http://sos2223-20.appspot.com/api/v2/blood-donations/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v2/blood-donations/docs</a> (developed by <a href="https://github.com/cargarmun">Carmen García Muñoz</a>)</li>
             <li><strong>FrontEnds</strong>:
