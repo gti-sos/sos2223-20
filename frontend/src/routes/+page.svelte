@@ -1,4 +1,4 @@
-<html>
+<main>
     <body>
         <h1>SOS2223-20</h1>
         <ul dir="auto">
@@ -22,4 +22,4 @@
             </li>
             </ul>
     </body>
-</html>
+</main>
