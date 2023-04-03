@@ -25,18 +25,20 @@
             resultStatus = status;
         }
 
-       /* async function loadImmovables(){
+        async function loadImmovables(){
             resultStatus = result = '';
             const res = await fetch(API+"/loadInitialData", {
                 method: 'GET'
             });
             const status = await res.status;
             resultStatus = status;
-        }*/
+        }
 
         onMount(async() => {
                 // Load initial data from API or local storage 
                 getImmovables();
+                if(immovables.length===0){loadImmovables();};
+                
 
             });
 </script>
