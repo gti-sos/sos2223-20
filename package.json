@@ -1,4 +1,6 @@
 {
+  
+  "type": "module",
   "name": "sos2223-20",
   "version": "0.1.0",
   "description": "",
@@ -89,6 +91,5 @@
   "bugs": {
     "url": "https://github.com/gti-sos/sos2223-20/issues"
   },
-  "homepage": "https://github.com/gti-sos/sos2223-20#readme",
-  "type": "module"
+  "homepage": "https://github.com/gti-sos/sos2223-20#readme"
 }

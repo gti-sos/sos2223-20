@@ -1,10 +1,12 @@
 
 import express from "express";
+//import cors from 'cors';
+
 var port = process.env.PORT || 12345;
 var app = express();
 
-app.use(cors());
-import {handler} from "./frontend/build/handler.js"
+//app.use(cors());
+//import {handler} from "./frontend/build/handler.js"
 
 //var backend_MAS = require("./backend/index_MAS");
 
@@ -16,7 +18,7 @@ app.listen(port,() =>{
     console.log(`Servidor corriendo en el puerto: ${port}`);
   });
 
-app.use(handler);
+//app.use(handler);
 //backend_MAS(app);
 loadBackend_LMP(app);
 //backend_CGM(app);

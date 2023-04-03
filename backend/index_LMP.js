@@ -45,6 +45,8 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
       }
     });
   });
+      
+
   
   //______________________________GET con rango de busqueda
   //immovables
