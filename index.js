@@ -4,7 +4,7 @@ import express from "express";
 
 var port = process.env.PORT || 12345;
 var app = express();
-
+app.use(express.json());
 //app.use(cors());
 //import {handler} from "./frontend/build/handler.js"
 

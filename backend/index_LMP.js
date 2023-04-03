@@ -285,6 +285,6 @@ app.get(`${BASE_API_URL}/immovables/:province`, (req, res) => {
   });
   
   
-}
+};
 
 export {loadBackend_LMP}
