@@ -1,15 +1,32 @@
 <script>
     // @ts-nocheck
-
+    import { fade } from "svelte/transition";
         import { onMount } from "svelte";
         import { dev } from '$app/environment';
-    import { each } from "svelte/internal";
+    import { each, prevent_default } from "svelte/internal";
     import {Table , Button} from "sveltestrap";
+    import Footer from "../../../Footer.svelte";
+
+    let showForm = false;
+
+    function toggleForm(){
+      showForm = !showForm;
+    }
+
+    let showDeleteForm = false;
+
+    function toggleDeleteForm() {
+      showDeleteForm = !showDeleteForm;
+    }
+
+    let deleteFormData = {
+      id: "",
+    };
+
 
     onMount(async() => {
                 // Load initial data from API or local storage 
                 getImmovables();
-                loadImmovables();
                 
 
             });
@@ -21,234 +38,350 @@
         let immovables = [];
         let result = '';
         let resultStatus = '';
-            //GET 
-        async function getImmovables(){
-            resultStatus = result = '';
-            const res = await fetch(API, {
-                method: 'GET'
-            });
-            try{
-                const data = await res.json();
-                result = JSON.stringify(data, null,2);
-                immovables = data;
-            }catch(error){
-                console.log(`Error parsing result: ${error}`);
-            }
-            const status = await res.status;
-            resultStatus = status;
-        }
-        //LOAD initial DATA
-        async function loadImmovables(){
-            resultStatus = result = '';
-            const res = await fetch(API+"/loadInitialData", {
-                method: 'GET'
-            });
-            const status = await res.status;
-            resultStatus = status;
-        }
-        //METHOD POST
-        let newactive_name= "Nombre";
-        let newcounseling= "Consejería";
-        let newcurrent_usage= "Uso Actual";
-        let newid= 0;
-        let newinventory_num= 0;
-        let newmodified_date= "2022-10-21";
-        let newmunicipality= "Municipio";
-        let newnature= "Rústica/Urbana";
-        let newprovince= "Provincia";
-        let newresource= 0;
 
-        async function postImmovable(){
-         const response = await fetch(API, {
-         method: 'POST',
-         headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ active_name: newactive_name
-                ,counseling: newcounseling
-                ,current_usage: newcurrent_usage
-                ,id: newid
-                ,inventory_num: newinventory_num
-                ,modified_date: newmodified_date
-                ,municipality: newmodified_date
-                ,nature: newnature
-                ,province: newprovince
-                ,resource: newresource})
-                });
-
-                
-            const status = await res.status;
-            resultStatus = status;
-            if(status==201){
-                    getImmovables();
-                }
-        
-            };
-            //DELETE ALL
-            async function deleteImmovables(){
-            resultStatus = result = '';
-            const res = await fetch(API, {
-                method: 'DELETE'
-            });
-                immovables = [];
-            
-            const status = await res.status;
-            resultStatus = status;
-        }
-        //DELETE IMMOVABLE
-        async function deleteImmovable(immovableId){
-            resultStatus = result = '';
-            const res = await fetch(API+"/"+immovableId, {
-                method: 'DELETE'
-            });
-            
-            const status = await res.status;
-            resultStatus = status;
-            if(status==200){
-                    getImmovables();
-                }
-        }
-        //PUT
-        async function putImmovable(immovableId) {
-  const response = await fetch(`${API}/${immovableId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ active_name: newactive_name
-                ,counseling: newcounseling
-                ,current_usage: newcurrent_usage
-                ,id: newid
-                ,inventory_num: newinventory_num
-                ,modified_date: newmodified_date
-                ,municipality: newmodified_date
-                ,nature: newnature
-                ,province: newprovince
-                ,resource: newresource})
-                });
-
-  const result = await response.json();
-
-  // Do something with the result
-  console.log(result);
+        async function handleDelete() {
+          const id = parseInt(deleteFormData.id)
+          const res = await fetch(API +"/"+ id, {
+          method: "DELETE",
+          });
+          if (res.ok) {
+    getImmovables(); // Actualizar los datos en la tabla
+    showMessage("Recurso eliminado correctamente", "success");
+  } else {
+    showMessage(`Recurso no encontrado: ${deleteFormData.id}`, "error");
+  }
 }
+
+let editMode = false;
+            //GET 
+
+            async function getImmovables() {
+  resultStatus = result = '';
+  const res = await fetch(API, {
+    method: 'GET'
+  });
+  try {
+    const data = await res.json();
+    result = JSON.stringify(data, null, 2);
+    immovables = data;
+    if (res.ok) {
+      const status = await res.status;
+      resultStatus = status.toString();
+      if (immovables.length === 0) {
+        resultStatus = 'empty';
+      }
+    } else {
+      resultStatus = 'Error en la solicitud';
+    }
+  } catch (error) {
+    console.log(`Error parsing result:${error}`);
+    resultStatus = 'Error en la solicitud';
+  }
+}
+
+        let formData ={
+           active_name:"",
+        counseling: "",
+         current_usage: "",
+         id: "",
+         inventory_num: "",
+         modified_date: "",
+       municipality: "",
+         nature: "",
+         province: "",
+         resource: ""
+
+        };
+        async function handleSubmit(){
+          const id = parseInt(formData.id);
+    const resource = parseInt(formData.resource);
+    const inventory_num = parseInt(formData.inventory_num);
+    // Validación básica antes de enviar el formulario
+  if (
+    !formData.active_name ||
+    formData.modified_date === null ||
+    id === null ||
+    formData.province === null ||
+    formData.counseling === null ||
+    formData.nature === null ||
+    formData.municipality === null ||
+    formData.current_usage === null ||
+    !Number.isInteger(id) ||
+    !Number.isInteger(resource) ||!Number.isInteger(inventory_num)
+  
+  ) {
+    showMessage("Por favor, complete todos los campos con los tipos de datos correctos","error");
+    return;
+  }
+  const response = await fetch(API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+  if (response.ok) {
+    // Actualizar los datos y ocultar el formulario
+    
+    getImmovables();
+    showMessage("Recurso creado correctamente", "success");
+    showForm = false;
+  } else {
+    showMessage("Error al crear el recurso. Ya existe.", "error");
+  }
+        };
+
         
+      
+
+        async function handleUpdate(immovable, index) {
+    // Cambia el modo de edición a true
+    editMode = true;
+    // Crea un objeto para almacenar los nuevos valores
+    let updatedImmovable = {
+      active_name: immovable.active_name
+                ,counseling: immovable.counseling
+                ,current_usage: immovable.current_usage
+                ,id: immovable.id
+                ,inventory_num: immovable.inventory_num
+                ,modified_date: immovable.modified_date
+                ,municipality: immovable.municipality
+                ,nature: immovable.nature
+                ,province: immovable.province
+                ,resource: immovable.resource,
+    };
+    // Actualiza los valores de la fila correspondiente
+    updatedImmovable = await updateImmovable(updatedImmovable, index);
+    // Si se realizó la actualización correctamente, cambia el modo de edición a false
+    if (updatedImmovable) {
+      editMode = false;
+    }
+  }
+
+  async function updateImmovable(immovable, index) {
+    const response = await fetch(API+ `/${immovable.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(immovable),
+    });
+    if (response.ok) {
+      // Actualiza los datos en la tabla
+      // @ts-ignore
+      immovables[index] = immovable;
+      return immovable;
+    } else {
+      showMessage("Porfavor, rellena todos los campos","warning");
+    }
+  }
+  async function saveRow(index) {
+      // @ts-ignore
+        const immovable = immovables[index];
+        await handleUpdate(immovable, index);
+  }
+
+  function showMessage(message, type = "success") {
+  const messages = document.getElementById("messages");
+  const messageElement = document.createElement("div");
+  messageElement.className = `message ${type}`;
+  messageElement.innerHTML = message;
+  messages.appendChild(messageElement);
+  console.log(`Mensaje: ${message}, Tipo: ${type}`);
+  // Hacer que el mensaje desaparezca después de 5 segundos (5000 milisegundos)
+  setTimeout(() => {
+    messageElement.remove();
+  }, 5000);
+}
+
+async function updatedImmovable(immovable, index) {
+    const response = await fetch(API+"/"+ `${immovable.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(immovable),
+    });
+    if (response.ok) {
+      // Actualiza los datos en la tabla
+      // @ts-ignore
+      immovables[index] = immovable;
+      return immovable;
+    } else {
+      showMessage("Porfavor, rellena todos los campos","warning");
+    }
+  }
+  let selectedRowIndex = null;
+  function editRow(index) {
+  // Desactivar la edición de la fila previamente seleccionada
+  if (selectedRowIndex !== null) {
+    // @ts-ignore
+    immovables[selectedRowIndex].editing = false;
+  }
+  // Activar la edición de la nueva fila seleccionada
+  selectedRowIndex = index;
+  // @ts-ignore
+  immovables[selectedRowIndex].editing = true;
+}
+async function loadInitialData() {
+      const res = await fetch(API+"/loadInitialData", {
+        method: 'GET'
+      });
+      if (res.ok) {
+        
+        getImmovables(); // Actualizar los datos en la tabla
+        showMessage("Datos cargados correctamente", "success");
+      } else {
+        showMessage("Error al cargar los datos iniciales", "error");
+      }
+    }
+    async function deleteResources() {
+      const res = await fetch(API, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        
+        getImmovables(); // Actualizar los datos en la tabla
+        showMessage("Recursos eliminados correctamente", "success");
+      } else {
+        showMessage("Error al eliminar los recursos", "error");
+      }
+    }
+
+
 </script>
 <main>
         
-      
-      <h1> Immovables </h1>
-      <tr> <Button on:click={deleteImmovables}>Borrar Immovables</Button></tr>
+ 
+  <h1 class="title">API IMMOVABLES - Lorenzo Morales</h1>
+  <div id="messages" class="message"></div>
 
-      <tr>
-      <label>
-        Nombre:
-        <input type="text" bind:value={newactive_name} />
-      </label>
-    
-      <label>
-        Consejo:
-        <input type="text" bind:value={newcounseling} />
-      </label>
-      <label>
-          Uso Actual:
-          <input type="text" bind:value={newcurrent_usage} />
-        </label>
-        <label>
-          ID:
-          <input type="number" bind:value={newid} />
-        </label>
-        <label>
-          Numero de inventario:
-          <input type="number" bind:value={newinventory_num} />
-        </label>
-        <label>
-          Fecha:
-          <input type="text" bind:value={newmodified_date} />
-        </label>
-        <label>
-          Municipio:
-          <input type="text" bind:value={newmunicipality} />
-        </label>
-        <label>
-          Naturaleza:
-          <input type="text" bind:value={newnature} />
-        </label>
-        <label>
-          Provincia:
-          <input type="text" bind:value={newprovince} />
-        </label>
-        <label>
-          Recurso:
-          <input type="number" bind:value={newresource} />
-        </label>
-    
-      <Button on:click={postImmovable}>Crear</Button>
-    </tr>
-      <Table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Consejo</th>
-                <th>Uso actual</th>
-                <th>Numero de Inventario</th>
-                <th>Provincia</th>
-                <th>Naturaleza</th>
-                <th>Municipio</th>
-                <th>Recurso</th>
-                <th>Fecha</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-            {#each immovables as immovable}
-            <tr>
-                
-                <td>{immovable.id}<input type="number" bind:value={newid}/></td>
-                
-                <td>{immovable.active_name}<input type="text" bind:value={newactive_name}/></td>
-                
-                <td>{immovable.counseling}<input type="text" bind:value={newcounseling}/></td>
-                
-                <td>{immovable.current_usage}<input type="text" bind:value={newcurrent_usage}/></td>
-                
-                <td>{immovable.inventory_num}<input type="number" bind:value={newinventory_num}/></td>
-                
-                <td>{immovable.province}<input type="text" bind:value={newprovince} /></td>
-                
-                <td>{immovable.nature}<input type="text" bind:value={newnature}/></td>
-                
-                <td>{immovable.municipality}<input type="text" bind:value={newmunicipality}/></td>
-                
-                <td>{immovable.resource}<input type="number" bind:value={newresource} /></td>
-                
-                <td>{immovable.modified_date}<input type="text" bind:value={newmodified_date}/></td>
-                
-                <td><Button on:click={deleteImmovable(immovable.id)}>Borrar</Button>
-                </td>
-                <td><Button on:click={putImmovable(immovable.id)}>Editar</Button>
-                </td>
-            </tr>
-            {/each}
-        </tbody>
-      </Table>
-      
-      
-      {#if resultStatus == "200"}
-          <p>
-             Operación realizada con éxito.
-          </p>
-          {/if}
-          {#if resultStatus == "404"}
-          <p>
-             No se encontró ningún archivo.
-          </p>
-          {/if}
-          {#if resultStatus == "404"}
-          <p>
-             No se encontró ningún archivo.
-          </p>
-          {/if}
+  {#if !showForm}
+  {#if resultStatus === "200"}
+    <table in:fade={{ duration: 300 }}>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Consejería</th>
+          <th>Uso Actual</th>
+          <th>ID</th>
+          <th>Num Inventario</th>
+          <th>Fecha</th>
+          <th>Municipio</th>
+          <th>Naturaleza</th>
+          <th>Provincia</th>
+          <th>Recurso</th>
+          <th></th> <!-- Nueva columna para el botón de actualizar -->
+        </tr>
+      </thead>
+      <tbody>
+        {#each immovables as immovable, index}
+  <tr>
+    {#if immovable.editing} <!-- Si la fila está en modo edición -->
+    <th>Nombre</th>
+    <th>Consejería</th>
+    <th>Uso Actual</th>
+    <th>ID</th>
+    <th>Num Inventario</th>
+    <th>Fecha</th>
+    <th>Municipio</th>
+    <th>Naturaleza</th>
+    <th>Provincia</th>
+    <th>Recurso</th>
+      <td><input type="text" bind:value={immovable.active_name}  /></td>
+      <td><input type="text" bind:value={immovable.counseling} /></td>
+      <td><input type="text" bind:value={immovable.current_usage} /></td>
+      <td><input type="number" bind:value={immovable.id} disabled /></td>
+      <td><input type="number" bind:value={immovable.inventory_num} /></td>
+      <td><input type="text" bind:value={immovable.modified_date} /></td>
+      <td><input type="text" bind:value={immovable.municipality} /></td>
+      <td><input type="text" bind:value={immovable.nature} /></td>
+      <td><input type="text" bind:value={immovable.province} /></td>
+      <td><input type="number" bind:value={immovable.resource} /></td>
 
+    {:else} <!-- Si la fila no está en modo edición -->
+      <td>{immovable.active_name}</td>
+      <td>{immovable.counseling}</td>
+      <td>{immovable.current_usage}</td>
+      <td>{immovable.id}</td>
+      <td>{immovable.inventory_num}</td>
+      <td>{immovable.modified_date}</td>
+      <td>{immovable.municipality}</td>
+      <td>{immovable.nature}</td>
+      <td>{immovable.province}</td>
+      <td>{immovable.resource}</td>
+
+    {/if}
+    <td>
+      {#if !immovable.editing}
+        <button on:click={() => editRow(index)}>Actualizar</button>
+      {:else}
+        <button on:click={() => saveRow(index)}>Guardar</button>
+      {/if}
+    </td>
+  </tr>
+{/each}
+      </tbody>
+    </table>
+  {:else if resultStatus === "404"}
+    <p>Error: Data not found</p>
+  {:else}
+    <p>Lista de recursos vacia</p>
+  {/if}
+  {/if}
+<div class="button-container">
+<!-- Agrega el botón "Crear recurso" -->
+<button on:click={toggleForm}>Crear recurso</button>
+<button on:click={loadInitialData}>Cargar recursos</button>
+<!-- Botón "Borrar recursos" -->
+<button on:click={deleteResources}>Borrar recursos</button>
+<!-- Botón "Borrar un recurso" -->
+<button on:click={toggleDeleteForm}>Borrar un recurso</button>
+</div>
+<!-- Formulario para eliminar un recurso por id -->
+{#if showDeleteForm}
+  <form on:submit|preventDefault={handleDelete}>
+    <label for="delete_id">ID</label>
+    <input type="number" id="delete_id" bind:value={deleteFormData.id} required />
+    <button type="submit">Eliminar</button>
+  </form>
+{/if}
+<!-- Agrega el formulario para enviar datos -->
+{#if showForm}
+<div class="form-container"  in:fade={{ duration: 300 }}>
+<form on:submit|preventDefault={handleSubmit}>
+    <label for="id">ID</label>
+    <input type="number" id="id" bind:value={formData.id} required />
+  
+    <label for="active_name">Nombre</label>
+    <input type="text" id="active_name" bind:value={formData.active_name} required />
+  
+    <label for="resource">Recurso</label>
+    <input type="number" id="resource" bind:value={formData.resource} required />
+  
+    <label for="counseling">Consejería</label>
+    <input type="text" id="counseling" bind:value={formData.counseling} required />
+
+    <label for="nature">Naturaleza</label>
+    <input type="text" id="nature" bind:value={formData.nature} required />
+
+    <label for="province">Provincia</label>
+    <input type="text" id="province" bind:value={formData.province} required />
+
+    <label for="municipality">Municipio</label>
+    <input type="text" id="municipality" bind:value={formData.municipality} required />
+
+    <label for="modified_date">Fecha</label>
+    <input type="text" id="modified_date" bind:value={formData.modified_date} required />
+
+    <label for="inventory_num">Num Inventario</label>
+    <input type="number" id="inventory_num" bind:value={formData.inventory_num} required />
+
+    <label for="current_usage">Uso Actual</label>
+    <input type="text" id="current_usage" bind:value={formData.current_usage} required />
+
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+{/if}
         </main>
