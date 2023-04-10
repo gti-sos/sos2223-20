@@ -139,7 +139,7 @@
       
       <h1> Immovables </h1>
       <tr> <Button on:click={deleteImmovables}>Borrar Immovables</Button></tr>
-      
+
       <tr>
       <label>
         Nombre:
