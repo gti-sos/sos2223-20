@@ -59,10 +59,10 @@
        headers: {
           'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ name: newname
+          body: JSON.stringify({ id: newid
+              ,name: newname
               ,registry_code: newregistry_code
               ,group_id: newgroup_id
-              ,id: newid
               ,camping_places: newcamping_places
               ,start_date: newstart_date
               ,city: newcity
@@ -94,6 +94,7 @@
           const res = await fetch(API+"/"+campingId, {
               method: 'DELETE'
           });
+          
           const status = await res.status;
           resultStatus = status;
           if(status==200){
@@ -107,10 +108,10 @@ const response = await fetch(`${API}/${campingId}`, {
   headers: {
     'Content-Type': 'application/json'
   },
-  body: JSON.stringify({ name: newname
+  body: JSON.stringify({ id: newid
+              ,name: newname
               ,registry_code: newregistry_code
               ,group_id: newgroup_id
-              ,id: newid
               ,camping_places: newcamping_places
               ,start_date: newstart_date
               ,city: newcity
@@ -129,6 +130,10 @@ console.log(result);
     <h1> Campings </h1>
     <tr> <Button on:click={deleteCampings}>Borrar Campings</Button></tr>
     <tr>
+      <label>
+        ID:
+        <input type="number" bind:value={newid} />
+      </label>
     <label>
       Nombre:
       <input type="text" bind:value={newname} />
@@ -140,10 +145,6 @@ console.log(result);
     <label>
         Id de Grupo:
         <input type="number" bind:value={newgroup_id} />
-      </label>
-      <label>
-        ID:
-        <input type="number" bind:value={newid} />
       </label>
       <label>
         Plazas de Camping:
@@ -172,44 +173,43 @@ console.log(result);
   
     <Button on:click={postCamping}>Crear</Button>
   </tr>
-  <Table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Codigo de Registro</th>
-        <th>Id de Grupo</th>
-        <th>ID</th>
-        <th>Plazas de Camping</th>
-        <th>Fecha de Inicio</th>
-        <th>Ciudad</th>
-        <th>Persona Responsable</th>
-        <th>Provincia</th>
-        <th>Categoría</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each campings as camping}
-        <tr>
-          <td>{camping.name}</td>
-          <td>{camping.registry_code}</td>
-          <td>{camping.group_id}</td>
-          <td>{camping.id}</td>
-          <td>{camping.camping_places}</td>
-          <td>{camping.start_date}</td>
-          <td>{camping.city}</td>
-          <td>{camping.responsible}</td>
-          <td>{camping.state}</td>
-          <td>{camping.category}</td>
-          <td>
-            <Button on:click={() => deleteCamping(camping.id)}>Eliminar</Button>
-            <Button on:click={() => putCamping(camping.id)}>Editar</Button>
-          </td>
-        </tr>
-      {/each}
-    </tbody>
-  </Table>
-  
+    <Table>
+      <thead>
+          <tr>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Codigo Registro</th>
+              <th>Id de Grupo</th>
+              <th>Plazas de Camping</th>
+              <th>Fecha de Inicio</th>
+              <th>Ciudad</th>
+              <th>Persona Responsable</th>
+              <th>Provincia</th>
+              <th>Categoria</th>
+          </tr>
+      </thead>
+      <tbody>
+          
+          {#each campings as camping}
+          <tr>
+              <td>{camping.id}<input type="number" bind:value={newid}/></td>
+              <td>{camping.name}<input type="text" bind:value={newname}/></td>                
+              <td>{camping.registry_code}<input type="text" bind:value={newregistry_code}/></td>                
+              <td>{camping.group_id}<input type="number" bind:value={newgroup_id}/></td>
+              <td>{camping.camping_places}<input type="number" bind:value={newcamping_places}/></td>                
+              <td>{camping.start_date}<input type="text" bind:value={newstart_date} /></td>    
+              <td>{camping.city}<input type="text" bind:value={newcity}/></td>            
+              <td>{camping.responsible}<input type="text" bind:value={newresponsible}/></td>               
+              <td>{camping.state}<input type="text" bind:value={newstate} /></td>           
+              <td>{camping.category}<input type="number" bind:value={newcategory}/></td>               
+              <td><Button on:click={deleteCamping(camping.id)}>Borrar</Button>
+              </td>
+              <td><Button on:click={putCamping(camping.id)}>Editar</Button>
+              </td>
+          </tr>
+          {/each}
+      </tbody>
+    </Table>
     
     {#if resultStatus != ""}
         <p>
