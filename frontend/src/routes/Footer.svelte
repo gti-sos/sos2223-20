@@ -1,2 +1,2 @@
 
-Develovep by <b>Lorenzo Morales Palacios</b>
+Develovep by <b>Lorenzo Morales Palacios, Miguel Ángel Salinas</b>
