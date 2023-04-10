@@ -52,47 +52,42 @@
       let newresponsible= "Persona Responsable";
       let newstate= "Provincia";
       let newcategory= 0;
-      
-      const validateId = (id) => {
-      const existingCamping = campings.find(c => c.id === id);
-        if (existingCamping) {
-        alert('Ya existe un objeto con ese id');
-        return false;
-    }
-      return true;
-    };
+     
+      const postCamping = async () => {
+       const res = await fetch(API, {
+       method: 'POST',
+       headers: {
+          'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ id: newid
+              ,name: newname
+              ,registry_code: newregistry_code
+              ,group_id: newgroup_id
+              ,camping_places: newcamping_places
+              ,start_date: newstart_date
+              ,city: newcity
+              ,responsible: newresponsible
+              ,state: newstate
+              ,category: newcategory})
+              });
 
-
-    const postCamping = async () => {
-  if (!validateId(newid)) {
-    return;
-  }
-  const res = await fetch(API, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      id: newid,
-      name: newname,
-      registry_code: newregistry_code,
-      group_id: newgroup_id,
-      camping_places: newcamping_places,
-      start_date: newstart_date,
-      city: newcity,
-      responsible: newresponsible,
-      state: newstate,
-      category: newcategory
-    })
-  });
-
-  const status = await res.status;
-  resultStatus = status;
-  if (status == 201) {
-    getCampings();
-  }
-};
-
+          const status = await res.status;
+          resultStatus = status;
+          if(status==201){
+                  getCampings();
+              }
+          };
+          //DELETE ALL
+          async function deleteCampings(){
+          resultStatus = result = '';
+          const res = await fetch(API, {
+              method: 'DELETE'
+          });
+              campings = [];
+          
+          const status = await res.status;
+          resultStatus = status;
+      }
       //DELETE Camping
       async function deleteCamping(campingId){
           resultStatus = result = '';
