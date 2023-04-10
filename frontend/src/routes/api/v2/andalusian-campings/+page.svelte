@@ -7,9 +7,9 @@
     import {Table , Button} from "sveltestrap";
 
     onMount(async() => {
-                // Load initial data from API or local storage 
-                loadCampings();
+                // Load initial data from API or local storage    
                 getCampings();
+                loadCampings();
             });
             let API = '/api/v1/andalusian-campings';
         
