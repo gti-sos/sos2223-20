@@ -1,17 +1,15 @@
 <script>
     // @ts-nocheck
 
-        import { onMount } from "svelte";
-        import { dev } from '$app/environment';
+    import { onMount } from "svelte";
+    import { dev } from '$app/environment';
     import { each } from "svelte/internal";
     import {Table , Button} from "sveltestrap";
 
     onMount(async() => {
                 // Load initial data from API or local storage 
-                getCampings();
                 loadCampings();
-                
-
+                getCampings();
             });
             let API = '/api/v1/andalusian-campings';
         
@@ -30,7 +28,7 @@
             try{
                 const data = await res.json();
                 result = JSON.stringify(data, null,2);
-                Campings = data;
+                campings = data;
             }catch(error){
                 console.log(`Error parsing result: ${error}`);
             }
@@ -47,7 +45,7 @@
             resultStatus = status;
         }
         //METHOD POST
-        let newactive_name= "Nombre";
+        let newname= "Nombre";
         let newregistry_code= "Código de registro";
         let newgroup_id= 0;
         let newid= 0;
@@ -59,17 +57,17 @@
         let newcategory= 0;
 
         const postCamping = async () => {
-         const response = await fetch(API, {
+         const res = await fetch(API, {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ active_name: newactive_name
+            body: JSON.stringify({ name: newname
                 ,registry_code: newregistry_code
                 ,group_id: newgroup_id
                 ,id: newid
                 ,camping_places: newcamping_places
-                ,newstart_date: newstart_date
+                ,start_date: newstart_date
                 ,city: newcity
                 ,responsible: newresponsible
                 ,state: newstate
@@ -115,16 +113,16 @@
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ active_name: newactive_name
-                ,counseling: newcounseling
-                ,current_usage: newcurrent_usage
+    body: JSON.stringify({ name: newname
+                ,registry_code: newregistry_code
+                ,group_id: newgroup_id
                 ,id: newid
-                ,inventory_num: newinventory_num
-                ,modified_date: newmodified_date
-                ,municipality: newmodified_date
-                ,nature: newnature
-                ,province: newprovince
-                ,resource: newresource})
+                ,camping_places: newcamping_places
+                ,start_date: newstart_date
+                ,city: newcity
+                ,responsible: newresponsible
+                ,state: newstate
+                ,category: newcategory})
                 });
 
   const result = await response.json();
@@ -135,17 +133,13 @@
         
 </script>
 <main>
-        
-      
       <h1> Campings </h1>
       <tr> <Button on:click={deleteCampings}>Borrar Campings</Button></tr>
-      
       <tr>
       <label>
         Nombre:
-        <input type="text" bind:value={newactive_name} />
+        <input type="text" bind:value={newname} />
       </label>
-    
       <label>
         Codigo de Registro:
         <input type="text" bind:value={newregistry_code} />
@@ -202,29 +196,18 @@
         </thead>
         <tbody>
             
-            {#each Campings as camping}
+            {#each campings as camping}
             <tr>
-                
                 <td>{camping.id}<input type="number" bind:value={newid}/></td>
-                
-                <td>{camping.active_name}<input type="text" bind:value={newactive_name}/></td>
-                
-                <td>{camping.registry_code}<input type="text" bind:value={newregistry_code}/></td>
-                
+                <td>{camping.name}<input type="text" bind:value={newname}/></td>                
+                <td>{camping.registry_code}<input type="text" bind:value={newregistry_code}/></td>                
                 <td>{camping.group_id}<input type="number" bind:value={newgroup_id}/></td>
-                
-                <td>{camping.camping_places}<input type="number" bind:value={newcamping_places}/></td>
-                
-                <td>{camping.start_date}<input type="text" bind:value={newstart_date} /></td>
-                
-                <td>{camping.city}<input type="text" bind:value={newcity}/></td>
-                
-                <td>{camping.responsible}<input type="text" bind:value={newresponsible}/></td>
-                
-                <td>{camping.state}<input type="text" bind:value={newstate} /></td>
-                
-                <td>{camping.category}<input type="number" bind:value={newcategory}/></td>
-                
+                <td>{camping.camping_places}<input type="number" bind:value={newcamping_places}/></td>                
+                <td>{camping.start_date}<input type="text" bind:value={newstart_date} /></td>    
+                <td>{camping.city}<input type="text" bind:value={newcity}/></td>            
+                <td>{camping.responsible}<input type="text" bind:value={newresponsible}/></td>               
+                <td>{camping.state}<input type="text" bind:value={newstate} /></td>           
+                <td>{camping.category}<input type="number" bind:value={newcategory}/></td>               
                 <td><Button on:click={deleteCamping(camping.id)}>Borrar</Button>
                 </td>
                 <td><Button on:click={putCamping(camping.id)}>Editar</Button>
@@ -233,7 +216,6 @@
             {/each}
         </tbody>
       </Table>
-      
       
       {#if resultStatus != ""}
           <p>
