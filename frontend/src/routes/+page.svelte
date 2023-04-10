@@ -29,3 +29,52 @@
             </ul>
     </body>
 </main>
+<style>
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+    }
+    
+    body {
+        width: 90%;
+        max-width: 800px;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+        font-size: 2em;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    li {
+        margin-bottom: 10px;
+    }
+    
+    a {
+        color: #0077cc;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    
+    a:hover {
+        color: #005ea1;
+    }
+    
+    strong {
+        font-weight: bold;
+    }
+</style>
+
