@@ -15,8 +15,6 @@ import {loadBackend_MAS} from "./backend/index_MAS.js";
 
 
 //var backend_CGM = require("./backend/index_CGM");
-
-
 loadBackend_MAS(app);
 loadBackend_LMP(app);
 //backend_CGM(app);
