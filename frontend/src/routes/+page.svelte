@@ -25,12 +25,7 @@
                 </ul>
                 </li>  
         </ul>
-        <li><strong>APIs v2</strong>:
-            <ul dir="auto">
-            <li><a href="http://sos2223-20.appspot.com/api/v2/immovables/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v2/immovables/docs</a> (developed by <a href="https://github.com/Lukmare">Lorenzo Morales Palacios</a>)</li>
-         
-        </ul>
-            </li>
+        
             </ul>
     </body>
 </main>

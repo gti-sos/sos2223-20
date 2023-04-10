@@ -211,13 +211,9 @@ console.log(result);
       </tbody>
     </Table>
     
-    {#if resultStatus != ""}
-        <p>
-            Result:
-        </p>
-        <pre>
-            {resultStatus}
-            {result}
-        </pre>
-        {/if}
+    {#if resultStatus == "200"}
+    <p>
+       Operación realizada con éxito
+    </p>
+    {/if}
       </main>

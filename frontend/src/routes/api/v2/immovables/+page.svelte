@@ -235,13 +235,10 @@
       </Table>
       
       
-      {#if resultStatus != ""}
+      {#if resultStatus == "200"}
           <p>
-              Result:
+             Operación realizada con éxito
           </p>
-          <pre>
-              {resultStatus}
-              {result}
-          </pre>
           {/if}
+
         </main>
