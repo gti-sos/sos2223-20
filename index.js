@@ -11,6 +11,8 @@ import {handler} from "./frontend/build/handler.js"
 //var backend_MAS = require("./backend/index_MAS");
 
 import {loadBackend_LMP} from "./backend/index_LMP.js";
+import {loadBackend_MAS} from "./backend/index_MAS.js";
+
 
 //var backend_CGM = require("./backend/index_CGM");
 

@@ -5,8 +5,7 @@ var port = process.env.PORT || 12345;
 const fs = require('fs');
 var Datastore = require('nedb'), campings = new Datastore();
 
-module.exports = (app) => {
-   //__________________________GET initial data
+function loadBackend_MAS(app){
 
 app.get(BASE_API_URL+'/andalusian-campings/docs', (req, res) => {
   res.redirect("https://documenter.getpostman.com/view/26063155/2s93K1oeqs");
@@ -198,8 +197,6 @@ app.delete(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
     });
 });
 
-
-
-
-
 }
+
+export {loadBackend_MAS}

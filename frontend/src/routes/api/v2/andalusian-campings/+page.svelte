@@ -8,21 +8,21 @@
 
     onMount(async() => {
                 // Load initial data from API or local storage 
-                getImmovables();
-                loadImmovables();
+                getCampings();
+                loadCampings();
                 
 
             });
-            let API = '/api/v1/immovables';
+            let API = '/api/v1/andalusian-campings';
         
         if(dev)
             API = 'http://localhost:12345'+API
 
-        let immovables = [];
+        let Campings = [];
         let result = '';
         let resultStatus = '';
             //GET 
-        async function getImmovables(){
+        async function getCampings(){
             resultStatus = result = '';
             const res = await fetch(API, {
                 method: 'GET'
@@ -30,7 +30,7 @@
             try{
                 const data = await res.json();
                 result = JSON.stringify(data, null,2);
-                immovables = data;
+                Campings = data;
             }catch(error){
                 console.log(`Error parsing result: ${error}`);
             }
@@ -38,7 +38,7 @@
             resultStatus = status;
         }
         //LOAD initial DATA
-        async function loadImmovables(){
+        async function loadCampings(){
             resultStatus = result = '';
             const res = await fetch(API+"/loadInitialData", {
                 method: 'GET'
@@ -58,7 +58,7 @@
         let newprovince= "Provincia";
         let newresource= 0;
 
-        const postImmovable = async () => {
+        const postCamping = async () => {
          const response = await fetch(API, {
          method: 'POST',
          headers: {
@@ -80,37 +80,37 @@
             const status = await res.status;
             resultStatus = status;
             if(status==201){
-                    getImmovables();
+                    getCampings();
                 }
         
             };
             //DELETE ALL
-            async function deleteImmovables(){
+            async function deleteCampings(){
             resultStatus = result = '';
             const res = await fetch(API, {
                 method: 'DELETE'
             });
-                immovables = [];
+                campings = [];
             
             const status = await res.status;
             resultStatus = status;
         }
-        //DELETE IMMOVABLE
-        async function deleteImmovable(immovableId){
+        //DELETE Camping
+        async function deleteCamping(campingId){
             resultStatus = result = '';
-            const res = await fetch(API+"/"+immovableId, {
+            const res = await fetch(API+"/"+campingId, {
                 method: 'DELETE'
             });
             
             const status = await res.status;
             resultStatus = status;
             if(status==200){
-                    getImmovables();
+                    getCampings();
                 }
         }
         //PUT
-        async function putImmovable(immovableId) {
-  const response = await fetch(`${API}/${immovableId}`, {
+        async function putCamping(campingId) {
+  const response = await fetch(`${API}/${campingId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -137,8 +137,8 @@
 <main>
         
       
-      <h1> Immovables </h1>
-      <tr> <Button on:click={deleteImmovables}>Borrar Immovables</Button></tr>
+      <h1> Campings </h1>
+      <tr> <Button on:click={deleteCampings}>Borrar Campings</Button></tr>
       
       <tr>
       <label>
@@ -183,7 +183,7 @@
           <input type="number" bind:value={newresource} />
         </label>
     
-      <Button on:click={postImmovable}>Crear</Button>
+      <Button on:click={postCamping}>Crear</Button>
     </tr>
       <Table>
         <thead>
@@ -202,32 +202,32 @@
         </thead>
         <tbody>
             
-            {#each immovables as immovable}
+            {#each Campings as camping}
             <tr>
                 
-                <td>{immovable.id}<input type="number" bind:value={newid}/></td>
+                <td>{camping.id}<input type="number" bind:value={newid}/></td>
                 
-                <td>{immovable.active_name}<input type="text" bind:value={newactive_name}/></td>
+                <td>{camping.active_name}<input type="text" bind:value={newactive_name}/></td>
                 
-                <td>{immovable.counseling}<input type="text" bind:value={newcounseling}/></td>
+                <td>{camping.counseling}<input type="text" bind:value={newcounseling}/></td>
                 
-                <td>{immovable.current_usage}<input type="text" bind:value={newcurrent_usage}/></td>
+                <td>{camping.current_usage}<input type="text" bind:value={newcurrent_usage}/></td>
                 
-                <td>{immovable.inventory_num}<input type="number" bind:value={newinventory_num}/></td>
+                <td>{camping.inventory_num}<input type="number" bind:value={newinventory_num}/></td>
                 
-                <td>{immovable.province}<input type="text" bind:value={newprovince} /></td>
+                <td>{camping.province}<input type="text" bind:value={newprovince} /></td>
                 
-                <td>{immovable.nature}<input type="text" bind:value={newnature}/></td>
+                <td>{camping.nature}<input type="text" bind:value={newnature}/></td>
                 
-                <td>{immovable.municipality}<input type="text" bind:value={newmunicipality}/></td>
+                <td>{camping.municipality}<input type="text" bind:value={newmunicipality}/></td>
                 
-                <td>{immovable.resource}<input type="number" bind:value={newresource} /></td>
+                <td>{camping.resource}<input type="number" bind:value={newresource} /></td>
                 
-                <td>{immovable.modified_date}<input type="text" bind:value={newmodified_date}/></td>
+                <td>{camping.modified_date}<input type="text" bind:value={newmodified_date}/></td>
                 
-                <td><Button on:click={deleteImmovable(immovable.id)}>Borrar</Button>
+                <td><Button on:click={deleteCamping(camping.id)}>Borrar</Button>
                 </td>
-                <td><Button on:click={putImmovable(immovable.id)}>Editar</Button>
+                <td><Button on:click={putCamping(camping.id)}>Editar</Button>
                 </td>
             </tr>
             {/each}
