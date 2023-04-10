@@ -58,7 +58,7 @@
         let newprovince= "Provincia";
         let newresource= 0;
 
-        const postImmovable = async () => {
+        async function postImmovable(){
          const response = await fetch(API, {
          method: 'POST',
          headers: {
@@ -237,7 +237,17 @@
       
       {#if resultStatus == "200"}
           <p>
-             Operación realizada con éxito
+             Operación realizada con éxito.
+          </p>
+          {/if}
+          {#if resultStatus == "404"}
+          <p>
+             No se encontró ningún archivo.
+          </p>
+          {/if}
+          {#if resultStatus == "404"}
+          <p>
+             No se encontró ningún archivo.
           </p>
           {/if}
 
