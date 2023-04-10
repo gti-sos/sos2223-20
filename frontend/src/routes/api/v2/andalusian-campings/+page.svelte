@@ -103,7 +103,7 @@
       }
       //PUT
       async function putCamping(campingId) {
-const response = await fetch(`${API}/${campingId}`, {
+  const response = await fetch(`${API}/${campingId}`, {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json'
@@ -120,9 +120,9 @@ const response = await fetch(`${API}/${campingId}`, {
               ,category: newcategory})
               });
 
-const result = await response.json();
+  const result = await response.json();
 // Do something with the result
-console.log(result);
+  console.log(result);
 }
       
 </script>
