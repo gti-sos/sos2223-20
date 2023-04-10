@@ -27,7 +27,7 @@
               result = JSON.stringify(data, null,2);
               campings = data;
           }catch(error){
-              console.log(`Error parsing result: ${error}`);
+              console.log(`Error parseando los resultados: ${error}`);
           }
           const status = await res.status;
           resultStatus = status;
@@ -49,7 +49,7 @@
       let newcamping_places= 0;
       let newstart_date= "2022-10-21";
       let newcity= "Municipio";
-      let newresponsible= "Persona Responsabñe";
+      let newresponsible= "Persona Responsable";
       let newstate= "Provincia";
       let newcategory= 0;
 
