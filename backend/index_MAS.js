@@ -4,7 +4,7 @@ const BASE_API_URL = "/api/v1";
 var port = process.env.PORT || 12345;
 import Datastore from 'nedb';
 var campings = new Datastore();
-
+import fs from 'fs';
 
 function loadBackend_MAS(app){
 
