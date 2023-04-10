@@ -4,7 +4,7 @@
         <ul dir="auto">
             <li><strong>Equipo</strong>
             <ul dir="auto">
-            <li><a href="https://github.com/Lukmare">Lorenzo Morales Palacios </a></li>
+            <li><a href="https://github.com/Lukmare">Lorenzo Morales Palacios (Fuente: immovables)</a></li>
             <li><a href="https://github.com/salinosaso">Miguel Ángel Salinas </a></li>
             <li><a href="https://github.com/cargarmun">Carmen García Muñoz </a></li>
             </ul>
