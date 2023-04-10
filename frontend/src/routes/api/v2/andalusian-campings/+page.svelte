@@ -18,7 +18,7 @@
         if(dev)
             API = 'http://localhost:12345'+API
 
-        let Campings = [];
+        let campings = [];
         let result = '';
         let resultStatus = '';
             //GET 
@@ -48,15 +48,15 @@
         }
         //METHOD POST
         let newactive_name= "Nombre";
-        let newcounseling= "Consejería";
-        let newcurrent_usage= "Uso Actual";
+        let newregistry_code= "Código de registro";
+        let newgroup_id= 0;
         let newid= 0;
-        let newinventory_num= 0;
-        let newmodified_date= "2022-10-21";
-        let newmunicipality= "Municipio";
-        let newnature= "Rústica/Urbana";
-        let newprovince= "Provincia";
-        let newresource= 0;
+        let newcamping_places= 0;
+        let newstart_date= "2022-10-21";
+        let newcity= "Municipio";
+        let newresponsible= "Persona Responsabñe";
+        let newstate= "Provincia";
+        let newcategory= 0;
 
         const postCamping = async () => {
          const response = await fetch(API, {
@@ -65,15 +65,15 @@
             'Content-Type': 'application/json'
             },
             body: JSON.stringify({ active_name: newactive_name
-                ,counseling: newcounseling
-                ,current_usage: newcurrent_usage
+                ,registry_code: newregistry_code
+                ,group_id: newgroup_id
                 ,id: newid
-                ,inventory_num: newinventory_num
-                ,modified_date: newmodified_date
-                ,municipality: newmodified_date
-                ,nature: newnature
-                ,province: newprovince
-                ,resource: newresource})
+                ,camping_places: newcamping_places
+                ,newstart_date: newstart_date
+                ,city: newcity
+                ,responsible: newresponsible
+                ,state: newstate
+                ,category: newcategory})
                 });
 
                 
@@ -147,40 +147,40 @@
       </label>
     
       <label>
-        Consejo:
-        <input type="text" bind:value={newcounseling} />
+        Codigo de Registro:
+        <input type="text" bind:value={newregistry_code} />
       </label>
       <label>
-          Uso Actual:
-          <input type="text" bind:value={newcurrent_usage} />
+          Id de Grupo:
+          <input type="number" bind:value={newgroup_id} />
         </label>
         <label>
           ID:
           <input type="number" bind:value={newid} />
         </label>
         <label>
-          Numero de inventario:
-          <input type="number" bind:value={newinventory_num} />
+          Plazas de Camping:
+          <input type="number" bind:value={newcamping_places} />
         </label>
         <label>
-          Fecha:
-          <input type="text" bind:value={newmodified_date} />
+          Fecha de Inicio:
+          <input type="text" bind:value={newstart_date} />
         </label>
         <label>
-          Municipio:
-          <input type="text" bind:value={newmunicipality} />
+          Ciudad:
+          <input type="text" bind:value={newcity} />
         </label>
         <label>
-          Naturaleza:
-          <input type="text" bind:value={newnature} />
+          Persona Responsable:
+          <input type="text" bind:value={newresponsible} />
         </label>
         <label>
           Provincia:
-          <input type="text" bind:value={newprovince} />
+          <input type="text" bind:value={newstate} />
         </label>
         <label>
-          Recurso:
-          <input type="number" bind:value={newresource} />
+          Categoría:
+          <input type="number" bind:value={newcategory} />
         </label>
     
       <Button on:click={postCamping}>Crear</Button>
@@ -190,14 +190,14 @@
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Consejo</th>
-                <th>Uso actual</th>
-                <th>Numero de Inventario</th>
+                <th>Codigo Registro</th>
+                <th>Plazas de Camping</th>
+                <th>Id de Grupo</th>
+                <th>Ciudad</th>
+                <th>Persona Responsable</th>
                 <th>Provincia</th>
-                <th>Naturaleza</th>
-                <th>Municipio</th>
-                <th>Recurso</th>
-                <th>Fecha</th>
+                <th>Categoria</th>
+                <th>Fecha de Inicio</th>
             </tr>
         </thead>
         <tbody>
@@ -209,21 +209,21 @@
                 
                 <td>{camping.active_name}<input type="text" bind:value={newactive_name}/></td>
                 
-                <td>{camping.counseling}<input type="text" bind:value={newcounseling}/></td>
+                <td>{camping.registry_code}<input type="text" bind:value={newregistry_code}/></td>
                 
-                <td>{camping.current_usage}<input type="text" bind:value={newcurrent_usage}/></td>
+                <td>{camping.group_id}<input type="number" bind:value={newgroup_id}/></td>
                 
-                <td>{camping.inventory_num}<input type="number" bind:value={newinventory_num}/></td>
+                <td>{camping.camping_places}<input type="number" bind:value={newcamping_places}/></td>
                 
-                <td>{camping.province}<input type="text" bind:value={newprovince} /></td>
+                <td>{camping.start_date}<input type="text" bind:value={newstart_date} /></td>
                 
-                <td>{camping.nature}<input type="text" bind:value={newnature}/></td>
+                <td>{camping.city}<input type="text" bind:value={newcity}/></td>
                 
-                <td>{camping.municipality}<input type="text" bind:value={newmunicipality}/></td>
+                <td>{camping.responsible}<input type="text" bind:value={newresponsible}/></td>
                 
-                <td>{camping.resource}<input type="number" bind:value={newresource} /></td>
+                <td>{camping.state}<input type="text" bind:value={newstate} /></td>
                 
-                <td>{camping.modified_date}<input type="text" bind:value={newmodified_date}/></td>
+                <td>{camping.category}<input type="number" bind:value={newcategory}/></td>
                 
                 <td><Button on:click={deleteCamping(camping.id)}>Borrar</Button>
                 </td>
