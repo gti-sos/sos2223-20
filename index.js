@@ -17,11 +17,12 @@ import {loadBackend_MAS} from "./backend/index_MAS.js";
 //var backend_CGM = require("./backend/index_CGM");
 
 
-//backend_MAS(app);
+loadBackend_MAS(app);
 loadBackend_LMP(app);
 //backend_CGM(app);
 
 app.use(handler);
+
 
 app.listen(port,() =>{
   console.log(`Servidor corriendo en el puerto: ${port}`);

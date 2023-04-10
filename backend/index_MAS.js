@@ -2,8 +2,9 @@
 const campingsFilePath = 'ddbb/camping-andalusia.json';
 const BASE_API_URL = "/api/v1";
 var port = process.env.PORT || 12345;
-const fs = require('fs');
-var Datastore = require('nedb'), campings = new Datastore();
+import Datastore from 'nedb';
+var campings = new Datastore();
+
 
 function loadBackend_MAS(app){
 
