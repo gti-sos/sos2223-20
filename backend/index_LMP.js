@@ -22,6 +22,10 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/26062489/2s93K1oysD");
   });
   
+app.get('/api/v2/immovables/docs', (req, res) => {
+    res.redirect("https://documenter.getpostman.com/view/26062489/2s93XsZn3G");
+  });
+  
   app.get(BASE_API_URL+'/immovables/loadInitialData', (req, res) => {
     immovables.find({}, (err, docs) => {
       if (err) {
