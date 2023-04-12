@@ -135,28 +135,32 @@ let editMode = false;
       
 
         async function handleUpdate(immovable, index) {
-    // Cambia el modo de edición a true
-    editMode = true;
-    // Crea un objeto para almacenar los nuevos valores
-    let updatedImmovable = {
-      active_name: immovable.active_name
-                ,counseling: immovable.counseling
-                ,current_usage: immovable.current_usage
-                ,id: immovable.id
-                ,inventory_num: immovable.inventory_num
-                ,modified_date: immovable.modified_date
-                ,municipality: immovable.municipality
-                ,nature: immovable.nature
-                ,province: immovable.province
-                ,resource: immovable.resource,
-    };
-    // Actualiza los valores de la fila correspondiente
-    updatedImmovable = await updateImmovable(updatedImmovable, index);
-    // Si se realizó la actualización correctamente, cambia el modo de edición a false
-    if (updatedImmovable) {
-      editMode = false;
+    const confirmUpdate = confirm("Seguro que quieres editar este recurso?");
+    if (confirmUpdate) {
+        // Changes the edit mode to true
+        editMode = true;
+        // Create an object to store the new values
+        let updatedImmovable = {
+            active_name: immovable.active_name,
+            counseling: immovable.counseling,
+            current_usage: immovable.current_usage,
+            id: immovable.id,
+            inventory_num: immovable.inventory_num,
+            modified_date: immovable.modified_date,
+            municipality: immovable.municipality,
+            nature: immovable.nature,
+            province: immovable.province,
+            resource: immovable.resource,
+        };
+        // Update the values of the corresponding row
+        updatedImmovable = await updateImmovable(updatedImmovable, index);
+        // If the update was successful, change the edit mode to false
+        if (updatedImmovable) {
+            editMode = false;
+        }
     }
-  }
+}
+
 
   async function updateImmovable(immovable, index) {
     const response = await fetch(API+ `/${immovable.id}`, {
@@ -278,16 +282,7 @@ async function loadInitialData() {
         {#each immovables as immovable, index}
   <tr>
     {#if immovable.editing} <!-- Si la fila está en modo edición -->
-    <th>Nombre</th>
-    <th>Consejería</th>
-    <th>Uso Actual</th>
-    <th>ID</th>
-    <th>Num Inventario</th>
-    <th>Fecha</th>
-    <th>Municipio</th>
-    <th>Naturaleza</th>
-    <th>Provincia</th>
-    <th>Recurso</th>
+    
       <td><input type="text" bind:value={immovable.active_name}  /></td>
       <td><input type="text" bind:value={immovable.counseling} /></td>
       <td><input type="text" bind:value={immovable.current_usage} /></td>
@@ -386,7 +381,7 @@ async function loadInitialData() {
 {/if}
         </main>
         <style>
-          body {
+body {
   font-family: Arial, sans-serif;
   background-color: #f8f8f8;
 }
