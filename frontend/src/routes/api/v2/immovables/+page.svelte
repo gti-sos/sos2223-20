@@ -14,7 +14,11 @@
     }
 
     let showDeleteForm = false;
+    let showFechaForm = false;
 
+    function toggleFechaForm(){
+      showFechaForm = !showFechaForm;
+    }
     function toggleDeleteForm() {
       showDeleteForm = !showDeleteForm;
     }
@@ -22,7 +26,10 @@
     let deleteFormData = {
       id: "",
     };
-
+    let FormFechaData = {
+      since: "",
+      until:"",
+    };
 
     onMount(async() => {
                 // Load initial data from API or local storage 
@@ -36,6 +43,7 @@
             API = 'http://localhost:12345'+API
 
         let immovables = [];
+        let immovablesFecha = [];
         let result = '';
         let resultStatus = '';
 
@@ -68,6 +76,34 @@ let editMode = false;
       const status = await res.status;
       resultStatus = status.toString();
       if (immovables.length === 0) {
+        resultStatus = 'empty';
+      }
+    } else {
+      resultStatus = 'Error en la solicitud';
+    }
+  } catch (error) {
+    console.log(`Error parsing result:${error}`);
+    resultStatus = 'Error en la solicitud';
+  }
+}
+
+
+async function getImmovablesByDate() {
+  const since = FormFechaData.since;
+  const until = FormFechaData.until;
+
+  resultStatus = result = '';
+  const res = await fetch(API+`?from=${since}&to=${until}`, {
+    method: 'GET'
+  });
+  try {
+    const data = await res.json();
+    result = JSON.stringify(data, null, 2);
+    immovablesFecha = data;
+    if (res.ok) {
+      const status = await res.status;
+      resultStatus = status.toString();
+      if (immovablesFecha.length === 0) {
         resultStatus = 'empty';
       }
     } else {
@@ -332,6 +368,8 @@ async function loadInitialData() {
 <button on:click={deleteResources}>Borrar recursos</button>
 <!-- Botón "Borrar un recurso" -->
 <button on:click={toggleDeleteForm}>Borrar un recurso</button>
+<!-- Botón "Busca un recurso" -->
+<button on:click={toggleFechaForm}>Busca un recurso</button>
 </div>
 <!-- Formulario para eliminar un recurso por id -->
 {#if showDeleteForm}
@@ -341,6 +379,51 @@ async function loadInitialData() {
     <button type="submit">Eliminar</button>
   </form>
 {/if}
+<!-- Formulario para buscar por fechas -->
+{#if showFechaForm}
+  <form on:submit|preventDefault={getImmovablesByDate}>
+    <label for="since">Desde:</label>
+    <input type="text" id="since" bind:value={FormFechaData.since} required />
+    <label for="until">Hasta:</label>
+    <input type="text" id="until" bind:value={FormFechaData.until} required />
+    <button type="submit">Buscar</button>
+  </form>
+{/if}
+  {#if resultStatus === "200"}
+    <table in:fade={{ duration: 300 }}>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Consejería</th>
+          <th>Uso Actual</th>
+          <th>ID</th>
+          <th>Num Inventario</th>
+          <th>Fecha</th>
+          <th>Municipio</th>
+          <th>Naturaleza</th>
+          <th>Provincia</th>
+          <th>Recurso</th>
+          <th></th> <!-- Nueva columna para el botón de actualizar -->
+        </tr>
+      </thead>
+      <tbody>
+        {#each immovablesFecha as immovable, index}
+  <tr><!-- Si la fila no está en modo edición -->
+      <td>{immovable.active_name}</td>
+      <td>{immovable.counseling}</td>
+      <td>{immovable.current_usage}</td>
+      <td>{immovable.id}</td>
+      <td>{immovable.inventory_num}</td>
+      <td>{immovable.modified_date}</td>
+      <td>{immovable.municipality}</td>
+      <td>{immovable.nature}</td>
+      <td>{immovable.province}</td>
+      <td>{immovable.resource}</td>
+  </tr>
+{/each}
+      </tbody>
+    </table>
+    {/if}
 <!-- Agrega el formulario para enviar datos -->
 {#if showForm}
 <div class="form-container"  in:fade={{ duration: 300 }}>
@@ -379,7 +462,8 @@ async function loadInitialData() {
   </form>
 </div>
 {/if}
-        </main>
+
+</main>
         <style>
 body {
   font-family: Arial, sans-serif;
