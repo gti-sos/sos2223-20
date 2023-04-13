@@ -15,9 +15,13 @@
 
     let showDeleteForm = false;
     let showFechaForm = false;
+    let showLimiteForm = false;
 
     function toggleFechaForm(){
       showFechaForm = !showFechaForm;
+    }
+    function toggleLimiteForm(){
+      showLimiteForm = !showLimiteForm;
     }
     function toggleDeleteForm() {
       showDeleteForm = !showDeleteForm;
@@ -30,6 +34,10 @@
       since: "",
       until:"",
     };
+    let FormLimiteData = {
+      offset: "",
+      limit:"",
+    };
 
     onMount(async() => {
                 // Load initial data from API or local storage 
@@ -37,7 +45,7 @@
                 
 
             });
-            let API = '/api/v1/immovables';
+            let API = '/api/v2/immovables';
         
         if(dev)
             API = 'http://localhost:12345'+API
@@ -65,9 +73,27 @@ let editMode = false;
 
             async function getImmovables() {
   resultStatus = result = '';
-  const res = await fetch(API, {
+    let res = await fetch(API, {
     method: 'GET'
   });
+    if((FormLimiteData.offset!="")&&(FormLimiteData.limit=="")){
+       res = await fetch(API+"?offset="+FormLimiteData.offset, {
+    method: 'GET'
+  });
+    }
+    if((FormLimiteData.offset=="")&&(FormLimiteData.limit!="")){
+       res = await fetch(API+"?limit="+FormLimiteData.limit, {
+    method: 'GET'
+  });
+    }
+    if((FormLimiteData.offset!="")&&(FormLimiteData.limit!="")){
+       res = await fetch(API+"?limit="+FormLimiteData.limit+"&offset="+FormLimiteData.offset, {
+    method: 'GET'
+  });
+    }
+    
+  
+  
   try {
     const data = await res.json();
     result = JSON.stringify(data, null, 2);
@@ -370,7 +396,20 @@ async function loadInitialData() {
 <button on:click={toggleDeleteForm}>Borrar un recurso</button>
 <!-- Botón "Busca un recurso" -->
 <button on:click={toggleFechaForm}>Busca un recurso</button>
+<!-- Botón "Limita visualización con limit y offset" -->
+<button on:click={toggleLimiteForm}>Limitar visualización</button>
+
 </div>
+<!-- Formulario para añadir limit y offset -->
+{#if showLimiteForm}
+  <form on:submit|preventDefault={getImmovables}>
+    <label for="limit">Limite</label>
+    <input type="text" id="limit" bind:value={FormLimiteData.limit} />
+    <label for="offset">Offset</label>
+    <input type="text" id="offset" bind:value={FormLimiteData.offset} />
+    <button type="submit">Limitar</button>
+  </form>
+{/if}
 <!-- Formulario para eliminar un recurso por id -->
 {#if showDeleteForm}
   <form on:submit|preventDefault={handleDelete}>

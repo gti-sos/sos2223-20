@@ -11,11 +11,13 @@ import {handler} from "./frontend/build/handler.js"
 //var backend_MAS = require("./backend/index_MAS");
 
 import {loadBackend_LMP} from "./backend/index_LMP.js";
+import {loadBackend_LMPv2} from "./backend/index_LMPv2.js";
 import {loadBackend_MAS} from "./backend/index_MAS.js";
 
 
 //var backend_CGM = require("./backend/index_CGM");
 loadBackend_MAS(app);
+loadBackend_LMPv2(app);
 loadBackend_LMP(app);
 //backend_CGM(app);
 
