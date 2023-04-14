@@ -45,10 +45,7 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
     const query = {};
   
     if (date) {
-      const startYear = parseInt(date);
-      const startYearBegin = new Date(startYear, 0, 1);
-      const startYearEnd = new Date(startYear + 1, 0, 1);
-      query.date = { $gte: startYearBegin, $lt: startYearEnd };
+      query.date = { $regex: new RegExp(date, 'i') };
     }
     if (place) {
       query.place = { $regex: new RegExp(place, 'i') };
@@ -92,9 +89,10 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
       const keys = Object.keys(this);
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
-        if (typeof this[key] === 'number' && parseFloat(value) === this[key]) {
+        if (typeof this[key] === 'number' && this[key] === parseFloat(value)) {
           return true;
-        } else if (typeof this[key] === 'string' && this[key].toLowerCase().includes(value.toLowerCase())) {
+
+        } else if (typeof this[key] === 'string' && this[key].toLowerCase().includes(value.toLowerCase()) && key !== "date") {
           if (value2) {
             const nextKey = keys[i + 1];
             if (nextKey && typeof this[nextKey] === 'number' && parseInt(value2) === this[nextKey]) {
@@ -103,6 +101,7 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
           } else {
             return true;
           }
+        
         } else if (typeof this[value] === 'string' && typeof parseInt(value2) === 'number' && Number.isInteger(parseInt(value2))) {
           if (this[value] === value && parseInt(this[value2]) === parseInt(value2)) {
             return true;
@@ -116,7 +115,7 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
         console.log(`Error getting /blooddonations: ${err}`);
         res.sendStatus(500);
       } else if (blooddonations.length === 0) {
-        res.status(404).json({ error: 'blooddonations not found.' });
+        res.sendStatus(404);
       } else {
         console.log(`blooddonations returned = ${blooddonations.length}`)
         
@@ -145,31 +144,30 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
   
   //POST fallo
   app.post(BASE_API_URL + "/blood-donations/*", (req, res) => {
-    console.log("POST FALLIDO HERE I AMMM");
     res.sendStatus(405);
   });
   
   //POST ok
   app.post(BASE_API_URL+"/blood-donations",(req,res)=>{
     const newReq = req.body;
-      if (!rnewReqeq.body || !newReq.hasOwnProperty('date') || !newReq.hasOwnProperty('place') || 
+      if (!newReq.hasOwnProperty('date') || !newReq.hasOwnProperty('place') || 
       !newReq.hasOwnProperty('dnt_people') || !newReq.hasOwnProperty('dnt_blood') || 
       !newReq.hasOwnProperty('dnt_plasme') || !newReq.hasOwnProperty('dnt_datef') ||
       !newReq.hasOwnProperty('dnt_new') || !newReq.hasOwnProperty('extraction') ||
       !newReq.hasOwnProperty('idcenter') || !newReq.hasOwnProperty('center')) {
-        return res.status(400).json({ error: 'Faltan datos en el JSON' });
+        return res.sendStatus(400);
       }
-      blooddonations.findOne({ date:nbd.date, place:nbd.place, dnt_people:nbd.dnt_people, 
-      dnt_blood:nbd.dnt_blood, dnt_plasme:nbd.dnt_plasme, dnt_datef:nbd.dnt_datef, 
-      dnt_new:nbd.dnt_new, extraction:nbd.extraction, idcenter:nbd.idcenter, center:nbd.center 
+      blooddonations.findOne({ date:newReq.date, place:newReq.place, dnt_people:newReq.dnt_people, 
+      dnt_blood:newReq.dnt_blood, dnt_plasme:newReq.dnt_plasme, dnt_datef:newReq.dnt_datef, 
+      dnt_new:newReq.dnt_new, extraction:newReq.extraction, idcenter:newReq.idcenter, center:newReq.center 
       }, (err, doc) => {
         if (err) {
           console.log(`Error finding blood donation`);
           res.sendStatus(500);
         } else if (doc) {
-          res.status(409).json({ error: `Blood donation with already exists.` });
+          res.sendStatus(409);
         } else {
-          blooddonations.insert(nbd, (err, newDoc) => {
+          blooddonations.insert(newReq, (err, newDoc) => {
             if (err) {
               console.log(`Error inserting blood donation`);
               res.sendStatus(500);
@@ -187,9 +185,9 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
     blooddonations.remove({}, { multi: true }, (err, numRemoved) => {
       if (err) {
           console.error(err);
-          return res.status(500).send({ error: 'Internal server error' });
+          return res.sendStatus(500);
       }
-      return res.status(200).send({ message: `Deleted ${numRemoved} blood donation` });
+      return res.sendStatus(200);
   });
   });
   
@@ -199,13 +197,13 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
     blooddonations.remove({ dnt_people: bd_dnt_people }, {}, (err, numRemoved) => {
         if (err) {
             console.error(err);
-            return res.status(500).send({ error: 'Internal server error' });
+            return res.sendStatus(500);
         }
         if (numRemoved === 0) {
-            return res.status(400).send({ error: 'Bad request: Blood donation parameter not found' });
+          return res.sendStatus(400);
         }
-        return res.status(200).send({ message: 'Blood donation deleted successfully' });
-    });
+        return res.sendStatus(200);
+      });
   });
   
   // PUT fallido
@@ -220,14 +218,13 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
       blooddonations.update({ dnt_people: bd_dnt_people }, { $set: updatedBd }, {}, (err, existe) => {
         if (err) {
           console.error(err);
-          return res.status(500).send({ error: 'Internal server error' });
+          return res.sendStatus(500);
         }
-        if (!existe || dnt_people!== Number(req.body.bd_dnt_people)) {
-          return res.status(400).send({ error: 'Bad request: blood donations ID not found' });
+        if (!existe) {
+          return res.sendStatus(400);
         }
-        return res.status(200).send({ message: 'Blood donations updated successfully' });
+        return res.sendStatus(200);
       });
-      //Comprobación
   });
   
 }
