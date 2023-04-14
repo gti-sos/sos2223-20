@@ -1,15 +1,16 @@
 
 const immovablesFilePath = 'ddbb/immovables.json';
 const BASE_API_URL = "/api/v1";
-var port = process.env.PORT || 12345;
-const { notStrictEqual } = require('assert');
-const { Console } = require('console');
-const fs = require('fs');
+import { notStrictEqual } from 'assert';
+import { Console } from 'console';
+import fs from 'fs';
 
-var Datastore = require('nedb'), immovables = new Datastore();
+import Datastore from 'nedb';
+var immovables = new Datastore();
 
 
-module.exports = (app) => {
+
+function loadBackend_LMP(app){
 
     
 //L06 LPM____________________________________________________________________________-
@@ -21,13 +22,16 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/26062489/2s93K1oysD");
   });
   
+app.get('/api/v2/immovables/docs', (req, res) => {
+    res.redirect("https://documenter.getpostman.com/view/26062489/2s93XsZn3G");
+  });
+  
   app.get(BASE_API_URL+'/immovables/loadInitialData', (req, res) => {
     immovables.find({}, (err, docs) => {
       if (err) {
         console.log(`Error getting /immovables: ${err}`);
         res.sendStatus(500);
       } else if (docs.length === 0) {
-        const fs = require('fs');
         const immovablesData = JSON.parse(fs.readFileSync(immovablesFilePath));
         const initialImmovables = immovablesData.slice(0, 15);
         immovables.insert(initialImmovables, (err, newDocs) => {
@@ -45,101 +49,172 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
       }
     });
   });
+      
+
   
   //______________________________GET con rango de busqueda
   //immovables
-  app.get('/api/v1/immovables', (req, res) => {
-    const { resource,modified_date,inventory_num,municipality, current_usage, active_name, 
-        province, id, nature, counseling, limit = 10, offset = 0 } = req.query;
-    const query = {};
+  app.get(BASE_API_URL+'/immovables', (req, res) => {
+    console.log(`New request to /immovables`);
 
-    if (municipality) {
-        query.municipality = { $regex: new RegExp(municipality, 'i') };
-      }
-    if (counseling) {
-        query.counseling = { $regex: new RegExp(counseling, 'i') };
-      }
-    if (current_usage) {
-      query.current_usage = { $regex: new RegExp(current_usage, 'i') };
-    }
-    if (active_name) {
-      query.active_name = { $regex: new RegExp(active_name, 'i') };
-    }
-    if (province) {
-      query.province = { $regex: new RegExp(province, 'i') };
-    }
-    if (modified_date) {
-      query.modified_date = { $regex: new RegExp(modified_date, 'i') };
-    }
-    if (id) {
-      query.id = parseInt(id);
-    }
-    if (resource) {
-        query.resource = parseInt(resource);
-      }
-    if (inventory_num) {
-        query.inventory_num = parseInt(inventory_num);
-      }
-    if (nature) {
-      query.nature = { $regex: new RegExp(nature, 'i') };
-    }
-    immovables
-      .find(query)
-      .limit(parseInt(limit))
-      .skip(parseInt(offset))
-      .exec((error, results) => {
-        if (error) {
-          res.status(500).json({ error: error.message });
-        } else if (results.length === 0) {
-          res.status(404).json({ error: 'Immovables not found.' });
-        } else if (results.length === 1) {
-          res.json(results[0]);
-        }else {
-          res.status(200).json(results.map((c)=>{
-            delete c._id;
-            return c;
-          }));
-        }
-      });
-  });
+    // Recuperamos todos los registros de la base de datos para filtrarlos despues
+    immovables.find({}, {_id: 0}, (err, data) => {
+
+                // Comprobamos los errores que han podido surgir
+                if(err){
+
+                    console.log(`Error getting immovables`);
+
+                    // El estado es 500: Internal Server Error
+                    res.sendStatus(500);
+
+                // Comprobamos si existen datos:
+                }else if(data.length == 0){
+
+                    console.log(`immovables not found`);
+
+                    // Si no existen datos el estado es 404: Not Found
+                    res.sendStatus(404);
+
+                }else{
+
+                    // Inicializamos los valores necesarios para el filtrado: un contador para el limit y el valor por defecto offset
+                    let i = -1;
+                    if(!req.query.offset){ var offset = -1;}else{ var offset = parseInt(req.query.offset);}
+
+                    // Filtramos los datos, para cada campo posible se devuelve true si no se pasa en la query, 
+                    // y si es un parametro se comprueba la condicion
+                    let datos = data.filter((x) => {
+                        return (((req.query.modified_date == undefined)||(parseInt(req.query.modified_date) === x.modified_date))&&
+                        ((req.query.from == undefined)||(parseInt(req.query.from) <= x.modified_date))&&
+                        ((req.query.to == undefined)||(parseInt(req.query.to) >= x.modified_date))&&
+                        ((req.query.province == undefined)||(req.query.province === x.province))&&
+                        ((req.query.active_name == undefined)||(req.query.active_name === x.active_name))&&
+                        ((req.query.counseling == undefined)||(req.query.counseling === x.counseling))&&
+                        ((req.query.current_usage == undefined)||(req.query.current_usage === x.current_usage))&&
+                        ((req.query.id == undefined)||(req.query.id === x.id))&&
+                        ((req.query.municipality == undefined)||(req.query.municipality === x.municipality))&&
+                        ((req.query.inventory_num == undefined)||(req.query.inventory_num === x.inventory_num))&&
+                        ((req.query.resource == undefined)||(req.query.resource === x.resource))&&
+                        ((req.query.nature == undefined)||(req.query.nature === x.nature))
+                        );
+                    }).filter((x) => {
+                        // Por ultimo implementamos la paginacion
+                        i = i+1;
+                        if(req.query.limit==undefined){ var cond = true;}else{ var cond = (offset + parseInt(req.query.limit)) >= i;}
+                        return (i>offset)&&cond;
+                    });
+
+                    // Comprobamos si tras el filtrado sigue habiendo datos, si no hay:
+                    if(datos.length == 0){
+
+                        console.log(`immovables not found`);
+                        // Estado 404: Not Found
+                        res.sendStatus(404);
+                        
+                    // Si por el contrario encontramos datos
+                    }else{
+
+                        console.log(`Data of immovables returned: ${datos.length}`);
+                        // Devolvemos dichos datos, estado 200: OK
+                        res.json(datos);
+                        
+                    }
+                }
+        })
+});
   
 
   
-  //______________________________Get con 2 valores 
-  app.get(BASE_API_URL+'/immovables/:value/:value2?', (req, res) => {
-    const value = req.params.value;
-    const value2 = req.params.value2;
-    //Filtro de error de lista vacía
-    if (immovables.length == 0) {
-      res.status(404).send('Error: Immovables not found');
-      return;
-    }
-    //Filtro para ver si tengo 1 o 2 valores y filtrar por ambos.
-    let filteredImmovables = immovables.filter(immovable => {
-      let matchValue = false;
-      let matchValue2 = false;
-      for (const key in immovable) {
-        if (immovable[key] == value) {
-          matchValue = true;
+  //GET /immovables/province/id (First Province, then id): Recurso único
+  app.get(`${BASE_API_URL}/immovables/:province/:id`, (req, res) => {
+
+    let id = req.params.id;
+    let province = req.params.province;
+
+    console.log(`New request to /immovables/${province}/${id}`);
+
+    // Recuperamos el registro concreto que se nos pide
+    immovables.find({'id': parseInt(id), 'province' : province}, {_id : 0}, (err, data) => {
+
+        // Si existen errores:
+        if(err){
+
+            console.log(`Error getting immovables/${province}/${id}: ${err}`);
+            // Estado 500: Internal Server Error
+            res.sendStatus(500);
+        
+        // Si no existen datos 
+        }else if(data.length == 0){
+
+            console.log(`immovables/${province}/${id} not found`);
+            // Estado 404: Not Found
+            res.sendStatus(404);
+
+        // Si existen datos
+        }else{
+
+            console.log(`Data immovables/${province}/${id} returned`);
+            // Estado 200: Ok
+            res.json(data[0]);
         }
-        if (value2 && immovable[key] == value2) {
-          matchValue2 = true;
-        }
-      }
-      if (value2) {
-        return matchValue && matchValue2;
-      } else {
-        return matchValue;
-      }
     });
-    if (filteredImmovables.length > 0) {
-      res.json(filteredImmovables);
-      console.log(`New GET request for value=${value} and secondValue=${secondValue}`);
-      res.sendStatus(200);
-    } else {
-      res.sendStatus(404);
-    }
-  });
+});
+
+
+//GET /immovables/province: Recursos por provincia
+app.get(`${BASE_API_URL}/immovables/:province`, (req, res) => {
+
+    let province = req.params.province;
+
+    console.log(`New request to /immovables/${province}`);
+
+    // Buscamos los registros que tengan el dado campo provincia
+    immovables.find({'province': province}, {_id: 0}, (err, data) => {
+        console.log(province);
+        console.log(data);
+        // Si existen errores
+        if(err){
+
+            console.log(`Error getting immovables`);
+            // Estado 500: Internal Server Error
+            res.sendStatus(500);
+
+        // Si no existen datos
+        }else if(data.length == 0){
+
+            console.log(`immovables/${province} not found`);
+            // Estado 404: Not Found
+            res.sendStatus(404);
+
+        }else{
+            let i = -1;
+            if(!req.query.offset){ var offset = -1;}else{ var offset = parseInt(req.query.offset);}
+
+            let datos = data.filter((x) => {
+                i = i+1;
+                if(req.query.limit==undefined){ var cond = true;}else{ var cond = (offset + parseInt(req.query.limit)) >= i;}
+                return (i>offset)&&cond;
+            });
+
+            if(datos.length == 0){
+
+                console.log(`immovables not found`);
+                // Estado 404: Not Found
+                res.sendStatus(404);
+            
+            // Si hay datos:
+            }else{
+
+                console.log(`Data of immovables returned: ${datos.length}`);
+                // Devolvemos datos, estado 200: Ok
+                res.json(datos);
+                
+            }
+        }
+    });
+    
+});
   
   //______________________________POST con URL prohibidas
   app.post(BASE_API_URL+'/immovables/*', (req, res) => {
@@ -229,4 +304,6 @@ app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
   });
   
   
-}
+};
+
+export {loadBackend_LMP}

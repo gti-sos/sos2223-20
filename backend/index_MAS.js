@@ -2,11 +2,12 @@
 const campingsFilePath = 'ddbb/camping-andalusia.json';
 const BASE_API_URL = "/api/v1";
 var port = process.env.PORT || 12345;
-const fs = require('fs');
-var Datastore = require('nedb'), campings = new Datastore();
+import fs from 'fs';
 
-module.exports = (app) => {
-   //__________________________GET initial data
+import Datastore from 'nedb';
+var campings = new Datastore();
+
+function loadBackend_MAS(app){
 
 app.get(BASE_API_URL+'/andalusian-campings/docs', (req, res) => {
   res.redirect("https://documenter.getpostman.com/view/26063155/2s93K1oeqs");
@@ -18,7 +19,6 @@ app.get(BASE_API_URL+'/andalusian-campings/loadInitialData', (req, res) => {
         console.log(`Error getting /andalusian-campings: ${err}`);
         res.sendStatus(500);
       } else if (docs.length === 0) {
-        const fs = require('fs');
         const campingsData = JSON.parse(fs.readFileSync(campingsFilePath));
         const initialCampings = campingsData.slice(0, 15);
         campings.insert(initialCampings, (err, newDocs) => {
@@ -198,8 +198,6 @@ app.delete(BASE_API_URL+'/andalusian-campings/:id', (req, res) => {
     });
 });
 
-
-
-
-
 }
+
+export {loadBackend_MAS}

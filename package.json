@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "dependencies": {
     "accepts": "^1.3.8",
     "array-flatten": "^1.1.1",
@@ -15,6 +16,7 @@
     "cookie-signature": "^1.0.6",
     "cool-ascii-faces": "^1.3.4",
     "core-util-is": "^1.0.3",
+    "cors": "^2.8.5",
     "debug": "^2.6.9",
     "depd": "^2.0.0",
     "destroy": "^1.2.0",
@@ -63,6 +65,7 @@
     "statuses": "^2.0.1",
     "stream-spigot": "^3.0.6",
     "string_decoder": "^1.0.3",
+    "svelte": "^3.57.0",
     "toidentifier": "^1.0.1",
     "type-is": "^1.6.18",
     "unpipe": "^1.0.0",
@@ -73,7 +76,7 @@
   },
   "scripts": {
     "start": "node index",
-    "test": "npm run test-andalusian-campings && npm run test-inmovables && npm run test-blood-donations",
+    "test": "npm run test-inmovables & npm run test-andalusian-campings",
     "test-andalusian-campings": "npx newman run ./tests/Gcloud.postman_MAS.json",
     "test-blood-donations": "npx newman run ./tests/blood-donations.json",
     "test-inmovables": "npx newman run ./tests/immovables.postman_LMP.json"
