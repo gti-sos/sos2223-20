@@ -18,7 +18,7 @@ function loadBackend_LMPv2(app){
 
 //Redireccion a la DOC de POSTMAN
 
-app.get(BASE_API_URL+'/immovables/docs', (req, res) => {
+app.get('/api/v1/immovables/docs', (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/26062489/2s93K1oysD");
   });
   

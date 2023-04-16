@@ -23,7 +23,7 @@
                 
             <li><strong>Documentación de Postman v1</strong>
                 <ul dir="auto">
-                <li><a href="https://github.com/Lukmare">Doc Inmuebles </a></li>
+                <li><a href="https://documenter.getpostman.com/view/26062489/2s93K1oysD">Doc Inmuebles </a></li>
                 <li><a href="https://documenter.getpostman.com/view/26063155/2s93K1oeqs">Doc Campings Andalucia</a></li>
                 <li><a href="https://github.com/cargarmun">Carmen García Muñoz </a></li>
                 </ul>
@@ -31,7 +31,7 @@
                 
                 <li><strong>Documentación de Postman v2</strong>
                     <ul dir="auto">
-                    <li><a href="https://github.com/Lukmare">Doc Inmuebles </a></li>
+                    <li><a href="https://documenter.getpostman.com/view/26062489/2s93XsZn3G">Doc Inmuebles </a></li>
                     <li><a href="https://documenter.getpostman.com/view/26063155/2s93XyU3Xd">Doc Campings Andalucia</a></li>
                     <li><a href="https://github.com/cargarmun">Carmen García Muñoz </a></li>
                     </ul>
