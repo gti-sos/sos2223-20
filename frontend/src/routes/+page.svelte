@@ -16,14 +16,26 @@
             <ul dir="auto">
             <li><a href="http://sos2223-20.appspot.com/api/v1/immovables/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v1/immovables/docs</a> (desarrollado por <a href="https://github.com/Lukmare">Lorenzo Morales Palacios</a>)</li>
             <li><a href="http://sos2223-20.appspot.com/api/v1/andalusian-campings/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v1/andalusian-campings/docs</a> (desarrollado por <a href="https://github.com/salinosaso">Miguel Ángel Salinas</a>)</li>
-            
-            <li><strong>Documentación de Postman</strong>
+            <li><strong>APIs v2</strong>:
+                <ul dir="auto">
+                <li><a href="http://sos2223-20.appspot.com/api/v2/immovables/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v2/immovables/docs</a> (desarrollado por <a href="https://github.com/Lukmare">Lorenzo Morales Palacios</a>)</li>
+                <li><a href="http://sos2223-20.appspot.com/api/v2/andalusian-campings/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v2/andalusian-campings/docs</a> (desarrollado por <a href="https://github.com/salinosaso">Miguel Ángel Salinas</a>)</li>
+                
+            <li><strong>Documentación de Postman v1</strong>
                 <ul dir="auto">
                 <li><a href="https://github.com/Lukmare">Doc Inmuebles </a></li>
                 <li><a href="https://documenter.getpostman.com/view/26063155/2s93K1oeqs">Doc Campings Andalucia</a></li>
                 <li><a href="https://github.com/cargarmun">Carmen García Muñoz </a></li>
                 </ul>
-                </li>  
+            </li> 
+                
+                <li><strong>Documentación de Postman v2</strong>
+                    <ul dir="auto">
+                    <li><a href="https://github.com/Lukmare">Doc Inmuebles </a></li>
+                    <li><a href="https://documenter.getpostman.com/view/26063155/2s93XyU3Xd">Doc Campings Andalucia</a></li>
+                    <li><a href="https://github.com/cargarmun">Carmen García Muñoz </a></li>
+                    </ul>
+                </li> 
         </ul>
         
             </ul>

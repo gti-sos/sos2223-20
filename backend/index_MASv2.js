@@ -23,7 +23,7 @@ app.get(BASE_API_URL+'/campings/docs', (req, res) => {
   });
   
 app.get('/api/v2/campings/docs', (req, res) => {
-    res.redirect("https://documenter.getpostman.com/view/26062489/2s93XsZn3G");
+    res.redirect("https://documenter.getpostman.com/view/26063155/2s93XyU3Xd");
   });
   
   app.get(BASE_API_URL+'/campings/loadInitialData', (req, res) => {
