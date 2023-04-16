@@ -70,30 +70,22 @@
 
 let editMode = false;
           //GET 
-
-          async function getCampings() {
+async function getCampings() {
 resultStatus = result = '';
   let res = await fetch(API, {
-  method: 'GET'
-});
+  method: 'GET'});
   if((FormLimiteData.offset!="")&&(FormLimiteData.limit=="")){
      res = await fetch(API+"?offset="+FormLimiteData.offset, {
-  method: 'GET'
-});
+  method: 'GET'});
   }
   if((FormLimiteData.offset=="")&&(FormLimiteData.limit!="")){
      res = await fetch(API+"?limit="+FormLimiteData.limit, {
-  method: 'GET'
-});
+  method: 'GET'});
   }
   if((FormLimiteData.offset!="")&&(FormLimiteData.limit!="")){
      res = await fetch(API+"?limit="+FormLimiteData.limit+"&offset="+FormLimiteData.offset, {
-  method: 'GET'
-});
+  method: 'GET'});
   }
-  
-
-
 try {
   const data = await res.json();
   result = JSON.stringify(data, null, 2);
@@ -113,11 +105,9 @@ try {
 }
 }
 
-
 async function getCampingsByDate() {
 const since = FormFechaData.since;
 const until = FormFechaData.until;
-
 resultStatus = result = '';
 const res = await fetch(API+`?from=${since}&to=${until}`, {
   method: 'GET'
@@ -140,19 +130,17 @@ try {
   resultStatus = 'Error en la solicitud';
 }
 }
-
       let formData ={
-         name:"",
-      registry_code: "",
-       responsible: "",
-       id: "",
-       camping_places: "",
-       start_date: "",
-     city: "",
-       category: "",
-       state: "",
-       group_id: ""
-
+        name:"",
+        registry_code: "",
+        responsible: "",
+        id: "",
+        camping_places: "",
+        start_date: "",
+        city: "",
+        category: "",
+        state: "",
+        group_id: ""
       };
       async function handleSubmit(){
         const id = parseInt(formData.id);
@@ -184,7 +172,6 @@ const response = await fetch(API, {
 });
 if (response.ok) {
   // Actualizar los datos y ocultar el formulario
-  
   getCampings();
   showMessage("Recurso creado correctamente", "success");
   showForm = false;
@@ -192,10 +179,6 @@ if (response.ok) {
   showMessage("Error al crear el recurso. Ya existe.", "error");
 }
       };
-
-      
-    
-
       async function handleUpdate(camping, index) {
   const confirmUpdate = confirm("Seguro que quieres editar este recurso?");
   if (confirmUpdate) {
@@ -294,7 +277,6 @@ async function loadInitialData() {
       method: 'GET'
     });
     if (res.ok) {
-      
       getCampings(); // Actualizar los datos en la tabla
       showMessage("Datos cargados correctamente", "success");
     } else {
@@ -313,6 +295,16 @@ async function loadInitialData() {
       showMessage("Error al eliminar los recursos", "error");
     }
   }
+
+  function prevPage() {
+  offset = Math.max(offset - limit, 0);
+  getCampings();
+}
+
+function nextPage() {
+  offset = offset + limit;
+  getCampings();
+}
 
 
 </script>
@@ -398,6 +390,10 @@ async function loadInitialData() {
 <button on:click={toggleFechaForm}>Busca un recurso</button>
 <!-- Botón "Limita visualización con limit y offset" -->
 <button on:click={toggleLimiteForm}>Limitar visualización</button>
+
+<button on:click={prevPage}>Anterior</button>
+<button on:click={nextPage}>Siguiente</button>
+
 
 </div>
 <!-- Formulario para añadir limit y offset -->
