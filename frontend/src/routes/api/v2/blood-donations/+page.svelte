@@ -252,14 +252,14 @@ async function pag_siguiente(){
     <div class="busqueda-filtrada">
         <input type="text" placeholder="Fecha" bind:value={nd2.date}>
         <input type="text" placeholder="Lugar" bind:value={nd2.place}>
-        <input type="text" placeholder="dnt_people" bind:value={nd2.dnt_people}>
-        <input type="text" placeholder="dnt_blood" bind:value={nd2.dnt_blood}>
-        <input type="text" placeholder="dnt_plasme" bind:value={nd2.dnt_plasme}>
-        <input type="text" placeholder="dnt_datef" bind:value={nd2.dnt_datef}>
-        <input type="text" placeholder="dnt_new" bind:value={nd2.dnt_new}>
-        <input type="text" placeholder="extraction" bind:value={nd2.extraction}>
-        <input type="text" placeholder="idcenter" bind:value={nd2.idcenter}>
-        <input type="text" placeholder="center" bind:value={nd2.center}>
+        <input type="text" placeholder="dnt persona" bind:value={nd2.dnt_people}>
+        <input type="text" placeholder="dnt sangre" bind:value={nd2.dnt_blood}>
+        <input type="text" placeholder="dnt plasma" bind:value={nd2.dnt_plasme}>
+        <input type="text" placeholder="dnt fecha" bind:value={nd2.dnt_datef}>
+        <input type="text" placeholder="nuevo dnt" bind:value={nd2.dnt_new}>
+        <input type="text" placeholder="extraccion" bind:value={nd2.extraction}>
+        <input type="text" placeholder="id del centro" bind:value={nd2.idcenter}>
+        <input type="text" placeholder="centro" bind:value={nd2.center}>
         <input type="text" placeholder="desplazamiento" bind:value={nd2.offset}>
         <input type="text" placeholder="limite" bind:value={nd2.limit}>
         <br>
@@ -298,38 +298,38 @@ async function pag_siguiente(){
         <div class="formulario_anydir">
             <form on:submit|preventDefault={anyadir}>
                 <div class="form-group">
-                  <label for="date">Date</label>
+                  <label for="date">Fecha</label>
                   <input type="text" class="form-control" placeholder="Introduzca la fecha" bind:value={nd.date} required>
 
-                  <label for="place">Place</label>
+                  <label for="place">Lugar</label>
                   <input type="text" class="form-control" placeholder="Introduzca el lugar" bind:value={nd.place} required>
                 </div>
 
                 <div class="form-group">
-                    <label for="dnt_people">dnt_people</label>
+                    <label for="dnt_people">dnt persona</label>
                     <input type="number" class="form-control" bind:value={nd.dnt_people} required>
   
-                    <label for="dnt_blood">dnt_blood</label>
+                    <label for="dnt_blood">dnt sangre</label>
                     <input type="number" class="form-control" bind:value={nd.dnt_blood} required>
 
-                    <label for="dnt_plasme">dnt_plasme</label>
+                    <label for="dnt_plasme">dnt plasma</label>
                     <input type="number" class="form-control" bind:value={nd.dnt_plasme} required>
 
-                    <label for="dnt_datef">dnt_datef</label>
+                    <label for="dnt_datef">dnt fecha</label>
                     <input type="number" class="form-control" bind:value={nd.dnt_datef} required>
 
-                    <label for="dnt_new">dnt_new</label>
+                    <label for="dnt_new">dnt nuevo</label>
                     <input type="number" class="form-control" bind:value={nd.dnt_new} required>
                 </div>
 
                 <div class="form-group">
-                    <label for="extraction">Extraction</label>
+                    <label for="extraction">Extracción</label>
                     <input type="text" class="form-control" placeholder="Introduzca extraction" bind:value={nd.extraction} required>
 
-                    <label for="idcenter">idcenter</label>
+                    <label for="idcenter">id centro</label>
                     <input type="number" class="form-control" placeholder="Introduzca el id del centro" bind:value={nd.idcenter} required>
   
-                    <label for="center">Center</label>
+                    <label for="center">Centro</label>
                     <input type="text" class="form-control" placeholder="Introduzca el nombre del centro" bind:value={nd.center} required>
                 </div>
 
@@ -348,17 +348,17 @@ async function pag_siguiente(){
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Place</th>
-              <th>dnt_people</th>
-              <th>dnt_blood</th>
-              <th>dnt_plasme</th>
-              <th>dnt_datef</th>
-              <th>dnt_new</th>
-              <th>extraction</th>
-              <th>idcenter</th>
-              <th>Center</th>
-              <th>Modificar</th>
+              <th>Fecha</th>
+              <th>Lugar</th>
+              <th>dnt persona</th>
+              <th>dnt sangre</th>
+              <th>dnt plasma</th>
+              <th>dnt fecha</th>
+              <th>dnt nuevo</th>
+              <th>Extraccion</th>
+              <th>ID-centro</th>
+              <th>Centro</th>
+              <th><i>MODIFICAR</i></th>
             </tr>
           </thead>
           <tbody>
