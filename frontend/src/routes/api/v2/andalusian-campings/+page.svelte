@@ -32,10 +32,6 @@
     showDeleteForm = !showDeleteForm;
   }
 
-  let searchFormData = {
-    id: "",
-  };
-
   let deleteFormData = {
     id: "",
   };
@@ -141,34 +137,6 @@ async function getCampings() {
     resultStatus = 'Error en la solicitud';
   }
 }
-
-async function getCampingsSearch() {
-  
-  const id = FormIdData.id;
-  resultStatus = result = '';
-  const res = await fetch(API+`/${id}`, {
-    method: 'GET'
-  });
-  try {
-    const data = await res.json();
-    result = JSON.stringify(data, null, 2);
-    campingsId = data;
-    if (res.ok) {
-      const status = await res.status;
-      resultStatus = status.toString();
-      if (!campingsId) {
-        resultStatus = 'empty';
-      }
-    } else {
-      resultStatus = 'Error en la solicitud';
-    }
-  } catch (error) {
-    console.log(`Error parsing result:${error}`);
-    resultStatus = 'Error en la solicitud';
-  }
-}
-
-
 
 async function getCampingsByDate() {
 const since = FormFechaData.since;
