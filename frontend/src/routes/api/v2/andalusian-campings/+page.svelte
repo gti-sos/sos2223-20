@@ -44,6 +44,15 @@
     limit:"10",
   };
 
+  let FormBuscaData = {
+      name:"",
+      category:"",
+      responsible:"",
+      city: "",
+      registry_code:"",
+      city:"",
+    };
+
   onMount(async() => {
           // Load initial data from API or local storage 
           getCampings();
@@ -136,6 +145,7 @@ async function getCampings() {
     console.log(`Error parsing result:${error}`);
     resultStatus = 'Error en la solicitud';
   }
+}
 }
 
 async function getCampingsByDate() {
@@ -475,7 +485,7 @@ async function nextPage() {
     <input type="text" id="responsible" bind:value={FormBuscaData.responsible} />
     <label for="registry_code">Cod Registro</label>
     <input type="text" id="registry_code" bind:value={FormBuscaData.registry_code} />
-    <label for="municipality">Municipio</label>
+    <label for="city">Ciudad</label>
     <input type="text" id="city" bind:value={FormBuscaData.city} />
     <label for="category">Categoria</label>
     <input type="text" id="category" bind:value={FormBuscaData.category} />
