@@ -21,7 +21,7 @@
             <li><strong>APIs v2</strong>:
                 <ul dir="auto">
                 <li><a href="http://sos2223-20.appspot.com/api/v2/immovables/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v2/immovables/docs</a> (desarrollado por <a href="https://github.com/Lukmare">Lorenzo Morales Palacios</a>)</li>
-                <li><a href="https://documenter.getpostman.com/view/26063155/2s93K1oeqs" rel="nofollow">http://sos2223-20.appspot.com/api/v2/andalusian-campings/docs</a> (desarrollado por <a href="https://github.com/salinosaso">Miguel Ángel Salinas</a>)</li>
+                <li><a href="https://documenter.getpostman.com/view/26063155/2s93XyU3Xd" rel="nofollow">http://sos2223-20.appspot.com/api/v2/andalusian-campings/docs</a> (desarrollado por <a href="https://github.com/salinosaso">Miguel Ángel Salinas</a>)</li>
                 <li><a href="http://sos2223-20.appspot.com/api/v1/blood-donations/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v2/blood-donations/docs</a> (desarrollado por <a href="https://github.com/cargarmun">Carmen García Muñoz</a>)</li>
                 
             <li><strong>Documentación de Postman v1</strong>
