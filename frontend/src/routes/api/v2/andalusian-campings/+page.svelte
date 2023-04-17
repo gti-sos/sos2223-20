@@ -36,14 +36,12 @@
   };
   let FormLimiteData = {
     offset: "",
-    limit:"",
+    limit:"10",
   };
 
   onMount(async() => {
-              // Load initial data from API or local storage 
-              getCampings();
-              
-
+          // Load initial data from API or local storage 
+          getCampings();
           });
           let API = '/api/v2/campings';
       
@@ -55,38 +53,38 @@
       let result = '';
       let resultStatus = '';
 
-      async function handleDelete() {
-        const id = parseInt(deleteFormData.id)
-        const res = await fetch(API +"/"+ id, {
-        method: "DELETE",
-        });
-        if (res.ok) {
-  getCampings(); // Actualizar los datos en la tabla
-  showMessage("Recurso eliminado correctamente", "success");
-} else {
-  showMessage(`Recurso no encontrado: ${deleteFormData.id}`, "error");
-}
+async function handleDelete() {
+      const id = parseInt(deleteFormData.id)
+      const res = await fetch(API +"/"+ id, {
+      method: "DELETE",
+      });
+      if (res.ok) {
+        getCampings(); // Actualizar los datos en la tabla
+        showMessage("Recurso eliminado correctamente", "success");
+      } else {
+        showMessage(`Recurso no encontrado: ${deleteFormData.id}`, "error");
+      }
 }
 
 let editMode = false;
           //GET 
 async function getCampings() {
-resultStatus = result = '';
+  resultStatus = result = '';
   let res = await fetch(API, {
-  method: 'GET'});
+    method: 'GET'});
   if((FormLimiteData.offset!="")&&(FormLimiteData.limit=="")){
      res = await fetch(API+"?offset="+FormLimiteData.offset, {
-  method: 'GET'});
+     method: 'GET'});
   }
   if((FormLimiteData.offset=="")&&(FormLimiteData.limit!="")){
-     res = await fetch(API+"?limit="+FormLimiteData.limit, {
-  method: 'GET'});
+      res = await fetch(API+"?limit="+FormLimiteData.limit, {
+      method: 'GET'});
   }
   if((FormLimiteData.offset!="")&&(FormLimiteData.limit!="")){
      res = await fetch(API+"?limit="+FormLimiteData.limit+"&offset="+FormLimiteData.offset, {
-  method: 'GET'});
+     method: 'GET'});
   }
-try {
+  try {
   const data = await res.json();
   result = JSON.stringify(data, null, 2);
   campings = data;
@@ -99,11 +97,12 @@ try {
   } else {
     resultStatus = 'Error en la solicitud';
   }
-} catch (error) {
-  console.log(`Error parsing result:${error}`);
-  resultStatus = 'Error en la solicitud';
+  } catch (error) {
+    console.log(`Error parsing result:${error}`);
+    resultStatus = 'Error en la solicitud';
+  }
 }
-}
+
 
 async function getCampingsByDate() {
 const since = FormFechaData.since;
@@ -142,8 +141,9 @@ try {
         state: "",
         group_id: ""
       };
-      async function handleSubmit(){
-        const id = parseInt(formData.id);
+
+async function handleSubmit(){
+  const id = parseInt(formData.id);
   const group_id = parseInt(formData.group_id);
   const camping_places = parseInt(formData.camping_places);
   // Validación básica antes de enviar el formulario
@@ -179,7 +179,8 @@ if (response.ok) {
   showMessage("Error al crear el recurso. Ya existe.", "error");
 }
       };
-      async function handleUpdate(camping, index) {
+
+async function handleUpdate(camping, index) {
   const confirmUpdate = confirm("Seguro que quieres editar este recurso?");
   if (confirmUpdate) {
       // Changes the edit mode to true
@@ -272,6 +273,7 @@ selectedRowIndex = index;
 // @ts-ignore
 campings[selectedRowIndex].editing = true;
 }
+
 async function loadInitialData() {
     const res = await fetch(API+"/loadInitialData", {
       method: 'GET'
@@ -283,7 +285,8 @@ async function loadInitialData() {
       showMessage("Error al cargar los datos iniciales", "error");
     }
   }
-  async function deleteResources() {
+
+async function deleteResources() {
     const res = await fetch(API, {
       method: 'DELETE'
     });
@@ -296,22 +299,29 @@ async function loadInitialData() {
     }
   }
 
-  function prevPage() {
-  offset = Math.max(offset - limit, 0);
-  getCampings();
+async  function prevPage() {
+  FormLimiteData.offset = FormLimiteData.offset-10;
+        if(FormLimiteData.offset-10<0){
+        alert("Estás al comienzo de la lista.");
+      }
+      console.log(campings.length);
+      getCampings();
 }
 
-function nextPage() {
-  offset = offset + limit;
+async function nextPage() {
+  FormLimiteData.offset = FormLimiteData.offset+10;
+      if(!(FormLimiteData.offset+10<campings.length+10)){
+        alert("Has llegado al final de la lista.");
+      }
+      console.log(campings.length);
   getCampings();
 }
-
 
 </script>
 <main>
-      
 
-<h1 class="title">API Andalusian Campings - Miguel Ángel Salinas</h1>
+
+<h1 class="title">API Campings Andalucia - Miguel Ángel Salinas</h1>
 <div id="messages" class="message"></div>
 
 {#if !showForm}
@@ -388,9 +398,7 @@ function nextPage() {
 <button on:click={toggleDeleteForm}>Borrar un recurso</button>
 <!-- Botón "Busca un recurso" -->
 <button on:click={toggleFechaForm}>Busca un recurso</button>
-<!-- Botón "Limita visualización con limit y offset" -->
-<button on:click={toggleLimiteForm}>Limitar visualización</button>
-
+<!-- Botón de Siguiente y Anterior para paginación-->
 <button on:click={prevPage}>Anterior</button>
 <button on:click={nextPage}>Siguiente</button>
 
@@ -554,7 +562,7 @@ background-color: #f8f8f8;
 display: block;
 margin: 1rem 0;
 font-weight: bold;
-color: #444444;
+color: #00838a;
 }
 
 .form-container input[type="text"],
@@ -568,7 +576,7 @@ font-size: 1rem;
 }
 
 .form-container button[type="submit"] {
-background-color: #444444;
+background-color: #00838a;
 color: #f8f8f8;
 padding: 1rem 2rem;
 border: none;
@@ -579,7 +587,7 @@ margin-top: 1rem;
 }
 
 .form-container button[type="submit"]:hover {
-background-color: #666666;
+background-color: #00838a;
 }
 
 .button-container {
@@ -589,7 +597,7 @@ margin: 2rem 0;
 }
 
 .button-container button {
-background-color: #444444;
+background-color: #00838a;
 color: #f8f8f8;
 padding: 1rem 2rem;
 border: none;

@@ -15,6 +15,10 @@ jobs:
       
       - run: npm install
 
+      - run: cd frontend; npm install; cd ..
+
+      - run: cd frontend; npm run build; cd..
+∫
       - run: npm start &
 
       - run: npm test

@@ -1,0 +1,1651 @@
+{
+	"info": {
+		"_postman_id": "686cf960-7b39-4033-871b-417e8fd05bfd",
+		"name": "Consultas-D02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26062213"
+	},
+	"item": [
+		{
+			"name": "Consulta con valor - 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/91",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"91"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Devuelve array vacio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir elemento por dato único 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"date\": \"140716\",\r\n        \"place\": \"CRTS CORDOBA\",\r\n        \"dnt_people\": 34,\r\n        \"dnt_blood\": 28,\r\n        \"dnt_plasme\": 0,\r\n        \"dnt_datef\": 0,\r\n        \"dnt_new\": 4,\r\n        \"extraction\": \"SPC\",\r\n        \"idcenter\": 13001,\r\n        \"center\": \"CTS Córdoba\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un objeto\",function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/34",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"34"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir elemento  por dato único 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"date\": \"130716\",\r\n        \"place\": \"POZOBLANCO\",\r\n        \"dnt_people\": 113,\r\n        \"dnt_blood\": 91,\r\n        \"dnt_plasme\": 4,\r\n        \"dnt_datef\": 0,\r\n        \"dnt_new\": 12,\r\n        \"extraction\": \"SP\",\r\n        \"idcenter\": 13001,\r\n        \"center\": \"CTS Córdoba\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un objeto\",function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/113",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"113"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir elemento  por dato único  3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"date\": \"150716\",\r\n        \"place\": \"CRTS CORDOBA\",\r\n        \"dnt_people\": 16,\r\n        \"dnt_blood\": 12,\r\n        \"dnt_plasme\": 1,\r\n        \"dnt_datef\": 0,\r\n        \"dnt_new\": 2,\r\n        \"extraction\": \"SPC\",\r\n        \"idcenter\": 13001,\r\n        \"center\": \"CTS Córdoba\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un objeto\",function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/16",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir elemento  por dato único  4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"date\": \"150716\",\r\n    \"place\": \"TORRECAMPO\",\r\n    \"dnt_people\": 37,\r\n    \"dnt_blood\": 35,\r\n    \"dnt_plasme\": 0,\r\n    \"dnt_datef\": 0,\r\n    \"dnt_new\": 2,\r\n    \"extraction\": \"SP\",\r\n    \"idcenter\": 13001,\r\n    \"center\": \"CTS Córdoba\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un objeto\",function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/37",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"37"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir elemento  por dato único 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date\": \"150716\",\r\n    \"place\": \"CRTS CORDOBA\",\r\n    \"dnt_people\": 14,\r\n    \"dnt_blood\": 10,\r\n    \"dnt_plasme\": 1,\r\n    \"dnt_datef\": 0,\r\n    \"dnt_new\": 4,\r\n    \"extraction\": \"SPC\",\r\n    \"idcenter\": 13001,\r\n    \"center\": \"CTS Córdoba\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato  5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un objeto\",function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/14",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir elemento  por dato único 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date\": \"140716\",\r\n    \"place\": \"CESPEDES\",\r\n    \"dnt_people\": 20,\r\n    \"dnt_blood\": 17,\r\n    \"dnt_plasme\": 0,\r\n    \"dnt_datef\": 0,\r\n    \"dnt_new\": 0,\r\n    \"extraction\": \"SP\",\r\n    \"idcenter\": 13001,\r\n    \"center\": \"CTS Córdoba\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un objeto\",function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/20",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta con valor - place",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un objeto\",function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/POZOBLANCO",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"POZOBLANCO"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta con valor - center",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un array\",function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/CTS Córdoba",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"CTS Córdoba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta con valor - date",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un array\",function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations?date=140716",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "140716"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta con valor - dnt_datef",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un array\",function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations?dnt_datef=0",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					],
+					"query": [
+						{
+							"key": "dnt_datef",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta con offset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un array\", function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations?offset=2",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta con limit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un array\", function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations?limit=3",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta por rango",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Devuelve un array\", function(){\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations?offset=1&limit=3",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir ERROR 405",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/67",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"67"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir ERROR 409",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {\r",
+							"    pm.response.to.have.status(409);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date\": \"140716\",\r\n    \"place\": \"CRTS CORDOBA\",\r\n    \"dnt_people\": 34,\r\n    \"dnt_blood\": 28,\r\n    \"dnt_plasme\": 0,\r\n    \"dnt_datef\": 0,\r\n    \"dnt_new\": 4,\r\n    \"extraction\": \"SPC\",\r\n    \"idcenter\": 13001,\r\n    \"center\": \"CTS Córdoba\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir ERROR 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"date\": \"231118\",\r\n        \"place\": \"SEVILLA\",\r\n        \"dnt_people\": 18\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar ERROR 400",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/9867",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"9867"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar ERROR 405",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar objeto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"date\": \"150716\",\r\n    \"place\": \"TORRECAMPO-ACT\",\r\n    \"dnt_people\": 37,\r\n    \"dnt_blood\": 35,\r\n    \"dnt_plasme\": 0,\r\n    \"dnt_datef\": 0,\r\n    \"dnt_new\": 2,\r\n    \"extraction\": \"SP\",\r\n    \"idcenter\": 13001,\r\n    \"center\": \"CTS Córdoba\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/37",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"37"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta actualización",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/37",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"37"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar objeto 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/34",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"34"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato 1 - 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/34",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"34"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar objeto 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/113",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"113"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato 2 - 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/113",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"113"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar objeto 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/16",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato 3 - 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/16",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar objeto 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/37",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"37"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato 4 - 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/37",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"37"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar objeto 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/14",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato  5 - 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/14",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar objeto 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/20",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta dato 6 - 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/20",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"blood-donations",
+						"20"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "lhost",
+			"value": "http://localhost:12345/api/v1"
+		},
+		{
+			"key": "ghostv2",
+			"value": "https://sos2223-20.appspot.com/api/v2"
+		}
+	]
+}

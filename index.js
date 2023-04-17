@@ -14,13 +14,17 @@ import {loadBackend_LMP} from "./backend/index_LMP.js";
 import {loadBackend_LMPv2} from "./backend/index_LMPv2.js";
 import {loadBackend_MAS} from "./backend/index_MAS.js";
 import {loadBackend_MASv2} from "./backend/index_MASv2.js";
+import {loadBackend_CGM} from "./backend/index_CGM.js";
+import {loadBackend_CGMv2} from "./backend/index_CGMv2.js";
 
 //var backend_CGM = require("./backend/index_CGM");
 loadBackend_MAS(app);
 loadBackend_MASv2(app);
 loadBackend_LMPv2(app);
 loadBackend_LMP(app);
-//backend_CGM(app);
+loadBackend_CGM(app);
+loadBackend_CGMv2(app);
+
 
 app.use(handler);
 

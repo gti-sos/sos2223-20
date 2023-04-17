@@ -1,7 +1,7 @@
 
 
 const blooddonationsFilePath = 'ddbb/blood-donations.json';
-const BASE_API_URL = "/api/v1";
+const BASE_API_URL = "/api/v2";
 var port = process.env.PORT || 12345;
 import { notStrictEqual } from 'assert';
 import { Console } from 'console';
@@ -10,7 +10,7 @@ import Datastore from 'nedb';
 var blooddonations = new Datastore();
 
 
-function loadBackend_CGM(app){
+function loadBackend_CGMv2(app){
 
 app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/26062213/2s93RNxZnU");
@@ -84,7 +84,7 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
   });
   
   //Get específico, búsqueda de dos valores
-  app.get('/api/v1/blood-donations/:value/:value2?', (req, res) => {
+  app.get('/api/v2/blood-donations/:value/:value2?', (req, res) => {
     const { value, value2 } = req.params;
     const query = { $where: function() {
       const keys = Object.keys(this);
@@ -232,4 +232,4 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
   
 }
 
-export{loadBackend_CGM};
+export{loadBackend_CGMv2};
