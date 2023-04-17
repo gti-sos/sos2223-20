@@ -25,11 +25,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{lhost}}/blood-donations/91",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/91",
+					"protocol": "https",
 					"host": [
-						"{{lhost}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"91"
 					]
@@ -56,11 +61,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					]
 				}
@@ -96,11 +106,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					]
 				}
@@ -130,11 +145,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/34",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/34",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"34"
 					]
@@ -171,11 +191,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					]
 				}
@@ -212,11 +237,16 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/113",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/113",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"113"
 					]
@@ -253,11 +283,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					]
 				}
@@ -287,11 +322,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/16",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/16",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"16"
 					]
@@ -328,11 +368,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					]
 				}
@@ -362,11 +407,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/37",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/37",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"37"
 					]
@@ -403,11 +453,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					]
 				}
@@ -437,11 +492,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/14",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/14",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"14"
 					]
@@ -478,11 +538,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					]
 				}
@@ -512,11 +577,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/20",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/20",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"20"
 					]
@@ -547,11 +617,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/POZOBLANCO",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/POZOBLANCO",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"POZOBLANCO"
 					]
@@ -582,11 +657,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/CTS Córdoba",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/CTS Córdoba",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"CTS Córdoba"
 					]
@@ -617,11 +697,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations?date=140716",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations?date=140716",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					],
 					"query": [
@@ -657,11 +742,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations?dnt_datef=0",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations?dnt_datef=0",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					],
 					"query": [
@@ -697,11 +787,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations?offset=2",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations?offset=2",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					],
 					"query": [
@@ -737,11 +832,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations?limit=3",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations?limit=3",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					],
 					"query": [
@@ -777,11 +877,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations?offset=1&limit=3",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations?offset=1&limit=3",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					],
 					"query": [
@@ -817,11 +922,16 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/67",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/67",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"67"
 					]
@@ -857,11 +967,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					]
 				}
@@ -896,11 +1011,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					]
 				}
@@ -935,11 +1055,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/9867",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/9867",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"9867"
 					]
@@ -975,11 +1100,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations"
 					]
 				}
@@ -1014,11 +1144,16 @@
 					}
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/37",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/37",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"37"
 					]
@@ -1045,11 +1180,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/37",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/37",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"37"
 					]
@@ -1076,11 +1216,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/34",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/34",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"34"
 					]
@@ -1108,11 +1253,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/34",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/34",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"34"
 					]
@@ -1139,11 +1289,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/113",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/113",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"113"
 					]
@@ -1177,11 +1332,16 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/113",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/113",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"113"
 					]
@@ -1208,11 +1368,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/16",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/16",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"16"
 					]
@@ -1239,11 +1404,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/16",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/16",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"16"
 					]
@@ -1270,11 +1440,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/37",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/37",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"37"
 					]
@@ -1301,11 +1476,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/37",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/37",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"37"
 					]
@@ -1332,11 +1512,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/14",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/14",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"14"
 					]
@@ -1363,11 +1548,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/14",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/14",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"14"
 					]
@@ -1394,11 +1584,16 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/20",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/20",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"20"
 					]
@@ -1425,11 +1620,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{ghostv2}}/blood-donations/20",
+					"raw": "https://sos2223-20.appspot.com/api/v2/blood-donations/20",
+					"protocol": "https",
 					"host": [
-						"{{ghostv2}}"
+						"sos2223-20",
+						"appspot",
+						"com"
 					],
 					"path": [
+						"api",
+						"v2",
 						"blood-donations",
 						"20"
 					]
