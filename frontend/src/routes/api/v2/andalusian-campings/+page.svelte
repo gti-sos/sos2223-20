@@ -93,6 +93,36 @@ async function getCampings() {
      res = await fetch(API+"?limit="+FormLimiteData.limit+"&offset="+FormLimiteData.offset, {
      method: 'GET'});
   }
+  if((FormBuscaData.name!="")){
+       res = await fetch(API+"?name="+FormBuscaData.name, {
+    method: 'GET'
+  });
+    }
+    if((FormBuscaData.responsible!="")){
+       res = await fetch(API+"?responsible="+FormBuscaData.responsible, {
+    method: 'GET'
+  });
+    }
+    if((FormBuscaData.registry_code!="")){
+       res = await fetch(API+"?registry_code="+FormBuscaData.registry_code, {
+    method: 'GET'
+  });
+    }
+    if((FormBuscaData.city!="")){
+       res = await fetch(API+"?city="+FormBuscaData.city, {
+    method: 'GET'
+  });
+    }
+    if((FormBuscaData.category!="")){
+       res = await fetch(API+"?category="+FormBuscaData.category, {
+    method: 'GET'
+  });
+    }
+    if((FormBuscaData.state!="")){
+       res = await fetch(API+"?state="+FormBuscaData.state, {
+    method: 'GET'
+  });
+
   try {
   const data = await res.json();
   result = JSON.stringify(data, null, 2);
@@ -434,7 +464,7 @@ async function nextPage() {
 <button on:click={toggleDeleteForm}>Borrar un recurso</button>
 <!-- Botón "Busca un recurso" -->
 <button on:click={toggleFechaForm}>Busca por fecha</button>
-<button on:click={getCampingsSearch}>Busca un recurso</button>
+<button on:click={toggleBuscaForm}>Busca un recurso</button>
 <!-- Botón de Siguiente y Anterior para paginación-->
 <button on:click={prevPage}>Anterior</button>
 <button on:click={nextPage}>Siguiente</button>
@@ -470,11 +500,21 @@ async function nextPage() {
 </form>
 {/if}
 {#if showBuscaForm}
-<form on:submit|preventDefault={getCampingsSearch}>
-  <label for="id">Busqueda</label>
-  <input type="text" id="id" bind:value={searchFormData.id} required />
-  <button type="submit">Buscar</button>
-</form>
+  <form on:submit|preventDefault={getCampings}>
+    <label for="name">Nombre</label>
+    <input type="text" id="name" bind:value={FormBuscaData.name} />
+    <label for="responsible">Responsable</label>
+    <input type="text" id="responsible" bind:value={FormBuscaData.responsible} />
+    <label for="registry_code">Cod Registro</label>
+    <input type="text" id="registry_code" bind:value={FormBuscaData.registry_code} />
+    <label for="municipality">Municipio</label>
+    <input type="text" id="city" bind:value={FormBuscaData.city} />
+    <label for="category">Categoria</label>
+    <input type="text" id="category" bind:value={FormBuscaData.category} />
+    <label for="state">Provincia</label>
+    <input type="text" id="state" bind:value={FormBuscaData.state} />
+    <button type="submit">Buscar</button>
+  </form>
 {/if}
 
 {#if resultStatus === "200"}
