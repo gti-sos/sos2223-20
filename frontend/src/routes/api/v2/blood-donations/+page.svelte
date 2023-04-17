@@ -176,7 +176,7 @@ async function anyadir_vista(){
 }
 
 async function anyadir(){
-    let du_repetido = false; //si el datos único está repetido
+    let du_repetido = false; //si el dato único está repetido
     for(let i=0; i<datos.length; i++){
         if(datos[i].dnt_people === nd.dnt_people){
             du_repetido = true;
@@ -184,6 +184,7 @@ async function anyadir(){
     }
 
     if(!du_repetido){
+        du_repetido = false;
         const res = await fetch(API, {
         method:"POST",
 
@@ -413,7 +414,7 @@ async function pag_siguiente(){
                 <button type="button" class="btn btn-secundary" on:click={pag_anterior}>Anterior</button>
             {/if}
 
-            {#if desp >= datos.length}
+            {#if desp>datos.length}
                 <button type="button" class="btn btn-secundary" disabled>Siguiente</button>
             {:else}
                 <button type="button" class="btn btn-secundary" on:click={pag_siguiente}>Siguiente</button>
