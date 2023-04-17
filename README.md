@@ -17,6 +17,7 @@
 
 - **APIS v2:**
    - https://sos2223-20.ew.r.appspot.com/api/v2/immovables/docs (Developed by Lorenzo Morales Palacios)
+<<<<<<< HEAD
    - https://sos2223-20.appspot.com/api/v2/blood-donations/ (Developed by Carmen García Muñoz)
 
 - **POSTMAN v1:**
@@ -24,3 +25,9 @@
 
 - **POSTMAN v2:**
    - https://sos2223-20.appspot.com/api/v2/blood-donations/docs (Developed by Carmen García Muñoz)
+=======
+
+   https://sos2223-20.ew.r.appspot.com/api/v2/andalusian-campings/docs (Developed by Miguel Ángel Salinas)
+   https://documenter.getpostman.com/view/26063155/2s93XyU3Xd
+   
+>>>>>>> e6221cf782613f3c5a6514f6f2ae7e47922ac289

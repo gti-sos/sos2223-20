@@ -71,7 +71,7 @@
 let editMode = false;
             //GET 
 
-            async function getImmovables() {
+async function getImmovables() {
   resultStatus = result = '';
     let res = await fetch(API, {
     method: 'GET'
