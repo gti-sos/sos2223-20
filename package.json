@@ -65,7 +65,7 @@
     "statuses": "^2.0.1",
     "stream-spigot": "^3.0.6",
     "string_decoder": "^1.0.3",
-    "svelte": "^3.57.0",
+    "svelte": "^3.58.0",
     "toidentifier": "^1.0.1",
     "type-is": "^1.6.18",
     "unpipe": "^1.0.0",
@@ -77,9 +77,9 @@
   "scripts": {
     "start": "node index",
     "test": "npm run test-inmovables & npm run test-andalusian-campings",
-    "test-andalusian-campings": "npx newman run ./tests/Gcloud.postman_MAS.json",
-    "test-blood-donations": "npx newman run ./tests/blood-donations.json",
-    "test-inmovables": "npx newman run ./tests/immovables.postman_LMP.json"
+    "test-andalusian-campings": "npx newman run ./tests/GcloudV2_postman.json",
+    "test-inmovables": "npx newman run ./tests/immovables.postman_LMP.json",
+    "test-blood-donations": "npx newman run ./tests/blood-donations.json"
   },
   "repository": {
     "type": "git",

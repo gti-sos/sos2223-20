@@ -168,7 +168,7 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
         } else if (doc) {
           res.sendStatus(409);
         } else {
-          blooddonations.insert(newReq, (err, newDoc) => {
+          blooddonations.insert(newReq, (err, newDocs) => {
             if (err) {
               console.log(`Error inserting blood donation`);
               res.sendStatus(500);

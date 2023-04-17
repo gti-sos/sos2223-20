@@ -35,8 +35,8 @@
       until:"",
     };
     let FormLimiteData = {
-      offset: "",
-      limit:"",
+      offset: 0,
+      limit:"10",
     };
 
     onMount(async() => {
@@ -313,6 +313,25 @@ async function loadInitialData() {
         showMessage("Error al eliminar los recursos", "error");
       }
     }
+    async function Adelante() {
+      
+      FormLimiteData.offset = FormLimiteData.offset+10;
+      if(!(FormLimiteData.offset+10<immovables.length+10)){
+        alert("Has llegado al final de la lista.");
+      }
+      console.log(immovables.length);
+      getImmovables();
+    }
+
+    async function Atras() {
+      
+      FormLimiteData.offset = FormLimiteData.offset-10;
+        if(FormLimiteData.offset-10<0){
+        alert("Estás al comienzo de la lista.");
+      }
+      console.log(immovables.length);
+      getImmovables();
+    }
 
 
 </script>
@@ -397,7 +416,11 @@ async function loadInitialData() {
 <!-- Botón "Busca un recurso" -->
 <button on:click={toggleFechaForm}>Busca un recurso</button>
 <!-- Botón "Limita visualización con limit y offset" -->
-<button on:click={toggleLimiteForm}>Limitar visualización</button>
+<button on:click={Atras}>◀</button>
+<button on:click={Adelante}>▶</button>
+
+
+
 
 </div>
 <!-- Formulario para añadir limit y offset -->
@@ -503,7 +526,8 @@ async function loadInitialData() {
 {/if}
 
 </main>
-        <style>
+
+<style>
 body {
   font-family: Arial, sans-serif;
   background-color: #f8f8f8;
