@@ -17,6 +17,10 @@
   let showFechaForm = false;
   let showLimiteForm = false;
 
+  function toggleBuscaForm(){
+    showBuscaForm = !showBuscaForm;
+  }
+
   function toggleFechaForm(){
     showFechaForm = !showFechaForm;
   }
@@ -102,6 +106,44 @@ async function getCampings() {
     resultStatus = 'Error en la solicitud';
   }
 }
+
+async function getCampingsSearch() {
+  resultStatus = result = '';
+  
+  const queryParams = new URLSearchParams();
+  queryParams.append('offset', FormLimiteData.offset);
+  queryParams.append('limit', FormLimiteData.limit);
+  
+  // Añade los campos de búsqueda y sus valores
+  if (FormLimiteData.searchField && FormLimiteData.searchValue) {
+    queryParams.append(FormLimiteData.searchField, FormLimiteData.searchValue);
+  }
+  
+  let res = await fetch(`${API}?${queryParams.toString()}`, {
+    method: 'GET'
+  });
+
+  try {
+    const data = await res.json();
+    result = JSON.stringify(data, null, 2);
+    campings = data;
+
+    if (res.ok) {
+      const status = await res.status;
+      resultStatus = status.toString();
+
+      if (campings.length === 0) {
+        resultStatus = 'empty';
+      }
+    } else {
+      resultStatus = 'Error en la solicitud';
+    }
+  } catch (error) {
+    console.log(`Error parsing result:${error}`);
+    resultStatus = 'Error en la solicitud';
+  }
+}
+
 
 
 async function getCampingsByDate() {
@@ -397,7 +439,8 @@ async function nextPage() {
 <!-- Botón "Borrar un recurso" -->
 <button on:click={toggleDeleteForm}>Borrar un recurso</button>
 <!-- Botón "Busca un recurso" -->
-<button on:click={toggleFechaForm}>Busca un recurso</button>
+<button on:click={toggleFechaForm}>Busca por fecha</button>
+<button on:click={getCampingsSearch}>Busca un recurso</button>
 <!-- Botón de Siguiente y Anterior para paginación-->
 <button on:click={prevPage}>Anterior</button>
 <button on:click={nextPage}>Siguiente</button>
