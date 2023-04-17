@@ -158,6 +158,7 @@ app.get(BASE_API_URL+'/blood-donations/docs', (req, res) => {
       !newReq.hasOwnProperty('idcenter') || !newReq.hasOwnProperty('center')) {
         return res.sendStatus(400);
       }
+
       
       blooddonations.findOne({ date:newReq.date, place:newReq.place, dnt_people:newReq.dnt_people, 
       dnt_blood:newReq.dnt_blood, dnt_plasme:newReq.dnt_plasme, dnt_datef:newReq.dnt_datef, 

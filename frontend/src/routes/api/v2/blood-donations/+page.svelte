@@ -1,6 +1,6 @@
 <script>
 //@ts-nocheck
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import { onMount } from 'svelte';
 
 let API = 'http://localhost:12345/api/v1/blood-donations';
