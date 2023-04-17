@@ -5,7 +5,7 @@
             <li><strong>Equipo</strong>
             <ul dir="auto">
             <li><a href="https://github.com/Lukmare">Lorenzo Morales Palacios (Fuente: immovables)</a></li>
-            <li><a href="https://github.com/salinosaso">Miguel Ángel Salinas </a></li>
+            <li><a href="https://github.com/salinosaso">Miguel Ángel Salinas(Fuente: andalusian-campings) </a></li>
             <li><a href="https://github.com/cargarmun">Carmen García Muñoz (Fuente: blood-donations) </a></li>
             </ul>
             </li>
@@ -39,6 +39,10 @@
                     <li><a href="http://sos2223-20.appspot.com/api/v2/blood-donations/docs">Doc Blood Donations</a></li>
                     </ul>
                 </li> 
+
+            <a href="/api/v2/immovables">Inmuebles</a>
+            <a href="/api/v2/andalusian-campings">Campings Andalucia</a>
+            <a href="/api/v2/blood-donations">Donaciones Sangre</a>
 
                 <li><strong>Frontend</strong>
                     <ul><li><a href="http://sos2223-20.appspot.com/api/v2/blood-donations">Blood donations</a></li></ul>
