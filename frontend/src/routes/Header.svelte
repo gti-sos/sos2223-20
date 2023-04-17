@@ -1,8 +1,8 @@
 <nav>
-    <a href="/">Home</a>
-    <a href="/api/v2/immovables">immovables</a>
-    <a href="/api/v2/andalusian-campings">andalusian-campings</a>
-    <a href="/api/v2/blood-donations">Blood Donations</a>
+    <a href="/">Inicio</a>
+    <a href="/api/v2/immovables">Inmuebles</a>
+    <a href="/api/v2/andalusian-campings">Campings Andalucia</a>
+    <a href="/api/v2/blood-donations">Donaciones Sangre</a>
 </nav>
 <style>
     nav {
