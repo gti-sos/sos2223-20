@@ -40,12 +40,10 @@
                     </ul>
                 </li> 
 
-            <a href="/api/v2/immovables">Inmuebles</a>
-            <a href="/api/v2/andalusian-campings">Campings Andalucia</a>
-            <a href="/api/v2/blood-donations">Donaciones Sangre</a>
-
                 <li><strong>Frontend</strong>
                     <ul><li><a href="http://sos2223-20.appspot.com/api/v2/blood-donations">Blood donations</a></li></ul>
+                    <a href="/api/v2/immovables">Inmuebles</a>
+                    <a href="/api/v2/andalusian-campings">Campings Andalucia</a>
                 </li>
         </ul>
         
