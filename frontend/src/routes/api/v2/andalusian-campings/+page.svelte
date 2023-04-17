@@ -396,9 +396,7 @@ async function nextPage() {
 <button on:click={toggleDeleteForm}>Borrar un recurso</button>
 <!-- Botón "Busca un recurso" -->
 <button on:click={toggleFechaForm}>Busca un recurso</button>
-<!-- Botón "Limita visualización con limit y offset" -->
-<button on:click={toggleLimiteForm}>Limitar visualización</button>
-
+<!-- Botón de Siguiente y Anterior para paginación-->
 <button on:click={prevPage}>Anterior</button>
 <button on:click={nextPage}>Siguiente</button>
 
