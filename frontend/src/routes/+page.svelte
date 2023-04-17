@@ -16,7 +16,7 @@
             <ul dir="auto">
             <li><a href="http://sos2223-20.appspot.com/api/v1/immovables/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v1/immovables/docs</a> (desarrollado por <a href="https://github.com/Lukmare">Lorenzo Morales Palacios</a>)</li>
             <li><a href="http://sos2223-20.appspot.com/api/v1/andalusian-campings/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v1/andalusian-campings/docs</a> (desarrollado por <a href="https://github.com/salinosaso">Miguel Ángel Salinas</a>)</li>
-            <li><a href="http://sos2223-20.appspot.com/api/v1/blood-donations/docs" rel="nofollow">http://sos2223-20.appspot.com/api/v1/blood-donations/</a> (desarrollado por <a href="https://github.com/cargarmun">Carmen García Muñoz</a>)</li>
+            <li><a href="http://sos2223-20.appspot.com/api/v1/blood-donations" rel="nofollow">http://sos2223-20.appspot.com/api/v1/blood-donations/</a> (desarrollado por <a href="https://github.com/cargarmun">Carmen García Muñoz</a>)</li>
             
             <li><strong>APIs v2</strong>:
                 <ul dir="auto">
@@ -36,7 +36,7 @@
                     <ul dir="auto">
                     <li><a href="https://documenter.getpostman.com/view/26062489/2s93XsZn3G">Doc Inmuebles </a></li>
                     <li><a href="https://documenter.getpostman.com/view/26063155/2s93XyU3Xd">Doc Campings Andalucia</a></li>
-                    <li><a href="http://sos2223-20.appspot.com/api/v2/blood-donations/docs">Doc Blood Donations</a></li>
+                    <li><a href="https://documenter.getpostman.com/view/26062213/2s93Xzvh39">Doc Blood Donations</a></li>
                     </ul>
                 </li> 
 
