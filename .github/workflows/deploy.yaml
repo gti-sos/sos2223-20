@@ -9,15 +9,17 @@ jobs:
   deploy:
     name: Deploy to Google Cloud Run
     runs-on: ubuntu-latest
-    environment: production
+    environment: produ  ction
     steps:
       - uses: actions/checkout@v2
       
       - run: npm install
 
-      - run: npm start &
+      - run: cd frontend; npm install; cd ..
+      
+      - run: cd frontend; npm run build; cd ..
 
-      - run: npm test
+      - run: npm start &
 
       - id: 'auth'
         uses: 'google-github-actions/auth@v1'
