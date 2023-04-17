@@ -13,9 +13,14 @@
       showForm = !showForm;
     }
 
+    let showBuscaForm = false;
     let showDeleteForm = false;
     let showFechaForm = false;
     let showLimiteForm = false;
+
+    function toggleBuscaForm(){
+      showBuscaForm = !showBuscaForm;
+    }
 
     function toggleFechaForm(){
       showFechaForm = !showFechaForm;
@@ -37,6 +42,15 @@
     let FormLimiteData = {
       offset: 0,
       limit:"10",
+    };
+
+    let FormBuscaData = {
+      active_name:"",
+      counseling:"",
+      current_usage:"",
+      municipality: "",
+      nature:"",
+      province:"",
     };
 
     onMount(async() => {
@@ -91,7 +105,36 @@ async function getImmovables() {
     method: 'GET'
   });
     }
-    
+      if((FormBuscaData.active_name!="")){
+       res = await fetch(API+"?active_name="+FormBuscaData.active_name, {
+    method: 'GET'
+  });
+    }
+    if((FormBuscaData.counseling!="")){
+       res = await fetch(API+"?counseling="+FormBuscaData.counseling, {
+    method: 'GET'
+  });
+    }
+    if((FormBuscaData.current_usage!="")){
+       res = await fetch(API+"?current_usage="+FormBuscaData.current_usage, {
+    method: 'GET'
+  });
+    }
+    if((FormBuscaData.municipality!="")){
+       res = await fetch(API+"?municipality="+FormBuscaData.municipality, {
+    method: 'GET'
+  });
+    }
+    if((FormBuscaData.nature!="")){
+       res = await fetch(API+"?nature="+FormBuscaData.nature, {
+    method: 'GET'
+  });
+    }
+    if((FormBuscaData.province!="")){
+       res = await fetch(API+"?province="+FormBuscaData.province, {
+    method: 'GET'
+  });
+    }
   
   
   try {
@@ -414,7 +457,9 @@ async function loadInitialData() {
 <!-- Botón "Borrar un recurso" -->
 <button on:click={toggleDeleteForm}>Borrar un recurso</button>
 <!-- Botón "Busca un recurso" -->
-<button on:click={toggleFechaForm}>Busca un recurso</button>
+<button on:click={toggleBuscaForm}>Buscar un recurso</button>
+<!-- Botón "Busca un recurso" -->
+<button on:click={toggleFechaForm}>Busca un recurso por fecha</button>
 <!-- Botón "Limita visualización con limit y offset" -->
 <button on:click={Atras}>◀</button>
 <button on:click={Adelante}>▶</button>
@@ -439,6 +484,23 @@ async function loadInitialData() {
     <label for="delete_id">ID</label>
     <input type="number" id="delete_id" bind:value={deleteFormData.id} required />
     <button type="submit">Eliminar</button>
+  </form>
+{/if}
+{#if showBuscaForm}
+  <form on:submit|preventDefault={getImmovables}>
+    <label for="active_name">Nombre</label>
+    <input type="text" id="active_name" bind:value={FormBuscaData.active_name} />
+    <label for="counseling">Consejeria</label>
+    <input type="text" id="counseling" bind:value={FormBuscaData.counseling} />
+    <label for="current_usage">Uso Actual</label>
+    <input type="text" id="current_usage" bind:value={FormBuscaData.current_usage} />
+    <label for="municipality">Municipio</label>
+    <input type="text" id="municipality" bind:value={FormBuscaData.municipality} />
+    <label for="nature">Naturaleza</label>
+    <input type="text" id="nature" bind:value={FormBuscaData.nature} />
+    <label for="province">Provincia</label>
+    <input type="text" id="province" bind:value={FormBuscaData.province} />
+    <button type="submit">Buscar</button>
   </form>
 {/if}
 <!-- Formulario para buscar por fechas -->

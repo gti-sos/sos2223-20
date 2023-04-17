@@ -12,7 +12,7 @@ let vista_anydir_activa = false;
 let mostrarAlerta = false;
 let codigoAlerta = 0;
 let desp = 0;
-let limite = 5;
+let limite = 10;
 
 // nuevo dato a añadir
 let nd =  {
@@ -27,7 +27,7 @@ let nd =  {
     idcenter: "",
     center: "",
     offset: "0",
-    limit: "5"
+    limit: "10"
     };
 
 let nd2 =  {
@@ -42,7 +42,7 @@ let nd2 =  {
     idcenter: "",
     center: "",
     offset: "0",
-    limit: "5"
+    limit: "10"
     };
 
 // ################ FUNCIONES UXILIARES ################
@@ -272,7 +272,7 @@ async function pag_siguiente(){
     {#if mostrarAlerta && codigoAlerta===400}
       <div class="alert alert-danger d-flex align-items-center show" role="alert" id = "divAlerta">
         <div>
-          Ningún campo puede estar vacío [ERROR 400 Bad Request]
+          Ningún campo puede estar vacío
         </div>
       </div>
     {/if}
@@ -280,7 +280,7 @@ async function pag_siguiente(){
     {#if mostrarAlerta && codigoAlerta===409}
       <div class="alert alert-danger d-flex align-items-center show" role="alert" id = "divAlerta">
         <div>
-          Hay otro dato con el mismo valor de dnt_people [ERROR 409 Conflicto]
+          Hay otro dato con el mismo valor de dnt_people
         </div>
       </div>
     {/if}
@@ -288,7 +288,7 @@ async function pag_siguiente(){
     {#if mostrarAlerta && codigoAlerta===200}
       <div class="alert alert-success d-flex align-items-center show" role="alert" id = "divAlerta">
         <div>
-            Operación realizada con éxito [200 OK]
+            Operación realizada con éxito
         </div>
       </div>
     {/if}
