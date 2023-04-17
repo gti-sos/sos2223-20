@@ -296,13 +296,21 @@ async function loadInitialData() {
     }
   }
 
-  function prevPage() {
-  offset = Math.max(offset - limit, 0);
-  getCampings();
+async  function prevPage() {
+  FormLimiteData.offset = FormLimiteData.offset-10;
+        if(FormLimiteData.offset-10<0){
+        alert("Estás al comienzo de la lista.");
+      }
+      console.log(campings.length);
+      getCampings();
 }
 
-function nextPage() {
-  offset = offset + limit;
+async function nextPage() {
+  FormLimiteData.offset = FormLimiteData.offset+10;
+      if(!(FormLimiteData.offset+10<campings.length+10)){
+        alert("Has llegado al final de la lista.");
+      }
+      console.log(campings.length);
   getCampings();
 }
 
