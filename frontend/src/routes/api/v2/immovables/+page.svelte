@@ -191,7 +191,7 @@ async function getImmovablesByDate() {
          id: "",
          inventory_num: "",
          modified_date: "",
-       municipality: "",
+         municipality: "",
          nature: "",
          province: "",
          resource: ""
