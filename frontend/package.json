@@ -20,6 +20,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"bootstrap": "^5.2.3",
 		"cors": "^2.8.5",
 		"sveltestrap": "^5.10.0"
 	}
