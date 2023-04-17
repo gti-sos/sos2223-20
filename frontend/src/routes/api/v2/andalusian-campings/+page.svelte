@@ -16,6 +16,7 @@
   let showDeleteForm = false;
   let showFechaForm = false;
   let showLimiteForm = false;
+  let showBuscaForm = false;
 
   function toggleBuscaForm(){
     showBuscaForm = !showBuscaForm;
@@ -30,6 +31,10 @@
   function toggleDeleteForm() {
     showDeleteForm = !showDeleteForm;
   }
+
+  let searchFormData = {
+    id: "",
+  };
 
   let deleteFormData = {
     id: "",
@@ -108,31 +113,20 @@ async function getCampings() {
 }
 
 async function getCampingsSearch() {
+  
+  const id = FormIdData.id;
   resultStatus = result = '';
-  
-  const queryParams = new URLSearchParams();
-  queryParams.append('offset', FormLimiteData.offset);
-  queryParams.append('limit', FormLimiteData.limit);
-  
-  // Añade los campos de búsqueda y sus valores
-  if (FormLimiteData.searchField && FormLimiteData.searchValue) {
-    queryParams.append(FormLimiteData.searchField, FormLimiteData.searchValue);
-  }
-  
-  let res = await fetch(`${API}?${queryParams.toString()}`, {
+  const res = await fetch(API+`/${id}`, {
     method: 'GET'
   });
-
   try {
     const data = await res.json();
     result = JSON.stringify(data, null, 2);
-    campings = data;
-
+    campingsId = data;
     if (res.ok) {
       const status = await res.status;
       resultStatus = status.toString();
-
-      if (campings.length === 0) {
+      if (!campingsId) {
         resultStatus = 'empty';
       }
     } else {
@@ -475,6 +469,14 @@ async function nextPage() {
   <button type="submit">Buscar</button>
 </form>
 {/if}
+{#if showBuscaForm}
+<form on:submit|preventDefault={getCampingsSearch}>
+  <label for="id">Busqueda</label>
+  <input type="text" id="id" bind:value={searchFormData.id} required />
+  <button type="submit">Buscar</button>
+</form>
+{/if}
+
 {#if resultStatus === "200"}
   <table in:fade={{ duration: 300 }}>
     <thead>
