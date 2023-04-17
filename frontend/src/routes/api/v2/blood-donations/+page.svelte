@@ -175,7 +175,6 @@ async function anyadir_vista(){
     vista_anydir_activa = true;
 }
 
-//funcion para añadir dato
 async function anyadir(){
     let du_repetido = false; //si el dato único está repetido
     for(let i=0; i<datos.length; i++){
