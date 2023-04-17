@@ -3,7 +3,8 @@
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import { onMount } from 'svelte';
 
-let API = 'http://localhost:12345/api/v1/blood-donations';
+//let API = 'http://localhost:12345/api/v2/blood-donations';
+let API = 'http://sos2223-20.appspot.com/api/v2/blood-donations';
 let datos = [];
 let result = '';
 let dato_a_actualizar = -1;
