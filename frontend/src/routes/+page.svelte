@@ -28,7 +28,7 @@
                 <ul dir="auto">
                 <li><a href="https://documenter.getpostman.com/view/26062489/2s93K1oysD">Doc Inmuebles </a></li>
                 <li><a href="https://documenter.getpostman.com/view/26063155/2s93K1oeqs">Doc Campings Andalucia</a></li>
-                <li><a href="http://sos2223-20.appspot.com/api/v1/blood-donations/docs">Doc Donacion Sangre</a></li>
+                <li><a href="http://sos2223-20.appspot.com/api/v1/blood-donations/docs">Doc Donaciones Sangre</a></li>
                 </ul>
             </li> 
                 
@@ -36,12 +36,12 @@
                     <ul dir="auto">
                     <li><a href="https://documenter.getpostman.com/view/26062489/2s93XsZn3G">Doc Inmuebles </a></li>
                     <li><a href="https://documenter.getpostman.com/view/26063155/2s93XyU3Xd">Doc Campings Andalucia</a></li>
-                    <li><a href="http://sos2223-20.appspot.com/api/v2/blood-donations/docs">Doc Donación Sangre</a></li>
+                    <li><a href="http://sos2223-20.appspot.com/api/v2/blood-donations/docs">Doc Donaciones Sangre</a></li>
                     </ul>
                 </li> 
 
                 <li><strong>Frontend</strong>
-                    <ul><li><a href="http://sos2223-20.appspot.com/api/v2/blood-donations">Blood donations</a></li></ul>
+                    <ul><li><a href="http://sos2223-20.appspot.com/api/v2/blood-donations">Donaciones Sangre</a></li></ul>
                     <a href="/api/v2/immovables">Inmuebles</a>
                     <a href="/api/v2/andalusian-campings">Campings Andalucia</a>
                 </li>

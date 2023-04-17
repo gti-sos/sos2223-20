@@ -321,7 +321,7 @@ async function nextPage() {
 <main>
 
 
-<h1 class="title">API Andalusian Campings - Miguel Ángel Salinas</h1>
+<h1 class="title">API Campings Andalucia - Miguel Ángel Salinas</h1>
 <div id="messages" class="message"></div>
 
 {#if !showForm}
