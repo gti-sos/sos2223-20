@@ -45,6 +45,9 @@
     };
 
     let FormBuscaData = {
+      id: "",
+      resource: "",
+      inventory_num: "",
       active_name:"",
       counseling:"",
       current_usage:"",
@@ -65,7 +68,6 @@
             API = 'http://localhost:12345'+API
 
         let immovables = [];
-        let immovablesFecha = [];
         let result = '';
         let resultStatus = '';
 
@@ -105,36 +107,7 @@ async function getImmovables() {
     method: 'GET'
   });
     }
-      if((FormBuscaData.active_name!="")){
-       res = await fetch(API+"?active_name="+FormBuscaData.active_name, {
-    method: 'GET'
-  });
-    }
-    if((FormBuscaData.counseling!="")){
-       res = await fetch(API+"?counseling="+FormBuscaData.counseling, {
-    method: 'GET'
-  });
-    }
-    if((FormBuscaData.current_usage!="")){
-       res = await fetch(API+"?current_usage="+FormBuscaData.current_usage, {
-    method: 'GET'
-  });
-    }
-    if((FormBuscaData.municipality!="")){
-       res = await fetch(API+"?municipality="+FormBuscaData.municipality, {
-    method: 'GET'
-  });
-    }
-    if((FormBuscaData.nature!="")){
-       res = await fetch(API+"?nature="+FormBuscaData.nature, {
-    method: 'GET'
-  });
-    }
-    if((FormBuscaData.province!="")){
-       res = await fetch(API+"?province="+FormBuscaData.province, {
-    method: 'GET'
-  });
-    }
+    
   
   
   try {
@@ -156,6 +129,29 @@ async function getImmovables() {
   }
 }
 
+async function busqueda(FormBuscaData){
+    let extension_URL = "?";
+    let claves = Object.keys(FormBuscaData);
+    let valores = Object.values(FormBuscaData);
+    for(let i=0; i<claves.length; i++){
+        let clave = claves[i];
+        let valor = valores[i];
+        if(valor!==null && valor.length!==0){
+            extension_URL += `${clave}=${valor}&`
+        }
+    }
+    extension_URL = extension_URL.substring(0, extension_URL.length - 1);
+    console.log("EXTENSION:" + extension_URL);
+    const res = await fetch(API + extension_URL, {method:"GET"});
+    if(res.ok){
+        
+        const data = await res.json();
+        result = JSON.stringify(data, null, 2); 
+        immovables = data;
+    }else{
+        getImmovables();
+    }
+}
 
 async function getImmovablesByDate() {
   const since = FormFechaData.since;
@@ -168,11 +164,11 @@ async function getImmovablesByDate() {
   try {
     const data = await res.json();
     result = JSON.stringify(data, null, 2);
-    immovablesFecha = data;
+    immovables = data;
     if (res.ok) {
       const status = await res.status;
       resultStatus = status.toString();
-      if (immovablesFecha.length === 0) {
+      if (immovables.length === 0) {
         resultStatus = 'empty';
       }
     } else {
@@ -487,21 +483,19 @@ async function loadInitialData() {
   </form>
 {/if}
 {#if showBuscaForm}
-  <form on:submit|preventDefault={getImmovables}>
-    <label for="active_name">Nombre</label>
-    <input type="text" id="active_name" bind:value={FormBuscaData.active_name} />
-    <label for="counseling">Consejeria</label>
-    <input type="text" id="counseling" bind:value={FormBuscaData.counseling} />
-    <label for="current_usage">Uso Actual</label>
-    <input type="text" id="current_usage" bind:value={FormBuscaData.current_usage} />
-    <label for="municipality">Municipio</label>
-    <input type="text" id="municipality" bind:value={FormBuscaData.municipality} />
-    <label for="nature">Naturaleza</label>
-    <input type="text" id="nature" bind:value={FormBuscaData.nature} />
-    <label for="province">Provincia</label>
-    <input type="text" id="province" bind:value={FormBuscaData.province} />
-    <button type="submit">Buscar</button>
-  </form>
+<div class="text-center">
+  <input type="number" bind:value={FormBuscaData.id} placeholder=" ID"> 
+  <input type="text" bind:value={FormBuscaData.active_name} placeholder="Nombre"> 
+  <input type="text" bind:value={FormBuscaData.counseling} placeholder="Consejería"> 
+  <input type="text" bind:value={FormBuscaData.current_usage} placeholder="Uso Actual"> 
+  <input type="number" bind:value={FormBuscaData.inventory_num} placeholder="Numero de Inventario">
+  <input type="text" bind:value={FormBuscaData.nature} placeholder="Naturaleza">
+  <input type="text" bind:value={FormBuscaData.municipality} placeholder="Municipio">
+  <input type="text" bind:value={FormBuscaData.province} placeholder="Provincia">
+  <input type="number" bind:value={FormBuscaData.resource} placeholder="Recurso">
+  <br><br>
+  <button type="submit" on:click={busqueda(FormBuscaData)} class="btn btn-info"><i class="fas fa-search"></i> Buscar</button>
+</div>
 {/if}
 <!-- Formulario para buscar por fechas -->
 {#if showFechaForm}
@@ -513,41 +507,7 @@ async function loadInitialData() {
     <button type="submit">Buscar</button>
   </form>
 {/if}
-  {#if resultStatus === "200"}
-    <table in:fade={{ duration: 300 }}>
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Consejería</th>
-          <th>Uso Actual</th>
-          <th>ID</th>
-          <th>Num Inventario</th>
-          <th>Fecha</th>
-          <th>Municipio</th>
-          <th>Naturaleza</th>
-          <th>Provincia</th>
-          <th>Recurso</th>
-          <th></th> <!-- Nueva columna para el botón de actualizar -->
-        </tr>
-      </thead>
-      <tbody>
-        {#each immovablesFecha as immovable, index}
-  <tr><!-- Si la fila no está en modo edición -->
-      <td>{immovable.active_name}</td>
-      <td>{immovable.counseling}</td>
-      <td>{immovable.current_usage}</td>
-      <td>{immovable.id}</td>
-      <td>{immovable.inventory_num}</td>
-      <td>{immovable.modified_date}</td>
-      <td>{immovable.municipality}</td>
-      <td>{immovable.nature}</td>
-      <td>{immovable.province}</td>
-      <td>{immovable.resource}</td>
-  </tr>
-{/each}
-      </tbody>
-    </table>
-    {/if}
+  
 <!-- Agrega el formulario para enviar datos -->
 {#if showForm}
 <div class="form-container"  in:fade={{ duration: 300 }}>

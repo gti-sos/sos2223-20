@@ -56,7 +56,6 @@ app.get('/api/v2/immovables/docs', (req, res) => {
   //immovables
   app.get(BASE_API_URL+'/immovables', (req, res) => {
     console.log(`New request to /immovables`);
-
     // Recuperamos todos los registros de la base de datos para filtrarlos despues
     immovables.find({}, {_id: 0}, (err, data) => {
 
@@ -92,10 +91,10 @@ app.get('/api/v2/immovables/docs', (req, res) => {
                         ((req.query.active_name == undefined)||(req.query.active_name === x.active_name))&&
                         ((req.query.counseling == undefined)||(req.query.counseling === x.counseling))&&
                         ((req.query.current_usage == undefined)||(req.query.current_usage === x.current_usage))&&
-                        ((req.query.id == undefined)||(req.query.id === x.id))&&
+                        ((req.query.id == undefined)||(parseInt(req.query.id) === x.id))&&
                         ((req.query.municipality == undefined)||(req.query.municipality === x.municipality))&&
-                        ((req.query.inventory_num == undefined)||(req.query.inventory_num === x.inventory_num))&&
-                        ((req.query.resource == undefined)||(req.query.resource === x.resource))&&
+                        ((req.query.inventory_num == undefined)||(parseInt(req.query.inventory_num) === x.inventory_num))&&
+                        ((req.query.resource == undefined)||(parseInt(req.query.resource) === x.resource))&&
                         ((req.query.nature == undefined)||(req.query.nature === x.nature))
                         );
                     }).filter((x) => {
