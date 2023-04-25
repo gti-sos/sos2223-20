@@ -31,7 +31,7 @@ app.get('/api/v2/immovables/docs', (req, res) => {
         res.sendStatus(500);
       } else if (docs.length === 0) {
         const immovablesData = JSON.parse(fs.readFileSync(immovablesFilePath));
-        const initialImmovables = immovablesData.slice(0, 15);
+        const initialImmovables = immovablesData.slice(0, 100);
         immovables.insert(initialImmovables, (err, newDocs) => {
           if (err) {
             console.log(`Error inserting initial data into immovables: ${err}`);

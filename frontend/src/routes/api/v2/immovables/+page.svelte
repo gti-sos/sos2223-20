@@ -352,10 +352,9 @@ async function loadInitialData() {
     async function Adelante() {
       
       FormLimiteData.offset = FormLimiteData.offset+10;
-      if(!(FormLimiteData.offset+10<immovables.length+10)){
+      if(FormLimiteData.offset+10>100){
         alert("Has llegado al final de la lista.");
       }
-      console.log(immovables.length);
       getImmovables();
     }
 

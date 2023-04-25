@@ -23,30 +23,31 @@
     data = await response.json();
   }
 
-  let counts = new Map();
+  let countsI = new Map();
+  let countsU = new Map();
 
-  function processData() {
+  function processDataI() {
     data.forEach(item => {
       const year = item.modified_date.split('-')[0];
       const province = item.province;
-      const count = counts.get(year) || {};
-      count[province] = (count[province] || 0) + 1;
-      counts.set(year, count);
+      const countI = countsI.get(year) || {};
+      countI[province] = (countI[province] || 0) + 1;
+      countsI.set(year, countI);
     });
   }
 
-  $: processData();
+  $: processDataI();
 
   let chart = null;
 
   function createChartProA() {
     chart = Morris.Bar({
       element: 'chart',
-      data: Array.from(counts.entries())
+      data: Array.from(countsI.entries())
         .sort(([year1], [year2]) => year1.localeCompare(year2)) // ordenamos por año
-        .map(([year, count]) => {
-          const total = Object.values(count).reduce((acc, curr) => acc + curr, 0);
-          return { year, total, count };
+        .map(([year, countI]) => {
+          const total = Object.values(countI).reduce((acc, curr) => acc + curr, 0);
+          return { year, total, countI };
         }),
       xkey: 'year',
       ykeys: ['total'],
@@ -54,23 +55,66 @@
       xLabelAngle: 60,
       hoverCallback: function (index, options, content, row) {
         let html = `<div>${row.year}: ${row.total}</div>`;
-        Object.entries(row.count).forEach(([province, count]) => {
-          html += `<div>${province}: ${count}</div>`;
+        Object.entries(row.countI).forEach(([province, countI]) => {
+          html += `<div>${province}: ${countI}</div>`;
         });
         return html;
       }
     });
   }
 
+  function processDataU() {
+    data.forEach(item => {
+      const uso = item.current_usage.split('-')[0];
+      const province = item.province;
+      const countU = countsU.get(uso) || {};
+      countU[province] = (countU[province] || 0) + 1;
+      countsU.set(uso, countU);
+    });
+  }
+
+  $: processDataU();
+
+  let chartU = null;
+
+  function createChartProU() {
+    chartU = Morris.Bar({
+      element: 'chartU',
+      data: Array.from(countsU.entries())
+        .map(([uso, countU]) => {
+          const total = Object.values(countU).reduce((acc, curr) => acc + curr, 0);
+          return { uso, total, countU };
+        }),
+      xkey: 'uso',
+      ykeys: ['total'],
+      labels: ['Total'],
+      xLabelAngle: 60,
+      hoverCallback: function (index, options, content, row) {
+        let html = `<div>${row.uso}: ${row.total}</div>`;
+        Object.entries(row.countU).forEach(([province, countU]) => {
+          html += `<div>${province}: ${countU}</div>`;
+        });
+        return html;
+      }
+    });
+  }
   onMount(() => {
     getData().then(() => {
-      processData();
+      processDataU();
+      createChartProU();
+      processDataI();
       createChartProA();
     });
   });
 </script>
 
 <main>
+    <tr>
     <h1>Immuebles por Provincia según el año</h1>
   <div id="chart" style="height: 250px;"></div>
+</tr>
+  <tr>
+  <h1>Uso de los inmuebles por Provincia</h1>
+  <div id="chartU" style="height: 250px;"></div>
+</tr>
 </main>
