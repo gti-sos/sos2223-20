@@ -547,10 +547,6 @@ async function loadInitialData() {
 </main>
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f8f8;
-}
 
 h1.title {
   text-align: center;

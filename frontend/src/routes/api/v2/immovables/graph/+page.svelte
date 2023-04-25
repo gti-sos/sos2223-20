@@ -1,23 +1,24 @@
 <svelte:head>
-     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 </svelte:head>
 
+
 <script>
-    // @ts-nocheck
-    import { dev } from '$app/environment';
-    import {onMount} from "svelte";
+  // @ts-nocheck
+  import { dev } from '$app/environment';
+  import { onMount } from "svelte";
 
-    let API = '/api/v2/immovables';
-        
-        if(dev)
-            API = 'http://localhost:12345'+API;
+  let API = '/api/v2/immovables';
+  if (dev) {
+    API = 'http://localhost:12345' + API;
+  }
 
-let data = [];
+  let data = [];
 
-async function getData() {
+  async function getData() {
     const response = await fetch(API);
     data = await response.json();
   }
@@ -38,7 +39,7 @@ async function getData() {
 
   let chart = null;
 
-  function createChart() {
+  function createChartProA() {
     chart = Morris.Bar({
       element: 'chart',
       data: Array.from(counts.entries())
@@ -64,13 +65,12 @@ async function getData() {
   onMount(() => {
     getData().then(() => {
       processData();
-      createChart();
+      createChartProA();
     });
   });
 </script>
 
- 
 <main>
-    <div id="chart" style="height: 250px;"></div>
-
+    <h1>Immuebles por Provincia según el año</h1>
+  <div id="chart" style="height: 250px;"></div>
 </main>

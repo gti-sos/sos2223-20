@@ -22,6 +22,7 @@
 	"dependencies": {
 		"bootstrap": "^5.2.3",
 		"cors": "^2.8.5",
+		"svelte-routing": "^1.6.0",
 		"sveltestrap": "^5.10.0"
 	}
 }
