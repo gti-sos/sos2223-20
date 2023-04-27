@@ -6,6 +6,7 @@
     import Integracion1Lmp from "./integracion1LMP.svelte";
     import Integracion from "./integracion-sin-proxyLMP.svelte";
     import Integracion2Lmp from "./integracion2LMP.svelte";
+    import IntegracionConProxyLmp from "./integracion-con-proxyLMP.svelte";
 </script>
 
 
@@ -42,6 +43,11 @@
     <div class="card">
       <h2 class="card-title">Gráficos Integracion Inmuebles Sin proxy</h2>
       <Integracion></Integracion>
+    </div>
+    
+    <div class="card">
+      <h2 class="card-title">Gráficos Integracion Inmuebles Con proxy</h2>
+      <IntegracionConProxyLmp></IntegracionConProxyLmp>
     </div>
   </main>
 <style>

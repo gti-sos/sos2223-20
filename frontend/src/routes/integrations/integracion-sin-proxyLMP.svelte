@@ -75,10 +75,10 @@
   }
 
   async function loadJSCharting(provincias,traveler,overnight_stay,average_stay,id,resource,inventory_num,current_usage) {
-      var chart = JSC.chart('chartDiv_1', { 
+      var chart = JSC.chart('chart_1', { 
           debug: true, 
           defaultSeries_type: 'column', 
-          title_label_text: '(parámetros pequeños)', 
+          title_label_text: '', 
           yAxis: { label_text: ''}, 
           xAxis: {
               label_text: '', 
@@ -96,10 +96,10 @@
           ] 
       });
 
-      var chart = JSC.chart('chartDiv_2', { 
+      var chart = JSC.chart('chart_2', { 
           debug: true, 
           defaultSeries_type: 'column', 
-          title_label_text: '(parámetros grandes)', 
+          title_label_text: '', 
           yAxis: { label_text: ''}, 
           xAxis: {
               label_text: '', 
@@ -117,10 +117,10 @@
           ] 
       });
 
-      var chart = JSC.chart('chartDiv_3', { 
+      var chart = JSC.chart('chart_3', { 
           debug: true, 
           defaultSeries_type: 'column', 
-          title_label_text: '(todos los parámetros)', 
+          title_label_text: '', 
           yAxis: { label_text: ''}, 
           xAxis: {
               label_text: '', 
@@ -163,11 +163,11 @@
       <h2 style="text-align:center; font-style: oblique;">Gráfica ocupación de apartamentos e inmuebles</h2>
   </div>
   
-  <div id="chartDiv_1" style="height:150px; margin: 0px auto; margin-top:40px">
+  <div id="chart_1" style="height:150px; margin: 0px auto; margin-top:40px">
   </div>
-  <div id="chartDiv_2" style="height:150px; margin: 0px auto; margin-top:40px">
+  <div id="chart_2" style="height:150px; margin: 0px auto; margin-top:40px">
   </div>
-  <div id="chartDiv_3" style="height:150px; margin: 0px auto; margin-top:40px">
+  <div id="chart_3" style="height:150px; margin: 0px auto; margin-top:40px">
   </div>
   <div style="margin-left:40px;font-size:20px;">
       <h4>Resultado inmuebles</h4>
