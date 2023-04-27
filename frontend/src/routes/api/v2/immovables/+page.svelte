@@ -55,6 +55,9 @@
 
     onMount(async() => {
                 // Load initial data from API or local storage 
+                if(immovables.length===0){
+                  loadInitialData();
+                }
                 getImmovables();
                 
 
@@ -352,7 +355,7 @@ async function loadInitialData() {
     async function Adelante() {
       
       FormLimiteData.offset = FormLimiteData.offset+10;
-      if(FormLimiteData.offset+10>100){
+      if(FormLimiteData.offset+10>immovables.length+10){
         alert("Has llegado al final de la lista.");
       }
       getImmovables();

@@ -23,45 +23,7 @@
     data = await response.json();
   }
 
-  let countsI = new Map();
   let countsU = new Map();
-
-  function processDataI() {
-    data.forEach(item => {
-      const year = item.modified_date.split('-')[0];
-      const province = item.province;
-      const countI = countsI.get(year) || {};
-      countI[province] = (countI[province] || 0) + 1;
-      countsI.set(year, countI);
-    });
-  }
-
-  $: processDataI();
-
-  let chart = null;
-
-  function createChartProA() {
-    chart = Morris.Bar({
-      element: 'chart',
-      data: Array.from(countsI.entries())
-        .sort(([year1], [year2]) => year1.localeCompare(year2)) // ordenamos por año
-        .map(([year, countI]) => {
-          const total = Object.values(countI).reduce((acc, curr) => acc + curr, 0);
-          return { year, total, countI };
-        }),
-      xkey: 'year',
-      ykeys: ['total'],
-      labels: ['Total'],
-      xLabelAngle: 60,
-      hoverCallback: function (index, options, content, row) {
-        let html = `<div>${row.year}: ${row.total}</div>`;
-        Object.entries(row.countI).forEach(([province, countI]) => {
-          html += `<div>${province}: ${countI}</div>`;
-        });
-        return html;
-      }
-    });
-  }
 
   function processDataU() {
     data.forEach(item => {
@@ -102,19 +64,12 @@
     getData().then(() => {
       processDataU();
       createChartProU();
-      processDataI();
-      createChartProA();
     });
   });
 </script>
 
 <main>
-    <tr>
-    <h1>Immuebles por Provincia según el año</h1>
-  <div id="chart" style="height: 250px;"></div>
-</tr>
-  <tr>
+    
   <h1>Uso de los inmuebles por Provincia</h1>
   <div id="chartU" style="height: 250px;"></div>
-</tr>
 </main>
