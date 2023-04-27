@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
 
   let API_immovables = "https://sos2223-20.appspot.com/api/v2/immovables";
-  let API_cristina ="https://sos2223-14.appspot.com/api/v2/apartment-occupancy-surveys";
+  let API_2 ="https://sos2223-14.appspot.com/api/v2/apartment-occupancy-surveys";
   let datos = "";
   let result_1 = "";
   let resultStatus_1 = "";
@@ -19,7 +19,7 @@
   let average_stay = [];
 
   onMount(async () => {
-      getData_cristina();
+      getData_2();
   });
 
   async function getData_immovables() {
@@ -47,8 +47,8 @@
       resultStatus_1 = status;
   }
 
-  async function getData_cristina() {
-      const res = await fetch(API_cristina, {
+  async function getData_2() {
+      const res = await fetch(API_2, {
           method: "GET",
       });
       try {
@@ -111,8 +111,8 @@
                   points: resource
               },
               { 
-                  name: 'Turistas', 
-                  points: traveler
+                  name: 'Num_inventario', 
+                  points: inventory_num
               }, 
           ] 
       });
