@@ -2,6 +2,7 @@
   //@ts-nocheck
   import { onMount } from "svelte";
 
+
   let API_immovables = "https://sos2223-20.appspot.com/api/v2/immovables";
   let API_2 ="https://sos2223-14.appspot.com/api/v2/apartment-occupancy-surveys";
   let datos = "";
@@ -14,10 +15,10 @@
   let inventory_num = [];
   let resource = [];
   let id = [];
+  let current_usage = [];
   let traveler = [];
   let overnight_stay = [];
   let average_stay = [];
-
   onMount(async () => {
       getData_2();
   });
@@ -30,16 +31,19 @@
           const data = await res.json();
           result_1 = JSON.stringify(data, null, 2);
           datos = data;
+         
           for (let i = 0; i < datos.length; i++) {
               p = `${datos[i]["province"]} ${datos[i]["modified_date"]}`;
               if (!provincias.includes(p)) {
                   provincias.push(p);
               }
+              current_usage.push(datos[i]["current_usage"].length)
               id.push(datos[i]["id"]);
               resource.push(datos[i]["resource"]);
               inventory_num.push(datos[i]["inventory_num"]);
           }
-          loadJSCharting(provincias, traveler, overnight_stay, average_stay,id,resource,inventory_num);
+          
+          loadJSCharting(provincias, traveler, overnight_stay, average_stay,id,resource,inventory_num,current_usage);
       } catch (error) {
           console.log(`Error parsing result: ${error}`);
       }
@@ -70,7 +74,7 @@
       resultStatus_2 = status;
   }
 
-  async function loadJSCharting(provincias,traveler,overnight_stay,average_stay,id,resource,inventory_num) {
+  async function loadJSCharting(provincias,traveler,overnight_stay,average_stay,id,resource,inventory_num,current_usage) {
       var chart = JSC.chart('chartDiv_1', { 
           debug: true, 
           defaultSeries_type: 'column', 
@@ -80,19 +84,15 @@
               label_text: '', 
               categories: provincias
           }, 
-          series: [   
+          series: [ 
               { 
-                  name: 'Turistas', 
-                  points: traveler
+                  name: 'Estancia Media', 
+                  points: average_stay
               },
               { 
-                  name: 'id', 
-                  points: id
-              },
-              { 
-                  name: 'Recurso', 
-                  points: resource
-              }, 
+                  name: 'current_usage', 
+                  points: current_usage
+              }
           ] 
       });
 

@@ -2,11 +2,10 @@
     import Youtube from "./youtubeLMP.svelte";
     import Google from "./apiGoogleLMP.svelte";
     import GraphsImmovablesMorris from "./graphsImmovablesMorris.svelte";
-    import GraphsImmovablesMorrisUsage from "./graphsImmovablesMorrisUsage.svelte";
+    import GraphsImmovablesJSCUsage from "./graphsImmovablesJSCUsage.svelte";
     import Integracion1Lmp from "./integracion1LMP.svelte";
     import Integracion from "./integracion-sin-proxyLMP.svelte";
     import Integracion2Lmp from "./integracion2LMP.svelte";
-    import IntegracionSinProxyLmp from "./integracion-sin-proxyLMP.svelte";
 </script>
 
 
@@ -24,12 +23,12 @@
     </div>
   
     <div class="card">
-        <h2 class="card-title">Gráficos Inmobiliarios</h2>
-        <GraphsImmovablesMorrisUsage></GraphsImmovablesMorrisUsage>
+        <h2 class="card-title">Gráficos Inmobiliarios Por Uso JSCharting</h2>
+        <GraphsImmovablesJSCUsage></GraphsImmovablesJSCUsage>
       </div>
       
     <div class="card">
-      <h2 class="card-title">Gráficos Inmobiliarios</h2>
+      <h2 class="card-title">Gráficos Inmobiliarios por Año Morris JS</h2>
       <GraphsImmovablesMorris></GraphsImmovablesMorris>
     </div>
     <div class="card">
@@ -41,12 +40,8 @@
       <Integracion2Lmp></Integracion2Lmp>
     </div>
     <div class="card">
-      <h2 class="card-title">Gráficos Integracion Inmuebles y Hogares</h2>
-      <Integracion></Integracion>
-    </div>
-    <div class="card">
       <h2 class="card-title">Gráficos Integracion Inmuebles Sin proxy</h2>
-      <IntegracionSinProxyLmp></IntegracionSinProxyLmp>
+      <Integracion></Integracion>
     </div>
   </main>
 <style>
