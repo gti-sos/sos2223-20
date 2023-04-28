@@ -5,8 +5,6 @@
 <script>
 import { onMount } from 'svelte';
 // @ts-ignore
-import HighchartsSeries from 'https://code.highcharts.com/9.2.2/modules/series.js';
-
 onMount(async () => {
   const response = await fetch('/api/v2/immovables');
   const immovablesData = await response.json();
