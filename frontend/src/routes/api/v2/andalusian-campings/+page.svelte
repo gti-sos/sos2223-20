@@ -372,7 +372,6 @@
     getCampings();
   }
 </script>
-
 <main>
   <h1 class="title">API Campings Andalucia - Miguel Ángel Salinas</h1>
   <div id="messages" class="message" />
