@@ -20,7 +20,7 @@ function loadBackend_MASv2(app){
 
 app.get(BASE_API_URL+'/campings/docs', (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/26062489/2s93K1oysD");
-  });
+  });// comentario
   
 app.get('/api/v2/campings/docs', (req, res) => {
     res.redirect("https://documenter.getpostman.com/view/26063155/2s93XyU3Xd");
