@@ -1,4 +1,4 @@
-//@ts-nocheck
+
 <svelte:head>
 
   <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -292,9 +292,9 @@ series3.push({
 
 <main>
     <h1>Immuebles por parametros no numericos según el año</h1>
-    <div id="chartI" style="height: 250px;"></div>
+    <div id="chartI" style="height: 500px;width: 80%;"></div>
     <h1>Immuebles por parametros numericos según el año</h1>
-    <div id="chartII" style="height: 250px;"></div>
+    <div id="chartII" style="height: 250px;width: 80%;"></div>
     <h1>Immuebles por todos los parametros </h1>
-    <div id="chartIII" style="height: 250px;"></div>
+    <div id="chartIII" style="height: 250px;width: 80%;"></div>
   </main>
