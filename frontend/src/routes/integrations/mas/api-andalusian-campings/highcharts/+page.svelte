@@ -1,7 +1,6 @@
 <script>
   // @ts-nocheck
   import { onMount } from "svelte";
-
   onMount(async () => {
     await Promise.all([getData()]);
     processDataI();
@@ -10,7 +9,7 @@
     createChartIII();
   });
 
-  let API = "https://sos2223-20.appspot.com/api/v2/andalusian_campings";
+  let API = "localhost:12345/api/v2/andalusian-campingss";
 
   let data = [];
 
@@ -22,15 +21,15 @@
   let countsIProvincia = new Map();
   let countsINombre = new Map();
   let countsICodRegistro = new Map();
-  let countsIIdGrupo = new Map();
+  let countsIResponsable = new Map();
   let countsICategoria = new Map();
-  let countsICiudad = new Map();
+  let countsIMunicipio = new Map();
   let id = [];
-  let responsible = [];
+  let group_id = [];
   let camping_places = [];
   function processDataI() {
     data.forEach((item) => {
-      const year = item.modified_date.split("-")[0];
+      const year = item.start_date.split("-")[0];
       const state = item.state;
       const countI = countsIProvincia.get(year) || {};
       countI[state] = (countI[state] || 0) + 1;
@@ -38,7 +37,7 @@
     });
     console.log(countsIProvincia);
     data.forEach((item) => {
-      const year = item.modified_date.split("-")[0];
+      const year = item.start_date.split("-")[0];
       const name = item.name;
       const countI = countsINombre.get(year) || {};
       countI[name] = (countI[name] || 0) + 1;
@@ -46,7 +45,7 @@
     });
 
     data.forEach((item) => {
-      const year = item.modified_date.split("-")[0];
+      const year = item.start_date.split("-")[0];
       const registry_code = item.registry_code;
       const countI = countsICodRegistro.get(year) || {};
       countI[registry_code] = (countI[registry_code] || 0) + 1;
@@ -54,15 +53,15 @@
     });
 
     data.forEach((item) => {
-      const year = item.modified_date.split("-")[0];
-      const group_id = item.group_id;
-      const countI = countsIIdGrupo.get(year) || {};
-      countI[group_id] = (countI[group_id] || 0) + 1;
-      countsIIdGrupo.set(year, countI);
+      const year = item.start_date.split("-")[0];
+      const responsible = item.responsible;
+      const countI = countsIResponsable.get(year) || {};
+      countI[responsible] = (countI[responsible] || 0) + 1;
+      countsIResponsable.set(year, countI);
     });
 
     data.forEach((item) => {
-      const year = item.modified_date.split("-")[0];
+      const year = item.start_date.split("-")[0];
       const usage = item.category;
       const countI = countsICategoria.get(year) || {};
       countI[usage] = (countI[usage] || 0) + 1;
@@ -70,15 +69,15 @@
     });
 
     data.forEach((item) => {
-      const year = item.modified_date.split("-")[0];
+      const year = item.start_date.split("-")[0];
       const city = item.city;
-      const countI = countsICiudad.get(year) || {};
+      const countI = countsIMunicipio.get(year) || {};
       countI[city] = (countI[city] || 0) + 1;
-      countsICiudad.set(year, countI);
+      countsIMunicipio.set(year, countI);
     });
     for (let i = 0; i < data.length; i++) {
       id.push(data[i]["id"]);
-      responsible.push(data[i]["responsible"]);
+      group_id.push(data[i]["group_id"]);
       camping_places.push(data[i]["camping_places"]);
     }
   }
@@ -135,15 +134,17 @@
     }
     return seriesData;
   }
-  function createSeriesForCountsIIdGrupo() {
+  function createSeriesForCountsIResponsable() {
     const seriesData = [];
-    const group_idNames = Object.keys(Array.from(countsIIdGrupo.values())[0]);
+    const responsibleNames = Object.keys(
+      Array.from(countsIResponsable.values())[0]
+    );
 
-    for (const group_id of group_idNames) {
+    for (const responsible of responsibleNames) {
       const series = {
-        name: group_id,
-        data: Array.from(countsIIdGrupo.entries()).map(
-          ([year, countI]) => countI[group_id] || 0
+        name: responsible,
+        data: Array.from(countsIResponsable.entries()).map(
+          ([year, countI]) => countI[responsible] || 0
         ),
       };
       seriesData.push(series);
@@ -153,9 +154,11 @@
   }
   function createSeriesForCountsICategoria() {
     const seriesData = [];
-    const usoNames = Object.keys(Array.from(countsICategoria.values())[0]);
+    const CategoriaNames = Object.keys(
+      Array.from(countsICategoria.values())[0]
+    );
 
-    for (const category of usoNames) {
+    for (const category of CategoriaNames) {
       const series = {
         name: category,
         data: Array.from(countsICategoria.entries()).map(
@@ -167,14 +170,14 @@
 
     return seriesData;
   }
-  function createSeriesForCountsICiudad() {
+  function createSeriesForCountsIMunicipio() {
     const seriesData = [];
-    const muniNames = Object.keys(Array.from(countsICiudad.values())[0]);
+    const muniNames = Object.keys(Array.from(countsIMunicipio.values())[0]);
 
     for (const city of muniNames) {
       const series = {
         name: city,
-        data: Array.from(countsICiudad.entries()).map(
+        data: Array.from(countsIMunicipio.entries()).map(
           ([year, countI]) => countI[city] || 0
         ),
       };
@@ -190,9 +193,9 @@
     series.push(...createSeriesForCountsIProvincia());
     series.push(...createSeriesForCountsINombre());
     series.push(...createSeriesForCountsICodRegistro());
-    series.push(...createSeriesForCountsIIdGrupo());
+    series.push(...createSeriesForCountsIResponsable());
     series.push(...createSeriesForCountsICategoria());
-    series.push(...createSeriesForCountsICiudad());
+    series.push(...createSeriesForCountsIMunicipio());
 
     console.log(series);
     chartI = Highcharts.chart("chartI", {
@@ -223,8 +226,8 @@
     });
 
     series2.push({
-      name: "Responsable",
-      data: responsible,
+      name: "Id Grupos",
+      data: group_id,
     });
 
     series2.push({
@@ -255,21 +258,21 @@
     series3.push(...createSeriesForCountsIProvincia());
     series3.push(...createSeriesForCountsINombre());
     series3.push(...createSeriesForCountsICodRegistro());
-    series3.push(...createSeriesForCountsIIdGrupo());
+    series3.push(...createSeriesForCountsIResponsable());
     series3.push(...createSeriesForCountsICategoria());
-    series3.push(...createSeriesForCountsICiudad());
+    series3.push(...createSeriesForCountsIMunicipio());
     series3.push({
       name: "IDs",
       data: id,
     });
 
     series3.push({
-      name: "Recursos",
-      data: responsible,
+      name: "Id Grupos",
+      data: group_id,
     });
 
     series3.push({
-      name: "Números de Campings",
+      name: "Números de Camping",
       data: camping_places,
     });
 
@@ -295,9 +298,9 @@
 
 <svelte:head>
   <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 </svelte:head>
 
 <main>
