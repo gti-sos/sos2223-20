@@ -200,7 +200,7 @@
     console.log(series);
     chartI = Highcharts.chart("chartI", {
       chart: {
-        type: "bar",
+        type: 'bar',
       },
       title: {
         text: "Grafico parametros no numericos",
@@ -209,10 +209,16 @@
         categories: Array.from(countsIProvincia.keys()),
       },
       yAxis: {
+        min: 0,
         title: {
-          text: "Cantidad",
+            text: 'Numero de Campings',
+            align: 'high'
         },
-      },
+        labels: {
+            overflow: 'justify'
+        },
+        gridLineWidth: 0
+    },
       series: series,
     });
   }

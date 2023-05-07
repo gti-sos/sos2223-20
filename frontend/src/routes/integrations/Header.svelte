@@ -13,6 +13,14 @@
   
     </ul>
     </nav>
+
+    <h1 class="title">Integraciones MAS</h1>
+    <nav>
+      <ul>
+        <li><a href="\integrations\mas\api-andalusian-campings\highcharts">Graficos API Campings HighCharts</a></li>
+  
+    </ul>
+    </nav>
 </main>
 <style>
 .container {
