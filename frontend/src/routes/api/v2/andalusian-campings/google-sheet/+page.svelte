@@ -5,6 +5,7 @@
     // Data retrieved from https://netmarketshare.com/
     // Radialize the colors
     Highcharts.setOptions({
+      
       colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
         return {
           radialGradient: {
