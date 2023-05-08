@@ -62,9 +62,9 @@
 
     data.forEach((item) => {
       const year = item.start_date.split("-")[0];
-      const usage = item.category;
+      const category = item.category;
       const countI = countsICategoria.get(year) || {};
-      countI[usage] = (countI[usage] || 0) + 1;
+      countI[category] = (countI[category] || 0) + 1;
       countsICategoria.set(year, countI);
     });
 
@@ -186,7 +186,6 @@
     console.log(seriesData);
     return seriesData;
   }
-
   function createChartI() {
     let series = [];
 
