@@ -1,22 +1,3 @@
-
-<svelte:head>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
-  <script src="https://code.highcharts.com/modules/export-data.js"></script>
-  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-</svelte:head>
-
-<main>
-  <h1>Campings por parametros no numericos según el año</h1>
-  <div id="chartI" style="height: 500px;width: 80%;"></div>
-  <h1>Campings por parametros numericos según el año</h1>
-  <div id="chartII" style="height: 550px;width: 80%;"></div>
-  <h1>Campings por todos los parametros</h1>
-  <div id="chartIII" style="height: 250px;width: 80%;"></div>
-</main>
-
-
-
 <script>
   // @ts-nocheck
   import { onMount } from "svelte";
@@ -28,7 +9,7 @@
     createChartIII();
   });
 
-  let API = "http://localhost:12345/api/v2/andalusian-campings";
+  let API = "https://sos2223-20.ew.r.appspot.com/api/v2/andalusian-campings";
 
   let data = [];
 
@@ -219,7 +200,7 @@
     console.log(series);
     chartI = Highcharts.chart("chartI", {
       chart: {
-        type: 'bar',
+        type: "bar",
       },
       title: {
         text: "Grafico parametros no numericos",
@@ -230,14 +211,14 @@
       yAxis: {
         min: 0,
         title: {
-            text: 'Numero de Campings',
-            align: 'high'
+          text: "Numero de Campings",
+          align: "high",
         },
         labels: {
-            overflow: 'justify'
+          overflow: "justify",
         },
-        gridLineWidth: 0
-    },
+        gridLineWidth: 0,
+      },
       series: series,
     });
   }
@@ -265,15 +246,15 @@
       },
       title: {
         text: "Grafico parametros numericos",
-        align: 'left'
+        align: "left",
       },
       xAxis: {
         categories: Object.keys(Array.from(countsIProvincia.values())[0]),
         title: {
-            text: null
+          text: null,
         },
         gridLineWidth: 1,
-        lineWidth: 0
+        lineWidth: 0,
       },
       yAxis: {
         min: 0,
@@ -281,9 +262,9 @@
           text: "Cantidad",
         },
         labels: {
-            overflow: 'justify'
+          overflow: "justify",
         },
-        gridLineWidth: 0
+        gridLineWidth: 0,
       },
       series: series2,
     });
@@ -331,3 +312,19 @@
     });
   }
 </script>
+
+<svelte:head>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</svelte:head>
+
+<main>
+  <h1>Campings por parametros no numericos según el año</h1>
+  <div id="chartI" style="height: 500px;width: 80%;" />
+  <h1>Campings por parametros numericos según el año</h1>
+  <div id="chartII" style="height: 550px;width: 80%;" />
+  <h1>Campings por todos los parametros</h1>
+  <div id="chartIII" style="height: 250px;width: 80%;" />
+</main>
