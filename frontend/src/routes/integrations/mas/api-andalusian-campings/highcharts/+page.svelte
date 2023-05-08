@@ -8,11 +8,11 @@
 
 <main>
   <h1>Campings por parametros no numericos según el año</h1>
-  <div id="chartI" style="height: 500px;width: 80%;" />
+  <div id="chartI" style="height: 500px;width: 80%;"></div>
   <h1>Campings por parametros numericos según el año</h1>
-  <div id="chartII" style="height: 550px;width: 80%;" />
+  <div id="chartII" style="height: 550px;width: 80%;"></div>
   <h1>Campings por todos los parametros</h1>
-  <div id="chartIII" style="height: 250px;width: 80%;" />
+  <div id="chartIII" style="height: 250px;width: 80%;"></div>
 </main>
 
 
