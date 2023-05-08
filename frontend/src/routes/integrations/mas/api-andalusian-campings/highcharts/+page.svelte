@@ -1,3 +1,22 @@
+
+<svelte:head>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</svelte:head>
+
+<main>
+  <h1>Campings por parametros no numericos según el año</h1>
+  <div id="chartI" style="height: 500px;width: 80%;" />
+  <h1>Campings por parametros numericos según el año</h1>
+  <div id="chartII" style="height: 250px;width: 80%;" />
+  <h1>Campings por todos los parametros</h1>
+  <div id="chartIII" style="height: 250px;width: 80%;" />
+</main>
+
+
+
 <script>
   // @ts-nocheck
   import { onMount } from "svelte";
@@ -9,7 +28,7 @@
     createChartIII();
   });
 
-  let API = "localhost:12345/api/v2/andalusian-campingss";
+  let API = "http://localhost:12345/api/v2/andalusian-campings";
 
   let data = [];
 
@@ -246,14 +265,25 @@
       },
       title: {
         text: "Grafico parametros numericos",
+        align: 'left'
       },
       xAxis: {
         categories: Object.keys(Array.from(countsIProvincia.values())[0]),
+        title: {
+            text: null
+        },
+        gridLineWidth: 1,
+        lineWidth: 0
       },
       yAxis: {
+        min: 0,
         title: {
           text: "Cantidad",
         },
+        labels: {
+            overflow: 'justify'
+        },
+        gridLineWidth: 0
       },
       series: series2,
     });
@@ -301,19 +331,3 @@
     });
   }
 </script>
-
-<svelte:head>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
-  <script src="https://code.highcharts.com/modules/export-data.js"></script>
-  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-</svelte:head>
-
-<main>
-  <h1>Campings por parametros no numericos según el año</h1>
-  <div id="chartI" style="height: 500px;width: 80%;" />
-  <h1>Campings por parametros numericos según el año</h1>
-  <div id="chartII" style="height: 250px;width: 80%;" />
-  <h1>Campings por todos los parametros</h1>
-  <div id="chartIII" style="height: 250px;width: 80%;" />
-</main>
