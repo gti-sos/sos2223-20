@@ -18,7 +18,7 @@
 });
   
     let API = 'https://sos2223-20.appspot.com/api/v2/immovables';
-  
+    //let API = 'http://localhost:12345/api/v2/immovables';
     let data = [];
   
     async function getData() {
