@@ -58,6 +58,7 @@
     "range-parser": "^1.2.1",
     "raw-body": "^2.5.1",
     "readable-stream": "^2.2.11",
+    "request": "^2.88.2",
     "safe-buffer": "^5.0.1",
     "safer-buffer": "^2.1.2",
     "send": "^0.18.0",

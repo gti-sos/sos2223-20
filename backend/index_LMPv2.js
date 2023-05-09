@@ -1,11 +1,11 @@
 
 const immovablesFilePath = 'ddbb/immovables.json';
 const BASE_API_URL = "/api/v2";
-import fs from 'fs';
-
+import request from 'request';
 import Datastore from 'nedb';
 var immovables = new Datastore();
 
+import fs from 'fs';
 
 
 function loadBackend_LMPv2(app){
@@ -31,8 +31,8 @@ app.get('/api/v2/immovables/docs', (req, res) => {
         res.sendStatus(500);
       } else if (docs.length === 0) {
         const immovablesData = JSON.parse(fs.readFileSync(immovablesFilePath));
-        const initialImmovables = immovablesData.slice(0, 30);
-        immovables.insert(initialImmovables, (err, newDocs) => {
+        const initialimmovables = immovablesData.slice(0, 15);
+        immovables.insert(initialimmovables, (err, newDocs) => {
           if (err) {
             console.log(`Error inserting initial data into immovables: ${err}`);
             res.sendStatus(500);
@@ -42,13 +42,11 @@ app.get('/api/v2/immovables/docs', (req, res) => {
           }
         });
       } else {
-        console.log(`Immovables collection already has ${docs.length} documents`);
+        console.log(`immovables collection already has ${docs.length} documents`);
         res.sendStatus(200);
       }
     });
   });
-      
-
   
   //______________________________GET con rango de busqueda
   //immovables
@@ -304,8 +302,14 @@ app.get(`${BASE_API_URL}/immovables/:province`, (req, res) => {
         return res.status(200).send({ message: 'Immovable deleted successfully' });
     });
   });
-  
-  
+
+
+app.use('/api/proxy-lmp', function (req, res) {
+    var url = req.url.replace('/?url=', '');
+    console.log('piped: ' + req.url);
+    req.pipe(request(url)).pipe(res);
+});
+
 };
 
 export {loadBackend_LMPv2}
