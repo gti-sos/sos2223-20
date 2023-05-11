@@ -10,7 +10,7 @@
     createChartIIII();
   });
 
-  let API = "https://sos2223-20.ew.r.appspot.com/api/v2/campings";
+  let API = "http://localhost:12345/api/v2/campings";
 
   let data = [];
 
@@ -19,37 +19,6 @@
     data = await response.json();
   }
 
-  async function createData1990() {
-  const campings = await getData();
-  const states = ["ALMERÍA", "CÁDIZ", "CÓRDOBA", "GRANADA", "HUELVA", "SEVILLA", "JAÉN", "MÁLAGA"];
-  const data1990 = {};
-  // Initialize data1990 object with 0 for each state
-  for (const state of states) {
-    data1990[state] = 0;
-  }
-  // Calculate the sum of camping_places for each state with a start date between 1990 and 1999
-  for (const camping of campings) {
-    const startYear = parseInt(camping.start_date);
-    if (startYear >= 1990 && startYear <= 1999) {
-      const state = camping.state.toUpperCase();
-      if (data1990.hasOwnProperty(state)) {
-        data1990[state] += camping.camping_places;
-      }
-    }
-  }
-  // Convert the data1990 object to an array and add 0 for any state with no camping_places
-  const resultArray = [];
-  for (const state of states) {
-    resultArray.push(data1990.hasOwnProperty(state) ? data1990[state] : 0);
-  }
-  return resultArray;
-}
-
-data1990().then(stateTotals => {
-  console.log(stateTotals); // outputs an array with the sum of camping places for each state that has campings with a start date between 1990 and 1999
-}).catch(error => {
-  console.error(error);
-});
 
   let countsIProvincia = new Map();
   let countsINombre = new Map();
@@ -260,6 +229,71 @@ data1990().then(stateTotals => {
   }
   let chartII = null;
 
+  
+  function getData1990() {
+  const provinces = ["ALMERÍA", "CÁDIZ", "CÓRDOBA", "GRANADA", "HUELVA", "SEVILLA", "JAÉN", "MÁLAGA"];
+  const campingPlaces90 = [0, 0, 0, 0, 0, 0, 0, 0];
+  
+  data.forEach((item) => {
+    const year = parseInt(item.start_date.split("-")[0]);
+    const province = item.state;
+    if (year >= 1990 && year <= 1999 && provinces.includes(province)) {
+      const index = provinces.indexOf(province);
+      campingPlaces90[index] += item.camping_places;
+    }
+  });
+  console.log(campingPlaces90);
+  return campingPlaces90;
+}
+
+function getData2000() {
+  const provinces = ["ALMERÍA", "CÁDIZ", "CÓRDOBA", "GRANADA", "HUELVA", "SEVILLA", "JAÉN", "MÁLAGA"];
+  const campingPlaces00 = [0, 0, 0, 0, 0, 0, 0, 0];
+  
+  data.forEach((item) => {
+    const year = parseInt(item.start_date.split("-")[0]);
+    const province = item.state;
+    if (year >= 2000 && year <= 2009 && provinces.includes(province)) {
+      const index = provinces.indexOf(province);
+      campingPlaces00[index] += item.camping_places;
+    }
+  });
+  console.log(campingPlaces00);
+  return campingPlaces00;
+}
+
+function getData2010() {
+  const provinces = ["ALMERÍA", "CÁDIZ", "CÓRDOBA", "GRANADA", "HUELVA", "SEVILLA", "JAÉN", "MÁLAGA"];
+  const campingPlaces10 = [0, 0, 0, 0, 0, 0, 0, 0];
+  
+  data.forEach((item) => {
+    const year = parseInt(item.start_date.split("-")[0]);
+    const province = item.state;
+    if (year >= 2010 && year <= 2019 && provinces.includes(province)) {
+      const index = provinces.indexOf(province);
+      campingPlaces10[index] += item.camping_places;
+    }
+  });
+  console.log(campingPlaces10);
+  return campingPlaces10;
+}
+
+function getData1980() {
+  const provinces = ["ALMERÍA", "CÁDIZ", "CÓRDOBA", "GRANADA", "HUELVA", "SEVILLA", "JAÉN", "MÁLAGA"];
+  const campingPlaces80 = [0, 0, 0, 0, 0, 0, 0, 0];
+  
+  data.forEach((item) => {
+    const year = parseInt(item.start_date.split("-")[0]);
+    const province = item.state;
+    if (year >= 1980 && year <= 1989 && provinces.includes(province)) {
+      const index = provinces.indexOf(province);
+      campingPlaces80[index] += item.camping_places;
+    }
+  });
+  console.log(campingPlaces80);
+  return campingPlaces80;
+}
+
   function createChartII() {
     let series2 = [];
     
@@ -343,34 +377,12 @@ data1990().then(stateTotals => {
     });
   }
 
-  function createSeries4(){
-
-  }
-
-  function data1960(){
-
-  }
-
-  function data2000(){
-
-  }
-
   function createChartIIII() {
-    let series4 = [];
-    createData1990();
-
-    series4.push(...createSeriesForCountsIProvincia());
-
-    series3.push({
-      name: "Id Grupos",
-      data: group_id,
-    });
-
-    series3.push({
-      name: "Números de Camping",
-      data: camping_places,
-    });
-
+    const data1990 = getData1990();
+    const data1980 = getData1980();
+    const data2000 = getData2000();
+    const data2010 = getData2010();
+    
     chartI = Highcharts.chart("chartIIII", {
       chart: {
         type: "bar",
@@ -401,17 +413,17 @@ data1990().then(stateTotals => {
 
       },
       series: [{
-        name: '1990',
+        name: 'Años 1980',
+        data: data1980
+    }, {
+        name: 'Años 1990',
         data: data1990
     }, {
-        name: 'Year 2000',
-        data: [814, 841, 3714, 726, 31]
+        name: 'Años 2000',
+        data: data2000
     }, {
-        name: 'Year 2010',
-        data: [1044, 944, 4170, 735, 40]
-    }, {
-        name: 'Year 2018',
-        data: [1276, 1007, 4561, 746, 42]
+        name: 'Años 2010',
+        data: data2010
     }]
     });
   }
@@ -430,5 +442,7 @@ data1990().then(stateTotals => {
   <h1>Campings por parametros numericos según el año</h1>
   <div id="chartII" style="height: 550px;width: 80%;" />
   <h1>Campings por todos los parametros</h1>
-  <div id="chartIII" style="height: 250px;width: 80%;" />
+  <div id="chartIII" style="height: 850px;width: 80%;" />
+  <h1>Campings por provincia y año</h1>
+  <div id="chartIIII" style="height: 650px;width: 80%;" />
 </main>
