@@ -186,7 +186,7 @@ try {
        category: "",
        id: "",
        camping_places: "",
-       modified_date: "",
+       start_date: "",
        city: "",
        responsible: "",
        state: "",
@@ -200,7 +200,7 @@ try {
   // Validación básica antes de enviar el formulario
 if (
   !formData.name ||
-  formData.modified_date === null ||
+  formData.start_date === null ||
   id === null ||
   formData.state === null ||
   formData.registry_code === null ||
@@ -247,7 +247,7 @@ if (response.ok) {
           category: camping.category,
           id: camping.id,
           camping_places: camping.camping_places,
-          modified_date: camping.modified_date,
+          start_date: camping.start_date,
           city: camping.city,
           responsible: camping.responsible,
           state: camping.state,
@@ -407,7 +407,7 @@ async function loadInitialData() {
     <td><input type="text" bind:value={camping.category} /></td>
     <td><input type="number" bind:value={camping.id} disabled /></td>
     <td><input type="number" bind:value={camping.camping_places} /></td>
-    <td><input type="text" bind:value={camping.modified_date} /></td>
+    <td><input type="text" bind:value={camping.start_date} /></td>
     <td><input type="text" bind:value={camping.city} /></td>
     <td><input type="text" bind:value={camping.responsible} /></td>
     <td><input type="text" bind:value={camping.state} /></td>
@@ -419,7 +419,7 @@ async function loadInitialData() {
     <td>{camping.category}</td>
     <td>{camping.id}</td>
     <td>{camping.camping_places}</td>
-    <td>{camping.modified_date}</td>
+    <td>{camping.start_date}</td>
     <td>{camping.city}</td>
     <td>{camping.responsible}</td>
     <td>{camping.state}</td>
@@ -532,8 +532,8 @@ async function loadInitialData() {
   <label for="city">Municipio</label>
   <input type="text" id="city" bind:value={formData.city} required />
 
-  <label for="modified_date">Fecha</label>
-  <input type="text" id="modified_date" bind:value={formData.modified_date} required />
+  <label for="start_date">Fecha</label>
+  <input type="text" id="start_date" bind:value={formData.start_date} required />
 
   <label for="camping_places">Num Campings</label>
   <input type="number" id="camping_places" bind:value={formData.camping_places} required />
