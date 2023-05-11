@@ -33,7 +33,7 @@ app.get('/api/v2/campings/docs', (req, res) => {
         res.sendStatus(500);
       } else if (docs.length === 0) {
         const campingsData = JSON.parse(fs.readFileSync(campingsFilePath));
-        const initialCampings = campingsData.slice(0, 15);
+        const initialCampings = campingsData.slice(0, 20);
         campings.insert(initialCampings, (err, newDocs) => {
           if (err) {
             console.log(`Error inserting initial data into campings: ${err}`);
