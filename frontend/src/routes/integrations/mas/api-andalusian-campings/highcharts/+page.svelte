@@ -9,7 +9,7 @@
     createChartIII();
   });
 
-  let API = "https://sos2223-20.ew.r.appspot.com/api/v2/andalusian-campings";
+  let API = "https://sos2223-20.ew.r.appspot.com/api/v2/campings";
 
   let data = [];
 
@@ -122,7 +122,6 @@
     const registry_codeNames = Object.keys(
       Array.from(countsICodRegistro.values())[0]
     );
-
     for (const registry_code of registry_codeNames) {
       const series = {
         name: registry_code,
@@ -134,6 +133,7 @@
     }
     return seriesData;
   }
+  
   function createSeriesForCountsIResponsable() {
     const seriesData = [];
     const responsibleNames = Object.keys(
@@ -149,7 +149,7 @@
       };
       seriesData.push(series);
     }
-
+    console.log(seriesData);
     return seriesData;
   }
   function createSeriesForCountsICategoria() {
@@ -168,8 +168,12 @@
       seriesData.push(series);
     }
 
+    console.log(seriesData);
     return seriesData;
+    
   }
+  
+
   function createSeriesForCountsIMunicipio() {
     const seriesData = [];
     const muniNames = Object.keys(Array.from(countsIMunicipio.values())[0]);
@@ -225,16 +229,11 @@
 
   function createChartII() {
     let series2 = [];
+    
     series2.push({
-      name: "IDs",
-      data: id,
-    });
-
-    series2.push({
-      name: "Id Grupos",
-      data: group_id,
-    });
-
+    name: 'IDs',
+    data: id
+      });
     series2.push({
       name: "Números de Camping",
       data: camping_places,
