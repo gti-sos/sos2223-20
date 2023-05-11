@@ -1,10 +1,17 @@
 <script>
     //@ts-nocheck
     import { onMount } from "svelte";
-
-    let API_externaSOS = "https://sos2223-12.appspot.com/api/v2/agroclimatic";
+    import { dev } from "$app/environment";
+    let API_externaSOS = "/api/proxy-lmp/?url=https://sos2223-12.ew.r.appspot.com/api/v2/agroclimatic";
     let API_immovables =
-        "https://sos2223-20.appspot.com/api/v2/immovables";
+        "/api/v2/immovables/";
+
+        if (dev){
+            API_immovables = "http://localhost:12345" + API_immovables;
+            console.log(API_immovables);
+            API_externaSOS = "http://localhost:12345" + API_externaSOS;
+    }
+
     let datos = "";
     let result_1 = "";
     let resultStatus_1 = "";
@@ -61,6 +68,7 @@
         });
         try {
             const data = await res.json();
+            console.log(data)
             result_2 = JSON.stringify(data, null, 2);
             datos = data;
             for (let i = 0; i < datos.length; i++) {

@@ -201,6 +201,7 @@ console.log(series)
   },
   xAxis: {
     categories: Array.from(countsIProvincia.keys())
+    
   },
   yAxis: {
     title: {
@@ -236,7 +237,9 @@ function createChartII() {
     text: 'Grafico parametros numericos'
   },
   xAxis: {
-    categories: Object.keys(Array.from(countsIProvincia.values())[0])
+    title: {
+      text: "Inmuebles"
+    }
   },
   yAxis: {
     title: {
