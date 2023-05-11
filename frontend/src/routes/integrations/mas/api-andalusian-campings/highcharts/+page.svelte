@@ -7,6 +7,7 @@
     createChartI();
     createChartII();
     createChartIII();
+    createChartIIII();
   });
 
   let API = "https://sos2223-20.ew.r.appspot.com/api/v2/campings";
@@ -17,6 +18,38 @@
     const response = await fetch(API);
     data = await response.json();
   }
+
+  async function createData1990() {
+  const campings = await getData();
+  const states = ["ALMERÍA", "CÁDIZ", "CÓRDOBA", "GRANADA", "HUELVA", "SEVILLA", "JAÉN", "MÁLAGA"];
+  const data1990 = {};
+  // Initialize data1990 object with 0 for each state
+  for (const state of states) {
+    data1990[state] = 0;
+  }
+  // Calculate the sum of camping_places for each state with a start date between 1990 and 1999
+  for (const camping of campings) {
+    const startYear = parseInt(camping.start_date);
+    if (startYear >= 1990 && startYear <= 1999) {
+      const state = camping.state.toUpperCase();
+      if (data1990.hasOwnProperty(state)) {
+        data1990[state] += camping.camping_places;
+      }
+    }
+  }
+  // Convert the data1990 object to an array and add 0 for any state with no camping_places
+  const resultArray = [];
+  for (const state of states) {
+    resultArray.push(data1990.hasOwnProperty(state) ? data1990[state] : 0);
+  }
+  return resultArray;
+}
+
+data1990().then(stateTotals => {
+  console.log(stateTotals); // outputs an array with the sum of camping places for each state that has campings with a start date between 1990 and 1999
+}).catch(error => {
+  console.error(error);
+});
 
   let countsIProvincia = new Map();
   let countsINombre = new Map();
@@ -307,6 +340,79 @@
         },
       },
       series: series3,
+    });
+  }
+
+  function createSeries4(){
+
+  }
+
+  function data1960(){
+
+  }
+
+  function data2000(){
+
+  }
+
+  function createChartIIII() {
+    let series4 = [];
+    createData1990();
+
+    series4.push(...createSeriesForCountsIProvincia());
+
+    series3.push({
+      name: "Id Grupos",
+      data: group_id,
+    });
+
+    series3.push({
+      name: "Números de Camping",
+      data: camping_places,
+    });
+
+    chartI = Highcharts.chart("chartIIII", {
+      chart: {
+        type: "bar",
+      },
+      title: {
+        text: "Número de Campings por Provincia y Año",
+        align: "left",
+      },
+      xAxis: {
+        categories: 
+        ["ALMERÍA", 
+        "CÁDIZ",
+        "CÓRDOBA",
+        "GRANADA",
+        "HUELVA",
+        "SEVILLA",
+        "JAÉN",
+        "MÁLAGA"]
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: "Num Campings",
+        },
+        labels: {
+          overflow: "justify",
+        },
+
+      },
+      series: [{
+        name: '1990',
+        data: data1990
+    }, {
+        name: 'Year 2000',
+        data: [814, 841, 3714, 726, 31]
+    }, {
+        name: 'Year 2010',
+        data: [1044, 944, 4170, 735, 40]
+    }, {
+        name: 'Year 2018',
+        data: [1276, 1007, 4561, 746, 42]
+    }]
     });
   }
 </script>
