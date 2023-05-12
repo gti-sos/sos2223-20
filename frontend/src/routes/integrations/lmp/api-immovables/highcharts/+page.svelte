@@ -77,16 +77,19 @@
     let chartI = null;
 function createSeriesForCountsIProvincia() {
   const seriesData = [];
-  let provinceNames = Object.keys(Array.from(countsIProvincia.values())[0]);
+  for(let i = 0; i<6;i++){
+  let provinceNames = Object.keys(Array.from(countsIProvincia.values())[i]);
 
   for (const province of provinceNames) {
+    if(!(seriesData.some((element) => element.name === province))){
     const series = {
       name: province,
       data: Array.from(countsIProvincia.entries()).map(([year, countI]) => countI[province] || 0)
     };
     seriesData.push(series);
   }
-
+}
+  }
   return seriesData;
 }
 function createSeriesForCountsINaturaleza() {
@@ -125,46 +128,54 @@ function createSeriesForCountsIUso() {
 
 function createSeriesForCountsIid() {
   const seriesData = [];
-  const idd = Object.keys(Array.from(countsIid.values())[0]);
+  for(let i = 0; i<6;i++){
+  const idd = Object.keys(Array.from(countsIid.values())[i]);
 
   for (const id of idd) {
+    if(!(seriesData.some((element) => element.name === id))){
     const series = {
       name: id,
       data: Array.from(countsIid.entries()).map(([year, countI]) => countI[id] || 0)
     };
     seriesData.push(series);
   }
-console.log(seriesData)
+}
+}
   return seriesData;
 }
 
 function createSeriesForCountsIresource() {
   const seriesData = [];
-  const resourcen = Object.keys(Array.from(countsIresource.values())[0]);
+  for(let i = 0; i<6;i++){
+  const resourcen = Object.keys(Array.from(countsIresource.values())[i]);
 
   for (const resource of resourcen) {
+    if(!(seriesData.some((element) => element.name === resource))){
     const series = {
       name: resource,
       data: Array.from(countsIresource.entries()).map(([year, countI]) => countI[resource] || 0)
     };
     seriesData.push(series);
   }
-console.log(seriesData)
+}
+  }
   return seriesData;
 }
 
 function createSeriesForCountsIinventorynum() {
   const seriesData = [];
-  const iventorynumn = Object.keys(Array.from(countsIinventorynum.values())[0]);
+  for(let i = 0; i<6;i++){
+  const iventorynumn = Object.keys(Array.from(countsIinventorynum.values())[i]);
 
   for (const inventory_num of iventorynumn) {
+    if(!(seriesData.some((element) => element.name === inventory_num))){
     const series = {
       name: inventory_num,
       data: Array.from(countsIinventorynum.entries()).map(([year, countI]) => countI[inventory_num] || 0)
     };
     seriesData.push(series);
   }
-console.log(seriesData)
+}}
   return seriesData;
 }
 
@@ -193,14 +204,33 @@ console.log(series)
       text: 'Cantidad'
     }
   },
-  series: series
+  series: series,
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y: 2f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+              animation: {
+        duration: 2000,
+        easing: 'easeOutBounce'
+      },
+            pointPadding: 0.2,
+            borderWidth: 2,
+            borderColor: "#000"
+            }
+        },
 });
 }
 let chartII = null;
 
 function createChartII() {
   let series2 = [];
-  
+
   series2.push(...createSeriesForCountsIid());
   series2.push(...createSeriesForCountsIresource());
   series2.push(...createSeriesForCountsIinventorynum());
@@ -251,14 +281,13 @@ series3.push(...createSeriesForCountsIinventorynum());
   series: series3
 });
 }
-
 </script>
 
 <main>
     <h1>Immuebles por parametros no numericos según el año</h1>
     <div id="chartI" style="height: 500px;width: 80%;"></div>
     <h1>Immuebles por parametros numericos según el año</h1>
-    <div id="chartII" style="height: 250px;width: 80%;"></div>
+    <div id="chartII" style="height: 500px;width: 80%;"></div>
     <h1>Immuebles por todos los parametros </h1>
-    <div id="chartIII" style="height: 250px;width: 80%;"></div>
+    <div id="chartIII" style="height: 500px;width: 80%;"></div>
   </main>
