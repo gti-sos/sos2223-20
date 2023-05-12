@@ -99,8 +99,8 @@
             }, 
             series: [   
                 { 
-                    name: 'Uso', 
-                    points: uso
+                    name: 'Recurso', 
+                    points: resource
                 },
                 { 
                     name: 'Temperatura maxima', 
@@ -174,12 +174,15 @@
 </svelte:head>
 <main>
     <div style="margin-left: 30px;">
+        <h1 style="text-align:center; font-style: oblique;">Integración con compañero con Proxy</h1>
         <h2 style="text-align:center; font-style: oblique;">Gráfica inmuebles y temperaturas</h2></div>
-    
+    <h2>Primera Integración</h2>
     <div id="chartPrimera" style="height:150px; margin: 0px auto; margin-top:40px">
     </div>
+    <h2>Variables propias</h2>
     <div id="chartSegunda" style="height:150px; margin: 0px auto; margin-top:40px">
     </div>
+    <h2>Segunda Integración</h2>
     <div id="chartTercera" style="height:150px; margin: 0px auto; margin-top:40px">
     </div>
     <div style="margin-left:40px;font-size:20px;">
