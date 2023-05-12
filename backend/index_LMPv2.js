@@ -89,11 +89,10 @@ app.get('/api/v2/immovables/docs', (req, res) => {
                         ((req.query.from == undefined)||(parseInt(req.query.from) <= x.modified_date))&&
                         ((req.query.to == undefined)||(parseInt(req.query.to) >= x.modified_date))&&
                         ((req.query.province == undefined)||(req.query.province === x.province))&&
-                        ((req.query.active_name == undefined)||(req.query.active_name === x.active_name))&&
-                        ((req.query.counseling == undefined)||(req.query.counseling === x.counseling))&&
+                        
                         ((req.query.current_usage == undefined)||(req.query.current_usage === x.current_usage))&&
                         ((req.query.id == undefined)||(parseInt(req.query.id) === x.id))&&
-                        ((req.query.municipality == undefined)||(req.query.municipality === x.municipality))&&
+                     
                         ((req.query.inventory_num == undefined)||(parseInt(req.query.inventory_num) === x.inventory_num))&&
                         ((req.query.resource == undefined)||(parseInt(req.query.resource) === x.resource))&&
                         ((req.query.nature == undefined)||(req.query.nature === x.nature))
@@ -224,8 +223,8 @@ app.get(`${BASE_API_URL}/immovables/:province`, (req, res) => {
   //______________________________POST normal
   app.post(BASE_API_URL+'/immovables', (req, res) => {
     const newImmovable = req.body;
-    if (!newImmovable.active_name || !newImmovable.counseling || !newImmovable.current_usage || 
-      !newImmovable.inventory_num ||  !newImmovable.municipality || !newImmovable.nature ||!newImmovable.province 
+    if ( !newImmovable.current_usage || 
+      !newImmovable.inventory_num || !newImmovable.nature ||!newImmovable.province 
       || !newImmovable.modified_date || !newImmovable.resource || !newImmovable.id) {
       return res.status(400).json({ error: 'Faltan datos en el JSON' });
     }

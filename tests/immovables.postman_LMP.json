@@ -62,7 +62,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"active_name\":\"Nuevo\",\"counseling\":\"CONSEJERÍA DE AGRICULTURA, GANADERÍA, PESCA Y DESA\",\"current_usage\":\"AGROPECUARIO\",\"id\":1,\"inventory_num\":2000002371,\"modified_date\":\"2022-10-21\",\"municipality\":\"CARMONA\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":9749}",
+					"raw": "{\"current_usage\":\"AGROPECUARIO\",\"id\":111,\"inventory_num\":20,\"modified_date\":\"2022\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":97}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"active_name\":\"SILO DE CARMONA\",\"counseling\":\"CONSEJERÍA DE AGRICULTURA, GANADERÍA, PESCA Y DESA\",\"current_usage\":\"AGROPECUARIO\",\"inventory_num\":2000002371,\"modified_date\":\"2022-10-21\",\"municipality\":\"CARMONA\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":9749}",
+					"raw": "{\"current_usage\":\"AGROPECUARIO\",\"inventory_num\":20,\"modified_date\":\"2022\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":97}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -156,7 +156,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"resource\":\"08942\",\"counseling\":\"CONSEJERÍA DE CULTURA Y PATRIMONIO HISTÓRICO\",\"street\":\"NEVERAL A-27.\",\"icmsId\":\"08942\",\"nature\":\"Rústica\",\"id\":\"08942\",\"province\":\"Jaén\",\"modified_date\":\"2023-03-16\",\"municipality\":\"JAEN\",\"inventory_num\":2000003772,\"active_name\":\"CASTILLO DE SANTA CATALINA\",\"current_usage\":\"CULTURAL\"}",
+					"raw": "{\"current_usage\":\"AGROPECUARIO\",\"id\":111,\"inventory_num\":20,\"modified_date\":\"2022\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":97}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -204,7 +204,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"active_name\":\"Nuevo immovable de Prueba\",\"counseling\":\"SERVICIO ANDALUZ DE SALUD\",\"current_usage\":\"SANITARIO\",\"id\":1,\"inventory_num\":900001805,\"modified_date\":\"2022-10-21\",\"municipality\":\"BEAS\",\"nature\":\"Urbana\",\"province\":\"Huelva\",\"resource\":13865}",
+					"raw": "{\"current_usage\":\"AGROPECUARIO\",\"id\":111,\"inventory_num\":20,\"modified_date\":\"2022\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":97}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -252,7 +252,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"active_name\":\"Nuevo\",\"counseling\":\"SERVICIO ANDALUZ DE SALUD\",\"current_usage\":\"SANITARIO\",\"id\":1,\"inventory_num\":900001805,\"modified_date\":\"2022-10-21\",\"municipality\":\"BEAS\",\"nature\":\"Urbana\",\"province\":\"Huelva\",\"resource\":13865}",
+					"raw": "{\"current_usage\":\"AGRO\",\"id\":111,\"inventory_num\":20,\"modified_date\":\"2022\",\"nature\":\"Urbana\",\"province\":\"Sevilla\",\"resource\":97}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -260,7 +260,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables/1",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables/111",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -273,7 +273,7 @@
 						"api",
 						"v2",
 						"immovables",
-						"1"
+						"111"
 					]
 				}
 			},
@@ -313,94 +313,6 @@
 						"v2",
 						"immovables",
 						"12345"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET con active_name",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?active_name=Nuevo",
-					"protocol": "https",
-					"host": [
-						"sos2223-20",
-						"ew",
-						"r",
-						"appspot",
-						"com"
-					],
-					"path": [
-						"api",
-						"v2",
-						"immovables"
-					],
-					"query": [
-						{
-							"key": "active_name",
-							"value": "Nuevo"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET con counseling",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?counseling=SERVICIO ANDALUZ DE SALUD",
-					"protocol": "https",
-					"host": [
-						"sos2223-20",
-						"ew",
-						"r",
-						"appspot",
-						"com"
-					],
-					"path": [
-						"api",
-						"v2",
-						"immovables"
-					],
-					"query": [
-						{
-							"key": "counseling",
-							"value": "SERVICIO ANDALUZ DE SALUD"
-						}
 					]
 				}
 			},
@@ -579,6 +491,141 @@
 						{
 							"key": "province",
 							"value": "Huelva"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET con id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?id=111",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"immovables"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "111"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET con resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?resource=97",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"immovables"
+					],
+					"query": [
+						{
+							"key": "resource",
+							"value": "97"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET con iventory_num",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?inventory_num=20",
+					"protocol": "https",
+					"host": [
+						"sos2223-20",
+						"ew",
+						"r",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"immovables"
+					],
+					"query": [
+						{
+							"key": "inventory_num",
+							"value": "20"
 						}
 					]
 				}

@@ -45,10 +45,7 @@
       id: "",
       resource: "",
       inventory_num: "",
-      active_name:"",
-      counseling:"",
       current_usage:"",
-      municipality: "",
       nature:"",
       province:"",
     };
@@ -181,13 +178,10 @@ async function getImmovablesByDate() {
 }
 
         let formData ={
-           active_name:"",
-        counseling: "",
          current_usage: "",
          id: "",
          inventory_num: "",
          modified_date: "",
-         municipality: "",
          nature: "",
          province: "",
          resource: ""
@@ -199,13 +193,11 @@ async function getImmovablesByDate() {
     const inventory_num = parseInt(formData.inventory_num);
     // Validación básica antes de enviar el formulario
   if (
-    !formData.active_name ||
+    
     formData.modified_date === null ||
     id === null ||
     formData.province === null ||
-    formData.counseling === null ||
     formData.nature === null ||
-    formData.municipality === null ||
     formData.current_usage === null ||
     !Number.isInteger(id) ||
     !Number.isInteger(resource) ||!Number.isInteger(inventory_num)
@@ -242,13 +234,10 @@ async function getImmovablesByDate() {
         editMode = true;
         // Create an object to store the new values
         let updatedImmovable = {
-            active_name: immovable.active_name,
-            counseling: immovable.counseling,
             current_usage: immovable.current_usage,
             id: immovable.id,
             inventory_num: immovable.inventory_num,
             modified_date: immovable.modified_date,
-            municipality: immovable.municipality,
             nature: immovable.nature,
             province: immovable.province,
             resource: immovable.resource,
@@ -384,13 +373,10 @@ async function loadInitialData() {
     <table in:fade={{ duration: 300 }}>
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Consejería</th>
           <th>Uso Actual</th>
           <th>ID</th>
           <th>Num Inventario</th>
           <th>Fecha</th>
-          <th>Municipio</th>
           <th>Naturaleza</th>
           <th>Provincia</th>
           <th>Recurso</th>
@@ -402,25 +388,19 @@ async function loadInitialData() {
   <tr>
     {#if immovable.editing} <!-- Si la fila está en modo edición -->
     
-      <td><input type="text" bind:value={immovable.active_name}  /></td>
-      <td><input type="text" bind:value={immovable.counseling} /></td>
       <td><input type="text" bind:value={immovable.current_usage} /></td>
       <td><input type="number" bind:value={immovable.id} disabled /></td>
       <td><input type="number" bind:value={immovable.inventory_num} /></td>
       <td><input type="text" bind:value={immovable.modified_date} /></td>
-      <td><input type="text" bind:value={immovable.municipality} /></td>
       <td><input type="text" bind:value={immovable.nature} /></td>
       <td><input type="text" bind:value={immovable.province} /></td>
       <td><input type="number" bind:value={immovable.resource} /></td>
 
     {:else} <!-- Si la fila no está en modo edición -->
-      <td>{immovable.active_name}</td>
-      <td>{immovable.counseling}</td>
       <td>{immovable.current_usage}</td>
       <td>{immovable.id}</td>
       <td>{immovable.inventory_num}</td>
       <td>{immovable.modified_date}</td>
-      <td>{immovable.municipality}</td>
       <td>{immovable.nature}</td>
       <td>{immovable.province}</td>
       <td>{immovable.resource}</td>
@@ -484,13 +464,10 @@ async function loadInitialData() {
 {#if showBuscaForm}
 <div class="text-center">
   <input type="number" bind:value={FormBuscaData.id} placeholder=" ID"> 
-  <input type="text" bind:value={FormBuscaData.active_name} placeholder="Nombre"> 
-  <input type="text" bind:value={FormBuscaData.counseling} placeholder="Consejería"> 
   <input type="text" bind:value={FormBuscaData.current_usage} placeholder="Uso Actual"> 
   <input type="number" bind:value={FormBuscaData.inventory_num} placeholder="Numero de Inventario">
   <input type="text" bind:value={FormBuscaData.nature} placeholder="Naturaleza">
-  <input type="text" bind:value={FormBuscaData.municipality} placeholder="Municipio">
-  <input type="text" bind:value={FormBuscaData.province} placeholder="Provincia">
+<input type="text" bind:value={FormBuscaData.province} placeholder="Provincia">
   <input type="number" bind:value={FormBuscaData.resource} placeholder="Recurso">
   <br><br>
   <button type="submit" on:click={busqueda(FormBuscaData)} class="btn btn-info"><i class="fas fa-search"></i> Buscar</button>
@@ -513,24 +490,14 @@ async function loadInitialData() {
 <form on:submit|preventDefault={handleSubmit}>
     <label for="id">ID</label>
     <input type="number" id="id" bind:value={formData.id} required />
-  
-    <label for="active_name">Nombre</label>
-    <input type="text" id="active_name" bind:value={formData.active_name} required />
-  
     <label for="resource">Recurso</label>
     <input type="number" id="resource" bind:value={formData.resource} required />
-  
-    <label for="counseling">Consejería</label>
-    <input type="text" id="counseling" bind:value={formData.counseling} required />
 
     <label for="nature">Naturaleza</label>
     <input type="text" id="nature" bind:value={formData.nature} required />
 
     <label for="province">Provincia</label>
     <input type="text" id="province" bind:value={formData.province} required />
-
-    <label for="municipality">Municipio</label>
-    <input type="text" id="municipality" bind:value={formData.municipality} required />
 
     <label for="modified_date">Fecha</label>
     <input type="text" id="modified_date" bind:value={formData.modified_date} required />
