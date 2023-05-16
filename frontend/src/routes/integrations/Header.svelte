@@ -10,7 +10,8 @@
         <li><a href="\integrations\lmp\apis-externas\google\tabla">API Externa Google LMP Tabla</a></li>
         <li><a href="\integrations\lmp\apis-externas\youtube">API Externa Youtube LMP</a></li>
         <li><a href="\integrations\lmp\api-immovables\highcharts">Graficos API Immovables HighCharts</a></li>
-  
+        <li><a href="\integrations\lmp\apis-externas\pokemon">API Externa Pokemon</a></li>
+        <li><a href="\integrations\lmp\apis-externas\paises">API Externa Paises</a></li>
     </ul>
     </nav>
 
