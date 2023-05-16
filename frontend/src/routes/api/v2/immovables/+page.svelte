@@ -1,3 +1,6 @@
+<svelte:head>
+    <title> Immuebles </title>
+</svelte:head>
 <script>
     // @ts-nocheck
     import { fade } from "svelte/transition";

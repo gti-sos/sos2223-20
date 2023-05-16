@@ -13,7 +13,7 @@
     
       axios.get('https://www.googleapis.com/youtube/v3/search', {
         params: {
-          key: 'AIzaSyAX4I9dpttB4TWkHxaYaZKTIOrx3OLljHg',
+          key: '',//key de la API
           q: 'Búsqueda de ejemplo',
           part: 'snippet'
         }

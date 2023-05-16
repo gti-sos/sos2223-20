@@ -13,16 +13,36 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - run: npm install
+      - uses: actions/setup-node@v3
+          with:
+          node-version: 16
 
-      - run: cd frontend; npm install; cd ..
+      - run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
-      - run: cd frontend; npm run build; cd ..
+      - name: Install FrontEnd dependences
+        run: cd frontend; npm install; cd ..
 
-      - run: npm start &
+      - name: Build FrontEnd
+        run: cd frontend; npm run build; cd ..
 
-      - run: npm test
+      - name: Run app
+        run: npm start &
 
+      - name: Run backend tests
+        run: npm test
+
+      - name: Run e2e tests
+        run: npx playwright test
+      
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+            name: playwright-report
+            path: playwright-report/
+            retention-days: 30
+            
       - id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:

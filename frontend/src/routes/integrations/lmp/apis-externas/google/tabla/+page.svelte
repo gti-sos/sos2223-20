@@ -4,7 +4,7 @@
     let results = [];
   
     const fetchResults = async () => {
-      const API_KEY = "AIzaSyAX4I9dpttB4TWkHxaYaZKTIOrx3OLljHg";
+      const API_KEY = "";//API KEY DEL PROYECTO
       const QUERY = "FC Barcelona";
       const SEARCH_URL = `https://kgsearch.googleapis.com/v1/entities:search?query=${QUERY}&key=${API_KEY}&limit=10&indent=True`;
   

@@ -1,3 +1,6 @@
+<svelte:head>
+    <title> SOS2223-20 </title>
+</svelte:head>
 <main>
     <body>
         <h1>SOS2223-20</h1>
