@@ -1,5 +1,5 @@
 <svelte:head>
-    <title> Immuebles </title>
+    <title>Immuebles</title>
 </svelte:head>
 <script>
     // @ts-nocheck
