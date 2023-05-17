@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "daf1763d-7285-4e27-a134-4367adac135c",
-		"name": "immovables v2",
+		"_postman_id": "c314364c-904a-4716-a43a-54801c02f5e5",
+		"name": "immovables v3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26062489"
 	},
@@ -23,7 +23,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -34,7 +34,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables"
 					]
 				}
@@ -70,7 +70,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -81,7 +81,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables"
 					]
 				}
@@ -117,7 +117,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -128,7 +128,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables"
 					]
 				}
@@ -164,7 +164,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables/",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables/",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -175,7 +175,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables",
 						""
 					]
@@ -212,7 +212,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables/1",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables/1",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -223,7 +223,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables",
 						"1"
 					]
@@ -260,7 +260,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables/111",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables/111",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -271,7 +271,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables",
 						"111"
 					]
@@ -299,7 +299,7 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables/12345",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables/12345",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -310,7 +310,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables",
 						"12345"
 					]
@@ -339,7 +339,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?current_usage=SANITARIO",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables?current_usage=SANITARIO",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -350,58 +350,13 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables"
 					],
 					"query": [
 						{
 							"key": "current_usage",
 							"value": "SANITARIO"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET con municipality",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function(){\r",
-							"    pm.response.to.have.status(200);\r",
-							"\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?municipality=BEAS",
-					"protocol": "https",
-					"host": [
-						"sos2223-20",
-						"ew",
-						"r",
-						"appspot",
-						"com"
-					],
-					"path": [
-						"api",
-						"v2",
-						"immovables"
-					],
-					"query": [
-						{
-							"key": "municipality",
-							"value": "BEAS"
 						}
 					]
 				}
@@ -428,7 +383,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?nature=Urbana",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables?nature=Urbana",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -439,7 +394,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables"
 					],
 					"query": [
@@ -473,7 +428,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?province=Huelva",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables?province=Huelva",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -484,7 +439,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables"
 					],
 					"query": [
@@ -518,7 +473,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?id=111",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables?id=111",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -529,7 +484,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables"
 					],
 					"query": [
@@ -563,7 +518,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?resource=97",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables?resource=97",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -574,7 +529,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables"
 					],
 					"query": [
@@ -608,7 +563,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables?inventory_num=20",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables?inventory_num=20",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -619,7 +574,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables"
 					],
 					"query": [
@@ -661,7 +616,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v2/immovables/1",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables/1",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -672,7 +627,7 @@
 					],
 					"path": [
 						"api",
-						"v2",
+						"v3",
 						"immovables",
 						"1"
 					]

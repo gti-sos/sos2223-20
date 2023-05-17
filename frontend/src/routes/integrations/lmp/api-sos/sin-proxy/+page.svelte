@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
 
 
-  let API_immovables = "https://sos2223-20.appspot.com/api/v2/immovables";
+  let API_immovables = "https://sos2223-20.appspot.com/api/v3/immovables";
   let API_2 ="https://sos2223-14.appspot.com/api/v2/apartment-occupancy-surveys";
   let datos = "";
   let result_1 = "";

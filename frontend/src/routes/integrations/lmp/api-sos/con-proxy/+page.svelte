@@ -4,7 +4,7 @@
     import { dev } from "$app/environment";
     let API_externaSOS = "/api/proxy-lmp/?url=https://sos2223-12.ew.r.appspot.com/api/v2/agroclimatic";
     let API_immovables =
-        "/api/v2/immovables/";
+        "/api/v3/immovables/";
 
         if (dev){
             API_immovables = "http://localhost:12345" + API_immovables;
