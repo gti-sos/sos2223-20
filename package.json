@@ -36,6 +36,7 @@
     "has-symbols": "^1.0.3",
     "highcharts": "^11.0.1",
     "http-errors": "^2.0.0",
+    "http-proxy": "^1.18.1",
     "iconv-lite": "^0.4.24",
     "inherits": "^2.0.4",
     "ipaddr.js": "^1.9.1",

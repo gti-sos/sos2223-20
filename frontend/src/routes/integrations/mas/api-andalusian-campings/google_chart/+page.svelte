@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
 
+     //proxy let API = "http://localhost:12345/api/v2/integrations/mas/api-andalusian-campings/api-sos/proxy";
     let API = "http://localhost:12345/api/v2/campings";
     let data = [];
 

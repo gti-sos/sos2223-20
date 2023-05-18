@@ -46,7 +46,28 @@
   </script>
   
   <style>
-    .sortable {
+    .table-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+  
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+  
+    th {
+      background-color: #f5f5f5;
+      font-weight: bold;
       cursor: pointer;
       position: relative;
     }
@@ -55,60 +76,95 @@
       content: "";
       display: inline-block;
       vertical-align: middle;
-      margin-left: 0.25rem;
+      margin-left: 0.5rem;
       border: solid transparent;
-      border-width: 0.25rem 0.25rem 0;
+      border-width: 0.35rem 0.35rem 0;
       border-top-color: currentColor;
-      opacity: 0.6;
+      opacity: 0.8;
       transform: rotate(180deg);
     }
   
     .ascending:after {
       transform: rotate(0deg);
     }
+  
+    tr:nth-child(2n) {
+      background-color: #f9f9f9;
+    }
+  
+    .search-bar {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+    }
+  
+    .search-input {
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 8px;
+      flex-grow: 1;
+    }
+  
+    .search-button {
+      padding: 8px 16px;
+      font-size: 14px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   </style>
   
-  <input type="text" bind:value={searchTerm} placeholder="Búsqueda por Nombre" />
-  
-  <button on:click={searchByName}>Busca</button>
-  
-  <table>
-    <thead>
-      <tr>
-        <th
-          class:sortable={sortedColumn === "name"}
-          class:sorted={sortedColumn === "name" && sortDirection === 1}
-          class:ascending={sortedColumn === "name" && sortDirection === -1}
-          on:click={() => sortTable("name")}
-        >
-          Nombre
-        </th>
-        <th
-          class:sortable={sortedColumn === "country"}
-          class:sorted={sortedColumn === "country" && sortDirection === 1}
-          class:ascending={sortedColumn === "country" && sortDirection === -1}
-          on:click={() => sortTable("country")}
-        >
-          País
-        </th>
-        <th>Código Universidad</th>
-        <th>Página Web</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each universities as university}
-        <tr>
-          <td>{university.name}</td>
-          <td>{university.country}</td>
-          <td>{university.alpha_two_code}</td>
-          <td>
-            {#each university.web_pages as webPage, index}
-              <a href={webPage} target="_blank" rel="noopener noreferrer">{webPage}</a>
-              {#if index !== university.web_pages.length - 1}, {/if}
-            {/each}
-          </td>
-        </tr>
-      {/each}
-    </tbody>
-  </table>
+  <div class="table-container">
+    <div class="search-bar">
+      <input
+        type="text"
+        class="search-input"
+        bind:value={searchTerm}
+        placeholder="Search by name"
+      />
+      <button class="search-button" on:click={searchByName}>Search</button>
+    </div>
+    {#if universities.length > 0}
+      <table>
+        <thead>
+          <tr>
+            <th class:sortable={sortedColumn === "name"} on:click={() => sortTable("name")}>
+              Name
+              {#if sortedColumn === "name"}
+                <span class:sorted class:ascending={sortDirection === 1}></span>
+              {/if}
+            </th>
+            <th class:sortable={sortedColumn === "country"} on:click={() => sortTable("country")}>
+              Country
+              {#if sortedColumn === "country"}
+                <span class:sorted class:ascending={sortDirection === 1}></span>
+              {/if}
+            </th>
+            <th>Domains</th>
+            <th>Web Pages</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each universities as university, index (university.id)}
+            <tr class:colored-row={index % 2 !== 0}>
+              <td>{university.name}</td>
+              <td>{university.country}</td>
+              <td>{university.domains.join(", ")}</td>
+              <td>
+                {#each university.web_pages as webPage}
+                  <a href={webPage} target="_blank" rel="noopener noreferrer">{webPage}</a><br />
+                {/each}
+              </td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    {:else}
+      <p>No universities found.</p>
+    {/if}
+  </div>
   
