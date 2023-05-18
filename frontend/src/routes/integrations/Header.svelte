@@ -19,7 +19,7 @@
     <nav>
       <ul>
         <li><a href="\integrations\mas\api-andalusian-campings\highcharts">Graficos API Campings HighCharts</a></li>
-  
+        <li><a href="\integrations\mas\api-andalusian-campings\google_chart">Graficos Google Charts</a></li>
     </ul>
     </nav>
 </main>
