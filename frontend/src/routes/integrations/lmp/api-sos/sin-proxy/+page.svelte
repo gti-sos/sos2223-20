@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
 
 
-  let API_immovables = "https://sos2223-20.appspot.com/api/v2/immovables";
+  let API_immovables = "https://sos2223-20.appspot.com/api/v3/immovables";
   let API_2 ="https://sos2223-14.appspot.com/api/v2/apartment-occupancy-surveys";
   let datos = "";
   let result_1 = "";
@@ -90,8 +90,8 @@
                   points: average_stay
               },
               { 
-                  name: 'current_usage', 
-                  points: current_usage
+                  name: 'Id', 
+                  points: id
               }
           ] 
       });
@@ -105,7 +105,13 @@
               label_text: '', 
               categories: provincias
           }, 
-          series: [   
+          series: [   { 
+                  name: 'Id', 
+                  points: id
+              },{ 
+                  name: 'Estancia Media', 
+                  points: average_stay
+              },
               { 
                   name: 'Recurso', 
                   points: resource
@@ -160,13 +166,18 @@
 </svelte:head>
 <main>
   <div style="margin-left: 30px;">
+    <h1 style="text-align:center; font-style: oblique;">Integración con compañero sin proxy</h1>
       <h2 style="text-align:center; font-style: oblique;">Gráfica ocupación de apartamentos e inmuebles</h2>
   </div>
-  
+  <h2>Primera Integración</h2>
   <div id="chart_1" style="height:150px; margin: 0px auto; margin-top:40px">
   </div>
+  <h2>Segunda Integración</h2>
+
   <div id="chart_2" style="height:150px; margin: 0px auto; margin-top:40px">
   </div>
+  <h2>Tercera Integración</h2>
+
   <div id="chart_3" style="height:150px; margin: 0px auto; margin-top:40px">
   </div>
   <div style="margin-left:40px;font-size:20px;">

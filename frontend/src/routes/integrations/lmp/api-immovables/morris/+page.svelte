@@ -11,7 +11,7 @@
   import { dev } from '$app/environment';
   import { onMount } from "svelte";
 
-  let API = '/api/v2/immovables';
+  let API = '/api/v3/immovables';
   if (dev) {
     API = 'http://localhost:12345' + API;
   }

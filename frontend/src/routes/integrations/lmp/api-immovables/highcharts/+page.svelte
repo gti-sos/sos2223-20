@@ -17,8 +17,8 @@
     createChartIII();
 });
   
-    let API = 'https://sos2223-20.appspot.com/api/v2/immovables';
-    //let API = 'http://localhost:12345/api/v2/immovables';
+    let API = 'https://sos2223-20.appspot.com/api/v3/immovables';
+    //let API = 'http://localhost:12345/api/v3/immovables';
     let data = [];
   
     async function getData() {
@@ -28,68 +28,48 @@
   
   
     let countsIProvincia = new Map();
-    let countsINombre = new Map();
-    let countsIConsejeria = new Map();
     let countsINaturaleza = new Map();
     let countsIUso = new Map();
-    let countsIMunicipio = new Map();
-    let id = [];
-    let resource = [];
-    let inventory_num = [];
+    let countsIid = new Map();
+    let countsIresource = new Map();
+    let countsIinventorynum = new Map();
+
     function processDataI() {
 
       data.forEach(item => {
-        const year = item.modified_date.split('-')[0];
+        const year = item.modified_date;
+
         const province = item.province;
         const countI = countsIProvincia.get(year) || {};
         countI[province] = (countI[province] || 0) + 1;
         countsIProvincia.set(year, countI);
-      });
-console.log(countsIProvincia)
-      data.forEach(item => {
-        const year = item.modified_date.split('-')[0];
-        const name = item.active_name;
-        const countI = countsINombre.get(year) || {};
-        countI[name] = (countI[name] || 0) + 1;
-        countsINombre.set(year, countI);
-      });
 
-      data.forEach(item => {
-        const year = item.modified_date.split('-')[0];
-        const counseling = item.counseling;
-        const countI = countsIConsejeria.get(year) || {};
-        countI[counseling] = (countI[counseling] || 0) + 1;
-        countsIConsejeria.set(year, countI);
-      });
-
-      data.forEach(item => {
-        const year = item.modified_date.split('-')[0];
         const nature = item.nature;
-        const countI = countsINaturaleza.get(year) || {};
-        countI[nature] = (countI[nature] || 0) + 1;
-        countsINaturaleza.set(year, countI);
-      });
+        const countInature = countsINaturaleza.get(year) || {};
+        countInature[nature] = (countInature[nature] || 0) + 1;
+        countsINaturaleza.set(year, countInature);
 
-      data.forEach(item => {
-        const year = item.modified_date.split('-')[0];
         const usage = item.current_usage;
-        const countI = countsIUso.get(year) || {};
-        countI[usage] = (countI[usage] || 0) + 1;
-        countsIUso.set(year, countI);
+        const countIusage = countsIUso.get(year) || {};
+        countIusage[usage] = (countIusage[usage] || 0) + 1;
+        countsIUso.set(year, countIusage);
+
+        const id = item.id;
+        const countIid = countsIid.get(year) || {};
+        countIid[id] = (countIid[id] || 0) + 1;
+        countsIid.set(year, countIid);
+
+        const resource = item.resource;
+        const countIresource = countsIresource.get(year) || {};
+        countIresource[resource] = (countIresource[resource] || 0) + 1;
+        countsIresource.set(year, countIresource);
+
+        const inventory_num = item.inventory_num;
+        const countIinv = countsIinventorynum.get(year) || {};
+        countIinv[inventory_num] = (countIinv[inventory_num] || 0) + 1;
+        countsIinventorynum.set(year, countIinv);
       });
 
-      data.forEach(item => {
-        const year = item.modified_date.split('-')[0];
-        const municipality = item.municipality;
-        const countI = countsIMunicipio.get(year) || {};
-        countI[municipality] = (countI[municipality] || 0) + 1;
-        countsIMunicipio.set(year, countI);
-      });
-      for (let i = 0; i < data.length; i++) {
-                id.push(data[i]["id"]);
-                resource.push(data[i]["resource"]);
-                inventory_num.push(data[i]["inventory_num"]);
-            }
     }
   
     $: processDataI();
@@ -97,45 +77,20 @@ console.log(countsIProvincia)
     let chartI = null;
 function createSeriesForCountsIProvincia() {
   const seriesData = [];
-  const provinceNames = Object.keys(Array.from(countsIProvincia.values())[0]);
+  for(let i = 0; i<6;i++){
+  let provinceNames = Object.keys(Array.from(countsIProvincia.values())[i]);
 
   for (const province of provinceNames) {
+    if(!(seriesData.some((element) => element.name === province))){
     const series = {
       name: province,
       data: Array.from(countsIProvincia.entries()).map(([year, countI]) => countI[province] || 0)
     };
     seriesData.push(series);
   }
-
-  return seriesData;
 }
-function createSeriesForCountsINombre() {
-  const seriesData = [];
-  const names = Object.keys(Array.from(countsINombre.values())[0]);
-
-  for (const name of names) {
-    const series = {
-      name: name,
-      data: Array.from(countsIProvincia.entries()).map(([year, countI]) => countI[name] || 0)
-    };
-    seriesData.push(series);
-  }
-
-  return seriesData;
-}
-function createSeriesForCountsIConsejeria() {
-  const seriesData = [];
-  const counselingNames = Object.keys(Array.from(countsIConsejeria.values())[0]);
-
-  for (const counseling of counselingNames) {
-    const series = {
-      name: counseling,
-      data: Array.from(countsIConsejeria.entries()).map(([year, countI]) => countI[counseling] || 0)
-    };
-    seriesData.push(series);
   }
   return seriesData;
-  
 }
 function createSeriesForCountsINaturaleza() {
   const seriesData = [];
@@ -153,30 +108,74 @@ function createSeriesForCountsINaturaleza() {
 }
 function createSeriesForCountsIUso() {
   const seriesData = [];
-  const usoNames = Object.keys(Array.from(countsIUso.values())[0]);
+  for(let i = 0; i<6;i++){
+  const usoNames = Object.keys(Array.from(countsIUso.values())[i]);
+  //const usoNames2 = Object.keys(Array.from(countsIUso.values())[3]);
 
   for (const current_usage of usoNames) {
+    if(!(seriesData.some((element) => element.name === current_usage))){
     const series = {
       name: current_usage,
       data: Array.from(countsIUso.entries()).map(([year, countI]) => countI[current_usage] || 0)
     };
     seriesData.push(series);
   }
+  }
+  }
 
   return seriesData;
 }
-function createSeriesForCountsIMunicipio() {
-  const seriesData = [];
-  const muniNames = Object.keys(Array.from(countsIMunicipio.values())[0]);
 
-  for (const municipality of muniNames) {
+function createSeriesForCountsIid() {
+  const seriesData = [];
+  for(let i = 0; i<6;i++){
+  const idd = Object.keys(Array.from(countsIid.values())[i]);
+
+  for (const id of idd) {
+    if(!(seriesData.some((element) => element.name === id))){
     const series = {
-      name: municipality,
-      data: Array.from(countsIMunicipio.entries()).map(([year, countI]) => countI[municipality] || 0)
+      name: id,
+      data: Array.from(countsIid.entries()).map(([year, countI]) => countI[id] || 0)
     };
     seriesData.push(series);
   }
-console.log(seriesData)
+}
+}
+  return seriesData;
+}
+
+function createSeriesForCountsIresource() {
+  const seriesData = [];
+  for(let i = 0; i<6;i++){
+  const resourcen = Object.keys(Array.from(countsIresource.values())[i]);
+
+  for (const resource of resourcen) {
+    if(!(seriesData.some((element) => element.name === resource))){
+    const series = {
+      name: resource,
+      data: Array.from(countsIresource.entries()).map(([year, countI]) => countI[resource] || 0)
+    };
+    seriesData.push(series);
+  }
+}
+  }
+  return seriesData;
+}
+
+function createSeriesForCountsIinventorynum() {
+  const seriesData = [];
+  for(let i = 0; i<6;i++){
+  const iventorynumn = Object.keys(Array.from(countsIinventorynum.values())[i]);
+
+  for (const inventory_num of iventorynumn) {
+    if(!(seriesData.some((element) => element.name === inventory_num))){
+    const series = {
+      name: inventory_num,
+      data: Array.from(countsIinventorynum.entries()).map(([year, countI]) => countI[inventory_num] || 0)
+    };
+    seriesData.push(series);
+  }
+}}
   return seriesData;
 }
 
@@ -184,11 +183,8 @@ function createChartI() {
   let series = [];
 
 series.push(...createSeriesForCountsIProvincia());
-series.push(...createSeriesForCountsINombre());
-series.push(...createSeriesForCountsIConsejeria());
 series.push(...createSeriesForCountsINaturaleza());
 series.push(...createSeriesForCountsIUso());
-series.push(...createSeriesForCountsIMunicipio());
 
 
 console.log(series)
@@ -208,27 +204,37 @@ console.log(series)
       text: 'Cantidad'
     }
   },
-  series: series
+  series: series,
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y: 2f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+              animation: {
+        duration: 2000,
+        easing: 'easeOutBounce'
+      },
+            pointPadding: 0.2,
+            borderWidth: 2,
+            borderColor: "#000"
+            }
+        },
 });
 }
 let chartII = null;
 
 function createChartII() {
   let series2 = [];
-  series2.push({
-    name: 'IDs',
-    data: id
-  });
 
-  series2.push({
-    name: 'Recursos',
-    data: resource
-  });
+  series2.push(...createSeriesForCountsIid());
+  series2.push(...createSeriesForCountsIresource());
+  series2.push(...createSeriesForCountsIinventorynum());
 
-  series2.push({
-    name: 'Números de inventario',
-    data: inventory_num
-  });
   chartII = Highcharts.chart('chartII', {
   chart: {
     type: 'column'
@@ -237,9 +243,7 @@ function createChartII() {
     text: 'Grafico parametros numericos'
   },
   xAxis: {
-    title: {
-      text: "Inmuebles"
-    }
+    categories: Array.from(countsIid.keys())
   },
   yAxis: {
     title: {
@@ -253,25 +257,11 @@ function createChartIII() {
   let series3 = [];
 
 series3.push(...createSeriesForCountsIProvincia());
-series3.push(...createSeriesForCountsINombre());
-series3.push(...createSeriesForCountsIConsejeria());
 series3.push(...createSeriesForCountsINaturaleza());
 series3.push(...createSeriesForCountsIUso());
-series3.push(...createSeriesForCountsIMunicipio());
-series3.push({
-    name: 'IDs',
-    data: id
-  });
-
-  series3.push({
-    name: 'Recursos',
-    data: resource
-  });
-
-  series3.push({
-    name: 'Números de inventario',
-    data: inventory_num
-  });
+series3.push(...createSeriesForCountsIid());
+series3.push(...createSeriesForCountsIresource());
+series3.push(...createSeriesForCountsIinventorynum());
 
   chartI = Highcharts.chart('chartIII', {
   chart: {
@@ -297,7 +287,7 @@ series3.push({
     <h1>Immuebles por parametros no numericos según el año</h1>
     <div id="chartI" style="height: 500px;width: 80%;"></div>
     <h1>Immuebles por parametros numericos según el año</h1>
-    <div id="chartII" style="height: 250px;width: 80%;"></div>
+    <div id="chartII" style="height: 500px;width: 80%;"></div>
     <h1>Immuebles por todos los parametros </h1>
-    <div id="chartIII" style="height: 250px;width: 80%;"></div>
+    <div id="chartIII" style="height: 500px;width: 80%;"></div>
   </main>
