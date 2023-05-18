@@ -14,17 +14,20 @@
         <li><a href="\integrations\lmp\apis-externas\paises">API Externa Paises</a></li>
     </ul>
     </nav>
+    <br>
 
-    <h1 class="title">Integraciones MAS</h1>
+    <h1 class="title" style="color: teal;" >Integraciones MAS</h1>
     <nav>
       <ul>
-        <li><a href="\integrations\mas\api-andalusian-campings\highcharts">Graficos API Campings HighCharts</a></li>
-        <li><a href="\integrations\mas\api-andalusian-campings\google_chart">Graficos Google Charts</a></li>
-        <li><a href="\integrations\mas\api-andalusian-campings\external-api\currency">Intercambio de Euro</a></li>  
-        <li><a href="\integrations\mas\api-andalusian-campings\external-api\music">Info Nirvan Rock MusicBrainz</a></li>  
-        <li><a href="\integrations\mas\api-andalusian-campings\external-api\space">Noticias Espaciales</a></li>  
-        <li><a href="\integrations\mas\api-andalusian-campings\external-api\advice">Consejos</a></li>  
-        <li><a href="\integrations\mas\api-andalusian-campings\external-api\university">Lista de Universidades</a></li>  
+        <li><a href="\integrations\mas\api-andalusian-campings\highcharts" style="color: teal;">Graficos API Campings HighCharts</a></li>
+        <li><a href="\integrations\mas\api-andalusian-campings\google_chart" style="color: teal;">Graficos Google Charts</a></li>
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\currency" style="color: teal;">Intercambio de Euro</a></li>  
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\music" style="color: teal;">Info Nirvan Rock MusicBrainz</a></li>  
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\space" style="color: teal;">Noticias Espaciales</a></li>  
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\advice" style="color: teal;">Consejos</a></li>  
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\university" style="color: teal;">Lista de Universidades</a></li>  
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\science" style="color: teal;">Literatura Científica</a></li>  
+      
       </ul>
     </nav>
 </main>
@@ -65,7 +68,7 @@ nav a {
 }
 
 nav a:hover {
-  background-color: #0077cc;
+  background-color: #c5c5c5;
   color: #fff;
 }
 

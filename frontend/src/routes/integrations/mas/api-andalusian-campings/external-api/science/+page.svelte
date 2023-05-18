@@ -3,13 +3,28 @@
     import { createSignal } from "svelte";
   
     let searchTerm = "";
-    let xmlData = "";
+    let searchResults = [];
   
     const fetchData = async () => {
       try {
         const response = await fetch(`http://export.arxiv.org/api/query?search_query=all:${searchTerm}`);
-        const data = await response.text();
-        xmlData = data;
+        const xmlData = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlData, "text/xml");
+  
+        const entries = xmlDoc.getElementsByTagName("entry");
+        searchResults = Array.from(entries).map((entry) => {
+          const title = entry.getElementsByTagName("title")[0]?.textContent || "";
+          const summary = entry.getElementsByTagName("summary")[0]?.textContent || "";
+          const authors = Array.from(entry.getElementsByTagName("author")).map(
+            (author) => author.getElementsByTagName("name")[0]?.textContent || ""
+          );
+          const publishedDate = entry.getElementsByTagName("published")[0]?.textContent || "";
+
+
+  
+          return { title, summary, authors,publishedDate };
+        });
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -26,21 +41,74 @@
   </script>
   
   <style>
-    pre {
-      white-space: pre-wrap;
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  
+    .search-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+  
+    .search-input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+    }
+  
+    .search-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #00838a;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  
+    .search-results {
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+  
+    .result-item {
+      margin-bottom: 20px;
+    }
+  
+    .result-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  
+    .result-authors {
+      font-style: italic;
+      margin-bottom: 5px;
+    }
+  
+    .result-summary {
+      line-height: 1.4;
     }
   </style>
   
-  <div>
-    <form on:submit={handleFormSubmit}>
-      <label>
-        Search Term:
-        <input type="text" bind:value={searchTerm} />
-      </label>
-      <button type="submit">Search</button>
+  <div class="search-container">
+    <form class="search-form" on:submit={handleFormSubmit}>
+      <input class="search-input" type="text" bind:value={searchTerm} placeholder="Enter a search term" />
+      <button class="search-button" type="submit">Search</button>
     </form>
   
-    <h2>Search Results:</h2>
-    <pre>{xmlData}</pre>
-  </div>
+    <div class="search-results">
+        {#each searchResults as result (result.title)}
+          <div class="result-item">
+            <div class="result-title">{result.title}</div>
+            {#if result.authors.length > 0}
+              <div class="result-authors">Authors: {result.authors.join(", ")}</div>
+            {/if}
+            <div class="result-published">Published Date: {result.publishedDate}</div>
+            <div class="result-summary">{result.summary}</div>
+          </div>
+        {/each}
+      </div>
+    </div>
   
