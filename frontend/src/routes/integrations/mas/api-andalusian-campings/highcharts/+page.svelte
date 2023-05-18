@@ -234,7 +234,7 @@
   const provinces = ["ALMERÍA", "CÁDIZ", "CÓRDOBA", "GRANADA", "HUELVA", "SEVILLA", "JAÉN", "MÁLAGA"];
   const campingPlaces90 = [0, 0, 0, 0, 0, 0, 0, 0];
   
-  data.forEach((item) => {
+    data.forEach((item) => {
     const year = parseInt(item.start_date.split("-")[0]);
     const province = item.state;
     if (year >= 1990 && year <= 1999 && provinces.includes(province)) {
@@ -354,7 +354,7 @@ function getData1980() {
     });
 
     series3.push({
-      name: "Números de Camping",
+      name: "",
       data: camping_places,
     });
 
@@ -366,7 +366,7 @@ function getData1980() {
         text: "Grafico todos los parametros",
       },
       xAxis: {
-        categories: Array.from(countsIProvincia.keys()),
+        categories: Array.from(countsIMunicipio.keys()),
       },
       yAxis: {
         title: {
