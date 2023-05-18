@@ -21,6 +21,10 @@
         <li><a href="\integrations\mas\api-andalusian-campings\highcharts">Graficos API Campings HighCharts</a></li>
         <li><a href="\integrations\mas\api-andalusian-campings\google_chart">Graficos Google Charts</a></li>
         <li><a href="\integrations\mas\api-andalusian-campings\external-api\currency">Intercambio de Euro</a></li>  
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\music">Info Nirvan Rock MusicBrainz</a></li>  
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\space">Noticias Espaciales</a></li>  
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\university">Lista de Universidades</a></li>  
+      
       </ul>
     </nav>
 </main>
