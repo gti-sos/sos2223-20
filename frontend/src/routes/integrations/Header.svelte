@@ -20,7 +20,8 @@
       <ul>
         <li><a href="\integrations\mas\api-andalusian-campings\highcharts">Graficos API Campings HighCharts</a></li>
         <li><a href="\integrations\mas\api-andalusian-campings\google_chart">Graficos Google Charts</a></li>
-    </ul>
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\currency">Intercambio de Euro</a></li>  
+      </ul>
     </nav>
 </main>
 <style>
