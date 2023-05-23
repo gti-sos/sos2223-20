@@ -15,7 +15,6 @@
     </ul>
     </nav>
     <br>
-
     <h1 class="title" style="color: teal;" >Integraciones MAS</h1>
     <nav>
       <ul>
@@ -29,6 +28,13 @@
         <li><a href="\integrations\mas\api-andalusian-campings\external-api\science" style="color: teal;">Literatura Científica</a></li>   
         <li><a href="\integrations\mas\api-andalusian-campings\external-api\food" style="color: teal;">Recetas de Comida</a></li>
       </ul>
+    </nav>
+    <br>
+    <h1 class="title" style="color: teal;" >Integraciones Conjunta</h1>
+    <nav>
+      <ul>
+        <li><a href="\integrations\mas\api-andalusian-campings\together">Graficos Conjuntos</a></li>
+        </ul>
     </nav>
 </main>
 <style>

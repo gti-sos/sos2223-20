@@ -140,7 +140,7 @@
                 ["Málaga", getDataMalaga()],
                 ["Sevilla", getDataSevilla()],
             ]);
-
+            
             var pieOptions = {
                 title: "Campings in Andalucia (Pie Chart)",
                 is3D: true,
