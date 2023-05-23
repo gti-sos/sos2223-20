@@ -26,8 +26,8 @@
         <li><a href="\integrations\mas\api-andalusian-campings\external-api\space" style="color: teal;">Noticias Espaciales</a></li>  
         <li><a href="\integrations\mas\api-andalusian-campings\external-api\advice" style="color: teal;">Consejos</a></li>  
         <li><a href="\integrations\mas\api-andalusian-campings\external-api\university" style="color: teal;">Lista de Universidades</a></li>  
-        <li><a href="\integrations\mas\api-andalusian-campings\external-api\science" style="color: teal;">Literatura Científica</a></li>  
-      
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\science" style="color: teal;">Literatura Científica</a></li>   
+        <li><a href="\integrations\mas\api-andalusian-campings\external-api\food" style="color: teal;">Recetas de Comida</a></li>
       </ul>
     </nav>
 </main>
