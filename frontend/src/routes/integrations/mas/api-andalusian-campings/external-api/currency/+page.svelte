@@ -2,10 +2,21 @@
   import { onMount } from "svelte";
 
   let currencyData = [];
-  const dates = ["2023-04-24", "2023-04-25", "2023-04-26", "2023-04-27", "2023-04-28", "2023-04-29", "2023-04-30"];
+  let dates = [];
 
   onMount(async () => {
     try {
+      const today = new Date();
+      const currentDate = today.toISOString().split("T")[0];
+
+      // Calculate the previous 5 days
+      for (let i = 0; i < 6; i++) {
+        const date = new Date();
+        date.setDate(today.getDate() - i);
+        const formattedDate = date.toISOString().split("T")[0];
+        dates.push(formattedDate);
+      }
+
       for (const date of dates) {
         const response = await fetch(
           `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${date}/currencies/eur.json`
@@ -13,13 +24,11 @@
         const { date: responseDate, eur } = await response.json();
 
         // Process the currency data for each date
-        const dateCurrencyData = Object.entries(eur).map(
-          ([currency, value]) => ({
-            date: responseDate,
-            currency,
-            value,
-          })
-        );
+        const dateCurrencyData = Object.entries(eur).map(([currency, value]) => ({
+          date: responseDate,
+          currency,
+          value,
+        }));
 
         currencyData = [...currencyData, ...dateCurrencyData];
       }
@@ -74,6 +83,14 @@
           height: 400,
           bar: { groupWidth: "70%" },
           legend: { position: "top" },
+          backgroundColor: { fill: "transparent" },
+          colors: ["#0077cc"],
+          fontName: "Arial",
+          titleTextStyle: {
+            fontSize: 18,
+            bold: true,
+            color: "#333",
+          },
         };
 
         // Instantiate and draw the bar chart
@@ -90,6 +107,34 @@
 
 <svelte:head>
   <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    td {
+      background-color: #ffffff;
+    }
+
+    #chart_div {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
 </svelte:head>
 
 <div id="chart_div"></div>
@@ -118,5 +163,3 @@
     {/each}
   </tbody>
 </table>
-
-

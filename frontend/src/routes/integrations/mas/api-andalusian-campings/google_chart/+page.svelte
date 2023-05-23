@@ -160,8 +160,8 @@
             
             var columnOptions = {
                 title: "Plazas de Camping por Provincias (Column Chart)",
-                width: 600,
-                height: 400,
+                width: 1600,
+                height: 800,
                 bar: { groupWidth: "95%" },
                 legend: { position: "none" },
             };
