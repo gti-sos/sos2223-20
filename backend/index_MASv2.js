@@ -46,7 +46,6 @@ function loadBackend_MASv2(app) {
   });
 
   //______________________________GET con rango de busqueda
-  //campings
   app.get(BASE_API_URL + '/campings', (req, res) => {
     console.log(`New request to /campings`);
 
