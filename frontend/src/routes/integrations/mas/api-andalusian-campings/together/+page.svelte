@@ -86,8 +86,8 @@
       if (noData) {
         const bubbleOptions = {
           title: 'Aun no se han cargado los datos',
-          width: 400,
-          height: 300,
+          width: 1600,
+          height: 800,
         };
 
         const bubbleChart = new google.visualization.BubbleChart(

@@ -1,6 +1,6 @@
 
 const campingsFilePath = 'ddbb/camping-andalusia.json';
-const BASE_API_URL = "/api/v2";
+const BASE_API_URL = "/api/v3";
 import { notStrictEqual } from 'assert';
 import { Console } from 'console';
 import fs from 'fs';
