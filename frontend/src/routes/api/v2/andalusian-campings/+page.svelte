@@ -62,7 +62,7 @@
               
 
           });
-          let API = '/api/v2/campings';
+          let API = '/api/v3/campings';
       
       if(dev)
           API = 'http://localhost:12345'+API
