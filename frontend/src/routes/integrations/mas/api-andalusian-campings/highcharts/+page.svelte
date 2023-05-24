@@ -10,7 +10,7 @@
     createChartIIII();
   });
 
-  let API = "https://sos2223-20.ew.r.appspot.com/api/v2/andalusian-campings";
+  let API = "https://sos2223-20.ew.r.appspot.com/api/v2/campings";
 
   let data = [];
 
@@ -18,6 +18,7 @@
     const response = await fetch(API);
     data = await response.json();
   }
+  console.log(data);
 
 
   let countsIProvincia = new Map();

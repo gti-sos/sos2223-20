@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
 
   async function getData() {
-    const campingApiUrl = 'https://sos2223-20.ew.r.appspot.com/api/v2/andalusian-campings';
+    const campingApiUrl = 'https://sos2223-20.ew.r.appspot.com/api/v2/campings';
     const immovablesApiUrl = '/api/proxy-mas/?url=https://sos2223-20.ew.r.appspot.com/api/v2/immovables';
 
     const campingResponse = await fetch(campingApiUrl);

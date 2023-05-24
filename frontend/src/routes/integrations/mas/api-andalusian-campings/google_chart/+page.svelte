@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     //let API_externaSOS = "/api/proxy-mas/?url=https://sos2223-20.ew.r.appspot.com/api/v2/immovables";
     
-    let API = "https://sos2223-20.ew.r.appspot.com/api/v2/andalusian-campings";
+    let API = "https://sos2223-20.ew.r.appspot.com/api/v2/campings";
     let data = [];
 
     async function getData() {
