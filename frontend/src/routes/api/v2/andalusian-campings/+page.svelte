@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Campings</title>
+</svelte:head>
+
 <script>
   // @ts-nocheck
   import { fade } from "svelte/transition";
