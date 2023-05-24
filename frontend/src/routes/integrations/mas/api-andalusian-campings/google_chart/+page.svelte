@@ -1,8 +1,8 @@
 <script>
     import { onMount } from "svelte";
-
-     //proxy let API = "http://localhost:12345/api/v2/integrations/mas/api-andalusian-campings/api-sos/proxy";
-    let API = "http://localhost:12345/api/v2/campings";
+    //let API_externaSOS = "/api/proxy-mas/?url=https://sos2223-20.ew.r.appspot.com/api/v2/immovables";
+    
+    let API = "https://sos2223-20.ew.r.appspot.com/api/v2/andalusian-campings";
     let data = [];
 
     async function getData() {

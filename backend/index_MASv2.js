@@ -4,7 +4,7 @@ const BASE_API_URL = "/api/v2";
 import { notStrictEqual } from 'assert';
 import { Console } from 'console';
 import fs from 'fs';
-
+import request from 'request';
 import Datastore from 'nedb';
 var campings = new Datastore();
 
@@ -290,6 +290,14 @@ function loadBackend_MASv2(app) {
       return res.status(200).send({ message: 'Camping deleted successfully' });
     });
   });
+
+  app.use('/api/proxy-mas', function (req, res) {
+    var url = req.url.replace('/?url=', '');
+    console.log('piped: ' + req.url);
+    req.pipe(request(url)).pipe(res);
+});
+
 };
+
 
 export { loadBackend_MASv2 }

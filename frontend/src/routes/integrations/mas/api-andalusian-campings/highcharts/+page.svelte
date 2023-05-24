@@ -10,7 +10,7 @@
     createChartIIII();
   });
 
-  let API = "http://localhost:12345/api/v2/campings";
+  let API = "https://sos2223-20.ew.r.appspot.com/api/v2/andalusian-campings";
 
   let data = [];
 
