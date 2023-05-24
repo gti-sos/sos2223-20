@@ -2,18 +2,24 @@
   import { onMount } from 'svelte';
 
   async function getData() {
-    const campingApiUrl = 'http://localhost:12345/api/v2/campings';
-    const immovablesApiUrl = 'http://localhost:12345/api/v3/immovables';
+    const campingApiUrl = 'https://sos2223-20.ew.r.appspot.com/api/v2/andalusian-campings';
+    const immovablesApiUrl = '/api/proxy-mas/?url=https://sos2223-20.ew.r.appspot.com/api/v2/immovables';
 
     const campingResponse = await fetch(campingApiUrl);
-    const immovablesResponse = await fetch(immovablesApiUrl);
-
+    const immovablesResponse = await fetch(immovablesApiUrl, {
+            method: "GET",
+        });
+    
+    console.log(campingResponse);
+    console.log(immovablesResponse);
     const campingData = await campingResponse.json();
     const immovablesData = await immovablesResponse.json();
+    console.log(campingData);
+    console.log(immovablesData);
 
     // Process the data as needed
 
-    // Example: Logging the fetched data
+    // Logging the fetched data
     console.log('Camping Data:', campingData.slice(0, 14));
     console.log('Immovables Data:', immovablesData.slice(0, 14));
 
