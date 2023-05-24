@@ -4,7 +4,8 @@
     
     let API = "https://sos2223-20.ew.r.appspot.com/api/v2/campings";
     let data = [];
-
+    console.log(data);
+    
     async function getData() {
         const response = await fetch(API);
         data = await response.json();
