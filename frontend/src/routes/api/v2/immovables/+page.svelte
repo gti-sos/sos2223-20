@@ -149,7 +149,7 @@ async function busqueda(FormBuscaData){
         result = JSON.stringify(data, null, 2); 
         immovables = data;
     }else{
-        getImmovables();
+      showMessage("No se encontró ningún elemento con ese valor");
     }
 }
 
