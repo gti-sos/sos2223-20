@@ -85,8 +85,7 @@
     "start": "node index",
     "test": "npm run test-inmovables & npm run test-andalusian-campings",
     "test-andalusian-campings": "npx newman run ./tests/GcloudV3_postman.json",
-    "test-inmovables": "npx newman run ./tests/immovables.postman_LMP.json",
-    "test-blood-donations": "npx newman run ./tests/blood-donationsv2.json"
+    "test-inmovables": "npx newman run ./tests/immovables.postman_LMP.json"
   },
   "repository": {
     "type": "git",
