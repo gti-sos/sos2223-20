@@ -177,13 +177,13 @@
         <h1 style="text-align:center; font-style: oblique;">Integración con compañero con Proxy</h1>
         <h2 style="text-align:center; font-style: oblique;">Gráfica inmuebles y temperaturas</h2></div>
     <h2>Primera Integración</h2>
-    <div id="chartPrimera" style="height:150px; margin: 0px auto; margin-top:40px">
+    <div id="chartPrimera" style="height: 500px; margin: 0px auto; margin-top:40px">
     </div>
     <h2>Variables propias</h2>
-    <div id="chartSegunda" style="height:150px; margin: 0px auto; margin-top:40px">
+    <div id="chartSegunda" style="height: 500px; margin: 0px auto; margin-top:40px">
     </div>
     <h2>Segunda Integración</h2>
-    <div id="chartTercera" style="height:150px; margin: 0px auto; margin-top:40px">
+    <div id="chartTercera" style="height: 500px; margin: 0px auto; margin-top:40px">
     </div>
     <div style="margin-left:40px;font-size:20px;">
         <h4>Resultado compañerx</h4>
