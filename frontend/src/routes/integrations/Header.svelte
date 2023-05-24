@@ -33,7 +33,8 @@
   <h1 class="title">Integraciones Conjunta </h1>
   <nav>
     <ul>
-      <li><a href="\integrations\mas\api-andalusian-campings\together">Graficos Conjuntos</a></li>
+      <li><a href="\integrations\mas\api-andalusian-campings\together">Graficos Conjuntos 1</a></li>
+      <li><a href="\integrations\lmp\together">Graficos Conjuntos 2</a></li>
     </ul>
   </nav>
 </main>

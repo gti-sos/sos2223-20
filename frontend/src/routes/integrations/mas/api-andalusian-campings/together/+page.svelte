@@ -101,6 +101,7 @@
         columnChart.draw(chartData, chartOptions);
       }
     }
+
   }
 
   onMount(getData);
