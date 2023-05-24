@@ -339,7 +339,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables?current_usage=SANITARIO",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables?current_usage=AGRO",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -356,7 +356,7 @@
 					"query": [
 						{
 							"key": "current_usage",
-							"value": "SANITARIO"
+							"value": "AGRO"
 						}
 					]
 				}
@@ -428,7 +428,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables?province=Huelva",
+					"raw": "https://sos2223-20.ew.r.appspot.com/api/v3/immovables?province=Sevilla",
 					"protocol": "https",
 					"host": [
 						"sos2223-20",
@@ -445,7 +445,7 @@
 					"query": [
 						{
 							"key": "province",
-							"value": "Huelva"
+							"value": "Sevilla"
 						}
 					]
 				}

@@ -152,7 +152,7 @@ async function busqueda(FormBuscaData){
       result = JSON.stringify(data, null, 2); 
       campings = data;
   }else{
-      getCampings();
+    showMessage("No se encontró ningún elemento con ese valor");
   }
 }
 
