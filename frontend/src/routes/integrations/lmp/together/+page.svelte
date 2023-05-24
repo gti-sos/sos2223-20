@@ -1,112 +1,108 @@
-<svelte:head>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="https://code.jscharting.com/latest/jscharting.js"></script>
-  </svelte:head>
-
 <script>
-  // @ts-nocheck
-  import { dev } from '$app/environment';
-  import { onMount } from "svelte";
+  import { onMount } from 'svelte';
 
-  let API_Immovables = '/api/proxy-mas/?url=https://sos2223-20.ew.r.appspot.com/api/v3/immovables';
-  if (dev) {
-    API_Immovables = 'http://localhost:12345' + API_Immovables;
-  }
-  let API_Campings = '/api/proxy-lmp/?url=https://sos2223-20.ew.r.appspot.com/api/v3/andalusian-campings';
-  if (dev) {
-    API_Campings = 'http://localhost:12345' + API_Campings;
-  }
-  let dataImmovables = [];
-  let dataCampings = [];
+  async function getData() {
+    const campingApiUrl = 'https://sos2223-20.ew.r.appspot.com/api/v3/campings';
+    const immovablesApiUrl = '/api/proxy-mas/?url=https://sos2223-20.ew.r.appspot.com/api/v3/immovables';
 
-  async function getdata() {
-    const response = await fetch(API_Immovables);
-    dataImmovables = await response.json();
-    const response2 = await fetch(API_Campings);
-    dataCampings = await response2.json();
-  }
-
-  let countsU = new Map();
-  let countsC = new Map();
-
-  function processdata() {
-    dataImmovables.forEach(item => {
-      const uso = item.current_usage.split('-')[0];
-      const province = item.province;
-      const countU = countsU.get(uso) || {};
-      countU[province] = (countU[province] || 0) + 1;
-      countsU.set(uso, countU);
+    const campingResponse = await fetch(campingApiUrl);
+    const immovablesResponse = await fetch(immovablesApiUrl, {
+      method: "GET",
     });
+    
+    console.log(campingResponse);
+    console.log(immovablesResponse);
+    const campingData = await campingResponse.json();
+    const immovablesData = await immovablesResponse.json();
+    console.log(campingData);
+    console.log(immovablesData);
 
-    dataCampings.forEach(item => {
-      const categoria = item.category.split('-')[0];
-      const state = item.state;
-      const countC = countsC.get(categoria) || {};
-      countC[state] = (countC[state] || 0) + 1;
-      countsC.set(categoria, countC);
-    });
-  }
+    // Process the data as needed
 
-  $: processdata();
+    // Logging the fetched data
+    console.log('Campings Data:', campingData.slice(0, 14));
+    console.log('Inmuebles Data:', immovablesData.slice(0, 14));
 
-  let chartU = null;
+    // Example: Creating a Google chart
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
 
-  function createChart() {
-    chartU = JSC.Chart('chartU', {
-      series: [{
-        name: 'Total',
-        points: Array.from(countsU.entries())
-          .map(([uso, countU]) => {
-            const total = Object.values(countU).reduce((acc, curr) => acc + curr, 0);
-            return { x: uso, y: total, countU };
-          })
-      }],
-      xAxis: {
-        label_text: 'Uso',
-        label_style_fontSize: 14,
-        label_style_fontWeight: 'bold',
-        scale_type: 'linear',
-        scale_label_text: '%v'
-      },
-      yAxis: {
-        label_text: 'Total',
-        label_style_fontSize: 14,
-        label_style_fontWeight: 'bold',
-        scale_type: 'linear',
-        scale_label_text: '%v'
-      },
-      legend_visible: false,
-      title_label_text: 'Uso de los inmuebles por Provincia',
-      title_label_style_fontSize: 16,
-      title_label_style_fontWeight: 'bold',
-      tooltip: {
-        content: '%name: %y<br>%extra'
-      },
-      defaultSeries: {
-        type: 'column',
-        point_padding: 0.1,
-        tooltip_extra_precision: 0,
-        tooltip_extra: (index, point) => {
-          let html = '';
-          Object.entries(point.dataImmovables.countU).forEach(([province, countU]) => {
-            html += `${province}: ${countU}<br>`;
-          });
-          return html;
+    function drawChart() {
+      // Create the chart data and options
+      const chartData = new google.visualization.DataTable();
+      chartData.addColumn('string', 'Provincia');
+      chartData.addColumn('number', 'Suma de Category');
+      chartData.addColumn('number', 'Suma de Recursos');
+
+      // Filter the camping and immovables data based on the desired states/provinces
+      const states = ['ALMERÍA', 'CÁDIZ', 'CÓRDOBA', 'GRANADA', 'JAÉN', 'HUELVA', 'MÁLAGA', 'SEVILLA'];
+
+      const filteredCampingData = campingData.filter(camping => states.includes(camping.state));
+      const filteredImmovablesData = immovablesData.filter(immovable =>
+        states.includes(immovable.province.toUpperCase())
+      );
+
+      // Calculate the sum of category and resource for each state
+      const sumByState = {};
+      filteredCampingData.forEach(camping => {
+        if (!sumByState[camping.state]) {
+          sumByState[camping.state] = { category: 0, resource: 0 };
         }
+        sumByState[camping.state].category += camping.category;
+      });
+
+      filteredImmovablesData.forEach(immovable => {
+        const province = immovable.province.toUpperCase();
+        const resource = immovable.resource;
+        if (!sumByState[province]) {
+          sumByState[province] = { category: 0, resource: 0 };
+        }
+        sumByState[province].resource += resource;
+      });
+
+      // Add the data to the chart
+      states.forEach(state => {
+        const { category, resource } = sumByState[state] || { category: 0, resource: 0 };
+        chartData.addRow([state, category, resource]);
+      });
+
+      const chartOptions = {
+        height: 800,
+        width: 1600,
+        legend: { position: 'top' },
+        vAxis: { minValue: 0 },
+      };
+
+      // Check if there is no data
+      const noData = filteredCampingData.length === 0 && filteredImmovablesData.length === 0;
+
+      // Draw the chart or display the message bubble
+      if (noData) {
+        const bubbleOptions = {
+          title: 'Sin datos',
+          width: 1600,
+          height: 800,
+        };
+
+        const bubbleChart = new google.visualization.BubbleChart(
+          document.getElementById('chart_div')
+        );
+        bubbleChart.draw(chartData, bubbleOptions);
+      } else {
+        const barChart = new google.visualization.BarChart(
+          document.getElementById('chart_div')
+        );
+        barChart.draw(chartData, chartOptions);
       }
-    });
+    }
+
   }
 
-  onMount(() => {
-    getdata().then(() => {
-      processdata();
-      createChart();
-    });
-  });
+  onMount(getData);
 </script>
 
-<main>
-  <h1>Uso de los inmuebles por Provincia</h1>
-  <div id="chartU" style="height: 250px;"></div>
-</main>
+<svelte:head>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+</svelte:head>
+
+<div id="chart_div"></div>
