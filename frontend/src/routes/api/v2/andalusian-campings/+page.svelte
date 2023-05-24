@@ -82,9 +82,9 @@
         });
         if (res.ok) {
   getCampings(); // Actualizar los datos en la tabla
-  showMessage("Responsable eliminado correctamente", "success");
+  showMessage("Camping eliminado correctamente", "success");
 } else {
-  showMessage(`Responsable no encontrado: ${deleteFormData.id}`, "error");
+  showMessage(`ID no encontrado: ${deleteFormData.id}`, "error");
 }
 }
 
@@ -148,7 +148,6 @@ async function busqueda(FormBuscaData){
   console.log("EXTENSION:" + extension_URL);
   const res = await fetch(API + extension_URL, {method:"GET"});
   if(res.ok){
-      
       const data = await res.json();
       result = JSON.stringify(data, null, 2); 
       campings = data;
@@ -229,7 +228,7 @@ if (response.ok) {
   // Actualizar los datos y ocultar el formulario
   
   getCampings();
-  showMessage("Responsable creado correctamente", "success");
+  showMessage("Camping creado correctamente", "success");
   showForm = false;
 } else {
   showMessage("Error al crear el recurso. Ya existe.", "error");
@@ -317,7 +316,7 @@ async function updatedCamping(camping, index) {
     campings[index] = camping;
     return camping;
   } else {
-    showMessage("Porfavor, rellena todos los campos","warning");
+    showMessage("Por favor, rellena todos los campos","warning");
   }
 }
 let selectedRowIndex = null;
