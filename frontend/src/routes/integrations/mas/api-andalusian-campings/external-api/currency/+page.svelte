@@ -19,7 +19,7 @@
 
       for (const date of dates) {
         const response = await fetch(
-          `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${date}/currencies/eur.json`
+          `/api/proxy-mas/?url=https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${date}/currencies/eur.json`
         );
         const { date: responseDate, eur } = await response.json();
 
@@ -142,7 +142,7 @@
 <table>
   <thead>
     <tr>
-      <th>Currency</th>
+      <th>Moneda</th>
       {#each dates as date}
         <th>{date}</th>
       {/each}
