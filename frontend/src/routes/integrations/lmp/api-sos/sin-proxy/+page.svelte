@@ -77,7 +77,7 @@
   async function loadJSCharting(provincias,traveler,overnight_stay,average_stay,id,resource,inventory_num,current_usage) {
       var chart = JSC.chart('chart_1', { 
           debug: true, 
-          defaultSeries_type: 'column', 
+          defaultSeries_type: 'bar', 
           title_label_text: '', 
           yAxis: { label_text: ''}, 
           xAxis: {
@@ -98,7 +98,7 @@
 
       var chart = JSC.chart('chart_2', { 
           debug: true, 
-          defaultSeries_type: 'column', 
+          defaultSeries_type: 'bar', 
           title_label_text: '', 
           yAxis: { label_text: ''}, 
           xAxis: {
@@ -125,7 +125,7 @@
 
       var chart = JSC.chart('chart_3', { 
           debug: true, 
-          defaultSeries_type: 'column', 
+          defaultSeries_type: 'bar', 
           title_label_text: '', 
           yAxis: { label_text: ''}, 
           xAxis: {
