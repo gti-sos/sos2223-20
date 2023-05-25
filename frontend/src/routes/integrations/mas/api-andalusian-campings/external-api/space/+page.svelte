@@ -40,8 +40,7 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Tituol</th>
+          <th>Titulo</th>
           <th>URL</th>
           <th>Imagen</th>
           <th>Fuente</th>
