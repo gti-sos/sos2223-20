@@ -1,9 +1,9 @@
 <svelte:head>
-    <title>SOS2223-20</title>
+    <title>Vídeo Grabaciones</title>
 </svelte:head>
 <main>
     <body>
-        <h1>SOS2223-20</h1>
+        <h1>Vídeo Grabaciones</h1>
         <ul dir="auto">
             <li>
                 <strong>Equipo</strong>
