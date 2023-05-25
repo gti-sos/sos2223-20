@@ -69,8 +69,8 @@
       function drawChart() {
         // Create the Google Chart data table
         const chartData = new google.visualization.DataTable();
-        chartData.addColumn("string", "Currency");
-        chartData.addColumn("number", "Difference");
+        chartData.addColumn("string", "Monedas");
+        chartData.addColumn("number", "Diferencia");
 
         top20Currencies.forEach(({ currency, difference }) => {
           chartData.addRow([currency, difference]);
@@ -78,7 +78,7 @@
 
         // Set chart options
         const options = {
-          title: "Top 20 Currencies with Highest Differences",
+          title: "Top 20 Monedas con los mayores cambios",
           width: "100%",
           height: 400,
           bar: { groupWidth: "70%" },
@@ -100,7 +100,7 @@
         chart.draw(chartData, options);
       }
     } catch (error) {
-      console.error("Error fetching currency data:", error);
+      console.error("Error consiguiendo los datos", error);
     }
   });
 </script>

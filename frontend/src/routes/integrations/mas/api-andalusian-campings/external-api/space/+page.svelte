@@ -31,7 +31,7 @@
         const data = await response.json();
         articles = data.results;
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error, prueba de nuevo:", error);
       }
     });
   </script>
@@ -41,14 +41,14 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Title</th>
+          <th>Tituol</th>
           <th>URL</th>
-          <th>Image</th>
-          <th>News Site</th>
-          <th>Summary</th>
-          <th>Published At</th>
-          <th>Updated At</th>
-          <th>Featured</th>
+          <th>Imagen</th>
+          <th>Fuente</th>
+          <th>Resumen</th>
+          <th>Publicado en</th>
+          <th>Actualizado en</th>
+          <th>Aparece en</th>
         </tr>
       </thead>
       <tbody>

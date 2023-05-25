@@ -95,7 +95,7 @@
   <div class="search-container">
     <form class="search-form" on:submit={handleFormSubmit}>
       <input class="search-input" type="text" bind:value={searchTerm} placeholder="Enter a search term" />
-      <button class="search-button" type="submit">Search</button>
+      <button class="search-button" type="submit">Buscar</button>
     </form>
   
     <div class="search-results">
@@ -103,9 +103,9 @@
           <div class="result-item">
             <div class="result-title">{result.title}</div>
             {#if result.authors.length > 0}
-              <div class="result-authors">Authors: {result.authors.join(", ")}</div>
+              <div class="result-authors">Autores: {result.authors.join(", ")}</div>
             {/if}
-            <div class="result-published">Published Date: {result.publishedDate}</div>
+            <div class="result-published">Fecha publicación: {result.publishedDate}</div>
             <div class="result-summary">{result.summary}</div>
           </div>
         {/each}

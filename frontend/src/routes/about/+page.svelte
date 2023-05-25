@@ -9,7 +9,7 @@
                 <strong>Equipo</strong>
                 <ul dir="auto">
                     <li>
-                        <a href="https://github.com/Lukmare"
+                        <a href="https://youtu.be/OnF0z0iAIiY"
                             >Lorenzo Morales Palacios (Vídeo)</a
                         >
                     </li>

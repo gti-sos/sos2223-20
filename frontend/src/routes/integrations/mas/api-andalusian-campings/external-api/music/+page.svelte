@@ -20,7 +20,7 @@
       const responses = await Promise.all(promises);
       releases = responses.flatMap(response => response.releases || []);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error buscando los datos", error);
     }
   });
   
@@ -28,7 +28,7 @@
     if (release && release["date"]) {
       return release["date"];
     }
-    return "Unknown";
+    return "Desconocido";
   }
   
   function getCountry(release) {
@@ -41,14 +41,14 @@
     ) {
       return release["release-events"][0].area.name;
     }
-    return "Unknown";
+    return "Desconocido";
   }
   
   function getStatus(release) {
     if (release && release.status) {
       return release.status;
     }
-    return "Unknown";
+    return "Desconocido";
   }
   
   function getQuality(release) {
@@ -84,11 +84,11 @@
   <table>
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Release Date</th>
-        <th>Country</th>
-        <th>Status</th>
-        <th>Quality</th>
+        <th>Título</th>
+        <th>Fecha Lanzamiento</th>
+        <th>País</th>
+        <th>Estado</th>
+        <th>Calidad</th>
       </tr>
     </thead>
     <tbody>
@@ -104,5 +104,5 @@
     </tbody>
   </table>
 {:else}
-  <p>No releases found.</p>
+  <p>Nada encontrado prueba a recargar.</p>
 {/if}

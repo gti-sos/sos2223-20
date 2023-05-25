@@ -58,9 +58,9 @@
   </div>
 
   <div class="button-container">
-    <button on:click={addAdvice}>Add to Table</button>
-    <button on:click={startAutoAdd}>Automatically Add</button>
-    <button on:click={stopAutoAdd}>Stop Auto Add</button>
+    <button on:click={addAdvice}>Añade uno nuevo</button>
+    <button on:click={startAutoAdd}>Automatico</button>
+    <button on:click={stopAutoAdd}>Para Automatico</button>
   </div>
 </main>
 

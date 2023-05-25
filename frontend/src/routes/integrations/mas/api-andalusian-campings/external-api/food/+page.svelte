@@ -15,7 +15,7 @@
       const data = await response.json();
       searchResults = data.results;
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error al recibir los datos:", error);
     }
   }
 
@@ -29,7 +29,7 @@
 <style>
   .search-box {
     margin-bottom: 1rem;
-    background-color: rgba(120, 255, 255, 0.4);
+    background-color: rgba(106, 106, 106, 0.4);
     backdrop-filter: blur(10px);
     padding: 0.5rem;
     border-radius: 10px;
@@ -47,7 +47,7 @@
   }
 
   .recipe-card {
-    background-color: rgba(132, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(10px);
     padding: 1rem;
     border-radius: 10px;
@@ -84,7 +84,7 @@
     class="search-input"
     bind:value={searchQuery}
     on:input={handleSearch}
-    placeholder="Search recipe..."
+    placeholder="Buscar Recetas"
   />
 </div>
 
@@ -98,5 +98,5 @@
     {/each}
   </div>
 {:else}
-  <p class="no-results">No results found.</p>
+  <p class="no-results">Sin resultados, prueba otra búsqueda</p>
 {/if}
