@@ -13,7 +13,6 @@
   function toggleForm(){
     showForm = !showForm;
   }
-
   let showBuscaForm = false;
   let showDeleteForm = false;
   let showFechaForm = false;
