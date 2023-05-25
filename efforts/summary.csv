@@ -1,0 +1,78 @@
+﻿Project,Client,Description,Duration
+SOS2223-20,,#10 Individual tab on Sheets,00:15:13
+SOS2223-20,,#11 Index Creation,02:59:49
+SOS2223-20,,#16 arreglar .gitignore,00:25:21
+SOS2223-20,,#17 Montar node con npm,00:16:10
+SOS2223-20,,#18 Crear folder /samples,00:15:11
+SOS2223-20,,#19 Crear servidor para el cool,02:24:50
+SOS2223-20,,#23 Replicar algoritmo para acceder con la ruta /samples/lmp,01:44:49
+SOS2223-20,,#27 Creación del GET en el index.js,00:33:29
+SOS2223-20,,#28 Modularizar datos,00:18:33
+SOS2223-20,,#29 API personal,03:31:08
+SOS2223-20,,"#30 Metodos POST,DELETE,PUT...",08:58:56
+SOS2223-20,,#39 Remodelar API,02:09:03
+SOS2223-20,,#40 Borrado de archivos obsoletos,00:16:13
+SOS2223-20,,#41 Ruta Docs POSTMAN,00:52:15
+SOS2223-20,,#45 Adecuar para que devuelva array u objeto,01:30:00
+SOS2223-20,,#46 Cambiar colección de Postman para el Test,01:41:00
+SOS2223-20,,#47 No mostrar ni pedir el _id,00:30:11
+SOS2223-20,,#8 Clone Respository and git commands,00:23:52
+SOS2223-20,,#9 Postman Account,00:16:17
+SOS2223-20,,API Visualización · Issue #64 · gti-sos/sos2223-20,06:32:41
+SOS2223-20,,Archivo samples/CGM,01:13:04
+SOS2223-20,,Añadir ruta index,00:40:52
+SOS2223-20,,Busqueda de elementos concretos #58,05:34:55
+SOS2223-20,,Cada persona debe tener un vídeo comentando todas las funcionalidades y aspectos del entregable D03  Debe tener menos de 5 minutos,02:45:00
+SOS2223-20,,Cambio APIS EXTERNAS · Issue #69 · gti-sos/sos2223-20,04:51:32
+SOS2223-20,,Cambio Backend a v3 · Issue #70 · gti-sos/sos2223-20,00:48:17
+SOS2223-20,,Clonar y sincronizar repositorios,00:16:49
+SOS2223-20,,Completar el registro información,00:30:03
+SOS2223-20,,Completar registro información repositorio común #36,02:15:00
+SOS2223-20,,"Continuar metodos GET,POST,DELETE en frontend... #53",06:17:14
+SOS2223-20,,"Continuar metodos GET,POST,DELETE en frontend... Pt.2",03:15:34
+SOS2223-20,,Convertir la App a OAuth · Issue #63 · gti-sos/sos2223-20,03:00:28
+SOS2223-20,,Crear archivo index,00:57:46
+SOS2223-20,,Crear Carpeta y Esqueleto del FrontEnd para el grupo #51,01:33:39
+SOS2223-20,,Dataset Selection,04:30:00
+SOS2223-20,,Desarrollo llamadas a PostMan #35,00:45:00
+SOS2223-20,,"El frontend debe recargar de manera automatizada los datos que se muestran en caso de ser necesario, por ejemplo (tal como se vio en el L10), al crear un nuevo recurso desde la tabla, se debe actualizar los recursos que se muestran para incluir el recurso recién creado. NO será válido que el usuario tenga que pulsar un botón para recargar manualmente la página.",00:30:00
+SOS2223-20,,Eliminar bug · Issue #67 · gti-sos/sos2223-20,01:20:40
+SOS2223-20,,Establecer recuento de todos los datos en integrarlos en highcharts · Issue #65 · gti-sos/sos2223-20,05:00:24
+SOS2223-20,,Front-end Svelte que permita todas las funcionalidades básicas de gestión de la información realizando peticiones a la API REST: #56 Open salinosaso opened this issue now · 0 comments,02:15:00
+SOS2223-20,,Generación de recursos de Get LoadInitialData #33,02:00:00
+SOS2223-20,,Haber desplegado el proyecto del grupo desde el repositorio de github del grupo a Google Cloud en la región wc de forma que esté accesible en https://sos2223-XX.appspot.com (siendo xx el número de grupo),01:45:00
+SOS2223-20,,Hacer Primera Grafica de Barras en Morris js · Issue #62 · gti-sos/sos2223-20,04:03:41
+SOS2223-20,,Información de README en la URL Base #37,01:00:00
+SOS2223-20,,Integración Grafica conjunta 2 con proxy · Issue #71 · gti-sos/sos2223-20,02:23:33
+SOS2223-20,,Integrar backend con frontend #52,01:00:40
+SOS2223-20,,Integrar o usar al menos 2 APIs que no hayan sido realizadas por un alumno de SOS.,03:00:00
+SOS2223-20,,Issue #01 - Clonar repositorio,00:10:24
+SOS2223-20,,La API debe cumplir con las buenas prácticas definidas en los laboratorios,02:04:04
+SOS2223-20,,Modificacion de los medios de para adecuarse al funcionamiento de ejemplo #34,02:02:00
+SOS2223-20,,Modificar bbdd · Issue #66 · gti-sos/sos2223-20,02:44:26
+SOS2223-20,,Modificar para mantener los Objetos o Array según el tipo de operación #44,00:30:00
+SOS2223-20,,NodeJS Error on MacOS,03:30:00
+SOS2223-20,,Noticias piazza,00:16:05
+SOS2223-20,,Persistencia basada en una base de datos NeDB.,00:33:03
+SOS2223-20,,Repositorio asignatura,00:28:00
+SOS2223-20,,Run test-FFFF de todos los compañeros #43,02:00:00
+SOS2223-20,,Ruta docs generado en POSTMAN #38,01:15:00
+SOS2223-20,,Se debe acceder a todas las integraciones/usos a través de la vista accesible en: http://sos2223-XX.appspot.com/integrations.,02:15:00
+SOS2223-20,,Se debe tener una vista correctamente configurada en http://sos2223-XX.appspot.com/ donde debe aparecer como mínimo: #55,02:15:00
+SOS2223-20,,Sistema de integración continua con NPM TEST GCLOUD #42,01:00:00
+SOS2223-20,,Tener al menos 3 horas dedicadas registradas en Toggle dentro de las tareas de la milestone F03.,00:25:35
+SOS2223-20,,Tener correctamente clonado el repositorio común de la asignatura https://github.com/gti-sos/SOS2223 en local. de forma que al hacer el comando en bash “git remote -v” sale correctamente enlazado con github.,00:30:00
+SOS2223-20,,Tener desplegadas todas las APIs en una aplicación de GCloud accesible en http://sos2223-XX.appspot.com/ (siendo XX el número de grupo tal como aparece en el team de GitHub rellenado con ceros).,03:00:00
+SOS2223-20,,Tener todos los requisitos del D02,06:45:00
+SOS2223-20,,"Tener una milestone en GitHub denominada “F04”  en el repositorio de grupo (http://github.com/gti-sos/SOS2223-XX), de aqui en adelante  “repositorio SOS2223-XX”, definida para el feedback con fecha correctamente establecida.",00:15:00
+SOS2223-20,,Tener una ruta dinámica “/cool” que muestre una cara ascii tal como se vió en el L05.,00:40:00
+SOS2223-20,,Terminar entregable anterior #57,04:01:00
+SOS2223-20,,Terminar puntos Backlog,01:30:00
+SOS2223-20,,Todos los requisitos obligatorios por persona del F06. (sustituyendo las referencias a F06 por F07) #54,00:45:00
+SOS2223-20,,Update con Tests de Playwright · Issue #68 · gti-sos/sos2223-20,01:37:04
+SOS2223-20,,Uso de alguna biblioteca especificada en la lista awesome-charting o similar,01:00:00
+SOS2223-20,,Uso de algún widget de la biblioteca Highcharts.,03:30:00
+SOS2223-20,,Verificar ficha de trabajo,00:17:39
+,,"Creación de Entornos, GITHUB, Toggl, Piazza y servicios. Encontrado los OD",02:00:00
+,,Eliminar bug · Issue #67 · gti-sos/sos2223-20,00:00:07
+,,,00:00:39
