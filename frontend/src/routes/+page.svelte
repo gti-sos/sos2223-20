@@ -142,6 +142,22 @@
                             </li>
 
                             <li>
+                                <strong>Vídeos</strong>
+                                <ul dir="auto">
+                                    <li>
+                                        <a href="https://youtu.be/OnF0z0iAIiY"
+                                            >Lorenzo Morales Palacios (Vídeo)</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="https://drive.google.com/file/d/1UTmV8MxufwQhJgW2r371UJ5AgFhHeI7O/view?usp=share_link"
+                                            >Miguel Ángel Salinas(Vídeo)
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
                                 <strong>Frontend</strong>
                                 <a href="/api/v2/immovables">Inmuebles</a>
                                 <br />
