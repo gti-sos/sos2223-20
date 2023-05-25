@@ -4,7 +4,6 @@
   
     let API = "https://sos2223-20.ew.r.appspot.com/api/v3/campings";
     let data = [];
-    console.log(data);
   
     async function getData() {
       const response = await fetch(API);
@@ -14,34 +13,6 @@
   
     function getDataAlmeria() {
       const province = "ALMERÍA";
-      let sumCampingPlaces = 0;
-      data.forEach((item) => {
-        const itemProvince = item.state;
-  
-        if (itemProvince === province) {
-          sumCampingPlaces += item.camping_places;
-        }
-      });
-      console.log(sumCampingPlaces);
-      return sumCampingPlaces;
-    }
-  
-    function getDataMalaga() {
-      const province = "MÁLAGA";
-      let sumCampingPlaces = 0;
-      data.forEach((item) => {
-        const itemProvince = item.state;
-  
-        if (itemProvince === province) {
-          sumCampingPlaces += item.camping_places;
-        }
-      });
-      console.log(sumCampingPlaces);
-      return sumCampingPlaces;
-    }
-  
-    function getDataSevilla() {
-      const province = "SEVILLA";
       let sumCampingPlaces = 0;
       data.forEach((item) => {
         const itemProvince = item.state;
@@ -96,20 +67,6 @@
       return sumCampingPlaces;
     }
   
-    function getDataHuelva() {
-      const province = "HUELVA";
-      let sumCampingPlaces = 0;
-      data.forEach((item) => {
-        const itemProvince = item.state;
-  
-        if (itemProvince === province) {
-          sumCampingPlaces += item.camping_places;
-        }
-      });
-      console.log(sumCampingPlaces);
-      return sumCampingPlaces;
-    }
-  
     function getDataJaen() {
       const province = "JAÉN";
       let sumCampingPlaces = 0;
@@ -124,12 +81,54 @@
       return sumCampingPlaces;
     }
   
+    function getDataHuelva() {
+      const province = "HUELVA";
+      let sumCampingPlaces = 0;
+      data.forEach((item) => {
+        const itemProvince = item.state;
+  
+        if (itemProvince === province) {
+          sumCampingPlaces += item.camping_places;
+        }
+      });
+      console.log(sumCampingPlaces);
+      return sumCampingPlaces;
+    }
+  
+    function getDataMalaga() {
+      const province = "MÁLAGA";
+      let sumCampingPlaces = 0;
+      data.forEach((item) => {
+        const itemProvince = item.state;
+  
+        if (itemProvince === province) {
+          sumCampingPlaces += item.camping_places;
+        }
+      });
+      console.log(sumCampingPlaces);
+      return sumCampingPlaces;
+    }
+  
+    function getDataSevilla() {
+      const province = "SEVILLA";
+      let sumCampingPlaces = 0;
+      data.forEach((item) => {
+        const itemProvince = item.state;
+  
+        if (itemProvince === province) {
+          sumCampingPlaces += item.camping_places;
+        }
+      });
+      console.log(sumCampingPlaces);
+      return sumCampingPlaces;
+    }
+  
     onMount(async () => {
       await Promise.all([getData()]);
-      google.charts.load("current", { packages: ["corechart"] });
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.load("current", { packages: ["corechart", "table"] });
+      google.charts.setOnLoadCallback(drawCharts);
   
-      function drawChart() {
+      function drawCharts() {
         var pieData = google.visualization.arrayToDataTable([
           ["Provincia", "Camping Places"],
           ["Almería", getDataAlmeria()],
@@ -167,24 +166,26 @@
           legend: { position: "none" },
         };
   
-        var barDataTable = new google.visualization.DataTable();
-        barDataTable.addColumn("string", "ID");
-        barDataTable.addColumn("string", "Registry Code");
-        barDataTable.addColumn("string", "Name");
-        barDataTable.addColumn("string", "Start Date");
-        barDataTable.addColumn("string", "State");
-        barDataTable.addColumn("string", "City");
-        barDataTable.addColumn("number", "Camping Places");
-        barDataTable.addColumn("string", "Responsible");
-        barDataTable.addColumn("number", "Group ID");
-        barDataTable.addColumn("number", "Category");
-        barDataTable.addColumn("number", "Modality");
+        var tableData = new google.visualization.DataTable();
+        tableData.addColumn("number", "ID");
+        tableData.addColumn("string", "Registry Code");
+        tableData.addColumn("string", "Name");
+        tableData.addColumn("string", "Inscription Date");
+        tableData.addColumn("string", "Start Date");
+        tableData.addColumn("string", "State");
+        tableData.addColumn("string", "City");
+        tableData.addColumn("number", "Camping Places");
+        tableData.addColumn("string", "Responsible");
+        tableData.addColumn("number", "Group ID");
+        tableData.addColumn("number", "Category");
+        tableData.addColumn("number", "Modality");
   
         data.forEach((item) => {
-          barDataTable.addRow([
-            item.id.toString(),
+          tableData.addRow([
+            item.id,
             item.registry_code,
             item.name,
+            item.inscription_date,
             item.start_date,
             item.state,
             item.city,
@@ -196,10 +197,10 @@
           ]);
         });
   
-        var barOptions = {
-          title: "All Objects from API Data (Bar Chart)",
-          width: 1500,
-          height: 900,
+        var tableOptions = {
+          showRowNumber: true,
+          width: "100%",
+          height: "100%",
         };
   
         var pieChart = new google.visualization.PieChart(
@@ -212,10 +213,10 @@
         );
         columnChart.draw(columnData, columnOptions);
   
-        var barChart = new google.visualization.BarChart(
-          document.getElementById("barchart_values")
+        var tableChart = new google.visualization.Table(
+          document.getElementById("tablechart_values")
         );
-        barChart.draw(barDataTable, barOptions);
+        tableChart.draw(tableData, tableOptions);
       }
     });
   </script>
@@ -226,5 +227,5 @@
   
   <div id="piechart_3d" style="width: 1500px; height: 600px;"></div>
   <div id="columnchart_values" style="width: 1500px; height: 900px;"></div>
-  <div id="barchart_values" style="width: 1800px; height: 900px;"></div>
+  <div id="tablechart_values" style="width: 100%; height: 100%;"></div>
   
