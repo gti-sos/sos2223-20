@@ -2,8 +2,10 @@
   <a href="/">Inicio</a>
   <a href="/api/v2/immovables">Inmuebles</a>
   <a href="/api/v2/andalusian-campings">Campings Andalucia</a>
-  <a href="/api/v2/blood-donations">Donaciones Sangre</a>
+  
   <a href="/integrations">Integraciones</a>
+  <a href="/analytics">Integración Conjunta</a>
+  <a href="/about">Vídeo</a>
 </nav>
 
 <style>
