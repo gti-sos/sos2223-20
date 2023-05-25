@@ -8,7 +8,6 @@
     async function getData() {
       const response = await fetch(API);
       data = await response.json();
-      console.log(data);
     }
   
     function getDataAlmeria() {
@@ -21,77 +20,6 @@
           sumCampingPlaces += item.camping_places;
         }
       });
-      console.log(sumCampingPlaces);
-      return sumCampingPlaces;
-    }
-  
-    function getDataCadiz() {
-      const province = "CÁDIZ";
-      let sumCampingPlaces = 0;
-      data.forEach((item) => {
-        const itemProvince = item.state;
-  
-        if (itemProvince === province) {
-          sumCampingPlaces += item.camping_places;
-        }
-      });
-      console.log(sumCampingPlaces);
-      return sumCampingPlaces;
-    }
-  
-    function getDataCordoba() {
-      const province = "CÓRDOBA";
-      let sumCampingPlaces = 0;
-      data.forEach((item) => {
-        const itemProvince = item.state;
-  
-        if (itemProvince === province) {
-          sumCampingPlaces += item.camping_places;
-        }
-      });
-      console.log(sumCampingPlaces);
-      return sumCampingPlaces;
-    }
-  
-    function getDataGranada() {
-      const province = "GRANADA";
-      let sumCampingPlaces = 0;
-      data.forEach((item) => {
-        const itemProvince = item.state;
-  
-        if (itemProvince === province) {
-          sumCampingPlaces += item.camping_places;
-        }
-      });
-      console.log(sumCampingPlaces);
-      return sumCampingPlaces;
-    }
-  
-    function getDataJaen() {
-      const province = "JAÉN";
-      let sumCampingPlaces = 0;
-      data.forEach((item) => {
-        const itemProvince = item.state;
-  
-        if (itemProvince === province) {
-          sumCampingPlaces += item.camping_places;
-        }
-      });
-      console.log(sumCampingPlaces);
-      return sumCampingPlaces;
-    }
-  
-    function getDataHuelva() {
-      const province = "HUELVA";
-      let sumCampingPlaces = 0;
-      data.forEach((item) => {
-        const itemProvince = item.state;
-  
-        if (itemProvince === province) {
-          sumCampingPlaces += item.camping_places;
-        }
-      });
-      console.log(sumCampingPlaces);
       return sumCampingPlaces;
     }
   
@@ -105,7 +33,6 @@
           sumCampingPlaces += item.camping_places;
         }
       });
-      console.log(sumCampingPlaces);
       return sumCampingPlaces;
     }
   
@@ -119,7 +46,71 @@
           sumCampingPlaces += item.camping_places;
         }
       });
-      console.log(sumCampingPlaces);
+      return sumCampingPlaces;
+    }
+  
+    function getDataCadiz() {
+      const province = "CÁDIZ";
+      let sumCampingPlaces = 0;
+      data.forEach((item) => {
+        const itemProvince = item.state;
+  
+        if (itemProvince === province) {
+          sumCampingPlaces += item.camping_places;
+        }
+      });
+      return sumCampingPlaces;
+    }
+  
+    function getDataCordoba() {
+      const province = "CÓRDOBA";
+      let sumCampingPlaces = 0;
+      data.forEach((item) => {
+        const itemProvince = item.state;
+  
+        if (itemProvince === province) {
+          sumCampingPlaces += item.camping_places;
+        }
+      });
+      return sumCampingPlaces;
+    }
+  
+    function getDataGranada() {
+      const province = "GRANADA";
+      let sumCampingPlaces = 0;
+      data.forEach((item) => {
+        const itemProvince = item.state;
+  
+        if (itemProvince === province) {
+          sumCampingPlaces += item.camping_places;
+        }
+      });
+      return sumCampingPlaces;
+    }
+  
+    function getDataHuelva() {
+      const province = "HUELVA";
+      let sumCampingPlaces = 0;
+      data.forEach((item) => {
+        const itemProvince = item.state;
+  
+        if (itemProvince === province) {
+          sumCampingPlaces += item.camping_places;
+        }
+      });
+      return sumCampingPlaces;
+    }
+  
+    function getDataJaen() {
+      const province = "JAÉN";
+      let sumCampingPlaces = 0;
+      data.forEach((item) => {
+        const itemProvince = item.state;
+  
+        if (itemProvince === province) {
+          sumCampingPlaces += item.camping_places;
+        }
+      });
       return sumCampingPlaces;
     }
   
@@ -166,41 +157,22 @@
           legend: { position: "none" },
         };
   
-        var tableData = new google.visualization.DataTable();
-        tableData.addColumn("number", "ID");
-        tableData.addColumn("string", "Registry Code");
-        tableData.addColumn("string", "Name");
-        tableData.addColumn("string", "Inscription Date");
-        tableData.addColumn("string", "Start Date");
-        tableData.addColumn("string", "State");
-        tableData.addColumn("string", "City");
-        tableData.addColumn("number", "Camping Places");
-        tableData.addColumn("string", "Responsible");
-        tableData.addColumn("number", "Group ID");
-        tableData.addColumn("number", "Category");
-        tableData.addColumn("number", "Modality");
-  
-        data.forEach((item) => {
-          tableData.addRow([
-            item.id,
-            item.registry_code,
-            item.name,
-            item.inscription_date,
-            item.start_date,
-            item.state,
-            item.city,
-            item.camping_places,
-            item.responsible,
-            item.group_id,
-            item.category,
-            item.modality,
-          ]);
-        });
+        var tableData = google.visualization.arrayToDataTable([
+          ["State", "Camping Places", "Start Date"],
+          ...data
+            .sort((a, b) => (a.name > b.name ? 1 : -1))
+            .map((item) => [
+              item.state,
+              item.camping_places,
+              item.start_date,
+            ]),
+        ]);
   
         var tableOptions = {
+          title: "Campings Data",
           showRowNumber: true,
-          width: "100%",
-          height: "100%",
+          sort: "enable",
+          sortColumn: 0,
         };
   
         var pieChart = new google.visualization.PieChart(
