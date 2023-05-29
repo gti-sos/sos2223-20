@@ -1,4 +1,4 @@
-
+console.log("g");
 const campingsFilePath = 'ddbb/camping-andalusia.json';
 const BASE_API_URL = "/api/v3";
 import { notStrictEqual } from 'assert';
@@ -6,7 +6,7 @@ import { Console } from 'console';
 import fs from 'fs';
 import request from 'request';
 import Datastore from 'nedb';
-var campings = new Datastore();
+console.log("h");var campings = new Datastore();
 
 function loadBackend_MASv3(app) {
 
@@ -208,35 +208,35 @@ function loadBackend_MASv3(app) {
   app.post(BASE_API_URL + '/campings/*', (req, res) => {
     res.sendStatus(405);
   });
-
+  console.log("i");
   //______________________________POST normal
   app.post(BASE_API_URL + '/campings', (req, res) => {
-    const newCamping = req.body;
+    console.log("j");  const newCamping = req.body;
     if (!newCamping.name || !newCamping.responsible || !newCamping.registry_code ||
       !newCamping.camping_places || !newCamping.city || !newCamping.group_id || !newCamping.state
       || !newCamping.start_date || !newCamping.category || !newCamping.id) {
       return res.status(400).json({ error: 'Faltan datos en el JSON' });
     }
-    campings.findOne({ id: newCamping.id }, (err, doc) => {
-      if (err) {
+    console.log("k");campings.findOne({ id: newCamping.id }, (err, doc) => {
+      console.log("l"); if (err) {
         console.log(`Error finding camping with id ${newCamping.id}: ${err}`);
         res.sendStatus(500);
       } else if (doc) {
         res.status(409).json({ error: `Camping with id ${newCamping.id} already exists.` });
       } else {
-        campings.insert(newCamping, (err, newDoc) => {
-          if (err) {
+        console.log("m"); campings.insert(newCamping, (err, newDoc) => {
+          console.log("n");  if (err) {
             console.log(`Error inserting camping with id ${newCamping.id}: ${err}`);
             res.sendStatus(500);
           } else {
             console.log(`Inserted new camping with id ${newCamping.id}`);
-            res.sendStatus(201);
+            console.log("ñ"); res.sendStatus(201);
           }
-        });
-      }
-    });
-  });
-
+          console.log("o");  });
+          console.log("p");}
+          console.log("q");});
+          console.log("r");});
+          console.log("s");
   //______________________________PUT con URL prohibidas
   app.put(BASE_API_URL + '/campings', (req, res) => {
     res.sendStatus(405);
@@ -296,8 +296,9 @@ function loadBackend_MASv3(app) {
     console.log('piped: ' + req.url);
     req.pipe(request(url)).pipe(res);
 });
-
+console.log("t");
 };
 
 
 export { loadBackend_MASv3 }
+console.log("u");
