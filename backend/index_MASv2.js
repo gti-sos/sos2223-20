@@ -101,6 +101,7 @@ function loadBackend_MASv2(app) {
 
           console.log(`campings not found`);
           // Estado 404: Not Found
+          
           res.sendStatus(404);
 
           // Si por el contrario encontramos datos
