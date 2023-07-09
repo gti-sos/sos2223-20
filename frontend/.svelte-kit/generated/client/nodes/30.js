@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/integrations/mas/api-andalusian-campings/highcharts/+page.svelte";

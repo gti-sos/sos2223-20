@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/integrations/lmp/api-sos/con-proxy/+page.svelte";

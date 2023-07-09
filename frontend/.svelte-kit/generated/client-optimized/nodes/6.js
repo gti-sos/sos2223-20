@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/api/v2/andalusian-campings/+page.svelte";

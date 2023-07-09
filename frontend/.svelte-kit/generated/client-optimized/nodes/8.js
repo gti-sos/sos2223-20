@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/api/v2/immovables/+page.svelte";

@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/integrations/lmp/apis-externas/google/tabla/+page.svelte";
