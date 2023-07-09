@@ -7,7 +7,7 @@ import fs from 'fs';
 import request from 'request';
 import Datastore from 'nedb';
 console.log("h");var campings = new Datastore();
-
+console.log("f");
 function loadBackend_MASv3(app) {
 
   //__________________________GET initial data
