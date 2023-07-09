@@ -1,18 +1,13 @@
 <svelte:head>
-    <title>SOS2223-20</title>
+    <title>SOS2223-JUL-MAS</title>
 </svelte:head>
 <main>
     <body>
-        <h1>SOS2223-20</h1>
+        <h1>SOS2223-JUL-MAS</h1>
         <ul dir="auto">
             <li>
                 <strong>Equipo</strong>
                 <ul dir="auto">
-                    <li>
-                        <a href="https://github.com/Lukmare"
-                            >Lorenzo Morales Palacios (Fuente: immovables)</a
-                        >
-                    </li>
                     <li>
                         <a href="https://github.com/salinosaso"
                             >Miguel Ángel Salinas(Fuente: andalusian-campings)
@@ -26,8 +21,8 @@
             </li>
             <li>
                 <strong>Repositorio</strong>:
-                <a href="https://github.com/gti-sos/SOS2223-20"
-                    >gti-sos/SOS2223-20</a
+                <a href="https://github.com/gti-sos/SOS2223-JUL-MAS"
+                    >gti-sos/SOS2223-JUL-MAS</a
                 >
             </li>
             <li>
